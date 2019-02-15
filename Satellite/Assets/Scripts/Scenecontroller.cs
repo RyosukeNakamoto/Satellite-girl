@@ -14,7 +14,29 @@ public class Scenecontroller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //タイトル画面でエンターキーを押したときのシーン遷移
+        if (SceneManager.GetActiveScene().name == "Title")
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Home");
+            }
+        }
+
+        //ホーム画面でキーを押したときの処理
+        if (SceneManager.GetActiveScene().name == "Home")
+        {
+            //エンターキーを押すとステージセレクト画面へシーン遷移
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Stageselect");
+            }
+            //スペースキーを押したときタイトルへシーン遷移
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("Title");
+            }
+        }
     }
 
     //タイトル画面でボタンを押したときホーム画面に遷移
