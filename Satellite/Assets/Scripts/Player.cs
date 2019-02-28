@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
     public float Speed = 100.0f;
     //プレイヤーの位置
     private Vector2 player_pos;
+    //プレイヤーのHP
+    public int Hp = 0;
+    //ダメージフラグ
+    public bool Ondamage = false;
+    private SpriteRenderer renderer;
+
 
     public GameObject camera;
     //発射する弾
@@ -24,11 +30,26 @@ public class Player : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //HPが0以下になったときの処理
+        if (Hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+        //ダメージを受けた時点滅
+        if(Ondamage)
+        {
+            float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
+            renderer.color = new Color(1f, 1f, 1f, level);
+        }
+
+
         // 移動処理
         Move();
         //移動制限
@@ -51,6 +72,8 @@ public class Player : MonoBehaviour
 
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * Speed;
+
+        
     }
 
     //プレイヤーの移動制限関数
@@ -75,7 +98,36 @@ public class Player : MonoBehaviour
             Timer = 0.0f;
 
             //弾の実体化
-            Instantiate(Bullet, transform.position, transform.rotation);
+            Instantiate(Bullet,new Vector2(transform.position.x+2,transform.position.y), transform.rotation);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //敵と衝突したときHPを減らす
+        if (!Ondamage&&collision.gameObject.tag == "Enemy")
+        {
+            Hp--;
+            OndamageEffect();
+        }
+    }
+
+    void OndamageEffect()
+    {
+        //ダメージフラグをtrueに
+        Ondamage = true;
+
+        StartCoroutine("WaitForIt");
+
+    }
+
+    //ダメージを受けた時の無敵時間
+    IEnumerator WaitForIt()
+    {
+        yield return new WaitForSeconds(1);
+
+
+        Ondamage = false;
+        renderer.color = new Color(1f, 1f, 1f, 1f);
     }
 }
