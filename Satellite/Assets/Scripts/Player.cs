@@ -1,28 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     Rigidbody2D rigidbody;
 
     // 速度
-    public float Speed = 100.0f;
+    public float speed = 100.0f;
     //プレイヤーの位置
     private Vector2 player_pos;
     //プレイヤーのHP
-    public int Hp = 0;
+    public float hp = 100f;
+    public Slider hpslider;
+    float maxhp = 100f;
+    
     //ダメージフラグ
-    public bool Ondamage = false;
+    public bool ondamage = false;
     private SpriteRenderer renderer;
+    //ゲームオーバー表示
+    public GameObject gameover;
 
 
     public GameObject camera;
     //発射する弾
-    public GameObject Bullet;
+    public GameObject bullet;
     //発射間隔の時間
-    public float Bulletderay = 0.5f;
-    private float Timer;
+    public float bulletderay = 0.5f;
+    private float timer;
 
     int key;
 
@@ -31,19 +37,23 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
+        Time.timeScale = 1.0f;
+        hpslider.maxValue = maxhp;
+        hpslider.value = hp;
     }
 
     // Update is called once per frame
     void Update()
     {
         //HPが0以下になったときの処理
-        if (Hp <= 0)
+        if (hp <= 0)
         {
             Destroy(gameObject);
+            gameover.SetActive(true);
         }
 
         //ダメージを受けた時点滅
-        if(Ondamage)
+        if(ondamage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             renderer.color = new Color(1f, 1f, 1f, level);
@@ -57,7 +67,7 @@ public class Player : MonoBehaviour
         //弾を発射する処理
         Shot();
         //発射間隔の時間計測
-        Timer += Time.deltaTime;
+        timer += Time.deltaTime;
     }
 
     // 移動関数
@@ -71,7 +81,7 @@ public class Player : MonoBehaviour
         Vector2 direction = new Vector2(x, y).normalized;
 
         //移動する向きとスピードを代入
-        rigidbody.velocity = direction * Speed;
+        rigidbody.velocity = direction * speed;
 
         
     }
@@ -92,30 +102,34 @@ public class Player : MonoBehaviour
     void Shot()
     {
         //Spaceキーを押したとき弾を発射
-        if (Input.GetKey(KeyCode.Space)&&Timer>Bulletderay)
+        if (Input.GetKey(KeyCode.Space)&&timer>bulletderay)
         {
             //弾を発射する間隔の時間計測の初期化
-            Timer = 0.0f;
+            timer = 0.0f;
 
             //弾の実体化
-            Instantiate(Bullet,new Vector2(transform.position.x+2,transform.position.y), transform.rotation);
+            Instantiate(bullet,new Vector2(transform.position.x+1.5f,transform.position.y), transform.rotation);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //敵と衝突したときHPを減らす
-        if (!Ondamage&&collision.gameObject.tag == "Enemy")
+        //ダメージ処理
+        if (!ondamage&&collision.gameObject.tag == "Enemy")
         {
-            Hp--;
+            //HPバーを減らす（プロト版）
+            hpslider.value -= 50f;
+            //敵からのダメージ(プロト版)
+            hp -= 50f;
             OndamageEffect();
         }
     }
 
+    //ダメージ処理
     void OndamageEffect()
     {
         //ダメージフラグをtrueに
-        Ondamage = true;
+        ondamage = true;
 
         StartCoroutine("WaitForIt");
 
@@ -127,7 +141,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1);
 
 
-        Ondamage = false;
+        ondamage = false;
         renderer.color = new Color(1f, 1f, 1f, 1f);
     }
 }

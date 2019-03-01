@@ -5,7 +5,7 @@ using UnityEngine;
 public class Backgroundcotroller : MonoBehaviour
 {
     // 背景の枚数
-    float spriteCount = 2.95f;
+    float spriteCount = 4f;
     // 背景が回り込み
     float rightOffset = 1.55f;
     float leftOffset = -1f;
