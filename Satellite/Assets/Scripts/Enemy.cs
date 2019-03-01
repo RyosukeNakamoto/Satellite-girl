@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     public float timer;
     // 弾を指定
     public GameObject enemyBullet;
+    // 消滅したデブリのカウント
+    public int debriCount;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,7 @@ public class Enemy : MonoBehaviour
         if (Hp == 0)
         {
             Destroy(gameObject);
+            debriCount++;
         }
 
         if (isRendered)
@@ -63,9 +66,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // 弾を表示する
     void bullet()
     {
         timer = 0.0f;
         Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-    }
+    }        
 }

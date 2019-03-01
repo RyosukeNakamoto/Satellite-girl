@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Scenecontroller : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
+    // 倒した敵の数
+    int score = 0;
+
+
+
     // Start is called before the first frame update
     void Start()
     {

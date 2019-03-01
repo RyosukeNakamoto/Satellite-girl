@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Backgroundcotroller : MonoBehaviour
+public class BackgroundCotroller : MonoBehaviour
 {
     // 背景の枚数
     float spriteCount = 4f;
