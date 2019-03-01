@@ -466,8 +466,8 @@ GameObject:
   - component: {fileID: 863122474}
   - component: {fileID: 863122473}
   - component: {fileID: 863122472}
-  - component: {fileID: 863122475}
   - component: {fileID: 863122476}
+  - component: {fileID: 863122475}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -548,19 +548,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 863122471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88894fb68831a0c43953c9161615c623, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &863122476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863122471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e889412a6431cbe47a922725709dfdc9, type: 3}
+  m_Script: {fileID: 11500000, guid: 045c00af6de96a543820a344ca6cc514, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Stage1: {fileID: 1004325883}
@@ -570,6 +558,18 @@ MonoBehaviour:
   Stage5: {fileID: 1233525888}
   Stage6: {fileID: 892356586}
   Return: {fileID: 672938434}
+--- !u!114 &863122476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863122471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9540dafb488059a44b6cdcdc5614ec92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &892356586
 GameObject:
   m_ObjectHideFlags: 0

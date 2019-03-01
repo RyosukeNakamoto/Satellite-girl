@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4198030019212497240}
   - component: {fileID: 4198030019212497241}
-  - component: {fileID: 4198030019212497246}
   - component: {fileID: 4198030019212497242}
   - component: {fileID: 4198030019212497243}
+  - component: {fileID: 4840467917690538779}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -82,23 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4198030019212497246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4198030019212497247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a029444f3d2a2c64ab9f191a317efedb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Hp: 1
-  enemytime: 1
-  timer: 0
-  enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
-    type: 3}
 --- !u!50 &4198030019212497242
 Rigidbody2D:
   serializedVersion: 4
@@ -146,3 +129,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4840467917690538779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4198030019212497247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607c8545e40140e4ba5d8156dbd300b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 1
+  enemytime: 1
+  timer: 0
+  enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
+    type: 3}
+  debriCount: 0
