@@ -95,6 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hp: 1
+  enemytime: 1
+  timer: 0
+  enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
+    type: 3}
 --- !u!50 &4198030019212497242
 Rigidbody2D:
   serializedVersion: 4

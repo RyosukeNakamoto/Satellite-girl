@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     public Vector2 speed;
 

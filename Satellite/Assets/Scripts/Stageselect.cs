@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Stageselect : MonoBehaviour
+public class StageSelect : MonoBehaviour
 {
 
     public GameObject Stage1;
