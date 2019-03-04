@@ -89,9 +89,10 @@ public class StageSelect : MonoBehaviour
                 Stage6.SetActive(false);
                 Return.SetActive(false);
 
+                //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    SceneManager.LoadScene("Stage1");
+                    SceneManager.LoadScene("CharacterSelect");
                 }
             }
             //Stage2を選択状態
