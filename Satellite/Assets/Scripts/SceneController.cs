@@ -52,6 +52,22 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene("Home");
             }
         }
+
+        //キャラクター選択画面でキーを押したときの処理
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
+        {
+            //エンターキーを押したときにステージ1へ遷移(プロト）
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("Stage1");
+            }
+            //スペースキーを押したときステージセレクト画面に遷移
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene("StageSelect");
+            }
+
+        }
     }
 }
 
