@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         if(ondamage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-            renderer.color = new Color(1f, 1f, 1f, level);
+            //renderer.color = new Color(1f, 1f, 1f, level);
         }
 
 
@@ -142,6 +142,6 @@ public class Player : MonoBehaviour
 
 
         ondamage = false;
-        renderer.color = new Color(1f, 1f, 1f, 1f);
+ //       renderer.color = new Color(1f, 1f, 1f, 1f);
     }
 }
