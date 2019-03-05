@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-namespace Satellite.Home_1
+namespace Satellite.Home
 {
-    public class SceneController_1 : MonoBehaviour
+    public class SceneController : MonoBehaviour
     {
         //seectnumberによって選択中のものを判定
         public int selectnumber = 4;
@@ -142,7 +142,6 @@ namespace Satellite.Home_1
                     SceneManager.LoadScene("StageSelect");
                 }
             }
-
         }
     }
 }
