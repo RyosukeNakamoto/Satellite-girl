@@ -19,15 +19,18 @@ public class Player : MonoBehaviour
     //ダメージフラグ
     public bool ondamage = false;
     public static SpriteRenderer renderer;
+    private float Damage = 25f;
     //ゲームオーバー表示
-    public GameObject gameover;
+    public GameObject gameOver;
+    // ゲームクリア表示
+    public GameObject gameClear;
 
 
     public GameObject camera;
     //発射する弾
     public GameObject bullet;
     //発射間隔の時間
-    public float bulletderay = 0.5f;
+    public float bulletderay;
     private float timer;
 
     //--------------------------
@@ -68,7 +71,7 @@ public class Player : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
-            gameover.SetActive(true);
+            gameOver.SetActive(true);
         }
 
         //ダメージを受けた時点滅
@@ -87,6 +90,11 @@ public class Player : MonoBehaviour
         Shot();
         //発射間隔の時間計測
         timer += Time.deltaTime;
+
+        if (score ==15)
+        {
+            gameClear.SetActive(true);
+        }
     }
 
     // 移動関数
@@ -137,9 +145,9 @@ public class Player : MonoBehaviour
         if (!ondamage && collision.gameObject.tag == "Enemy")
         {
             //HPバーを減らす（プロト版）
-            hpslider.value -= 50f;
+            hpslider.value -= Damage;
             //敵からのダメージ(プロト版)
-            hp -= 50f;
+            hp -= Damage;
             OndamageEffect();
         }
 
@@ -175,5 +183,4 @@ public class Player : MonoBehaviour
         ondamage = false;
         //       renderer.color = new Color(1f, 1f, 1f, 1f);
     }
-
 }

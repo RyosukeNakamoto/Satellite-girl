@@ -6,16 +6,16 @@ public class EnemySpawner : MonoBehaviour
 {
     // こどもプレハブのエネミーを指定します
     public GameObject enemy;
+
     // 親オブジェクトを指定します
-    public Transform parentObject;
+    //public Transform parentObject;
+    
     // Enemyのスクリプトを参照するための変数
-    Enemy enemysc;
+    //Enemy enemysc;
 
     // Start is called before the first frame update
     void Start()
     {
-
-
         // ランダムで20体の敵を生成します
         for (int i = 0; i <= 20; i++)
         {
@@ -29,12 +29,13 @@ public class EnemySpawner : MonoBehaviour
             position.y = Random.Range(-6.0f, 6.0f);
 
             // こどもプレハブを生成します
-            GameObject enemyChild = Instantiate(enemy,position, enemy.transform.rotation, parentObject.transform) as GameObject;
+            GameObject enemyChild = Instantiate(enemy, position, enemy.transform.rotation, transform) as GameObject;
+            //GameObject enemyChild = Instantiate(enemy,position, enemy.transform.rotation) as GameObject;
             //enemyChild.transform.parent = parentObject.transform;
         }
 
         // Enemyのスクリプトを参照します
-        enemysc = gameObject.GetComponent<Enemy>();
+        //enemysc = gameObject.GetComponent<Enemy>();
     }
 
     // Update is called once per frame
