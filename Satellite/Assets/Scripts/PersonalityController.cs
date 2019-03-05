@@ -20,8 +20,14 @@ public class PersonalityController : MonoBehaviour
     //「ツンデレな女の子」のアウトライン
     public Outline tsunderegirloutline;
 
-    public GameObject playerspriteobject;
-    PlayerSprite playersprite;
+    //「機械的な女の子」を選択してるかを判定
+    public static bool mechanical = false;
+    //「活発な女の子」を選択しているかを判定
+    public static bool lively = false;
+    //「清楚な女の子」を選択しているかを判定
+    public static bool neat = false;
+    //「ツンデレな女の子」を選択しているか判定
+    public static bool tsundere = false;
 
 
     // Start is called before the first frame update
@@ -34,8 +40,6 @@ public class PersonalityController : MonoBehaviour
         neatgirloutline.enabled = false;
         tsunderegirloutline.enabled = false;
 
-        playerspriteobject = GameObject.Find("PlayerSprite");
-        playersprite = playerspriteobject.GetComponent<PlayerSprite>();
     }
 
     // Update is called once per frame
@@ -91,7 +95,16 @@ public class PersonalityController : MonoBehaviour
             neatgirloutline.enabled = false;
             tsunderegirloutline.enabled = false;
 
-            
+            //エンターキーを押して「機械的な女の子」に決定
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                //「機械的な女の子」以外をfalseに
+                mechanical = true;
+                lively = false;
+                neat = false;
+                tsundere = false;
+            }
+
         }
 
         //「活発な女の子」を選択状態
@@ -103,6 +116,16 @@ public class PersonalityController : MonoBehaviour
             livelygirloutline.enabled = true;
             neatgirloutline.enabled = false;
             tsunderegirloutline.enabled = false;
+
+            //エンターキーで「活発な女の子」に決定
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                //「活発な女の子」以外をfalseni
+                mechanical = false;
+                lively = true;
+                neat = false;
+                tsundere = false;
+            }
         }
 
         //「清楚な女の子」を選択状態
@@ -114,6 +137,16 @@ public class PersonalityController : MonoBehaviour
             livelygirloutline.enabled = false;
             neatgirloutline.enabled = true;
             tsunderegirloutline.enabled = false;
+
+            //エンターキーで「清楚な女の子」に決定
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                //「清楚な女の子」以外をfalse
+                mechanical = false;
+                lively = false;
+                neat = true;
+                tsundere = false;
+            }
         }
 
         //「ツンデレな女の子」を選択状態
@@ -125,6 +158,16 @@ public class PersonalityController : MonoBehaviour
             livelygirloutline.enabled = false;
             neatgirloutline.enabled = false;
             tsunderegirloutline.enabled = true;
+            
+            //エンターキーで「ツンデレな女の子」に決定
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                //「ツンデレな女の子」以外をfalseに
+                mechanical = false;
+                lively = false;
+                neat = false;
+                tsundere = true;
+            }
         }
     }
 }
