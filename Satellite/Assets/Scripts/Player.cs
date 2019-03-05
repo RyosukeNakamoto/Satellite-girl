@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     //ダメージフラグ
     public bool ondamage = false;
-    private SpriteRenderer renderer;
+    public static SpriteRenderer renderer;
     //ゲームオーバー表示
     public GameObject gameover;
 
@@ -29,8 +29,6 @@ public class Player : MonoBehaviour
     //発射間隔の時間
     public float bulletderay = 0.5f;
     private float timer;
-
-    int key;
 
     //--------------------------
     //(仮)
@@ -177,4 +175,5 @@ public class Player : MonoBehaviour
         ondamage = false;
         //       renderer.color = new Color(1f, 1f, 1f, 1f);
     }
+
 }
