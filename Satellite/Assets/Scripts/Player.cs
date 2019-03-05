@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public float hp = 100f;
     public Slider hpslider;
     float maxhp = 100f;
-    
+
     //ダメージフラグ
     public bool ondamage = false;
     private SpriteRenderer renderer;
@@ -32,6 +32,18 @@ public class Player : MonoBehaviour
 
     int key;
 
+    //--------------------------
+    //(仮)
+    // スコアの値
+    public static int score;
+    // スコアテキストコンポーネント
+    Text scoretext;
+    // スコアテキストオブジェクトの参照
+    public GameObject scoreObj;
+    //　アイテムの点数
+    int itemScore = 5;
+    //--------------------------
+
     // Use this for initialization
     void Start()
     {
@@ -40,6 +52,15 @@ public class Player : MonoBehaviour
         Time.timeScale = 1.0f;
         hpslider.maxValue = maxhp;
         hpslider.value = hp;
+
+        //--------------------------
+        //(仮)
+        // スコアテキストのコンポーネント
+        scoretext = scoreObj.GetComponent<Text>();
+        // スコアを0で初期化
+        scoretext.text = "Score: " + score;
+        score = 0;
+        //--------------------------
     }
 
     // Update is called once per frame
@@ -53,7 +74,7 @@ public class Player : MonoBehaviour
         }
 
         //ダメージを受けた時点滅
-        if(ondamage)
+        if (ondamage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             //renderer.color = new Color(1f, 1f, 1f, level);
@@ -83,7 +104,7 @@ public class Player : MonoBehaviour
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * speed;
 
-        
+
     }
 
     //プレイヤーの移動制限関数
@@ -102,20 +123,20 @@ public class Player : MonoBehaviour
     void Shot()
     {
         //Spaceキーを押したとき弾を発射
-        if (Input.GetKey(KeyCode.Space)&&timer>bulletderay)
+        if (Input.GetKey(KeyCode.Space) && timer > bulletderay)
         {
             //弾を発射する間隔の時間計測の初期化
             timer = 0.0f;
 
             //弾の実体化
-            Instantiate(bullet,new Vector2(transform.position.x+1.5f,transform.position.y), transform.rotation);
+            Instantiate(bullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //ダメージ処理
-        if (!ondamage&&collision.gameObject.tag == "Enemy")
+        if (!ondamage && collision.gameObject.tag == "Enemy")
         {
             //HPバーを減らす（プロト版）
             hpslider.value -= 50f;
@@ -123,6 +144,18 @@ public class Player : MonoBehaviour
             hp -= 50f;
             OndamageEffect();
         }
+
+        //--------------------------
+        //(仮)
+        if (collision.gameObject.tag == "Item")
+        {
+            score += itemScore;
+
+            // スコア内容の変更
+            scoretext.text = "Score: " + score;
+        }
+        //--------------------------
+
     }
 
     //ダメージ処理
@@ -142,6 +175,6 @@ public class Player : MonoBehaviour
 
 
         ondamage = false;
- //       renderer.color = new Color(1f, 1f, 1f, 1f);
+        //       renderer.color = new Color(1f, 1f, 1f, 1f);
     }
 }
