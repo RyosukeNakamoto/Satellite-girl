@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // 倒した敵の数
-    int score = 0;
-
-
     // Start is called before the first frame update
     void Start()
     {
