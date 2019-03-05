@@ -9,13 +9,13 @@ public class CustomController : MonoBehaviour
     //どこを選択中か数値で管理
     public int selectnumber = 0;
 
-    //「性格」オブジェクトのアウトライン
+    //「性格」のアウトライン
     public Outline personality;
-    //「武器」オブジェクトのアウトライン
+    //「武器」のアウトライン
     public Outline weapon;
-    //「防具」オブジェクトのアウトライン
+    //「防具」のアウトライン
     public Outline armor;
-    //「戻る」オブジェクトのアウトライン
+    //「戻る」のアウトライン
     public Outline back;
 
 
@@ -44,12 +44,12 @@ public class CustomController : MonoBehaviour
             selectnumber++;
         }
 
-        //selectnumberが5になったとき、selectnumberを0にする
+        //selectnumberが4になったとき、selectnumberを0にする
         if (selectnumber == 4)
         {
             selectnumber = 0;
         }
-        //selectnumberが-1になったとき、selectnumberを4にする
+        //selectnumberが-1になったとき、selectnumberを3にする
         if (selectnumber == -1)
         {
             selectnumber = 3;
@@ -58,24 +58,39 @@ public class CustomController : MonoBehaviour
         //「性格」を選択状態
         if (selectnumber == 0)
         {
+            //「性格」以外のアウトラインを非表示
             personality.enabled = true;
             weapon.enabled = false;
             armor.enabled = false;
             back.enabled = false;
+
+            //エンターキーを押したとき「性格変更」へシーン遷移
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("CustomPersonality");
+            }
         }
 
         //「武器」を選択状態
         if (selectnumber == 1)
         {
+            //「武器」以外のアウトラインを非表示
             personality.enabled = false;
             weapon.enabled = true;
             armor.enabled = false;
             back.enabled = false;
+
+            //エンターキーを押したとき「武器」へシーン遷移
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SceneManager.LoadScene("CustomWeapon");
+            }
         }
 
         //「防具」を選択状態
         if (selectnumber == 2)
         {
+            //「防具」以外のアウトラインを非表示
             personality.enabled = false;
             weapon.enabled = false;
             armor.enabled = true;
@@ -85,6 +100,7 @@ public class CustomController : MonoBehaviour
         //「戻る」を選択状態
         if (selectnumber == 3)
         {
+            //「戻る」以外のアウトラインを非表示
             personality.enabled = false;
             weapon.enabled = false;
             armor.enabled = false;

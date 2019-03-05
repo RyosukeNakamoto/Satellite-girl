@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Custom.unity
     guid: 6cd75d2c6cb2ef04dbff4842981b1b3a
   - enabled: 1
+    path: Assets/Scenes/CustomPersonality.unity
+    guid: a3caf0d4996111547a174ee4203d67a1
+  - enabled: 1
+    path: Assets/Scenes/CustomWeapon.unity
+    guid: fc922010b156a6d4fb2f613dae1d20bb
+  - enabled: 1
     path: Assets/Scenes/StageSelect.unity
     guid: 7709e2f160a2a2346bc944b532dc1cf3
   - enabled: 1

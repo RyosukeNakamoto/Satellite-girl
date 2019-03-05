@@ -9,12 +9,15 @@ public class HomeController : MonoBehaviour
     //seectnumberによって選択中のものを判定
     public int selectnumber = 4;
 
-    //オプションオブジェクトのアウトライン
+    //「オプション」のアウトライン
     public Outline option;
-    //
+    //「戻る」のアウトライン
     public Outline back;
+    //「セーブ」のアウトライン
     public Outline save;
+    //「改造」のアウトライン
     public Outline custom;
+    //「出撃」のアウトライン
     public Outline sortie;
 
     // Start is called before the first frame update
@@ -58,6 +61,7 @@ public class HomeController : MonoBehaviour
         //「オプション」を選択状態
         if (selectnumber == 0)
         {
+            //「オプション」以外のアウトラインを非表示
             option.enabled = true;
             back.enabled = false;
             save.enabled = false;
@@ -68,6 +72,7 @@ public class HomeController : MonoBehaviour
         //「タイトルに戻る」を選択状態
         if (selectnumber == 1)
         {
+            //「タイトルに戻る」以外のアウトラインを非表示
             option.enabled = false;
             back.enabled = true;
             save.enabled = false;
@@ -84,6 +89,7 @@ public class HomeController : MonoBehaviour
         //「セーブ」を選択状態
         if (selectnumber == 2)
         {
+            //「セーブ」以外のアウトラインを非表示
             option.enabled = false;
             back.enabled = false;
             save.enabled = true;
@@ -94,6 +100,7 @@ public class HomeController : MonoBehaviour
         //「改造」を選択状態
         if (selectnumber == 3)
         {
+            //「改造」以外のアウトラインを非表示
             option.enabled = false;
             back.enabled = false;
             save.enabled = false;
@@ -110,6 +117,7 @@ public class HomeController : MonoBehaviour
         //「出撃」を選択状態
         if (selectnumber == 4)
         {
+            //「出撃」以外のアウトラインを非表示
             option.enabled = false;
             back.enabled = false;
             save.enabled = false;
