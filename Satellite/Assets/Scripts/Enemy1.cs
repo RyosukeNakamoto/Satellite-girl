@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy1 : MonoBehaviour
 {
 
     public int Hp=0;
@@ -16,7 +16,9 @@ public class Enemy : MonoBehaviour
     // 時間処理計算
     public float timer;
     // 弾を指定
-    public GameObject enemyBullet;
+    public GameObject enemyBullet1;
+    public GameObject enemyBullet2;
+    public GameObject enemyBullet3;
     // 消滅したデブリのカウント
     public int debriCount;
 
@@ -44,7 +46,6 @@ public class Enemy : MonoBehaviour
                 bullet();
             }            
         }
-
         // カメラ範囲から再度外れたらfalse
         isRendered = false;        
     }
@@ -71,6 +72,8 @@ public class Enemy : MonoBehaviour
     void bullet()
     {
         timer = 0.0f;
-        Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet2, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet3, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
     }        
 }
