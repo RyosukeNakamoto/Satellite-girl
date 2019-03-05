@@ -6,29 +6,29 @@ using UnityEngine.SceneManagement;
 public class StageSelect : MonoBehaviour
 {
 
-    public GameObject Stage1;
-    public GameObject Stage2;
-    public GameObject Stage3;
-    public GameObject Stage4;
-    public GameObject Stage5;
-    public GameObject Stage6;
-    public GameObject Return;
+    public GameObject stage1;
+    public GameObject stage2;
+    public GameObject stage3;
+    public GameObject stage4;
+    public GameObject stage5;
+    public GameObject stage6;
+    public GameObject back;
 
     //どこを選択中か数値で管理
-    int Selectnumber = 0;
-    int Selectsecondnumber = 0;
+    int selectnumber = 0;
+    int selectsecondnumber = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         //シーン開始時に選択中の表示の非表示
-        Stage1.SetActive(false);
-        Stage2.SetActive(false);
-        Stage3.SetActive(false);
-        Stage4.SetActive(false);
-        Stage5.SetActive(false);
-        Stage6.SetActive(false);
-        Return.SetActive(false);
+        stage1.SetActive(false);
+        stage2.SetActive(false);
+        stage3.SetActive(false);
+        stage4.SetActive(false);
+        stage5.SetActive(false);
+        stage6.SetActive(false);
+        back.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,57 +37,57 @@ public class StageSelect : MonoBehaviour
         //右矢印キーを押したときSelectnumberを増やす
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Selectnumber++;
+            selectnumber++;
         }
         //左矢印キーを押したときSelectnumberを減らす
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            Selectnumber--;
+            selectnumber--;
         }
         //Selectnumberが2を越えた時0に戻す処理
-        if (Selectnumber > 2)
+        if (selectnumber > 2)
         {
-            Selectnumber = 0;
+            selectnumber = 0;
         }
         //Selectnumberが0を下回った時2にする処理
-        if (Selectnumber < 0)
+        if (selectnumber < 0)
         {
-            Selectnumber = 2;
+            selectnumber = 2;
         }
         //下矢印キーを押したときSelectsecondnumberを増やす処理
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Selectsecondnumber++;
+            selectsecondnumber++;
         }
         //上矢印キーを押したときSelectsecondnumberを減らす処理
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Selectsecondnumber--;
+            selectsecondnumber--;
         }
         //Selectsecondnumberが2を越えた時0に戻す処理
-        if (Selectsecondnumber > 2)
+        if (selectsecondnumber > 2)
         {
-            Selectsecondnumber = 0;
+            selectsecondnumber = 0;
         }
         //Selectsecondnumberが0を下回った時2にする処理
-        if (Selectsecondnumber < 0)
+        if (selectsecondnumber < 0)
         {
-            Selectsecondnumber = 2;
+            selectsecondnumber = 2;
         }
 
         //1段目を選択状態
-        if (Selectsecondnumber == 0)
+        if (selectsecondnumber == 0)
         {
             //Stage1を選択状態
-            if (Selectnumber == 0)
+            if (selectnumber == 0)
             {
-                Stage1.SetActive(true);
-                Stage2.SetActive(false);
-                Stage3.SetActive(false);
-                Stage4.SetActive(false);
-                Stage5.SetActive(false);
-                Stage6.SetActive(false);
-                Return.SetActive(false);
+                stage1.SetActive(true);
+                stage2.SetActive(false);
+                stage3.SetActive(false);
+                stage4.SetActive(false);
+                stage5.SetActive(false);
+                stage6.SetActive(false);
+                back.SetActive(false);
 
                 //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                 if (Input.GetKeyDown(KeyCode.Return))
@@ -96,76 +96,76 @@ public class StageSelect : MonoBehaviour
                 }
             }
             //Stage2を選択状態
-            if (Selectnumber == 1)
+            if (selectnumber == 1)
             {
-                Stage1.SetActive(false);
-                Stage2.SetActive(true);
-                Stage3.SetActive(false);
-                Stage4.SetActive(false);
-                Stage5.SetActive(false);
-                Stage6.SetActive(false);
-                Return.SetActive(false);
+                stage1.SetActive(false);
+                stage2.SetActive(true);
+                stage3.SetActive(false);
+                stage4.SetActive(false);
+                stage5.SetActive(false);
+                stage6.SetActive(false);
+                back.SetActive(false);
             }
             //Stage3を選択状態
-            if (Selectnumber == 2)
+            if (selectnumber == 2)
             {
-                Stage1.SetActive(false);
-                Stage2.SetActive(false);
-                Stage3.SetActive(true);
-                Stage4.SetActive(false);
-                Stage5.SetActive(false);
-                Stage6.SetActive(false);
-                Return.SetActive(false);
+                stage1.SetActive(false);
+                stage2.SetActive(false);
+                stage3.SetActive(true);
+                stage4.SetActive(false);
+                stage5.SetActive(false);
+                stage6.SetActive(false);
+                back.SetActive(false);
             }
         }
         //2段目を選択状態
-        if (Selectsecondnumber == 1)
+        if (selectsecondnumber == 1)
         {
             //Stage4を選択状態
-            if (Selectnumber == 0)
+            if (selectnumber == 0)
             {
-                Stage1.SetActive(false);
-                Stage2.SetActive(false);
-                Stage3.SetActive(false);
-                Stage4.SetActive(true);
-                Stage5.SetActive(false);
-                Stage6.SetActive(false);
-                Return.SetActive(false);
+                stage1.SetActive(false);
+                stage2.SetActive(false);
+                stage3.SetActive(false);
+                stage4.SetActive(true);
+                stage5.SetActive(false);
+                stage6.SetActive(false);
+                back.SetActive(false);
             }
             //Stage5を選択状態
-            if (Selectnumber == 1)
+            if (selectnumber == 1)
             {
-                Stage1.SetActive(false);
-                Stage2.SetActive(false);
-                Stage3.SetActive(false);
-                Stage4.SetActive(false);
-                Stage5.SetActive(true);
-                Stage6.SetActive(false);
-                Return.SetActive(false);
+                stage1.SetActive(false);
+                stage2.SetActive(false);
+                stage3.SetActive(false);
+                stage4.SetActive(false);
+                stage5.SetActive(true);
+                stage6.SetActive(false);
+                back.SetActive(false);
             }
             //Stage6を選択状態
-            if (Selectnumber == 2)
+            if (selectnumber == 2)
             {
-                Stage1.SetActive(false);
-                Stage2.SetActive(false);
-                Stage3.SetActive(false);
-                Stage4.SetActive(false);
-                Stage5.SetActive(false);
-                Stage6.SetActive(true);
-                Return.SetActive(false);
+                stage1.SetActive(false);
+                stage2.SetActive(false);
+                stage3.SetActive(false);
+                stage4.SetActive(false);
+                stage5.SetActive(false);
+                stage6.SetActive(true);
+                back.SetActive(false);
             }
         }
 
         //Returnを選択状態
-        if (Selectsecondnumber == 2)
+        if (selectsecondnumber == 2)
         {
-            Stage1.SetActive(false);
-            Stage2.SetActive(false);
-            Stage3.SetActive(false);
-            Stage4.SetActive(false);
-            Stage5.SetActive(false);
-            Stage6.SetActive(false);
-            Return.SetActive(true);
+            stage1.SetActive(false);
+            stage2.SetActive(false);
+            stage3.SetActive(false);
+            stage4.SetActive(false);
+            stage5.SetActive(false);
+            stage6.SetActive(false);
+            back.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
