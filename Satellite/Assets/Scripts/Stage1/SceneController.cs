@@ -10,7 +10,7 @@ namespace Satellite.Stage1
         public GameObject debri;
 
         // 消滅したデブリのカウント
-        public int debriCount;
+        public int debriDsCount;
 
         // Start is called before the first frame update
         void Start()
@@ -24,9 +24,12 @@ namespace Satellite.Stage1
 
             foreach (Transform debri in gameObject.transform)
             {
+                // デブリが死んだら
                 Destroy(debri.gameObject);
-                debriCount++;
-                if (debriCount == 3)
+                // デブリカウントをプラス
+                debriDsCount++;
+                // 敵を3体倒したら
+                if (debriDsCount == 3)
                 {
                     Debug.Log("a");
                 }
