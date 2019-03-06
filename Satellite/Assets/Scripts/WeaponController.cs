@@ -13,10 +13,13 @@ public class WeaponController : MonoBehaviour
     public Outline back;
     //「ライフル」のアウトライン
     public Outline rifle;
+    public Image riflesprite;
     //「マシンガン」のアウトライン
     public Outline machinegun;
+    public Image machinegunsprite;
     //「バズーカ」のアウトライン
     public Outline bazooka;
+    public Image bazookasprite;
 
     // Start is called before the first frame update
     void Start()
@@ -82,6 +85,8 @@ public class WeaponController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 Bullet.bulletstatus = 0;
+
+             
             }
         }
 
@@ -113,6 +118,30 @@ public class WeaponController : MonoBehaviour
             {
                 Bullet.bulletstatus = 2;
             }
+        }
+
+        //「ライフル」を選択中に色の変更
+        if (Bullet.bulletstatus == 0)
+        {
+            riflesprite.color = Color.yellow;
+            machinegunsprite.color = Color.gray;
+            bazookasprite.color = Color.gray;
+        }
+
+        //「マシンガン」を選択中に色の変更
+        if (Bullet.bulletstatus == 1)
+        {
+            riflesprite.color = Color.gray;
+            machinegunsprite.color = Color.yellow;
+            bazookasprite.color = Color.gray;
+        }
+
+        //「バズーカ」を選択中に色の変更
+        if (Bullet.bulletstatus == 2)
+        {
+            riflesprite.color = Color.gray;
+            machinegunsprite.color = Color.gray;
+            bazookasprite.color = Color.yellow;
         }
     }
 }

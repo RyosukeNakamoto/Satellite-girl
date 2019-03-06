@@ -29,6 +29,12 @@ public class PersonalityController : MonoBehaviour
     //「ツンデレな女の子」を選択しているか判定
     public static bool tsundere = false;
 
+    public Image mechanicalSprite;
+    public Image livelySprite;
+    public Image neatSprite;
+    public Image tsundereSprite;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +45,11 @@ public class PersonalityController : MonoBehaviour
         livelygirloutline.enabled = false;
         neatgirloutline.enabled = false;
         tsunderegirloutline.enabled = false;
+
+        mechanicalSprite.color = Color.gray;
+        livelySprite.color = Color.gray;
+        neatSprite.color = Color.gray;
+        tsundereSprite.color = Color.gray;
 
     }
 
@@ -168,6 +179,38 @@ public class PersonalityController : MonoBehaviour
                 neat = false;
                 tsundere = true;
             }
+        }
+
+        if (mechanical == true)
+        {
+            mechanicalSprite.color = Color.yellow;
+            livelySprite.color = Color.gray;
+            neatSprite.color = Color.gray;
+            tsundereSprite.color = Color.gray;
+        }
+
+        if (lively == true)
+        {
+            mechanicalSprite.color = Color.gray;
+            livelySprite.color = Color.yellow;
+            neatSprite.color = Color.gray;
+            tsundereSprite.color = Color.gray;
+        }
+
+        if (neat == true)
+        {
+            mechanicalSprite.color = Color.gray;
+            livelySprite.color = Color.gray;
+            neatSprite.color = Color.yellow;
+            tsundereSprite.color = Color.gray;
+        }
+
+        if (tsundere == true)
+        {
+            mechanicalSprite.color = Color.gray;
+            livelySprite.color = Color.gray;
+            neatSprite.color = Color.gray;
+            tsundereSprite.color = Color.yellow;
         }
     }
 }
