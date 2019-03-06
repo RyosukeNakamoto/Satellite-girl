@@ -10,11 +10,25 @@ namespace Satellite.Title
         // Update is called once per frame
         void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                //UnityEngine.Application.
+                Quit();
+            }
             //タイトル画面でいずれかのキーを押したときのシーン遷移
-            if (Input.anyKeyDown)
+            else if (Input.anyKeyDown)
             {
                 SceneManager.LoadScene("Home");
             }
+
+        }
+        void Quit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+    UnityEngine.Application.Quit();
+#endif
         }
     }
 }
