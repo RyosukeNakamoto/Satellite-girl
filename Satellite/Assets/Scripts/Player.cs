@@ -128,6 +128,28 @@ public class Player : MonoBehaviour
     //弾の発射関数
     void Shot()
     {
+        //弾の発射間隔を弾の状態で変更
+
+        //ライフルを装備中の発射間隔
+        if (Bullet.bulletstatus == 0)
+        {
+            bulletderay = 0.5f;
+        }
+
+        //マシンガンを装備中の発射間隔
+        if (Bullet.bulletstatus == 1)
+        {
+            bulletderay = 0.1f;
+        }
+
+        //バズーカを装備中の発射間隔
+        if (Bullet.bulletstatus == 2)
+        {
+            bulletderay = 0.8f;
+        }
+
+
+
         //Spaceキーを押したとき弾を発射
         if (Input.GetKey(KeyCode.Space) && timer > bulletderay)
         {
