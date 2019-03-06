@@ -78,6 +78,11 @@ public class WeaponController : MonoBehaviour
             rifle.enabled = true;
             machinegun.enabled = false;
             bazooka.enabled = false;
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Bullet.bulletstatus = 0;
+            }
         }
 
         //「マシンガン」を選択中
@@ -88,6 +93,11 @@ public class WeaponController : MonoBehaviour
             rifle.enabled = false;
             machinegun.enabled = true;
             bazooka.enabled = false;
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Bullet.bulletstatus = 1;
+            }
         }
 
         //「バズーカ」を選択中
@@ -98,6 +108,11 @@ public class WeaponController : MonoBehaviour
             rifle.enabled = false;
             machinegun.enabled = false;
             bazooka.enabled = true;
+
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Bullet.bulletstatus = 2;
+            }
         }
     }
 }
