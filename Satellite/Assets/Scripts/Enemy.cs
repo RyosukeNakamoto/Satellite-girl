@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     // 時間処理計算
     public float timer;
     // 弾を指定
-    public GameObject enemyBullet;
+    //public GameObject enemyBullet;
 
 
     // Start is called before the first frame update
@@ -33,15 +33,15 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (isRendered)
-        {
-            timer += Time.deltaTime;
-            // Debug.Log("表示中");
-            if (enemytime <= timer)
-            {
-                bullet();
-            }            
-        }
+        //if (isRendered)
+        //{
+        //    timer += Time.deltaTime;
+        //    // Debug.Log("表示中");
+        //    if (enemytime <= timer)
+        //    {
+        //        bullet();
+        //    }            
+        //}
 
         // カメラ範囲から再度外れたらfalse
         isRendered = false;        
@@ -65,10 +65,10 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 弾を表示する
-    void bullet()
-    {
-        timer = 0.0f;
-        Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-    }        
+    //// 弾を表示する
+    //void bullet()
+    //{
+    //    timer = 0.0f;
+    //    Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+    //}        
 }
