@@ -15,6 +15,8 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject boss;
 
+    public GameObject Slider;
+
     //public GameObject enemyds;// 禁断の手
 
     //private int enemyDsCount;
@@ -55,10 +57,10 @@ public class EnemySpawner : MonoBehaviour
         {
             foreach (Transform enemy in gameObject.transform)
             {
-                Destroy(enemy.gameObject);
-
-                boss.SetActive(true);
+                Destroy(enemy.gameObject);                      
             }
+            boss.SetActive(true);
+            Slider.SetActive(true);
         }
     }
 }
