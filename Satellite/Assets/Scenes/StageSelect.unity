@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 453995542}
   - component: {fileID: 453995541}
   m_Layer: 5
-  m_Name: Stage3select
+  m_Name: Stage3Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +177,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1309131393}
   m_Father: {fileID: 98415737}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -199,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -235,7 +236,7 @@ GameObject:
   - component: {fileID: 466801118}
   - component: {fileID: 466801117}
   m_Layer: 5
-  m_Name: Return
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,14 +251,14 @@ RectTransform:
   m_GameObject: {fileID: 466801115}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.14285713, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
+  m_Father: {fileID: 672938435}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -917}
+  m_AnchoredPosition: {x: 0, y: 22}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &466801117
@@ -293,7 +294,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: HOME
+  m_Text: Title
 --- !u!222 &466801118
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -314,7 +315,7 @@ GameObject:
   - component: {fileID: 672938437}
   - component: {fileID: 672938436}
   m_Layer: 5
-  m_Name: Returnselect
+  m_Name: TitleSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,14 +331,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 7, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 466801116}
   m_Father: {fileID: 98415737}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -961}
-  m_SizeDelta: {x: 65, y: 100}
+  m_SizeDelta: {x: 50, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &672938436
 MonoBehaviour:
@@ -352,7 +354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -388,7 +390,7 @@ GameObject:
   - component: {fileID: 796699398}
   - component: {fileID: 796699397}
   m_Layer: 5
-  m_Name: Stageselect
+  m_Name: StageSelect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +593,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1821338449}
   m_Father: {fileID: 98415737}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -613,7 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -649,7 +652,7 @@ GameObject:
   - component: {fileID: 1004325886}
   - component: {fileID: 1004325885}
   m_Layer: 5
-  m_Name: Stage1select
+  m_Name: Stage1Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,7 +668,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1433766942}
   m_Father: {fileID: 98415737}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -687,7 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -723,7 +727,7 @@ GameObject:
   - component: {fileID: 1069041471}
   - component: {fileID: 1069041470}
   m_Layer: 5
-  m_Name: Stage4select
+  m_Name: Stage4Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -739,7 +743,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1390753794}
   m_Father: {fileID: 98415737}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -761,7 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -915,13 +920,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d78c4da326e7de41b783fb3b44484b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage1: {fileID: 1004325883}
-  stage2: {fileID: 1580920950}
-  stage3: {fileID: 453995539}
-  stage4: {fileID: 1069041468}
-  stage5: {fileID: 1233525888}
-  stage6: {fileID: 892356586}
-  back: {fileID: 672938434}
+  stage1: {fileID: 1004325885}
+  stage2: {fileID: 1580920952}
+  stage3: {fileID: 453995541}
+  stage4: {fileID: 1069041470}
+  stage5: {fileID: 1233525890}
+  stage6: {fileID: 892356588}
+  back: {fileID: 672938436}
 --- !u!4 &1180400618
 Transform:
   m_ObjectHideFlags: 0
@@ -948,7 +953,7 @@ GameObject:
   - component: {fileID: 1215525239}
   - component: {fileID: 1215525238}
   m_Layer: 5
-  m_Name: Stage2
+  m_Name: Stage2Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -963,14 +968,14 @@ RectTransform:
   m_GameObject: {fileID: 1215525236}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 2
+  m_Father: {fileID: 1580920951}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: -351}
+  m_AnchoredPosition: {x: 2.5, y: 25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215525238
@@ -1027,7 +1032,7 @@ GameObject:
   - component: {fileID: 1233525891}
   - component: {fileID: 1233525890}
   m_Layer: 5
-  m_Name: Stage5select
+  m_Name: Stage5Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1043,7 +1048,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1319140553}
   m_Father: {fileID: 98415737}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1065,7 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1101,7 +1107,7 @@ GameObject:
   - component: {fileID: 1309131395}
   - component: {fileID: 1309131394}
   m_Layer: 5
-  m_Name: Stage3
+  m_Name: Stage3Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1116,14 +1122,14 @@ RectTransform:
   m_GameObject: {fileID: 1309131392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 3
+  m_Father: {fileID: 453995540}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 520, y: -351}
+  m_AnchoredPosition: {x: -2.5, y: 25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309131394
@@ -1180,7 +1186,7 @@ GameObject:
   - component: {fileID: 1319140555}
   - component: {fileID: 1319140554}
   m_Layer: 5
-  m_Name: Stage5
+  m_Name: Stage5Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1195,14 +1201,14 @@ RectTransform:
   m_GameObject: {fileID: 1319140552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 5
+  m_Father: {fileID: 1233525889}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -671}
+  m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319140554
@@ -1259,7 +1265,7 @@ GameObject:
   - component: {fileID: 1390753796}
   - component: {fileID: 1390753795}
   m_Layer: 5
-  m_Name: Stage4
+  m_Name: Stage4v
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1274,14 +1280,14 @@ RectTransform:
   m_GameObject: {fileID: 1390753793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 4
+  m_Father: {fileID: 1069041469}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -520, y: -671}
+  m_AnchoredPosition: {x: 2.5, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390753795
@@ -1338,7 +1344,7 @@ GameObject:
   - component: {fileID: 1433766944}
   - component: {fileID: 1433766943}
   m_Layer: 5
-  m_Name: Stage1
+  m_Name: Stage1Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1353,14 +1359,14 @@ RectTransform:
   m_GameObject: {fileID: 1433766941}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 1
+  m_Father: {fileID: 1004325884}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -520, y: -351}
+  m_AnchoredPosition: {x: 2.5, y: 25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433766943
@@ -1417,7 +1423,7 @@ GameObject:
   - component: {fileID: 1580920953}
   - component: {fileID: 1580920952}
   m_Layer: 5
-  m_Name: Stage2select
+  m_Name: Stage2Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1433,7 +1439,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1215525237}
   m_Father: {fileID: 98415737}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1455,7 +1462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1505,14 +1512,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 511, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 466801116}
-  - {fileID: 1433766942}
-  - {fileID: 1215525237}
-  - {fileID: 1309131393}
-  - {fileID: 1390753794}
-  - {fileID: 1319140553}
-  - {fileID: 1821338449}
+  m_Children: []
   m_Father: {fileID: 1121292289}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 1821338451}
   - component: {fileID: 1821338450}
   m_Layer: 5
-  m_Name: Stage6
+  m_Name: Stage6Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1543,14 +1543,14 @@ RectTransform:
   m_GameObject: {fileID: 1821338448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.25, y: 0.5, z: 1}
   m_Children: []
-  m_Father: {fileID: 1672127374}
-  m_RootOrder: 6
+  m_Father: {fileID: 892356587}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 520, y: -671}
+  m_AnchoredPosition: {x: -2.5, y: 20}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1821338450
