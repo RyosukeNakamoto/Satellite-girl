@@ -53,6 +53,17 @@ public class Enemy : MonoBehaviour
         {
             Hp--;
         }
+
+        if (collision.gameObject.tag == "explosion")
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
     }
 
     // カメラの表示範囲に入ったら動作します
