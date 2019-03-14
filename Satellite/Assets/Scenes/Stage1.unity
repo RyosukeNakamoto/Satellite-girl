@@ -1166,7 +1166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Enter=\u30DE\u30C3\u30D7\u9078\u629E"
+  m_Text: "Enter=\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u30BB\u30EC\u30AF\u30C8"
 --- !u!222 &523839034
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2175,7 +2175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1319542330
 RectTransform:
   m_ObjectHideFlags: 0
