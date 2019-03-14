@@ -18,7 +18,7 @@ namespace Satellite.Title
             //タイトル画面でいずれかのキーを押したときのシーン遷移
             else if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene("Home");
+                SceneManager.LoadScene("StageSelect");
             }
 
         }

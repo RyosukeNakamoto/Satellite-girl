@@ -38,7 +38,7 @@ public class Pause : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Backspace))
             {
-                SceneManager.LoadScene("Home");
+                SceneManager.LoadScene("CharacterSelect");
 
             }
         }
