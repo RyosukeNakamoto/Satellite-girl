@@ -1,19 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 namespace Satellite.StageSelect
 {
     public class SceneController : MonoBehaviour
     {
-        public GameObject stage1;
-        public GameObject stage2;
-        public GameObject stage3;
-        public GameObject stage4;
-        public GameObject stage5;
-        public GameObject stage6;
-        public GameObject back;
+        public Image stage1;
+        public Image stage2;
+        public Image stage3;
+        public Image stage4;
+        public Image stage5;
+        public Image stage6;
+        public Image back;
 
         //どこを選択中か数値で管理
         int selectnumber = 0;
@@ -23,13 +24,13 @@ namespace Satellite.StageSelect
         void Start()
         {
             //シーン開始時に選択中の表示の非表示
-            stage1.SetActive(false);
-            stage2.SetActive(false);
-            stage3.SetActive(false);
-            stage4.SetActive(false);
-            stage5.SetActive(false);
-            stage6.SetActive(false);
-            back.SetActive(false);
+            stage1.color = Color.gray;
+            stage2.color = Color.gray;
+            stage3.color = Color.gray;
+            stage4.color = Color.gray;
+            stage5.color = Color.gray;
+            stage6.color = Color.gray;
+            back.color = Color.gray;
         }
 
         // Update is called once per frame
@@ -82,13 +83,13 @@ namespace Satellite.StageSelect
                 //Stage1を選択状態
                 if (selectnumber == 0)
                 {
-                    stage1.SetActive(true);
-                    stage2.SetActive(false);
-                    stage3.SetActive(false);
-                    stage4.SetActive(false);
-                    stage5.SetActive(false);
-                    stage6.SetActive(false);
-                    back.SetActive(false);
+                    stage1.color = Color.yellow;
+                    stage2.color = Color.gray;
+                    stage3.color = Color.gray;
+                    stage4.color = Color.gray;
+                    stage5.color = Color.gray;
+                    stage6.color = Color.gray;
+                    back.color = Color.gray;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return))
@@ -99,24 +100,24 @@ namespace Satellite.StageSelect
                 //Stage2を選択状態
                 if (selectnumber == 1)
                 {
-                    stage1.SetActive(false);
-                    stage2.SetActive(true);
-                    stage3.SetActive(false);
-                    stage4.SetActive(false);
-                    stage5.SetActive(false);
-                    stage6.SetActive(false);
-                    back.SetActive(false);
+                    stage1.color = Color.gray;
+                    stage2.color = Color.yellow;
+                    stage3.color = Color.gray;
+                    stage4.color = Color.gray;
+                    stage5.color = Color.gray;
+                    stage6.color = Color.gray;
+                    back.color = Color.gray;
                 }
                 //Stage3を選択状態
                 if (selectnumber == 2)
                 {
-                    stage1.SetActive(false);
-                    stage2.SetActive(false);
-                    stage3.SetActive(true);
-                    stage4.SetActive(false);
-                    stage5.SetActive(false);
-                    stage6.SetActive(false);
-                    back.SetActive(false);
+                    stage1.color = Color.gray;
+                    stage2.color = Color.gray;
+                    stage3.color = Color.yellow;
+                    stage4.color = Color.gray;
+                    stage5.color = Color.gray;
+                    stage6.color = Color.gray;
+                    back.color = Color.gray;
                 }
             }
             //2段目を選択状態
@@ -125,52 +126,52 @@ namespace Satellite.StageSelect
                 //Stage4を選択状態
                 if (selectnumber == 0)
                 {
-                    stage1.SetActive(false);
-                    stage2.SetActive(false);
-                    stage3.SetActive(false);
-                    stage4.SetActive(true);
-                    stage5.SetActive(false);
-                    stage6.SetActive(false);
-                    back.SetActive(false);
+                    stage1.color = Color.gray;
+                    stage2.color = Color.gray;
+                    stage3.color = Color.gray;
+                    stage4.color = Color.yellow;
+                    stage5.color = Color.gray;
+                    stage6.color = Color.gray;
+                    back.color = Color.gray;
                 }
                 //Stage5を選択状態
                 if (selectnumber == 1)
                 {
-                    stage1.SetActive(false);
-                    stage2.SetActive(false);
-                    stage3.SetActive(false);
-                    stage4.SetActive(false);
-                    stage5.SetActive(true);
-                    stage6.SetActive(false);
-                    back.SetActive(false);
+                    stage1.color = Color.gray;
+                    stage2.color = Color.gray;
+                    stage3.color = Color.gray;
+                    stage4.color = Color.gray;
+                    stage5.color = Color.yellow;
+                    stage6.color = Color.gray;
+                    back.color = Color.gray;
                 }
                 //Stage6を選択状態
                 if (selectnumber == 2)
                 {
-                    stage1.SetActive(false);
-                    stage2.SetActive(false);
-                    stage3.SetActive(false);
-                    stage4.SetActive(false);
-                    stage5.SetActive(false);
-                    stage6.SetActive(true);
-                    back.SetActive(false);
+                    stage1.color = Color.gray;
+                    stage2.color = Color.gray;
+                    stage3.color = Color.gray;
+                    stage4.color = Color.gray;
+                    stage5.color = Color.gray;
+                    stage6.color = Color.yellow;
+                    back.color = Color.gray;
                 }
             }
 
-            //Returnを選択状態
+            //タイトルを選択状態
             if (selectsecondnumber == 2)
             {
-                stage1.SetActive(false);
-                stage2.SetActive(false);
-                stage3.SetActive(false);
-                stage4.SetActive(false);
-                stage5.SetActive(false);
-                stage6.SetActive(false);
-                back.SetActive(true);
+                stage1.color = Color.gray;
+                stage2.color = Color.gray;
+                stage3.color = Color.gray;
+                stage4.color = Color.gray;
+                stage5.color = Color.gray;
+                stage6.color = Color.gray;
+                back.color = Color.yellow;
 
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-                    SceneManager.LoadScene("Home");
+                    SceneManager.LoadScene("Title");
                 }
             }
         }
