@@ -17,6 +17,20 @@ public class Enemy : MonoBehaviour
     public float timer;
     // 弾を指定
     //public GameObject enemyBullet;
+    // アイテムオブジェクトを指定
+    public GameObject itemObj;
+    // 爆発エフェクトオブジェクトを指定
+    public GameObject effect;
+
+    public void Death()
+    {
+        // アイテムを表示
+        Instantiate(itemObj, transform.position, itemObj.transform.rotation);
+        // エフェクトを表示
+        Instantiate(effect, transform.position, effect.transform.rotation);
+        // デブリをデストロイ
+        Destroy(gameObject);
+    }
 
 
     // Start is called before the first frame update
@@ -30,8 +44,8 @@ public class Enemy : MonoBehaviour
     {
         if (Hp == 0)
         {
-            Destroy(gameObject);
-        }
+            Death();
+        }        
 
         //if (isRendered)
         //{
@@ -56,7 +70,7 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.tag == "explosion")
         {
-            Destroy(gameObject);
+            Hp--;
         }
     }
 

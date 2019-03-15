@@ -81,7 +81,6 @@ public class Player : MonoBehaviour
             //renderer.color = new Color(1f, 1f, 1f, level);
         }
 
-
         // 移動処理
         Move();
         //移動制限
@@ -90,11 +89,6 @@ public class Player : MonoBehaviour
         Shot();
         //発射間隔の時間計測
         timer += Time.deltaTime;
-
-        if (score ==15)
-        {
-            gameClear.SetActive(true);
-        }
     }
 
     // 移動関数
@@ -109,8 +103,6 @@ public class Player : MonoBehaviour
 
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * speed;
-
-
     }
 
     //プレイヤーの移動制限関数

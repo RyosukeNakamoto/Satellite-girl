@@ -31,10 +31,10 @@ public class EnemySpawner : MonoBehaviour
             var position = transform.position;
 
             // 一定の間隔を開けます
-            position.x += i * 3.0f;
+            position.x += i * 2.0f;
 
             // 縦画面を14分割した真ん中12の空間にランダム生成します
-            position.y = Random.Range(-6.0f, 6.0f);
+            position.y = Random.Range(-5.0f, 5.0f);
 
             // こどもプレハブを生成します
             GameObject enemyChild = Instantiate(enemy, position, enemy.transform.rotation,transform) as GameObject;
@@ -53,13 +53,15 @@ public class EnemySpawner : MonoBehaviour
     {
         int ObjCount = this.transform.childCount;
 
-        if (ObjCount == 98)
+        if (ObjCount == 91)
         {
             foreach (Transform enemy in gameObject.transform)
             {
                 Destroy(enemy.gameObject);                      
             }
+            // ボスを表示
             boss.SetActive(true);
+            // ボスのHPゲージを表示
             Slider.SetActive(true);
         }
     }

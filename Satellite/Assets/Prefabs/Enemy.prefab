@@ -144,6 +144,5 @@ MonoBehaviour:
   Hp: 1
   enemytime: 1
   timer: 0
-  enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
-    type: 3}
-  debriCount: 0
+  itemObj: {fileID: 6167792974611453852, guid: 5753f6912ea53654786ce5937b763867, type: 3}
+  effect: {fileID: 8646174484481769995, guid: 923fd00eb84aa474db977450db7b933d, type: 3}
