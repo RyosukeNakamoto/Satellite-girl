@@ -19,10 +19,10 @@ public class Clear : MonoBehaviour
 
         if (this)
         {
-            //クリア表示後に、エンターキーでキャラクターセレクト画面に遷移
+            //クリア表示後に、エンターキーでステージ選択画面に遷移
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                SceneManager.LoadScene("CharacterSelect");
+                SceneManager.LoadScene("StageSelect");
             }
 
             //クリア表示後に、スペースキーでもう一回
