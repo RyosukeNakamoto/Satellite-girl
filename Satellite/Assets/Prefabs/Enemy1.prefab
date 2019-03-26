@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6465052087144793741}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,3 +151,4 @@ MonoBehaviour:
   enemyBullet3: {fileID: 1879095314465036589, guid: 4f257e0e380063844b8ed4ae1f729a39,
     type: 3}
   debriCount: 0
+  itemObj: {fileID: 6167792974611453852, guid: 5753f6912ea53654786ce5937b763867, type: 3}

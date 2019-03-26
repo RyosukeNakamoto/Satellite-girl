@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
             var position = transform.position;
 
             // 一定の間隔を開けます
-            position.x += i * 2.0f;
+            position.x += i * 3.0f;
 
             // 縦画面を14分割した真ん中12の空間にランダム生成します
             position.y = Random.Range(-5.0f, 5.0f);
@@ -51,9 +51,9 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int ObjCount = this.transform.childCount;
+        int ObjCount = transform.childCount;
 
-        if (ObjCount == 91)
+        if (ObjCount == 86)
         {
             foreach (Transform enemy in gameObject.transform)
             {

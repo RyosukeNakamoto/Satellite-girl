@@ -15,35 +15,71 @@ public class Enemy1 : MonoBehaviour
     public float enemytime = 1.0f;
     // 時間処理計算
     public float timer;
+    // 一回だけ弾を撃つための変数
+    bool Attack = false;
     // 弾を指定
+    //// 左直線
     public GameObject enemyBullet1;
+    //// 左斜め上
     public GameObject enemyBullet2;
+    //// 左斜め下 
     public GameObject enemyBullet3;
     // 消滅したデブリのカウント
     public int debriCount;
+    // アイテムオブジェクトを指定
+    public GameObject itemObj;
+
+    public void Death()
+    {
+        // アイテムを表示
+        Instantiate(itemObj, transform.position, itemObj.transform.rotation);
+        // デブリをデストロイ
+        Destroy(gameObject);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        // 自分の座標を取得
+        Vector3 enemy1 = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Hp == 0)
         {
-            Destroy(gameObject);
-            debriCount++;
+            //Destroy(gameObject);
+            //debriCount++;
+            Death();
         }
 
+        // カメラの範囲にいるか確認
         if (isRendered)
         {
+            // 時間のカウント
             timer += Time.deltaTime;
             // Debug.Log("表示中");
+            // enemytimeのタイムを経過したか
             if (enemytime <= timer)
             {
-                bullet();
+                // 弾が打てる状態
+                if (!Attack)
+                {
+                    // 画面の上半分にいるとき
+                    if (transform.position.y >= 0)
+                    {
+                        bulletUp();
+                    }
+                    // 画面の上半分にいるとき
+                    if (transform.position.y <= 0)
+                    {
+                        bulletUnder();
+                    }
+                    // 弾を打たなくする
+                    Attack = true;
+                }
             }            
         }
         // カメラ範囲から再度外れたらfalse
@@ -68,12 +104,18 @@ public class Enemy1 : MonoBehaviour
         }
     }
 
-    // 弾を表示する
-    void bullet()
+    // 弾を下に打つ
+    void bulletUp()
+    {
+        timer = 0.0f;
+        Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet3, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+    }
+    // 弾を上に打つ
+    void bulletUnder()
     {
         timer = 0.0f;
         Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
         Instantiate(enemyBullet2, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-        Instantiate(enemyBullet3, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
     }        
 }

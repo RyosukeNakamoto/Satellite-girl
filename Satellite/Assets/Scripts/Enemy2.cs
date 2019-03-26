@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy2 : MonoBehaviour
 {
 
     public int Hp=0;
@@ -18,57 +18,60 @@ public class Enemy : MonoBehaviour
     // 一回だけ弾を撃つための変数
     bool Attack = false;
     // 弾を指定
-    public GameObject enemyBullet;
+    //// 左直線
+    public GameObject enemyBullet1;
+    //// 左斜め上
+    public GameObject enemyBullet2;
+    //// 左斜め下 
+    public GameObject enemyBullet3;
+    // 消滅したデブリのカウント
+    public int debriCount;
     // アイテムオブジェクトを指定
     public GameObject itemObj;
-    // 爆発エフェクトオブジェクトを指定
-    public GameObject effect;
-    // カメラオブジェクト
-    GameObject cameraObj;
 
     public void Death()
-    {
-        // エフェクトを表示(やめた)
-        //Instantiate(effect, transform.position, effect.transform.rotation);
+    {      
         // アイテムを表示
-        Instantiate(itemObj, transform.position, itemObj.transform.rotation);        
+        Instantiate(itemObj, transform.position, itemObj.transform.rotation);
         // デブリをデストロイ
         Destroy(gameObject);
     }
-
-
     // Start is called before the first frame update
     void Start()
     {
-        // カメラの座標を取得
-        cameraObj = Camera.main.gameObject;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Hp == 0)
         {
+            //Destroy(gameObject);
+            //debriCount++;
             Death();
         }
-        // カメラの範囲に入ったら呼び出されます
+
+        // カメラの範囲にいるか確認
         if (isRendered)
         {
+            // 時間のカウント
             timer += Time.deltaTime;
             // Debug.Log("表示中");
+            // enemytimeのタイムを経過したか
             if (enemytime <= timer)
             {
                 // 弾が打てる状態
                 if (!Attack)
                 {
                     bullet();
-                    // 弾を打たなくする
-                    Attack = true;
                 }
-            }
+                // 弾を打たなくする
+                Attack = true;
+            }            
         }
-
-        // カメラの範囲から再度外れたらfalse
+        // カメラ範囲から再度外れたらfalse
         isRendered = false;        
     }
 
@@ -78,18 +81,7 @@ public class Enemy : MonoBehaviour
         {
             Hp--;
         }
-
-        if (collision.gameObject.tag == "explosion")
-        {
-            Hp--;
-        }
     }
-
-    // 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }    
 
     // カメラの表示範囲に入ったら動作します
     private void OnWillRenderObject()
@@ -101,10 +93,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 弾を表示する
+    // 弾を3方向に打つ
     void bullet()
     {
         timer = 0.0f;
-        Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-    }
+        Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet2, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Instantiate(enemyBullet3, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+    }      
 }

@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     private Vector2 player_pos;
     //プレイヤーのHP
     public float hp = 100f;
+    // 
     public Slider hpslider;
+    // 
     float maxhp = 100f;
 
     //ダメージフラグ
@@ -52,7 +54,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         Time.timeScale = 1.0f;
         hpslider.maxValue = maxhp;
-        hpslider.value = hp;
+        hpslider.value = hp;        
 
         //--------------------------
         //(仮)
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             //renderer.color = new Color(1f, 1f, 1f, level);
         }
+        
 
         // 移動処理
         Move();
@@ -111,21 +114,21 @@ public class Player : MonoBehaviour
         //現在位置を代入
         player_pos = transform.position;
         //横の移動の制限
-        player_pos.x = Mathf.Clamp(player_pos.x, camera.transform.position.x - 7.0f, camera.transform.position.x + 7.0f);
+        player_pos.x = Mathf.Clamp(player_pos.x, camera.transform.position.x - 11.0f, camera.transform.position.x + 11.0f);
         //縦の移動制限
-        player_pos.y = Mathf.Clamp(player_pos.y, -3.9f, 3.9f);
+        player_pos.y = Mathf.Clamp(player_pos.y, -4.9f, 4.9f);
         transform.position = new Vector2(player_pos.x, player_pos.y);
     }
 
     //弾の発射関数
     void Shot()
-    {
+    {       
         //弾の発射間隔を弾の状態で変更
 
         //ライフルを装備中の発射間隔
         if (Bullet.bulletstatus == 0)
         {
-            bulletderay = 0.5f;
+            bulletderay = 0.5f;                    
         }
 
         //マシンガンを装備中の発射間隔
@@ -139,8 +142,6 @@ public class Player : MonoBehaviour
         {
             bulletderay = 0.8f;
         }
-
-
 
         //Spaceキーを押したとき弾を発射
         if (Input.GetKey(KeyCode.Space) && timer > bulletderay)
