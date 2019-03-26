@@ -10,11 +10,11 @@ public class Item : MonoBehaviour
 
     //}
 
-    //// Update is called once per frame
-    //void Update()
-    //{
+    // Update is called once per frame
+    void Update()
+    {
 
-    //}
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

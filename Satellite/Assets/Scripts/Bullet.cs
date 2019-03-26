@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
 
             if (!GetComponent<SpriteRenderer>().isVisible)
             {
-                Debug.Log("画面外");
+                // Debug.Log("画面外");
                 Destroy(gameObject);
             }
 
@@ -70,7 +70,14 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Enemy")
+        {            
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.tag == "Boss")
+        {            
+            Destroy(gameObject);
+        }
     }
 
     //// カメラの範囲外に出た際に呼び出されます。
