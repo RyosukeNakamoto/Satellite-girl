@@ -283,7 +283,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Enter=START
+  m_Text: Pressanybutton
 --- !u!222 &522042788
 CanvasRenderer:
   m_ObjectHideFlags: 0
