@@ -84,7 +84,7 @@ public class WeaponController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Bullet.bulletstatus = 0;
+                Player.bulletstatus = 0;
 
              
             }
@@ -101,7 +101,7 @@ public class WeaponController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Bullet.bulletstatus = 1;
+                Player.bulletstatus = 1;
             }
         }
 
@@ -116,12 +116,12 @@ public class WeaponController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                Bullet.bulletstatus = 2;
+                Player.bulletstatus = 2;
             }
         }
 
         //「ライフル」を選択中に色の変更
-        if (Bullet.bulletstatus == 0)
+        if (Player.bulletstatus == 0)
         {
             riflesprite.color = Color.yellow;
             machinegunsprite.color = Color.gray;
@@ -129,7 +129,7 @@ public class WeaponController : MonoBehaviour
         }
 
         //「マシンガン」を選択中に色の変更
-        if (Bullet.bulletstatus == 1)
+        if (Player.bulletstatus == 1)
         {
             riflesprite.color = Color.gray;
             machinegunsprite.color = Color.yellow;
@@ -137,7 +137,7 @@ public class WeaponController : MonoBehaviour
         }
 
         //「バズーカ」を選択中に色の変更
-        if (Bullet.bulletstatus == 2)
+        if (Player.bulletstatus == 2)
         {
             riflesprite.color = Color.gray;
             machinegunsprite.color = Color.gray;
