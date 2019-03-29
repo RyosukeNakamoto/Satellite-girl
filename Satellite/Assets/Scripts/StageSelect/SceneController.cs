@@ -37,15 +37,15 @@ namespace Satellite.StageSelect
         void Update()
         {
             //十字キーの横の入力
-            float dph = Input.GetAxis("D_Pad_V");
+            float dpv = Input.GetAxis("D_Pad_V");
 
             //右矢印キーを押したときSelectnumberを増やす
-            if (Input.GetKeyDown(KeyCode.RightArrow)||dph>0)
+            if (Input.GetKeyDown(KeyCode.RightArrow)||dpv>0)
             {
                 selectnumber++;
             }
             //左矢印キーを押したときSelectnumberを減らす
-            if (Input.GetKeyDown(KeyCode.LeftArrow)||dph<0)
+            if (Input.GetKeyDown(KeyCode.LeftArrow)||dpv<0)
             {
                 selectnumber--;
             }
