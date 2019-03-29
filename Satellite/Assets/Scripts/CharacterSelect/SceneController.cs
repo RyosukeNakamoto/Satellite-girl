@@ -17,12 +17,12 @@ namespace Satellite.CharacterSelect
         void Update()
         {
             //エンターキーを押したときにステージ1へ遷移(プロト）
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)||Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("Stage1");
             }
             //スペースキーを押したときステージセレクト画面に遷移
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown("joystick button 0"))
             {
                 SceneManager.LoadScene("StageSelect");
             }
