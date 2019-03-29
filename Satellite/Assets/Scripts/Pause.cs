@@ -17,7 +17,7 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 9"))
         {
             if (Time.timeScale == 1.0f)
             {
@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour
 
         if (Time.timeScale == 0.0f)
         {
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Backspace)||Input.GetKeyDown("joystick button 0"))
             {
                 SceneManager.LoadScene("CharacterSelect");
 

@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         }
 
         //Spaceキーを押したとき弾を発射
-        if (Input.GetKey(KeyCode.Space) && timer > bulletderay)
+        if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
         {
             //弾を発射する間隔の時間計測の初期化
             timer = 0.0f;

@@ -36,144 +36,104 @@ namespace Satellite.StageSelect
         // Update is called once per frame
         void Update()
         {
+            //十字キーの横の入力
+            float dph = Input.GetAxis("D_Pad_V");
+
             //右矢印キーを押したときSelectnumberを増やす
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow)||dph>0)
             {
                 selectnumber++;
             }
             //左矢印キーを押したときSelectnumberを減らす
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow)||dph<0)
             {
                 selectnumber--;
             }
-            //Selectnumberが2を越えた時0に戻す処理
-            if (selectnumber > 2)
+            //Selectnumberが5を越えた時0に戻す処理
+            if (selectnumber > 5)
             {
                 selectnumber = 0;
             }
-            //Selectnumberが0を下回った時2にする処理
+            //Selectnumberが0を下回った時5にする処理
             if (selectnumber < 0)
             {
-                selectnumber = 2;
-            }
-            //下矢印キーを押したときSelectsecondnumberを増やす処理
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                selectsecondnumber++;
-            }
-            //上矢印キーを押したときSelectsecondnumberを減らす処理
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                selectsecondnumber--;
-            }
-            //Selectsecondnumberが2を越えた時0に戻す処理
-            if (selectsecondnumber > 2)
-            {
-                selectsecondnumber = 0;
-            }
-            //Selectsecondnumberが0を下回った時2にする処理
-            if (selectsecondnumber < 0)
-            {
-                selectsecondnumber = 2;
+                selectnumber = 5;
             }
 
-            //1段目を選択状態
-            if (selectsecondnumber == 0)
+            //Stage1を選択状態
+            if (selectnumber == 0)
             {
-                //Stage1を選択状態
-                if (selectnumber == 0)
-                {
-                    stage1.color = Color.yellow;
-                    stage2.color = Color.gray;
-                    stage3.color = Color.gray;
-                    stage4.color = Color.gray;
-                    stage5.color = Color.gray;
-                    stage6.color = Color.gray;
-                    back.color = Color.gray;
+                stage1.color = Color.white;
+                stage2.color = Color.gray;
+                stage3.color = Color.gray;
+                stage4.color = Color.gray;
+                stage5.color = Color.gray;
+                stage6.color = Color.gray;
+                back.color = Color.gray;
 
-                    //エンターキーを押したときキャラクター選択画面に遷移(プロト)
-                    if (Input.GetKeyDown(KeyCode.Return))
-                    {
-                        SceneManager.LoadScene("CharacterSelect");
-                    }
-                }
-                //Stage2を選択状態
-                if (selectnumber == 1)
+                //エンターキーを押したときキャラクター選択画面に遷移(プロト)
+                if (Input.GetKeyDown(KeyCode.Return)||Input.GetKeyDown("joystick button 1"))
                 {
-                    stage1.color = Color.gray;
-                    stage2.color = Color.yellow;
-                    stage3.color = Color.gray;
-                    stage4.color = Color.gray;
-                    stage5.color = Color.gray;
-                    stage6.color = Color.gray;
-                    back.color = Color.gray;
-                }
-                //Stage3を選択状態
-                if (selectnumber == 2)
-                {
-                    stage1.color = Color.gray;
-                    stage2.color = Color.gray;
-                    stage3.color = Color.yellow;
-                    stage4.color = Color.gray;
-                    stage5.color = Color.gray;
-                    stage6.color = Color.gray;
-                    back.color = Color.gray;
+                    SceneManager.LoadScene("CharacterSelect");
                 }
             }
-            //2段目を選択状態
-            if (selectsecondnumber == 1)
+            //Stage2を選択状態
+            if (selectnumber == 1)
             {
-                //Stage4を選択状態
-                if (selectnumber == 0)
-                {
-                    stage1.color = Color.gray;
-                    stage2.color = Color.gray;
-                    stage3.color = Color.gray;
-                    stage4.color = Color.yellow;
-                    stage5.color = Color.gray;
-                    stage6.color = Color.gray;
-                    back.color = Color.gray;
-                }
-                //Stage5を選択状態
-                if (selectnumber == 1)
-                {
-                    stage1.color = Color.gray;
-                    stage2.color = Color.gray;
-                    stage3.color = Color.gray;
-                    stage4.color = Color.gray;
-                    stage5.color = Color.yellow;
-                    stage6.color = Color.gray;
-                    back.color = Color.gray;
-                }
-                //Stage6を選択状態
-                if (selectnumber == 2)
-                {
-                    stage1.color = Color.gray;
-                    stage2.color = Color.gray;
-                    stage3.color = Color.gray;
-                    stage4.color = Color.gray;
-                    stage5.color = Color.gray;
-                    stage6.color = Color.yellow;
-                    back.color = Color.gray;
-                }
+                stage1.color = Color.gray;
+                stage2.color = Color.white;
+                stage3.color = Color.gray;
+                stage4.color = Color.gray;
+                stage5.color = Color.gray;
+                stage6.color = Color.gray;
+                back.color = Color.gray;
+            }
+            //Stage3を選択状態
+            if (selectnumber == 2)
+            {
+                stage1.color = Color.gray;
+                stage2.color = Color.gray;
+                stage3.color = Color.white;
+                stage4.color = Color.gray;
+                stage5.color = Color.gray;
+                stage6.color = Color.gray;
+                back.color = Color.gray;
             }
 
-            //タイトルを選択状態
-            if (selectsecondnumber == 2)
+            //Stage4を選択状態
+            if (selectnumber == 3)
+            {
+                stage1.color = Color.gray;
+                stage2.color = Color.gray;
+                stage3.color = Color.gray;
+                stage4.color = Color.white;
+                stage5.color = Color.gray;
+                stage6.color = Color.gray;
+                back.color = Color.gray;
+            }
+            //Stage5を選択状態
+            if (selectnumber == 4)
+            {
+                stage1.color = Color.gray;
+                stage2.color = Color.gray;
+                stage3.color = Color.gray;
+                stage4.color = Color.gray;
+                stage5.color = Color.white;
+                stage6.color = Color.gray;
+                back.color = Color.gray;
+            }
+            //Stage6を選択状態
+            if (selectnumber == 5)
             {
                 stage1.color = Color.gray;
                 stage2.color = Color.gray;
                 stage3.color = Color.gray;
                 stage4.color = Color.gray;
                 stage5.color = Color.gray;
-                stage6.color = Color.gray;
-                back.color = Color.yellow;
-
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    SceneManager.LoadScene("Title");
-                }
+                stage6.color = Color.white;
+                back.color = Color.gray;
             }
+            }
+
         }
     }
-}
