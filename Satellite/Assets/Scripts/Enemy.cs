@@ -105,6 +105,10 @@ public class Enemy : MonoBehaviour
     void bullet()
     {
         timer = 0.0f;
-        Instantiate(enemyBullet, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Vector3 position = transform.position;
+        position.x += -1;
+        
+        var bullet = Instantiate(enemyBullet, position,enemyBullet.transform.rotation);
+        bullet.transform.Rotate(0,0,180);
     }
 }

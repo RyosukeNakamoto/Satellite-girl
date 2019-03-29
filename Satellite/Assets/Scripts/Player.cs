@@ -27,10 +27,14 @@ public class Player : MonoBehaviour
     // ゲームクリア表示
     public GameObject gameClear;
 
-
+    //武器を数値で管理
+    public static int bulletstatus = 2;
+    // 
     public GameObject camera;
     //発射する弾
-    public GameObject bullet;
+    public GameObject rifleBullet;      // ライフル
+    public GameObject machinegunBullet; // マシンガン
+    public GameObject bazookaBullet;    // バズーカ
     //発射間隔の時間
     public float bulletderay;
     private float timer;
@@ -126,32 +130,52 @@ public class Player : MonoBehaviour
         //弾の発射間隔を弾の状態で変更
 
         //ライフルを装備中の発射間隔
-        if (Bullet.bulletstatus == 0)
+        if (bulletstatus == 0)
         {
-            bulletderay = 0.5f;                    
+            bulletderay = 0.5f;
+
+            //Spaceキーを押したとき弾を発射
+            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            {
+                //弾を発射する間隔の時間計測の初期化
+                timer = 0.0f;
+
+                //弾の実体化
+                Instantiate(rifleBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+            }
         }
 
         //マシンガンを装備中の発射間隔
-        if (Bullet.bulletstatus == 1)
+        if (bulletstatus == 1)
         {
             bulletderay = 0.1f;
+
+            //Spaceキーを押したとき弾を発射
+            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            {
+                //弾を発射する間隔の時間計測の初期化
+                timer = 0.0f;
+
+                //弾の実体化
+                Instantiate(machinegunBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+            }
         }
 
         //バズーカを装備中の発射間隔
-        if (Bullet.bulletstatus == 2)
+        if (bulletstatus == 2)
         {
             bulletderay = 0.8f;
-        }
 
-        //Spaceキーを押したとき弾を発射
-        if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
-        {
-            //弾を発射する間隔の時間計測の初期化
-            timer = 0.0f;
+            //Spaceキーを押したとき弾を発射
+            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            {
+                //弾を発射する間隔の時間計測の初期化
+                timer = 0.0f;
 
-            //弾の実体化
-            Instantiate(bullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
-        }
+                //弾の実体化
+                Instantiate(bazookaBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+            }
+        }        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 146317284}
   - component: {fileID: 146317285}
   - component: {fileID: 146317286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: New Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1075,7 +1075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &596549249
 Transform:
   m_ObjectHideFlags: 0
@@ -1123,7 +1123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &655264987
 Transform:
   m_ObjectHideFlags: 0
@@ -1757,7 +1757,7 @@ GameObject:
   - component: {fileID: 1192846848}
   - component: {fileID: 1192846849}
   - component: {fileID: 1192846850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1812,7 +1812,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1847,7 +1847,12 @@ MonoBehaviour:
   gameOver: {fileID: 1939688543}
   gameClear: {fileID: 1319542329}
   camera: {fileID: 1090074770}
-  bullet: {fileID: 2576970764510253572, guid: 2add1e9ea5a9db848b37e11889cbc5ea, type: 3}
+  rifleBullet: {fileID: 2576970764510253572, guid: 2add1e9ea5a9db848b37e11889cbc5ea,
+    type: 3}
+  machinegunBullet: {fileID: 2576970764510253572, guid: 855a9c2c2e3539647baf91041c2c6ce1,
+    type: 3}
+  bazookaBullet: {fileID: 2576970764510253572, guid: 7b52d2acd804bae4ca9f974612587f44,
+    type: 3}
   bulletderay: 0.5
   scoreObj: {fileID: 149076470}
 --- !u!1 &1207778019
@@ -2276,7 +2281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1483549133}
   - component: {fileID: 1483549134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2906,7 +2911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1965810972}
   - component: {fileID: 1965810973}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Absorption
   m_TagString: Untagged
   m_Icon: {fileID: 0}

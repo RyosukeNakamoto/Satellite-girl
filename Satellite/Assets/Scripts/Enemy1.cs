@@ -108,14 +108,22 @@ public class Enemy1 : MonoBehaviour
     void bulletUp()
     {
         timer = 0.0f;
-        Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-        Instantiate(enemyBullet3, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Vector3 position = transform.position;
+        position.x += -1;
+        var bullet1 = Instantiate(enemyBullet1, position, enemyBullet1.transform.rotation);
+        bullet1.transform.Rotate(0, 0, 180);
+        var bullet3 = Instantiate(enemyBullet3, position, enemyBullet3.transform.rotation);
+        bullet3.transform.Rotate(0, 0, 180);
     }
     // 弾を上に打つ
     void bulletUnder()
     {
         timer = 0.0f;
-        Instantiate(enemyBullet1, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-        Instantiate(enemyBullet2, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+        Vector3 position = transform.position;
+        position.x += -1;
+        var bullet1 = Instantiate(enemyBullet1, position, enemyBullet1.transform.rotation);
+        bullet1.transform.Rotate(0, 0, 180);
+        var bullet2 = Instantiate(enemyBullet2, position, enemyBullet2.transform.rotation);
+        bullet2.transform.Rotate(0, 0, 180);
     }        
 }
