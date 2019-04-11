@@ -127,6 +127,11 @@ public class CustomController : MonoBehaviour
     //強化のNoイメージ
     public Image no;
 
+    //ポイントが不足していた場合に表示する画像
+    public GameObject shortagePointImage;
+
+    //所持ポイント
+    public Text possessionPointText;
     //消費ポイントのテキスト
     public Text consumptionPointText;
 
@@ -213,6 +218,9 @@ public class CustomController : MonoBehaviour
 
         //シーン開始時に強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
+
+        //シーン開始時にポイントが不足してた場合のウインドウ非表示
+        shortagePointImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -223,8 +231,11 @@ public class CustomController : MonoBehaviour
         //十字キー横の入力
         float dpv = Input.GetAxis("D_Pad_V");
 
+        //所持ポイントを表示
+        possessionPointText.text = (GameController.Instance.score).ToString();
+
         //強化の確定を選択する画面が表示中にSelectnumberの数値が変更されないようにする
-        if (!strengtheningQuestion.activeSelf)
+        if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
         {
             //上矢印キーを押したときSelectnumberを減らす
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
@@ -264,12 +275,25 @@ public class CustomController : MonoBehaviour
             }
         }
 
+        //強化を確定するウインドウが表示されたときはどこも選択していない状態にする
         if (strengtheningQuestionnumber == 0)
         {
             yes.color = Color.grey;
             no.color = Color.grey;
         }
-        
+
+        //ポイントが不足してた時に画像が表示されているときの処理
+        if (shortagePointImage.activeSelf)
+        {
+            //強化を確定するウインドウを非表示
+            strengtheningQuestion.SetActive(false);
+
+            //いずれかのキーを押したときに非表示
+            if (Input.anyKeyDown)
+            {
+                shortagePointImage.SetActive(false);
+            }
+        }
 
         //親愛度選択中
         if (selectnumber == 0)
@@ -342,15 +366,26 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを1にする
-                                GameController.Instance.intimacylevel = 1;
+                                if (GameController.Instance.score >= 5)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを1にする
+                                    GameController.Instance.intimacyLevel = 1;
 
-                                minimumununsettledintimacy = 1;
+                                    minimumununsettledintimacy = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
 
-                                strengtheningQuestionnumber = 0;
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //強化するポイントが不足していた場合に画像表示
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -406,7 +441,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの親愛度レベルを2にする
-                                GameController.Instance.intimacylevel = 2;
+                                GameController.Instance.intimacyLevel = 2;
 
                                 minimumununsettledintimacy = 2;
 
@@ -471,7 +506,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの親愛度レベルを3にする
-                                GameController.Instance.intimacylevel = 3;
+                                GameController.Instance.intimacyLevel = 3;
 
                                 minimumununsettledintimacy = 3;
 
@@ -534,7 +569,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの親愛度レベルを4にする
-                                GameController.Instance.intimacylevel = 4;
+                                GameController.Instance.intimacyLevel = 4;
 
                                 minimumununsettledintimacy = 4;
 
@@ -599,7 +634,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの親愛度レベルを5にする
-                                GameController.Instance.intimacylevel = 5;
+                                GameController.Instance.intimacyLevel = 5;
 
                                 minimumununsettledintimacy = 5;
 
@@ -704,7 +739,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーのHPレベルを1にする
-                                GameController.Instance.hplevel = 1;
+                                GameController.Instance.hpLevel = 1;
 
                                 minimumununsettledhp = 1;
 
@@ -767,7 +802,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーのHPレベルを2にする
-                                GameController.Instance.hplevel = 2;
+                                GameController.Instance.hpLevel = 2;
 
                                 minimumununsettledhp = 2;
 
@@ -830,7 +865,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーのHPレベルを3にする
-                                GameController.Instance.hplevel = 3;
+                                GameController.Instance.hpLevel = 3;
 
                                 minimumununsettledhp = 3;
 
@@ -893,7 +928,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーのHPレベルを4にする
-                                GameController.Instance.hplevel = 4;
+                                GameController.Instance.hpLevel = 4;
 
                                 minimumununsettledhp = 4;
 
@@ -956,7 +991,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーのHPレベルを5にする
-                                GameController.Instance.hplevel = 5;
+                                GameController.Instance.hpLevel = 5;
 
                                 minimumununsettledhp = 5;
 
@@ -1058,7 +1093,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを1にする
-                                GameController.Instance.activityTimelevel = 1;
+                                GameController.Instance.activityTimeLevel = 1;
 
                                 minimumunununsettledactivityTime = 1;
 
@@ -1121,7 +1156,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを2にする
-                                GameController.Instance.activityTimelevel = 2;
+                                GameController.Instance.activityTimeLevel = 2;
 
                                 minimumunununsettledactivityTime = 2;
 
@@ -1184,7 +1219,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを3にする
-                                GameController.Instance.activityTimelevel = 3;
+                                GameController.Instance.activityTimeLevel = 3;
 
                                 minimumunununsettledactivityTime = 3;
 
@@ -1247,7 +1282,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを4にする
-                                GameController.Instance.activityTimelevel = 4;
+                                GameController.Instance.activityTimeLevel = 4;
 
                                 minimumunununsettledactivityTime = 4;
 
@@ -1309,7 +1344,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを5にする
-                                GameController.Instance.activityTimelevel = 5;
+                                GameController.Instance.activityTimeLevel = 5;
 
                                 minimumunununsettledactivityTime = 5;
 
@@ -1411,7 +1446,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの攻撃レベルを1にする
-                                GameController.Instance.attacklevel = 1;
+                                GameController.Instance.attackLevel = 1;
 
                                 minimumunununsettledattack = 1;
 
@@ -1474,7 +1509,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの攻撃レベルを2にする
-                                GameController.Instance.attacklevel = 2;
+                                GameController.Instance.attackLevel = 2;
 
                                 minimumunununsettledattack = 2;
 
@@ -1537,7 +1572,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの攻撃レベルを3にする
-                                GameController.Instance.attacklevel = 3;
+                                GameController.Instance.attackLevel = 3;
 
                                 minimumunununsettledattack = 3;
 
@@ -1600,7 +1635,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの攻撃レベルを4にする
-                                GameController.Instance.attacklevel = 4;
+                                GameController.Instance.attackLevel = 4;
 
                                 minimumunununsettledattack = 4;
 
@@ -1663,7 +1698,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの攻撃レベルを5にする
-                                GameController.Instance.attacklevel = 5;
+                                GameController.Instance.attackLevel = 5;
 
                                 minimumunununsettledattack = 5;
 
@@ -1765,7 +1800,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを1にする
-                                GameController.Instance.rapidfirelevel = 1;
+                                GameController.Instance.rapidfireLevel = 1;
 
                                 minimumunununsettledrapidfire = 1;
 
@@ -1828,7 +1863,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを2にする
-                                GameController.Instance.rapidfirelevel = 2;
+                                GameController.Instance.rapidfireLevel = 2;
 
                                 minimumunununsettledrapidfire = 2;
 
@@ -1891,7 +1926,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを3にする
-                                GameController.Instance.rapidfirelevel = 3;
+                                GameController.Instance.rapidfireLevel = 3;
 
                                 minimumunununsettledrapidfire = 3;
 
@@ -1954,7 +1989,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを4にする
-                                GameController.Instance.rapidfirelevel = 4;
+                                GameController.Instance.rapidfireLevel = 4;
 
                                 minimumunununsettledrapidfire = 4;
 
@@ -2017,7 +2052,7 @@ public class CustomController : MonoBehaviour
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //ゲームコントローラーの活動時間レベルを5にする
-                                GameController.Instance.rapidfirelevel = 5;
+                                GameController.Instance.rapidfireLevel = 5;
 
                                 minimumunununsettledrapidfire = 5;
 
@@ -2065,31 +2100,31 @@ public class CustomController : MonoBehaviour
         }
 
         //親愛度レベル1
-        if (GameController.Instance.intimacylevel >= 1)
+        if (GameController.Instance.intimacyLevel >= 1)
         {
             //星を表示
             intimacyStar_first.enabled = true;
 
             //親愛度レベル2
-            if (GameController.Instance.intimacylevel >= 2)
+            if (GameController.Instance.intimacyLevel >= 2)
             {
                 //星を表示
                 intimacyStar_second.enabled = true;
 
                 //親愛度レベル3
-                if (GameController.Instance.intimacylevel >= 3)
+                if (GameController.Instance.intimacyLevel >= 3)
                 {
                     //星を表示
                     intimacyStar_third.enabled = true;
 
                     //親愛度レベル4
-                    if (GameController.Instance.intimacylevel >= 4)
+                    if (GameController.Instance.intimacyLevel >= 4)
                     {
                         //星を表示
                         intimacyStar_fourth.enabled = true;
 
                         //親愛度レベル5
-                        if (GameController.Instance.intimacylevel >= 5)
+                        if (GameController.Instance.intimacyLevel >= 5)
                         {
                             //星を表示
                             intimacyStar_fifth.enabled = true;
@@ -2112,31 +2147,31 @@ public class CustomController : MonoBehaviour
         }
 
         //Hpレベル1
-        if (GameController.Instance.hplevel >= 1)
+        if (GameController.Instance.hpLevel >= 1)
         {
             //星を表示
             hpStar_first.enabled = true;
 
             //Hpレベル2
-            if (GameController.Instance.hplevel >= 2)
+            if (GameController.Instance.hpLevel >= 2)
             {
                 //星を表示
                 hpStar_second.enabled = true;
 
                 //Hpレベル3
-                if (GameController.Instance.hplevel >= 3)
+                if (GameController.Instance.hpLevel >= 3)
                 {
                     //星を表示
                     hpStar_third.enabled = true;
 
                     //Hpレベル4
-                    if (GameController.Instance.hplevel >= 4)
+                    if (GameController.Instance.hpLevel >= 4)
                     {
                         //星を表示
                         hpStar_fourth.enabled = true;
 
                         //Hpレベル5
-                        if (GameController.Instance.hplevel >= 5)
+                        if (GameController.Instance.hpLevel >= 5)
                         {
                             //星を表示
                             hpStar_fifth.enabled = true;
@@ -2159,31 +2194,31 @@ public class CustomController : MonoBehaviour
         }
 
         //活動時間レベル1
-        if (GameController.Instance.activityTimelevel >= 1)
+        if (GameController.Instance.activityTimeLevel >= 1)
         {
             //星を表示
             activityTimeStar_first.enabled = true;
 
             //活動時間レベル2
-            if (GameController.Instance.activityTimelevel >= 2)
+            if (GameController.Instance.activityTimeLevel >= 2)
             {
                 //星を表示
                 activityTimeStar_second.enabled = true;
 
                 //活動時間レベル3
-                if (GameController.Instance.activityTimelevel >= 3)
+                if (GameController.Instance.activityTimeLevel >= 3)
                 {
                     //星を表示
                     activityTimeStar_third.enabled = true;
 
                     //活動時間レベル4
-                    if (GameController.Instance.activityTimelevel >= 4)
+                    if (GameController.Instance.activityTimeLevel >= 4)
                     {
                         //星を表示
                         activityTimeStar_fourth.enabled = true;
 
                         //活動時間レベル5
-                        if (GameController.Instance.activityTimelevel >= 5)
+                        if (GameController.Instance.activityTimeLevel >= 5)
                         {
                             //星を表示
                             activityTimeStar_fifth.enabled = true;
@@ -2206,31 +2241,31 @@ public class CustomController : MonoBehaviour
         }
 
         //攻撃レベル1
-        if (GameController.Instance.attacklevel >= 1)
+        if (GameController.Instance.attackLevel >= 1)
         {
             //星を表示
             attackStar_first.enabled = true;
 
             //攻撃レベル2
-            if (GameController.Instance.attacklevel >= 2)
+            if (GameController.Instance.attackLevel >= 2)
             {
                 //星を表示
                 attackStar_second.enabled = true;
 
                 //攻撃レベル3
-                if (GameController.Instance.attacklevel >= 3)
+                if (GameController.Instance.attackLevel >= 3)
                 {
                     //星を表示
                     attackStar_third.enabled = true;
 
                     //攻撃レベル4
-                    if (GameController.Instance.attacklevel >= 4)
+                    if (GameController.Instance.attackLevel >= 4)
                     {
                         //星を表示
                         attackStar_fourth.enabled = true;
 
                         //攻撃レベル5
-                        if (GameController.Instance.attacklevel >= 5)
+                        if (GameController.Instance.attackLevel >= 5)
                         {
                             //星を表示
                             attackStar_fifth.enabled = true;
@@ -2253,31 +2288,31 @@ public class CustomController : MonoBehaviour
         }
 
         //連射速度レベル1
-        if (GameController.Instance.rapidfirelevel >= 1)
+        if (GameController.Instance.rapidfireLevel >= 1)
         {
             //星を表示
             rapidfireStar_first.enabled = true;
 
             //連射速度レベル2
-            if (GameController.Instance.rapidfirelevel >= 2)
+            if (GameController.Instance.rapidfireLevel >= 2)
             {
                 //星を表示
                 rapidfireStar_second.enabled = true;
 
                 //連射速度レベル3
-                if (GameController.Instance.rapidfirelevel >= 3)
+                if (GameController.Instance.rapidfireLevel >= 3)
                 {
                     //星の表示
                     rapidfireStar_third.enabled = true;
 
                     //連射速度レベル4
-                    if (GameController.Instance.rapidfirelevel >= 4)
+                    if (GameController.Instance.rapidfireLevel >= 4)
                     {
                         //星の表示
                         rapidfireStar_fourth.enabled = true;
 
                         //連射速度レベル5
-                        if (GameController.Instance.rapidfirelevel >= 5)
+                        if (GameController.Instance.rapidfireLevel >= 5)
                         {
                             //星の表示
                             rapidfireStar_fifth.enabled = true;
