@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8679468213999391476}
   m_Layer: 11
   m_Name: Enemy_Bullet1
-  m_TagString: Untagged
+  m_TagString: Enemy_Bullet1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  damage: 1
 --- !u!61 &8679468213999391476
 BoxCollider2D:
   m_ObjectHideFlags: 0

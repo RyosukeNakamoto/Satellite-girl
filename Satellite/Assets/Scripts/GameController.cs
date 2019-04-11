@@ -19,35 +19,45 @@ public class GameController : MonoBehaviour
     {
         get { return intimacyTable[intimacyLevel]; }
     }
+    // HPステータスレベル
     public int hpLevel = 0;
+    // レベルテーブル
     public int[] hpTable = new int[6] { 9, 12, 15, 18, 21, 24 };
-
+    // ステータスとレベルを連結
     public int HitPoint
     {
+        // 戻り値で判別
         get { return hpTable[hpLevel]; }
     }
 
+    // 活動時間ステータスレベル
     public int activityTimeLevel = 0;
+    // レベルテーブル
     public int[] activityTimeTable = new int[6] { 6, 7, 8, 9, 10, 11 };
-
+    // ステータスとレベルを連結
     public int ActivityTime
     {
+        // 戻り値で判別
         get { return activityTimeTable[activityTimeLevel]; }
     }
-    public int attackLevel = 0;
-    public int[] attackTable = new int[6] { 3, 5, 7, 9, 11, 13 };
 
+    // 攻撃力ステータスレベル
+    public int attackLevel = 0;
+    // レベルテーブル
+    public int[] attackTable = new int[6] { 3, 5, 7, 9, 11, 13 };
+    // ステータスとレベルを連結
     public int Attack
     {
+        // 戻り値で判別
         get { return attackTable[attackLevel]; }
     }
     public int rapidfireLevel = 0;
-    public int[] rapidfireTable = new int[6] { 7, 8, 9, 10, 11, 12 };
-    public int Rapidfire
+    public float[] rapidfireTable = new float[6] { 1, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f };
+    public float Rapidfire
     {
         get { return rapidfireTable[rapidfireLevel]; }
     }
-    public int sortieLevel = 0;
+    // public int sortieLevel = 0;
     public int score = 0;
 
 
@@ -79,6 +89,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(score);
+        
     }
 }

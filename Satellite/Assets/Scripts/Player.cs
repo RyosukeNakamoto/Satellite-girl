@@ -12,7 +12,9 @@ public class Player : MonoBehaviour
     //プレイヤーの位置
     private Vector2 player_pos;
     //プレイヤーのHP
-    public float hp = 100f;
+    [SerializeField]
+    int hp = 0;
+    float attackDelay;
     // 
     public Slider hpslider;
     // 
@@ -21,7 +23,9 @@ public class Player : MonoBehaviour
     //ダメージフラグ
     public bool ondamage = false;
     public static SpriteRenderer renderer;
-    private float Damage = 25f;
+    public GameObject enemyBullet;
+    Bullet bulletSc;
+    private int Damage = 25;
     //ゲームオーバー表示
     public GameObject gameOver;
     // ゲームクリア表示
@@ -56,19 +60,30 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
-        Time.timeScale = 1.0f;
-        hpslider.maxValue = maxhp;
-        hpslider.value = hp;        
+        bulletSc = enemyBullet.GetComponent<StraightBullet>();
 
-        //--------------------------
-        //(仮)
+        Time.timeScale = 1.0f;
+        hpslider.maxValue = GameController.Instance.HitPoint;
+        hpslider.value = hp;        
+        
         // スコアテキストのコンポーネント
         scoretext = scoreObj.GetComponent<Text>();
         // スコアを0で初期化
         score = 0;
         scoretext.text = "Score: " + score;
 
-        //--------------------------
+        // 一号機セレステルのHPを取得
+        hp =  GameController.Instance.HitPoint;
+        // 一号機セレステルの活動時間を取得
+
+        // 一号機セレステルの攻撃力を取得
+
+        // 一号機セレステルの連射間隔を取得
+
+        // スライダーの値をセット
+        attackDelay = GameController.Instance.Rapidfire;
+        hpslider.maxValue = GameController.Instance.HitPoint;
+        hpslider.value = hp;
     }
 
     // Update is called once per frame
@@ -179,54 +194,6 @@ public class Player : MonoBehaviour
         }        
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //ダメージ処理
-        if (!ondamage && collision.gameObject.tag == "Enemy")
-        {
-            //HPバーを減らす（プロト版）
-            hpslider.value -= Damage;
-            //敵からのダメージ(プロト版)
-            hp -= Damage;
-            OndamageEffect();
-        }
-
-        // スコアの加算
-        if (collision.gameObject.tag == "Item")
-        {
-            score += itemScore;
-            // スコア内容の変更
-            scoretext.text = "Score: " + score;
-            
-        }
-
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        ////ダメージ処理
-        //if (!ondamage && collision.gameObject.tag == "Enemy")
-        //{
-        //    //HPバーを減らす（プロト版）
-        //    hpslider.value -= Damage;
-        //    //敵からのダメージ(プロト版)
-        //    hp -= Damage;
-        //    OndamageEffect();
-        //}
-
-        ////--------------------------
-        ////(仮)
-        //if (collision.gameObject.tag == "Item")
-        //{
-        //    score += itemScore;
-
-        //    // スコア内容の変更
-        //    scoretext.text = "Score: " + score;
-        //}
-        ////--------------------------
-    }
-
     //ダメージ処理
     void OndamageEffect()
     {
@@ -245,5 +212,26 @@ public class Player : MonoBehaviour
 
         ondamage = false;
         //       renderer.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // 小デブリの弾に当たったら
+        if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
+        {
+            hp -= bulletSc.damage;
+            //HPバーを減らす（プロト版）
+            hpslider.value -= bulletSc.damage;
+            OndamageEffect();
+        }
+
+        // スコアの加算
+        if (collision.gameObject.tag == "Item")
+        {
+            score += itemScore;
+            // スコア内容の変更
+            scoretext.text = "Score: " + score;
+
+        }
     }
 }
