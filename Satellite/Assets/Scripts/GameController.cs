@@ -13,15 +13,44 @@ public class GameController : MonoBehaviour
     private static GameController instance = null;
 
     //それぞれのパラメーターのレベル
-    public int intimacylevel = 0;
-    public int hplevel = 0;
-    public int activityTimelevel = 0;
-    public int attacklevel = 0;
-    public int rapidfirelevel = 0;
-    public int sortielevel = 0;
+    public int intimacyLevel = 0;
+    public int[] intimacyTable = new int[6] { 100, 95, 90, 85, 80, 75 };
+    public int Intimacy
+    {
+        get { return intimacyTable[intimacyLevel]; }
+    }
+    public int hpLevel = 0;
+    public int[] hpTable = new int[6] { 9, 12, 15, 18, 21, 24 };
+
+    public int HitPoint
+    {
+        get { return hpTable[hpLevel]; }
+    }
+
+    public int activityTimeLevel = 0;
+    public int[] activityTimeTable = new int[6] { 6, 7, 8, 9, 10, 11 };
+
+    public int ActivityTime
+    {
+        get { return activityTimeTable[activityTimeLevel]; }
+    }
+    public int attackLevel = 0;
+    public int[] attackTable = new int[6] { 3, 5, 7, 9, 11, 13 };
+
+    public int Attack
+    {
+        get { return attackTable[attackLevel]; }
+    }
+    public int rapidfireLevel = 0;
+    public int[] rapidfireTable = new int[6] { 7, 8, 9, 10, 11, 12 };
+    public int Rapidfire
+    {
+        get { return rapidfireTable[rapidfireLevel]; }
+    }
+    public int sortieLevel = 0;
     public int score = 0;
 
-    
+
 
 
 
@@ -44,7 +73,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
