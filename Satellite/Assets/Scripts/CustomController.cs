@@ -46,6 +46,12 @@ public class CustomController : MonoBehaviour
     public int rapidfirelevel = 0;
     public int sortielevel = 0;
     */
+    //レベルごとの消費ポイント
+    int Level1 = 500;
+    int Level2 = 600;
+    int Level3 = 700;
+    int Level4 = 800;
+    int Level5 = 1000;
 
     //親愛度の星の画像
     public Image intimacyStar_first;
@@ -132,6 +138,8 @@ public class CustomController : MonoBehaviour
 
     //所持ポイント
     public Text possessionPointText;
+    //消費ポイント
+    int consumptionPoint;
     //消費ポイントのテキスト
     public Text consumptionPointText;
 
@@ -289,7 +297,7 @@ public class CustomController : MonoBehaviour
             strengtheningQuestion.SetActive(false);
 
             //いずれかのキーを押したときに非表示
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.Backspace)|| Input.GetKeyDown("joystick button 0"))
             {
                 shortagePointImage.SetActive(false);
             }
@@ -309,7 +317,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf)
+            if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
             {
                 //親愛度選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -363,15 +371,18 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= 5)
+                                if (GameController.Instance.score >= Level1)
                                 {
                                     //ゲームコントローラーの親愛度レベルを1にする
                                     GameController.Instance.intimacyLevel = 1;
 
                                     minimumununsettledintimacy = 1;
+
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level1;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -416,8 +427,23 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = false;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイントの表示を600に変更
-                consumptionPointText.text = "600";
+                //消費ポイント
+                switch (GameController.Instance.intimacyLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2;
+                        break;
+                }
+
+
+                //消費ポイントのテキスト表示
+                consumptionPointText.text = (consumptionPoint).ToString();
+
+                
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 2)
@@ -437,20 +463,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを2にする
-                                GameController.Instance.intimacyLevel = 2;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを2にする
+                                    GameController.Instance.intimacyLevel = 2;
 
-                                minimumununsettledintimacy = 2;
+                                    minimumununsettledintimacy = 2;
 
-                                strengtheningQuestionnumber = 0;
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
 
-                                strengtheningQuestionnumber = 0;
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -481,8 +519,25 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = false;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイントの表示を700に変更
-                consumptionPointText.text = "700";
+                //消費ポイント
+                switch (GameController.Instance.intimacyLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3;
+                        break;
+                }
+
+
+                //消費ポイントの表示を変更
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 3)
@@ -502,18 +557,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを3にする
-                                GameController.Instance.intimacyLevel = 3;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを3にする
+                                    GameController.Instance.intimacyLevel = 3;
 
-                                minimumununsettledintimacy = 3;
+                                    minimumununsettledintimacy = 3;
 
-                                strengtheningQuestionnumber = 0;
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    strengtheningQuestionnumber = 0;
+
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -544,8 +613,28 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = true;
                 unsettledintimacyStar_fifth.enabled = false;
 
+                //消費ポイント
+                switch (GameController.Instance.intimacyLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4;
+                        break;
+                }
+
                 //消費ポイントの表示を800に変更
-                consumptionPointText.text = "800";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 4)
@@ -565,20 +654,33 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを4にする
-                                GameController.Instance.intimacyLevel = 4;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを4にする
+                                    GameController.Instance.intimacyLevel = 4;
 
-                                minimumununsettledintimacy = 4;
+                                    minimumununsettledintimacy = 4;
 
-                                strengtheningQuestionnumber = 0;
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    strengtheningQuestionnumber = 0;
 
-                                
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -609,8 +711,31 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = true;
                 unsettledintimacyStar_fifth.enabled = true;
 
+                //消費ポイント
+                switch (GameController.Instance.intimacyLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4 + Level5;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4 + Level5;
+                        break;
+                    case 4:
+                        consumptionPoint = Level5;
+                        break;
+                }
+
                 //消費ポイントの表示を1000に変更
-                consumptionPointText.text = "1000";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 5)
@@ -630,20 +755,33 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを5にする
-                                GameController.Instance.intimacyLevel = 5;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを5にする
+                                    GameController.Instance.intimacyLevel = 5;
 
-                                minimumununsettledintimacy = 5;
+                                    minimumununsettledintimacy = 5;
 
-                                strengtheningQuestionnumber = 0;
+                                    strengtheningQuestionnumber = 0;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -681,7 +819,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf)
+            if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -735,18 +873,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーのHPレベルを1にする
-                                GameController.Instance.hpLevel = 1;
+                                if (GameController.Instance.score >= Level1)
+                                {
+                                    //ゲームコントローラーのHPレベルを1にする
+                                    GameController.Instance.hpLevel = 1;
 
-                                minimumununsettledhp = 1;
+                                    minimumununsettledhp = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level1;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -777,8 +929,19 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = false;
                 unsettledhpStar_fifth.enabled = false;
 
+                switch (GameController.Instance.hpLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2;
+                        break;
+                }
+
                 //消費ポイントの表示を600に変更
-                consumptionPointText.text = "600";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 2)
@@ -798,18 +961,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーのHPレベルを2にする
-                                GameController.Instance.hpLevel = 2;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーのHPレベルを2にする
+                                    GameController.Instance.hpLevel = 2;
 
-                                minimumununsettledhp = 2;
+                                    minimumununsettledhp = 2;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -840,8 +1017,23 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = false;
                 unsettledhpStar_fifth.enabled = false;
 
+                switch (GameController.Instance.hpLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3;
+                        break;
+                }
+
                 //消費ポイントの表示を700に変更
-                consumptionPointText.text = "700";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 3)
@@ -864,15 +1056,29 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーのHPレベルを3にする
-                                GameController.Instance.hpLevel = 3;
+                                if (GameController.Instance.score>= consumptionPoint)
+                                {
+                                    //ゲームコントローラーのHPレベルを3にする
+                                    GameController.Instance.hpLevel = 3;
 
-                                minimumununsettledhp = 3;
+                                    minimumununsettledhp = 3;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -903,8 +1109,27 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = true;
                 unsettledhpStar_fifth.enabled = false;
 
+                switch (GameController.Instance.hpLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4;
+                        break;
+                }
+
                 //消費ポイントの表示を800に変更
-                consumptionPointText.text = "800";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 4)
@@ -924,18 +1149,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーのHPレベルを4にする
-                                GameController.Instance.hpLevel = 4;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーのHPレベルを4にする
+                                    GameController.Instance.hpLevel = 4;
 
-                                minimumununsettledhp = 4;
+                                    minimumununsettledhp = 4;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -966,8 +1205,30 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = true;
                 unsettledhpStar_fifth.enabled = true;
 
+                switch (GameController.Instance.hpLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                        break;
+
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4 + Level5;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4 + Level5;
+                        break;
+                    case 4:
+                        consumptionPoint = Level5;
+                        break;
+                }
+
                 //消費ポイントの表示を1000に変更
-                consumptionPointText.text = "1000";
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 5)
@@ -987,18 +1248,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーのHPレベルを5にする
-                                GameController.Instance.hpLevel = 5;
+                                if (GameController.Instance.score >= consumptionPoint)
+                                {
+                                    //ゲームコントローラーのHPレベルを5にする
+                                    GameController.Instance.hpLevel = 5;
 
-                                minimumununsettledhp = 5;
+                                    minimumununsettledhp = 5;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= consumptionPoint;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1035,7 +1310,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf)
+            if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -1089,18 +1364,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを1にする
-                                GameController.Instance.activityTimeLevel = 1;
+                                if (GameController.Instance.score >= Level1)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを1にする
+                                    GameController.Instance.activityTimeLevel = 1;
 
-                                minimumunununsettledactivityTime = 1;
+                                    minimumunununsettledactivityTime = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level1;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1152,18 +1441,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを2にする
-                                GameController.Instance.activityTimeLevel = 2;
+                                if (GameController.Instance.score >= Level2)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを2にする
+                                    GameController.Instance.activityTimeLevel = 2;
 
-                                minimumunununsettledactivityTime = 2;
+                                    minimumunununsettledactivityTime = 2;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level2;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1215,18 +1518,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを3にする
-                                GameController.Instance.activityTimeLevel = 3;
+                                if (GameController.Instance.score >= Level3)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを3にする
+                                    GameController.Instance.activityTimeLevel = 3;
 
-                                minimumunununsettledactivityTime = 3;
+                                    minimumunununsettledactivityTime = 3;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level3;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1278,18 +1595,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを4にする
-                                GameController.Instance.activityTimeLevel = 4;
+                                if (GameController.Instance.score >= Level4)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを4にする
+                                    GameController.Instance.activityTimeLevel = 4;
 
-                                minimumunununsettledactivityTime = 4;
+                                    minimumunununsettledactivityTime = 4;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level4;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1340,18 +1671,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを5にする
-                                GameController.Instance.activityTimeLevel = 5;
+                                if (GameController.Instance.score >= Level5)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを5にする
+                                    GameController.Instance.activityTimeLevel = 5;
 
-                                minimumunununsettledactivityTime = 5;
+                                    minimumunununsettledactivityTime = 5;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level5;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1388,7 +1733,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf)
+            if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -1442,18 +1787,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの攻撃レベルを1にする
-                                GameController.Instance.attackLevel = 1;
+                                if (GameController.Instance.score >= Level1)
+                                {
+                                    //ゲームコントローラーの攻撃レベルを1にする
+                                    GameController.Instance.attackLevel = 1;
 
-                                minimumunununsettledattack = 1;
+                                    minimumunununsettledattack = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level1;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1505,18 +1864,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの攻撃レベルを2にする
-                                GameController.Instance.attackLevel = 2;
+                                if (GameController.Instance.score >= Level2)
+                                {
+                                    //ゲームコントローラーの攻撃レベルを2にする
+                                    GameController.Instance.attackLevel = 2;
 
-                                minimumunununsettledattack = 2;
+                                    minimumunununsettledattack = 2;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level2;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1568,18 +1941,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの攻撃レベルを3にする
-                                GameController.Instance.attackLevel = 3;
+                                if (GameController.Instance.score >= Level3)
+                                {
+                                    //ゲームコントローラーの攻撃レベルを3にする
+                                    GameController.Instance.attackLevel = 3;
 
-                                minimumunununsettledattack = 3;
+                                    minimumunununsettledattack = 3;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level3;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1631,18 +2018,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの攻撃レベルを4にする
-                                GameController.Instance.attackLevel = 4;
+                                if (GameController.Instance.score >= Level4)
+                                {
+                                    //ゲームコントローラーの攻撃レベルを4にする
+                                    GameController.Instance.attackLevel = 4;
 
-                                minimumunununsettledattack = 4;
+                                    minimumunununsettledattack = 4;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level4;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1694,18 +2095,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの攻撃レベルを5にする
-                                GameController.Instance.attackLevel = 5;
+                                if (GameController.Instance.score >= Level5)
+                                {
+                                    //ゲームコントローラーの攻撃レベルを5にする
+                                    GameController.Instance.attackLevel = 5;
 
-                                minimumunununsettledattack = 5;
+                                    minimumunununsettledattack = 5;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level5;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1742,7 +2157,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf)
+            if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //連射速度選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -1796,18 +2211,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを1にする
-                                GameController.Instance.rapidfireLevel = 1;
+                                if (GameController.Instance.score >= Level1)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを1にする
+                                    GameController.Instance.rapidfireLevel = 1;
 
-                                minimumunununsettledrapidfire = 1;
+                                    minimumunununsettledrapidfire = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level1;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1862,15 +2291,29 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを2にする
-                                GameController.Instance.rapidfireLevel = 2;
+                                if (GameController.Instance.score >= Level2)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを2にする
+                                    GameController.Instance.rapidfireLevel = 2;
 
-                                minimumunununsettledrapidfire = 2;
+                                    minimumunununsettledrapidfire = 2;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level2;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1922,18 +2365,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを3にする
-                                GameController.Instance.rapidfireLevel = 3;
+                                if (GameController.Instance.score >= Level3)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを3にする
+                                    GameController.Instance.rapidfireLevel = 3;
 
-                                minimumunununsettledrapidfire = 3;
+                                    minimumunununsettledrapidfire = 3;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level3;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -1988,15 +2445,29 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを4にする
-                                GameController.Instance.rapidfireLevel = 4;
+                                if (GameController.Instance.score >= Level4)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを4にする
+                                    GameController.Instance.rapidfireLevel = 4;
 
-                                minimumunununsettledrapidfire = 4;
+                                    minimumunununsettledrapidfire = 4;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level4;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
@@ -2048,18 +2519,32 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.yellow;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの活動時間レベルを5にする
-                                GameController.Instance.rapidfireLevel = 5;
+                                if (GameController.Instance.score >= Level5)
+                                {
+                                    //ゲームコントローラーの活動時間レベルを5にする
+                                    GameController.Instance.rapidfireLevel = 5;
 
-                                minimumunununsettledrapidfire = 5;
+                                    minimumunununsettledrapidfire = 5;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //ポイントを消費
+                                    GameController.Instance.score -= Level5;
 
-                                strengtheningQuestionnumber = 0;
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
+
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //ポイント不足
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
