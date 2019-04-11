@@ -48,6 +48,8 @@ public class Boss : MonoBehaviour
             Destroy(gameObject);
 
             clearImage.SetActive(true);
+            // sceneをまたいで保存
+            GameController.Instance.score += Player.score;
         }
 
     }

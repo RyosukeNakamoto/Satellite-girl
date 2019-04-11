@@ -19,6 +19,10 @@ public class GameController : MonoBehaviour
     public int attacklevel = 0;
     public int rapidfirelevel = 0;
     public int sortielevel = 0;
+    public int score = 0;
+
+    
+
 
 
 
@@ -38,9 +42,14 @@ public class GameController : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(score);
     }
 }
