@@ -25,5 +25,5 @@ public class EnemyBullet : Bullet
             // 弾を消します
             Destroy(gameObject);
         }
-    }   
+    }
 }
