@@ -127,6 +127,11 @@ public class CustomController : MonoBehaviour
     //強化のNoイメージ
     public Image no;
 
+    //ポイントが不足していた場合に表示する画像
+    public GameObject shortagePointImage;
+
+    //所持ポイント
+    public Text possessionPointText;
     //消費ポイントのテキスト
     public Text consumptionPointText;
 
@@ -213,6 +218,9 @@ public class CustomController : MonoBehaviour
 
         //シーン開始時に強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
+
+        //シーン開始時にポイントが不足してた場合のウインドウ非表示
+        shortagePointImage.SetActive(false);
     }
 
     // Update is called once per frame
@@ -223,8 +231,11 @@ public class CustomController : MonoBehaviour
         //十字キー横の入力
         float dpv = Input.GetAxis("D_Pad_V");
 
+        //所持ポイントを表示
+        possessionPointText.text = (GameController.Instance.score).ToString();
+
         //強化の確定を選択する画面が表示中にSelectnumberの数値が変更されないようにする
-        if (!strengtheningQuestion.activeSelf)
+        if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
         {
             //上矢印キーを押したときSelectnumberを減らす
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
@@ -264,12 +275,25 @@ public class CustomController : MonoBehaviour
             }
         }
 
+        //強化を確定するウインドウが表示されたときはどこも選択していない状態にする
         if (strengtheningQuestionnumber == 0)
         {
             yes.color = Color.grey;
             no.color = Color.grey;
         }
-        
+
+        //ポイントが不足してた時に画像が表示されているときの処理
+        if (shortagePointImage.activeSelf)
+        {
+            //強化を確定するウインドウを非表示
+            strengtheningQuestion.SetActive(false);
+
+            //いずれかのキーを押したときに非表示
+            if (Input.anyKeyDown)
+            {
+                shortagePointImage.SetActive(false);
+            }
+        }
 
         //親愛度選択中
         if (selectnumber == 0)
@@ -342,15 +366,26 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                //ゲームコントローラーの親愛度レベルを1にする
-                                GameController.Instance.intimacylevel = 1;
+                                if (GameController.Instance.score >= 5)
+                                {
+                                    //ゲームコントローラーの親愛度レベルを1にする
+                                    GameController.Instance.intimacylevel = 1;
 
-                                minimumununsettledintimacy = 1;
+                                    minimumununsettledintimacy = 1;
 
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                                    //強化するか尋ねるウインドウを非表示
+                                    strengtheningQuestion.SetActive(false);
 
-                                strengtheningQuestionnumber = 0;
+                                    strengtheningQuestionnumber = 0;
+                                }
+
+                                //強化するポイントが不足していた場合に画像表示
+                                else
+                                {
+                                    strengtheningQuestionnumber = 0;
+
+                                    shortagePointImage.SetActive(true);
+                                }
                             }
                         }
 
