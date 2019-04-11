@@ -1257,7 +1257,7 @@ GameObject:
   - component: {fileID: 909888176}
   - component: {fileID: 909888175}
   m_Layer: 5
-  m_Name: Text (3)
+  m_Name: ResultScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1856,7 +1856,8 @@ MonoBehaviour:
   bazookaBullet: {fileID: 2576970764510253572, guid: 7b52d2acd804bae4ca9f974612587f44,
     type: 3}
   bulletderay: 0.5
-  scoreObj: {fileID: 149076470}
+  scoreObject: {fileID: 149076470}
+  resultScoreObject: {fileID: 909888173}
 --- !u!1 &1207778019
 GameObject:
   m_ObjectHideFlags: 0

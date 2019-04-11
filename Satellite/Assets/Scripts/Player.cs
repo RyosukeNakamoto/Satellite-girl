@@ -43,17 +43,19 @@ public class Player : MonoBehaviour
     public float bulletderay;
     private float timer;
 
-    //--------------------------
-    //(仮)
     // スコアの値
     public static int score;
     // スコアテキストコンポーネント
-    Text scoretext;
+    Text scoreText;
+    // リザルト画面のスコアスコアテキストコンポーネント
+    Text resultScoreText;
     // スコアテキストオブジェクトの参照
-    public GameObject scoreObj;
+    public GameObject scoreObject;
+    // リザルト画面のスコア表示
+    public GameObject resultScoreObject;
     //　アイテムの点数
     int itemScore = 5;
-    //--------------------------
+
 
     // Use this for initialization
     void Start()
@@ -67,10 +69,13 @@ public class Player : MonoBehaviour
         hpslider.value = hp;        
         
         // スコアテキストのコンポーネント
-        scoretext = scoreObj.GetComponent<Text>();
+        scoreText = scoreObject.GetComponent<Text>();
         // スコアを0で初期化
         score = 0;
-        scoretext.text = "Score: " + score;
+        scoreText.text = "Score: " + score;
+        // リザルトスコアテキストのコンポーネント
+        resultScoreText = resultScoreObject.GetComponent<Text>();
+        resultScoreText.text = "" + score + "p";
 
         // 一号機セレステルのHPを取得
         hp =  GameController.Instance.HitPoint;
@@ -230,8 +235,8 @@ public class Player : MonoBehaviour
         {
             score += itemScore;
             // スコア内容の変更
-            scoretext.text = "Score: " + score;
-
+            scoreText.text = "Score: " + score;
+            resultScoreText.text = "" + score + "p";
         }
     }
 }
