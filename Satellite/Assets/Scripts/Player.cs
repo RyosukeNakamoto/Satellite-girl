@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public GameObject gameClear;
 
     //武器を数値で管理
-    public static int bulletstatus = 2;
+    public static int bulletstatus = 1;
     // 
     public GameObject camera;
     //発射する弾
@@ -65,8 +65,9 @@ public class Player : MonoBehaviour
         // スコアテキストのコンポーネント
         scoretext = scoreObj.GetComponent<Text>();
         // スコアを0で初期化
-        scoretext.text = "Score: " + score;
         score = 0;
+        scoretext.text = "Score: " + score;
+
         //--------------------------
     }
 
@@ -190,17 +191,40 @@ public class Player : MonoBehaviour
             OndamageEffect();
         }
 
-        //--------------------------
-        //(仮)
+        // スコアの加算
         if (collision.gameObject.tag == "Item")
         {
             score += itemScore;
-
             // スコア内容の変更
             scoretext.text = "Score: " + score;
+            
         }
-        //--------------------------
 
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ////ダメージ処理
+        //if (!ondamage && collision.gameObject.tag == "Enemy")
+        //{
+        //    //HPバーを減らす（プロト版）
+        //    hpslider.value -= Damage;
+        //    //敵からのダメージ(プロト版)
+        //    hp -= Damage;
+        //    OndamageEffect();
+        //}
+
+        ////--------------------------
+        ////(仮)
+        //if (collision.gameObject.tag == "Item")
+        //{
+        //    score += itemScore;
+
+        //    // スコア内容の変更
+        //    scoretext.text = "Score: " + score;
+        //}
+        ////--------------------------
     }
 
     //ダメージ処理
