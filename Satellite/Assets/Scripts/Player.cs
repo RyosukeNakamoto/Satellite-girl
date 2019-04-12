@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public GameObject machinegunBullet; // マシンガン
     public GameObject bazookaBullet;    // バズーカ
     //発射間隔の時間
-    public float bulletderay;
+    public float bulletDelay;
     private float timer;
 
     // スコアの値
@@ -153,10 +153,10 @@ public class Player : MonoBehaviour
         //ライフルを装備中の発射間隔
         if (bulletstatus == 0)
         {
-            bulletderay = 0.5f;
+            bulletDelay = 0.5f;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;
@@ -169,10 +169,12 @@ public class Player : MonoBehaviour
         //マシンガンを装備中の発射間隔
         if (bulletstatus == 1)
         {
-            bulletderay = 0.1f;
+            bulletDelay = GameController.Instance.Rapidfire;
+            Debug.Log(GameController.Instance.Rapidfire);
+            //bulletDelay = 0.1f;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;
@@ -185,10 +187,10 @@ public class Player : MonoBehaviour
         //バズーカを装備中の発射間隔
         if (bulletstatus == 2)
         {
-            bulletderay = 0.8f;
+            bulletDelay = 0.8f;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletderay || Input.GetKey("joystick button 1") && timer > bulletderay)
+            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;

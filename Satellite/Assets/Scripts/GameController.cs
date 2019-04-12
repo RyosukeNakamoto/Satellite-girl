@@ -51,8 +51,11 @@ public class GameController : MonoBehaviour
         // 戻り値で判別
         get { return attackTable[attackLevel]; }
     }
+    // 弾を撃つ間隔レベル
     public int rapidfireLevel = 0;
-    public float[] rapidfireTable = new float[6] { 1, 0.9f, 0.8f, 0.7f, 0.6f, 0.5f };
+    // レベルテーブル
+    public float[] rapidfireTable = new float[6] { 0.48f, 0.46f, 0.44f, 0.42f, 0.40f, 0.3f };
+    // ステータスとレベルを連結
     public float Rapidfire
     {
         get { return rapidfireTable[rapidfireLevel]; }
