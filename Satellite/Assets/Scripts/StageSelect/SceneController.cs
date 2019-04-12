@@ -6,8 +6,13 @@ using UnityEngine.SceneManagement;
 
 namespace Satellite.StageSelect
 {
+
     public class SceneController : MonoBehaviour
     {
+        [SerializeField]
+        Color selectedColor = Color.white;
+
+
         public Image stage1;
         public Image stage2;
         public Image stage3;
@@ -63,7 +68,7 @@ namespace Satellite.StageSelect
             //Stage1を選択状態
             if (selectnumber == 0)
             {
-                stage1.color = Color.white;
+                stage1.color = selectedColor;
                 stage2.color = Color.gray;
                 stage3.color = Color.gray;
                 stage4.color = Color.gray;
@@ -81,7 +86,7 @@ namespace Satellite.StageSelect
             if (selectnumber == 1)
             {
                 stage1.color = Color.gray;
-                stage2.color = Color.white;
+                stage2.color = selectedColor;
                 stage3.color = Color.gray;
                 stage4.color = Color.gray;
                 stage5.color = Color.gray;
@@ -93,7 +98,7 @@ namespace Satellite.StageSelect
             {
                 stage1.color = Color.gray;
                 stage2.color = Color.gray;
-                stage3.color = Color.white;
+                stage3.color = selectedColor;
                 stage4.color = Color.gray;
                 stage5.color = Color.gray;
                 stage6.color = Color.gray;
@@ -106,7 +111,7 @@ namespace Satellite.StageSelect
                 stage1.color = Color.gray;
                 stage2.color = Color.gray;
                 stage3.color = Color.gray;
-                stage4.color = Color.white;
+                stage4.color = selectedColor;
                 stage5.color = Color.gray;
                 stage6.color = Color.gray;
                 back.color = Color.gray;
@@ -118,7 +123,7 @@ namespace Satellite.StageSelect
                 stage2.color = Color.gray;
                 stage3.color = Color.gray;
                 stage4.color = Color.gray;
-                stage5.color = Color.white;
+                stage5.color = selectedColor;
                 stage6.color = Color.gray;
                 back.color = Color.gray;
             }
@@ -130,7 +135,7 @@ namespace Satellite.StageSelect
                 stage3.color = Color.gray;
                 stage4.color = Color.gray;
                 stage5.color = Color.gray;
-                stage6.color = Color.white;
+                stage6.color = selectedColor;
                 back.color = Color.gray;
             }
             }
