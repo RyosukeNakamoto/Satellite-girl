@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class CustomController : MonoBehaviour
 {
+    [SerializeField]
+    Color selectedColor = Color.yellow;
+
     //どこを選択中か数値で管理
     public int selectnumber = 0;
 
@@ -234,6 +237,12 @@ public class CustomController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //デバッグ用
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            GameController.Instance.score += 10000;
+        }
+
         //十字キー縦の入力
         float dph = Input.GetAxis("D_Pad_H");
         //十字キー横の入力
@@ -306,7 +315,7 @@ public class CustomController : MonoBehaviour
         //親愛度選択中
         if (selectnumber == 0)
         {
-            intimacyImage.color = Color.yellow;
+            intimacyImage.color = selectedColor;
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
@@ -350,8 +359,16 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = false;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイントの表示を500に変更
-                consumptionPointText.text = "500";
+                if (GameController.Instance.intimacyLevel == 0)
+                {
+                    //消費ポイントの表示を500に変更
+                    consumptionPointText.text = "500";
+                }
+                else
+                {
+                    //消費ポイントの表示を0に変更
+                    consumptionPointText.text = "0";
+                }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 1)
@@ -427,27 +444,25 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = false;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイント
-                switch (GameController.Instance.intimacyLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2;
-                        break;
-                }
-
-
-                //消費ポイントのテキスト表示
-                consumptionPointText.text = (consumptionPoint).ToString();
-
-                
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 2)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.intimacyLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -519,29 +534,30 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = false;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイント
-                switch (GameController.Instance.intimacyLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3;
-                        break;
-                }
-
-
-                //消費ポイントの表示を変更
-                consumptionPointText.text = (consumptionPoint).ToString();
+               
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 3)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.intimacyLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -613,32 +629,32 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = true;
                 unsettledintimacyStar_fifth.enabled = false;
 
-                //消費ポイント
-                switch (GameController.Instance.intimacyLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4;
-                        break;
-                }
-
-                //消費ポイントの表示を800に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 4)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.intimacyLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -711,35 +727,35 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fourth.enabled = true;
                 unsettledintimacyStar_fifth.enabled = true;
 
-                //消費ポイント
-                switch (GameController.Instance.intimacyLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4 + Level5;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4 + Level5;
-                        break;
-                    case 4:
-                        consumptionPoint = Level5;
-                        break;
-                }
-
-                //消費ポイントの表示を1000に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledintimacy < 5)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.intimacyLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4 + Level5;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4 + Level5;
+                            break;
+                        case 4:
+                            consumptionPoint = Level5;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -809,7 +825,7 @@ public class CustomController : MonoBehaviour
         if (selectnumber == 1)
         {
             intimacyImage.color = Color.gray;
-            hpImage.color = Color.yellow;
+            hpImage.color = selectedColor;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
@@ -840,7 +856,7 @@ public class CustomController : MonoBehaviour
 
             if (ununsettledintimacy == 0)
             {
-                unsettledintimacyStar_second.enabled = false;
+                unsettledintimacyStar_first.enabled = false;
             }
 
             //未確定のHPのレベル1の強化選択状態
@@ -852,8 +868,16 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = false;
                 unsettledhpStar_fifth.enabled = false;
 
-                //消費ポイントの表示を500に変更
-                consumptionPointText.text = "500";
+                if (GameController.Instance.hpLevel == 0)
+                {
+                    //消費ポイントの表示を500に変更
+                    consumptionPointText.text = "500";
+                }
+                else
+                {
+                    //消費ポイントの表示を0に変更
+                    consumptionPointText.text = "0";
+                }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 1)
@@ -929,23 +953,24 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = false;
                 unsettledhpStar_fifth.enabled = false;
 
-                switch (GameController.Instance.hpLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2;
-                        break;
-                }
-
-                //消費ポイントの表示を600に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 2)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.hpLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1017,27 +1042,28 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = false;
                 unsettledhpStar_fifth.enabled = false;
 
-                switch (GameController.Instance.hpLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3;
-                        break;
-                }
-
-                //消費ポイントの表示を700に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 3)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.hpLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1056,7 +1082,7 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score>= consumptionPoint)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーのHPレベルを3にする
                                     GameController.Instance.hpLevel = 3;
@@ -1109,31 +1135,34 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = true;
                 unsettledhpStar_fifth.enabled = false;
 
-                switch (GameController.Instance.hpLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
-                        break;
 
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4;
-                        break;
-                }
-
-                //消費ポイントの表示を800に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 4)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.hpLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1205,34 +1234,35 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fourth.enabled = true;
                 unsettledhpStar_fifth.enabled = true;
 
-                switch (GameController.Instance.hpLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4 + Level5;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4 + Level5;
-                        break;
-                    case 4:
-                        consumptionPoint = Level5;
-                        break;
-                }
-
-                //消費ポイントの表示を1000に変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumununsettledhp < 5)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.hpLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4 + Level5;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4 + Level5;
+                            break;
+                        case 4:
+                            consumptionPoint = Level5;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1301,7 +1331,7 @@ public class CustomController : MonoBehaviour
         {
             intimacyImage.color = Color.gray;
             hpImage.color = Color.gray;
-            activityTimeImage.color = Color.yellow;
+            activityTimeImage.color = selectedColor;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
             sortieImage.color = Color.gray;
@@ -1329,9 +1359,10 @@ public class CustomController : MonoBehaviour
                 }
             }
 
+            //何も選択していないとき星を非表示
             if (ununsettledactivityTime == 0)
             {
-                unsettledactivityTimeStar_second.enabled = false;
+                unsettledactivityTimeStar_first.enabled = false;
             }
 
             //未確定の活動時間のレベル1の強化選択状態
@@ -1343,8 +1374,16 @@ public class CustomController : MonoBehaviour
                 unsettledactivityTimeStar_fourth.enabled = false;
                 unsettledactivityTimeStar_fifth.enabled = false;
 
-                //消費ポイントの表示を500に変更
-                consumptionPointText.text = "500";
+                if (GameController.Instance.activityTimeLevel == 0)
+                {
+                    //消費ポイントの表示を500に変更
+                    consumptionPointText.text = "500";
+                }
+                else
+                {
+                    //消費ポイントの表示を0に変更
+                    consumptionPointText.text = "0";
+                }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledactivityTime < 1)
@@ -1420,12 +1459,24 @@ public class CustomController : MonoBehaviour
                 unsettledactivityTimeStar_fourth.enabled = false;
                 unsettledactivityTimeStar_fifth.enabled = false;
 
-                //消費ポイントの表示を600に変更
-                consumptionPointText.text = "600";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledactivityTime < 2)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.activityTimeLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1444,7 +1495,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level2)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを2にする
                                     GameController.Instance.activityTimeLevel = 2;
@@ -1452,7 +1503,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledactivityTime = 2;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level2;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1497,12 +1548,28 @@ public class CustomController : MonoBehaviour
                 unsettledactivityTimeStar_fourth.enabled = false;
                 unsettledactivityTimeStar_fifth.enabled = false;
 
-                //消費ポイントの表示を700に変更
-                consumptionPointText.text = "700";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledactivityTime < 3)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.activityTimeLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1521,7 +1588,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level3)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを3にする
                                     GameController.Instance.activityTimeLevel = 3;
@@ -1529,7 +1596,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledactivityTime = 3;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level3;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1574,12 +1641,32 @@ public class CustomController : MonoBehaviour
                 unsettledactivityTimeStar_fourth.enabled = true;
                 unsettledactivityTimeStar_fifth.enabled = false;
 
-                //消費ポイントの表示を800に変更
-                consumptionPointText.text = "800";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledactivityTime < 4)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.activityTimeLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1598,7 +1685,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level4)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを4にする
                                     GameController.Instance.activityTimeLevel = 4;
@@ -1606,7 +1693,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledactivityTime = 4;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level4;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1650,12 +1737,36 @@ public class CustomController : MonoBehaviour
                 unsettledactivityTimeStar_fourth.enabled = true;
                 unsettledactivityTimeStar_fifth.enabled = true;
 
-                //消費ポイントの表示を1000に変更
-                consumptionPointText.text = "1000";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledactivityTime < 5)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.activityTimeLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4 + Level5;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4 + Level5;
+                            break;
+
+                        case 4:
+                            consumptionPoint = Level5;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1674,7 +1785,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level5)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを5にする
                                     GameController.Instance.activityTimeLevel = 5;
@@ -1682,7 +1793,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledactivityTime = 5;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level5;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1725,7 +1836,7 @@ public class CustomController : MonoBehaviour
             intimacyImage.color = Color.gray;
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
-            attackImage.color = Color.yellow;
+            attackImage.color = selectedColor;
             rapidfireImage.color = Color.gray;
             sortieImage.color = Color.gray;
 
@@ -1766,8 +1877,16 @@ public class CustomController : MonoBehaviour
                 unsettledattackStar_fourth.enabled = false;
                 unsettledattackStar_fifth.enabled = false;
 
-                //消費ポイントの表示を500に変更
-                consumptionPointText.text = "500";
+                if (GameController.Instance.attackLevel == 0)
+                {
+                    //消費ポイントの表示を500に変更
+                    consumptionPointText.text = "500";
+                }
+                else
+                {
+                    //消費ポイントの表示を0に変更
+                    consumptionPointText.text = "0";
+                }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledattack < 1)
@@ -1843,12 +1962,24 @@ public class CustomController : MonoBehaviour
                 unsettledattackStar_fourth.enabled = false;
                 unsettledattackStar_fifth.enabled = false;
 
-                //消費ポイントの表示を600に変更
-                consumptionPointText.text = "600";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledattack < 2)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.attackLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -1867,7 +1998,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level2)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの攻撃レベルを2にする
                                     GameController.Instance.attackLevel = 2;
@@ -1875,7 +2006,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledattack = 2;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level2;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1919,9 +2050,24 @@ public class CustomController : MonoBehaviour
                 unsettledattackStar_third.enabled = true;
                 unsettledattackStar_fourth.enabled = false;
                 unsettledattackStar_fifth.enabled = false;
+                //消費ポイントを現在のレベルによって変更
+                switch (GameController.Instance.attackLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3;
+                        break;
 
-                //消費ポイントの表示を700に変更
-                consumptionPointText.text = "700";
+                    case 1:
+                        consumptionPoint = Level2 + Level3;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3;
+                        break;
+                }
+
+                //消費ポイントの表示を変更
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledattack < 3)
@@ -1944,7 +2090,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level3)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの攻撃レベルを3にする
                                     GameController.Instance.attackLevel = 3;
@@ -1952,7 +2098,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledattack = 3;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level3;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -1996,9 +2142,28 @@ public class CustomController : MonoBehaviour
                 unsettledattackStar_third.enabled = true;
                 unsettledattackStar_fourth.enabled = true;
                 unsettledattackStar_fifth.enabled = false;
+                //消費ポイントを現在のレベルによって変更
+                switch (GameController.Instance.attackLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                        break;
 
-                //消費ポイントの表示を800に変更
-                consumptionPointText.text = "800";
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4;
+                        break;
+                }
+
+                //消費ポイントの表示を変更
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledattack < 4)
@@ -2021,7 +2186,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level4)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの攻撃レベルを4にする
                                     GameController.Instance.attackLevel = 4;
@@ -2029,7 +2194,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledattack = 4;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level4;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2073,9 +2238,32 @@ public class CustomController : MonoBehaviour
                 unsettledattackStar_third.enabled = true;
                 unsettledattackStar_fourth.enabled = true;
                 unsettledattackStar_fifth.enabled = true;
+                //消費ポイントを現在のレベルによって変更
+                switch (GameController.Instance.attackLevel)
+                {
+                    case 0:
+                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                        break;
 
-                //消費ポイントの表示を1000に変更
-                consumptionPointText.text = "1000";
+                    case 1:
+                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                        break;
+
+                    case 2:
+                        consumptionPoint = Level3 + Level4 + Level5;
+                        break;
+
+                    case 3:
+                        consumptionPoint = Level4 + Level5;
+                        break;
+
+                    case 4:
+                        consumptionPoint = Level5;
+                        break;
+                }
+
+                //消費ポイントの表示を変更
+                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledattack < 5)
@@ -2098,7 +2286,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level5)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの攻撃レベルを5にする
                                     GameController.Instance.attackLevel = 5;
@@ -2106,7 +2294,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledattack = 5;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level5;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2150,7 +2338,7 @@ public class CustomController : MonoBehaviour
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
-            rapidfireImage.color = Color.yellow;
+            rapidfireImage.color = selectedColor;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -2190,8 +2378,16 @@ public class CustomController : MonoBehaviour
                 unsettledrapidfireStar_fourth.enabled = false;
                 unsettledrapidfireStar_fifth.enabled = false;
 
-                //消費ポイントの表示を500に変更
-                consumptionPointText.text = "500";
+                if (GameController.Instance.rapidfireLevel == 0)
+                {
+                    //消費ポイントの表示を500に変更
+                    consumptionPointText.text = "500";
+                }
+                else
+                {
+                    //消費ポイントの表示を0に変更
+                    consumptionPointText.text = "0";
+                }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledrapidfire < 1)
@@ -2267,12 +2463,24 @@ public class CustomController : MonoBehaviour
                 unsettledrapidfireStar_fourth.enabled = false;
                 unsettledrapidfireStar_fifth.enabled = false;
 
-                //消費ポイントの表示を600に変更
-                consumptionPointText.text = "600";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledrapidfire < 2)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.rapidfireLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -2291,7 +2499,7 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level2)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを2にする
                                     GameController.Instance.rapidfireLevel = 2;
@@ -2299,7 +2507,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledrapidfire = 2;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level2;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2344,12 +2552,28 @@ public class CustomController : MonoBehaviour
                 unsettledrapidfireStar_fourth.enabled = false;
                 unsettledrapidfireStar_fifth.enabled = false;
 
-                //消費ポイントの表示を700に変更
-                consumptionPointText.text = "700";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledrapidfire < 3)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.rapidfireLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -2368,7 +2592,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level3)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを3にする
                                     GameController.Instance.rapidfireLevel = 3;
@@ -2376,7 +2600,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledrapidfire = 3;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level3;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2421,12 +2645,32 @@ public class CustomController : MonoBehaviour
                 unsettledrapidfireStar_fourth.enabled = true;
                 unsettledrapidfireStar_fifth.enabled = false;
 
-                //消費ポイントの表示を800に変更
-                consumptionPointText.text = "800";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledrapidfire < 4)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.rapidfireLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -2445,7 +2689,7 @@ public class CustomController : MonoBehaviour
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level4)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを4にする
                                     GameController.Instance.rapidfireLevel = 4;
@@ -2453,7 +2697,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledrapidfire = 4;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level4;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2498,12 +2742,36 @@ public class CustomController : MonoBehaviour
                 unsettledrapidfireStar_fourth.enabled = true;
                 unsettledrapidfireStar_fifth.enabled = true;
 
-                //消費ポイントの表示を1000に変更
-                consumptionPointText.text = "1000";
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumunununsettledrapidfire < 5)
                 {
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.rapidfireLevel)
+                    {
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4 + Level5;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4 + Level5;
+                            break;
+
+                        case 4:
+                            consumptionPoint = Level5;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
@@ -2522,7 +2790,7 @@ public class CustomController : MonoBehaviour
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
-                                if (GameController.Instance.score >= Level5)
+                                if (GameController.Instance.score >= consumptionPoint)
                                 {
                                     //ゲームコントローラーの活動時間レベルを5にする
                                     GameController.Instance.rapidfireLevel = 5;
@@ -2530,7 +2798,7 @@ public class CustomController : MonoBehaviour
                                     minimumunununsettledrapidfire = 5;
 
                                     //ポイントを消費
-                                    GameController.Instance.score -= Level5;
+                                    GameController.Instance.score -= consumptionPoint;
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
@@ -2575,7 +2843,7 @@ public class CustomController : MonoBehaviour
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
-            sortieImage.color = Color.yellow;
+            sortieImage.color = selectedColor;
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
