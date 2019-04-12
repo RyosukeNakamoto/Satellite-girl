@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Hp == 0)
+        if (Hp <= 0)
         {
             Death();
         }
@@ -76,13 +76,14 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Hp--;
+            Hp -= GameController.Instance.Attack;
+            //Debug.Log(Hp);
         }
 
-        if (collision.gameObject.tag == "explosion")
-        {
-            Hp--;
-        }
+        //if (collision.gameObject.tag == "explosion")
+        //{
+        //    Hp--;
+        //}
     }
 
     // 
