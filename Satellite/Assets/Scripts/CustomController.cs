@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class CustomController : MonoBehaviour
 {
+    [SerializeField]
+    Color selectedColor = Color.yellow;
+
     //どこを選択中か数値で管理
     public int selectnumber = 0;
 
@@ -312,7 +315,7 @@ public class CustomController : MonoBehaviour
         //親愛度選択中
         if (selectnumber == 0)
         {
-            intimacyImage.color = Color.yellow;
+            intimacyImage.color = selectedColor;
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
@@ -822,7 +825,7 @@ public class CustomController : MonoBehaviour
         if (selectnumber == 1)
         {
             intimacyImage.color = Color.gray;
-            hpImage.color = Color.yellow;
+            hpImage.color = selectedColor;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
@@ -1328,7 +1331,7 @@ public class CustomController : MonoBehaviour
         {
             intimacyImage.color = Color.gray;
             hpImage.color = Color.gray;
-            activityTimeImage.color = Color.yellow;
+            activityTimeImage.color = selectedColor;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
             sortieImage.color = Color.gray;
@@ -1833,7 +1836,7 @@ public class CustomController : MonoBehaviour
             intimacyImage.color = Color.gray;
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
-            attackImage.color = Color.yellow;
+            attackImage.color = selectedColor;
             rapidfireImage.color = Color.gray;
             sortieImage.color = Color.gray;
 
@@ -2335,7 +2338,7 @@ public class CustomController : MonoBehaviour
             hpImage.color = Color.gray;
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
-            rapidfireImage.color = Color.yellow;
+            rapidfireImage.color = selectedColor;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -2840,7 +2843,7 @@ public class CustomController : MonoBehaviour
             activityTimeImage.color = Color.gray;
             attackImage.color = Color.gray;
             rapidfireImage.color = Color.gray;
-            sortieImage.color = Color.yellow;
+            sortieImage.color = selectedColor;
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
