@@ -58,8 +58,8 @@ public class Boss : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            hp -= 20f;
-            hpslider.value -= 20f;
+            hp -= GameController.Instance.Attack;
+            hpslider.value -= GameController.Instance.Attack;
         }
     }
 }
