@@ -16,11 +16,12 @@ public class GameOver : MonoBehaviour
     {
         Time.timeScale = 0.0f;
 
-        Scene loadscene = SceneManager.GetActiveScene();
+        //Scene loadscene = SceneManager.GetActiveScene();
 
+        //ゲームオーバー後、エンターキーでタイトルに戻る
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(loadscene.name);
+            SceneManager.LoadScene("Title");
         }
     }
 }
