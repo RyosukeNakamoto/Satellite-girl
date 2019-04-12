@@ -386,7 +386,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -421,7 +421,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -476,7 +476,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -511,7 +511,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -571,7 +571,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -606,7 +606,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -668,7 +668,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -704,7 +704,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -769,7 +769,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -805,7 +805,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -895,7 +895,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -930,7 +930,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -984,7 +984,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1019,7 +1019,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1077,7 +1077,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1112,7 +1112,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1176,7 +1176,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1211,7 +1211,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1276,7 +1276,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1311,7 +1311,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1401,7 +1401,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1436,7 +1436,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1490,7 +1490,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1525,7 +1525,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1583,7 +1583,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1618,7 +1618,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1680,7 +1680,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1715,7 +1715,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1780,7 +1780,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1815,7 +1815,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1904,7 +1904,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -1939,7 +1939,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -1993,7 +1993,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2028,7 +2028,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2085,7 +2085,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2120,7 +2120,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2181,7 +2181,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2216,7 +2216,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2281,7 +2281,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2316,7 +2316,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2405,7 +2405,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2440,7 +2440,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2494,7 +2494,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2529,7 +2529,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2587,7 +2587,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2622,7 +2622,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2684,7 +2684,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化をするか選択
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2719,7 +2719,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
@@ -2785,7 +2785,7 @@ public class CustomController : MonoBehaviour
                         //Yes選択状態
                         if (strengtheningQuestionnumber == 1)
                         {
-                            yes.color = Color.yellow;
+                            yes.color = Color.white;
                             no.color = Color.gray;
                             //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
@@ -2820,7 +2820,7 @@ public class CustomController : MonoBehaviour
                         if (strengtheningQuestionnumber == 2)
                         {
                             yes.color = Color.gray;
-                            no.color = Color.yellow;
+                            no.color = Color.white;
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 //強化するか尋ねるウインドウを非表示
