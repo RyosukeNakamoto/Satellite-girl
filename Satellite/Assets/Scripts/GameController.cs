@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
     // 活動時間ステータスレベル
     public int activityTimeLevel = 0;
     // レベルテーブル
-    public int[] activityTimeTable = new int[6] { 6, 7, 8, 9, 10, 11 };
+    public int[] activityTimeTable = new int[6] { 30, 35, 40, 45, 50, 55 };
     // ステータスとレベルを連結
     public int ActivityTime
     {

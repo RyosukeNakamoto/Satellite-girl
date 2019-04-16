@@ -11,14 +11,19 @@ public class Player : MonoBehaviour
     public float speed = 100.0f;
     //プレイヤーの位置
     private Vector2 player_pos;
+
     //プレイヤーのHP
     [SerializeField]
     int hp = 0;
-    float attackDelay;
-    // 
-    public Slider hpslider;
-    // 
-    float maxhp = 100f;
+    [SerializeField]
+    float activ = 0;
+
+    // プレイヤーのHPゲージ
+    public Slider hpSlider;
+    // プレイヤーの活動時間ゲージ
+    public Slider activTimeSlider;
+    // 活動時間ゲージのスイッチ
+    bool activsSwitch = false;
 
     //ダメージフラグ
     public bool ondamage = false;
@@ -39,8 +44,10 @@ public class Player : MonoBehaviour
     public GameObject rifleBullet;      // ライフル
     public GameObject machinegunBullet; // マシンガン
     public GameObject bazookaBullet;    // バズーカ
-    //発射間隔の時間
+    //発射間隔の時間（オール）
     public float bulletDelay;
+    // マシンガンの発射間隔の時間
+    public float machineGunDelay;
     private float timer;
 
     // スコアの値
@@ -65,37 +72,40 @@ public class Player : MonoBehaviour
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
 
         Time.timeScale = 1.0f;
-        hpslider.maxValue = GameController.Instance.HitPoint;
-        hpslider.value = hp;        
-        
+
+
         // スコアテキストのコンポーネント
         scoreText = scoreObject.GetComponent<Text>();
         // スコアを0で初期化
         score = 0;
+        // スコアを表示
         scoreText.text = "Score: " + score;
         // リザルトスコアテキストのコンポーネント
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
         // 一号機セレステルのHPを取得
-        hp =  GameController.Instance.HitPoint;
+        hp = GameController.Instance.HitPoint;
         // 一号機セレステルの活動時間を取得
-
+        activ = GameController.Instance.ActivityTime;
         // 一号機セレステルの攻撃力を取得
 
         // 一号機セレステルの連射間隔を取得
 
-        // スライダーの値をセット
-        attackDelay = GameController.Instance.Rapidfire;
-        hpslider.maxValue = GameController.Instance.HitPoint;
-        hpslider.value = hp;
+        //// スライダーの値をセット
+        // HPのゲージ
+        hpSlider.maxValue = GameController.Instance.HitPoint;
+        hpSlider.value = hp;
+        // 活動時間のゲージ
+        activTimeSlider.maxValue = GameController.Instance.ActivityTime;
+        activTimeSlider.value = activ;
     }
 
     // Update is called once per frame
     void Update()
     {
         //HPが0以下になったときの処理
-        if (hp <= 0)
+        if (hp <= 0 || activ <= 0)
         {
             Destroy(gameObject);
             gameOver.SetActive(true);
@@ -107,7 +117,6 @@ public class Player : MonoBehaviour
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             //renderer.color = new Color(1f, 1f, 1f, level);
         }
-        
 
         // 移動処理
         Move();
@@ -131,6 +140,33 @@ public class Player : MonoBehaviour
 
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * speed;
+        // 移動時の活動時間の変化
+        if (x != 0 || y != 0)
+        {
+            activsSwitch = true;
+            if (activsSwitch)
+            {
+                // 活動ゲージの減算
+                activ -= 0.2f;
+                activTimeSlider.value = activ;
+                // 活動ゲージの値が0以下にはならない
+                if (activ < 0)
+                {
+                    activ = 0;
+                }
+            }
+        }
+        // 移動していないとき
+        else
+        {
+            activsSwitch = false;
+            if (!activsSwitch)
+            {
+                // 活動ゲージの加算
+                activ += 0.1f;
+                activTimeSlider.value = activ;
+            }
+        }
     }
 
     //プレイヤーの移動制限関数
@@ -147,7 +183,7 @@ public class Player : MonoBehaviour
 
     //弾の発射関数
     void Shot()
-    {       
+    {
         //弾の発射間隔を弾の状態で変更
 
         //ライフルを装備中の発射間隔
@@ -169,12 +205,11 @@ public class Player : MonoBehaviour
         //マシンガンを装備中の発射間隔
         if (bulletstatus == 1)
         {
-            bulletDelay = GameController.Instance.Rapidfire;
-            Debug.Log(GameController.Instance.Rapidfire);
-            //bulletDelay = 0.1f;
+            // マシンガンの連射間隔の取得
+            machineGunDelay = GameController.Instance.Rapidfire;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
+            if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey("joystick button 1") && timer > machineGunDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;
@@ -198,7 +233,7 @@ public class Player : MonoBehaviour
                 //弾の実体化
                 Instantiate(bazookaBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
             }
-        }        
+        }
     }
 
     //ダメージ処理
@@ -228,7 +263,7 @@ public class Player : MonoBehaviour
         {
             hp -= bulletSc.damage;
             //HPバーを減らす（プロト版）
-            hpslider.value -= bulletSc.damage;
+            hpSlider.value -= bulletSc.damage;
             OndamageEffect();
         }
 
