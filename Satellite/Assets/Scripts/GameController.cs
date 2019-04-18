@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     {
         get { return intimacyTable[intimacyLevel]; }
     }
+
     // HPステータスレベル
     public int hpLevel = 0;
     // レベルテーブル
@@ -51,6 +52,7 @@ public class GameController : MonoBehaviour
         // 戻り値で判別
         get { return attackTable[attackLevel]; }
     }
+
     // 弾を撃つ間隔レベル
     public int rapidfireLevel = 0;
     // レベルテーブル

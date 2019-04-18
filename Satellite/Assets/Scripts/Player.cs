@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     public Slider activTimeSlider;
     // 活動時間ゲージのスイッチ
     bool activsSwitch = false;
+    // プレイヤーのバフゲージ       
+    public GameObject buffObject;
+    Image buffGauge;
 
     //ダメージフラグ
     public bool ondamage = false;
@@ -84,6 +87,10 @@ public class Player : MonoBehaviour
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
+        // バフゲージ
+        buffGauge = buffObject.GetComponent<Image>();
+        buffGauge.fillAmount = 0;
+
         // 一号機セレステルのHPを取得
         hp = GameController.Instance.HitPoint;
         // 一号機セレステルの活動時間を取得
@@ -104,6 +111,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        buffGauge.fillAmount += 0.01f * Time.deltaTime / 10 * 100;
         //HPが0以下になったときの処理
         if (hp <= 0 || activ <= 0)
         {
