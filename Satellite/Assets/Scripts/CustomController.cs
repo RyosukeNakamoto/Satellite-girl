@@ -10,34 +10,44 @@ public class CustomController : MonoBehaviour
     Color selectedColor = Color.yellow;
 
     //どこを選択中か数値で管理
-    public int selectnumber = 0;
+    int selectNumber = 0;
 
     //未確定の親愛度の星の画像の表示を数値で管理
-    public int ununsettledintimacy = 0;
-    public int minimumununsettledintimacy = 0;
+    int ununsettledIntimacy = 0;
+    int minimumUnunsettledIntimacy = 0;
 
     //未確定のHPの星の画像の表示を数値で管理
-    public int ununsettledhp = 0;
-    public int minimumununsettledhp = 0;
+    int ununsettledHp = 0;
+    int minimumUnunsettledHp = 0;
 
     //未確定の活動時間の星の画像の表示を数値で管理
-    public int ununsettledactivityTime = 0;
-    public int minimumunununsettledactivityTime = 0;
+    int ununsettledactivityTime = 0;
+    int minimumunununsettledactivityTime = 0;
 
     //未確定の攻撃の星の画像の表示を数値で管理
-    public int ununsettledattack = 0;
-    public int minimumunununsettledattack = 0;
+    int ununsettledattack = 0;
+    int minimumunununsettledattack = 0;
 
     //未確定の連射速度の星の画像の表示を数値で管理
-    public int ununsettledrapidfire = 0;
-    public int minimumunununsettledrapidfire = 0;
+    int ununsettledrapidfire = 0;
+    int minimumunununsettledrapidfire = 0;
 
-    //選択中表示イメージ
+    //親愛度
     public Image intimacyImage;
+    public Image selectedIntimacyImage;
+    //HP
     public Image hpImage;
+    public Image selectedHpImage;
+    //活動時間
     public Image activityTimeImage;
+    public Image selectedActivityTimeImage;
+    //攻撃
     public Image attackImage;
+    public Image selectedAttackImage;
+    //連射速度
     public Image rapidfireImage;
+    public Image selectedRapidfireImage;
+    //出撃
     public Image sortieImage;
 
     /*
@@ -57,11 +67,13 @@ public class CustomController : MonoBehaviour
     int Level5 = 1000;
 
     //親愛度の星の画像
-    public Image intimacyStar_first;
+    public Image[] intimacyStar;
+    /*
     public Image intimacyStar_second;
     public Image intimacyStar_third;
     public Image intimacyStar_fourth;
     public Image intimacyStar_fifth;
+    */
 
     //未確定の親愛度の星の画像
     public Image unsettledintimacyStar_first;
@@ -69,7 +81,6 @@ public class CustomController : MonoBehaviour
     public Image unsettledintimacyStar_third;
     public Image unsettledintimacyStar_fourth;
     public Image unsettledintimacyStar_fifth;
-
 
     //HPの星の画像
     public Image hpStar_first;
@@ -149,20 +160,21 @@ public class CustomController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //シーン開始時に選択イメージをグレーに
-        intimacyImage.color = Color.gray;
-        hpImage.color = Color.gray;
-        activityTimeImage.color = Color.gray;
-        attackImage.color = Color.gray;
-        rapidfireImage.color = Color.gray;
-        sortieImage.color = Color.gray;
+        //シーン開始時に選択中画像を非表示
+        selectedIntimacyImage.enabled = false;
+        selectedHpImage.enabled = false;
+        selectedActivityTimeImage.enabled = false;
+        selectedAttackImage.enabled = false;
+        selectedRapidfireImage.enabled = false;
 
+        //シーン開始時に選択イメージをグレーに
+        sortieImage.color = Color.gray;
+        
         //シーン開始時に親愛度の星の画像をを非表示
-        intimacyStar_first.enabled = false;
-        intimacyStar_second.enabled = false;
-        intimacyStar_third.enabled = false;
-        intimacyStar_fourth.enabled = false;
-        intimacyStar_fifth.enabled = false;
+        for(int i = 0; i < 5; i++)
+        {
+            intimacyStar[i].enabled = false;
+        }
 
         //シーン開始時に未確定の親愛度の星の画像を非表示
         unsettledintimacyStar_first.enabled = false;
@@ -251,30 +263,30 @@ public class CustomController : MonoBehaviour
         //所持ポイントを表示
         possessionPointText.text = (GameController.Instance.score).ToString();
 
-        //強化の確定を選択する画面が表示中にSelectnumberの数値が変更されないようにする
+        //強化の確定を選択する画面が表示中にSelectNumberの数値が変更されないようにする
         if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
         {
-            //上矢印キーを押したときSelectnumberを減らす
+            //上矢印キーを押したときSelectNumberを減らす
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
             {
-                selectnumber--;
+                selectNumber--;
             }
 
-            //下矢印キーを押したときSelectnumberを増やす
+            //下矢印キーを押したときSelectNumberを増やす
             if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
             {
-                selectnumber++;
+                selectNumber++;
             }
 
-            //selectnumberが5を超えたときselectnumberを0にする
-            if (selectnumber > 5)
+            //selectNumberが5を超えたときselectNumberを0にする
+            if (selectNumber > 5)
             {
-                selectnumber = 0;
+                selectNumber = 0;
             }
-            //selectnumberが0以下になったときselectnumberを5にする
-            if (selectnumber < 0)
+            //selectNumberが0以下になったときselectNumberを5にする
+            if (selectNumber < 0)
             {
-                selectnumber = 5;
+                selectNumber = 5;
             }
         }
 
@@ -313,13 +325,14 @@ public class CustomController : MonoBehaviour
         }
 
         //親愛度選択中
-        if (selectnumber == 0)
+        if (selectNumber == 0)
         {
-            intimacyImage.color = selectedColor;
-            hpImage.color = Color.gray;
-            activityTimeImage.color = Color.gray;
-            attackImage.color = Color.gray;
-            rapidfireImage.color = Color.gray;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = true;
+            selectedHpImage.enabled = false;
+            selectedActivityTimeImage.enabled = false;
+            selectedAttackImage.enabled = false;
+            selectedRapidfireImage.enabled = false;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -331,27 +344,27 @@ public class CustomController : MonoBehaviour
                 //親愛度選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    if (ununsettledintimacy < 5)
+                    if (ununsettledIntimacy < 5)
                     {
-                        ununsettledintimacy++;
+                        ununsettledIntimacy++;
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (ununsettledintimacy > minimumununsettledintimacy)
+                    if (ununsettledIntimacy > minimumUnunsettledIntimacy)
                     {
-                        ununsettledintimacy--;
+                        ununsettledIntimacy--;
                     }
                 }
             }
 
-            if (ununsettledintimacy == 0)
+            if (ununsettledIntimacy == 0)
             {
                 unsettledintimacyStar_first.enabled = false;
             }
 
             //未確定の親愛度のレベル1の強化選択状態
-            if (ununsettledintimacy == 1)
+            if (ununsettledIntimacy == 1)
             {
                 unsettledintimacyStar_first.enabled = true;
                 unsettledintimacyStar_second.enabled = false;
@@ -371,7 +384,7 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledintimacy < 1)
+                if (minimumUnunsettledIntimacy < 1)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
@@ -396,7 +409,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーの親愛度レベルを1にする
                                     GameController.Instance.intimacyLevel = 1;
 
-                                    minimumununsettledintimacy = 1;
+                                    minimumUnunsettledIntimacy = 1;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= Level1;
@@ -436,7 +449,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定の親愛度のレベル2の強化選択状態
-            if (ununsettledintimacy == 2)
+            if (ununsettledIntimacy == 2)
             {
                 unsettledintimacyStar_first.enabled = true;
                 unsettledintimacyStar_second.enabled = true;
@@ -446,7 +459,7 @@ public class CustomController : MonoBehaviour
 
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledintimacy < 2)
+                if (minimumUnunsettledIntimacy < 2)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.intimacyLevel)
@@ -486,7 +499,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーの親愛度レベルを2にする
                                     GameController.Instance.intimacyLevel = 2;
 
-                                    minimumununsettledintimacy = 2;
+                                    minimumUnunsettledIntimacy = 2;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -526,7 +539,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定の親愛度レベル3の強化選択状態
-            if (ununsettledintimacy == 3)
+            if (ununsettledIntimacy == 3)
             {
                 unsettledintimacyStar_first.enabled = true;
                 unsettledintimacyStar_second.enabled = true;
@@ -537,7 +550,7 @@ public class CustomController : MonoBehaviour
                
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledintimacy < 3)
+                if (minimumUnunsettledIntimacy < 3)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.intimacyLevel)
@@ -581,7 +594,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーの親愛度レベルを3にする
                                     GameController.Instance.intimacyLevel = 3;
 
-                                    minimumununsettledintimacy = 3;
+                                    minimumUnunsettledIntimacy = 3;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -621,7 +634,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定の親愛度レベル4の強化選択状態
-            if (ununsettledintimacy == 4)
+            if (ununsettledIntimacy == 4)
             {
                 unsettledintimacyStar_first.enabled = true;
                 unsettledintimacyStar_second.enabled = true;
@@ -630,7 +643,7 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fifth.enabled = false;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledintimacy < 4)
+                if (minimumUnunsettledIntimacy < 4)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.intimacyLevel)
@@ -678,7 +691,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーの親愛度レベルを4にする
                                     GameController.Instance.intimacyLevel = 4;
 
-                                    minimumununsettledintimacy = 4;
+                                    minimumUnunsettledIntimacy = 4;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -719,7 +732,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定の親愛度レベル5の強化選択状態
-            if (ununsettledintimacy == 5)
+            if (ununsettledIntimacy == 5)
             {
                 unsettledintimacyStar_first.enabled = true;
                 unsettledintimacyStar_second.enabled = true;
@@ -728,7 +741,7 @@ public class CustomController : MonoBehaviour
                 unsettledintimacyStar_fifth.enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledintimacy < 5)
+                if (minimumUnunsettledIntimacy < 5)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.intimacyLevel)
@@ -779,7 +792,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーの親愛度レベルを5にする
                                     GameController.Instance.intimacyLevel = 5;
 
-                                    minimumununsettledintimacy = 5;
+                                    minimumUnunsettledIntimacy = 5;
 
                                     strengtheningQuestionnumber = 0;
 
@@ -822,13 +835,14 @@ public class CustomController : MonoBehaviour
         }
 
         //Hp選択中
-        if (selectnumber == 1)
+        if (selectNumber == 1)
         {
-            intimacyImage.color = Color.gray;
-            hpImage.color = selectedColor;
-            activityTimeImage.color = Color.gray;
-            attackImage.color = Color.gray;
-            rapidfireImage.color = Color.gray;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = false;
+            selectedHpImage.enabled = true;
+            selectedActivityTimeImage.enabled = false;
+            selectedAttackImage.enabled = false;
+            selectedRapidfireImage.enabled = false;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -840,27 +854,27 @@ public class CustomController : MonoBehaviour
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    if (ununsettledhp < 5)
+                    if (ununsettledHp < 5)
                     {
-                        ununsettledhp++;
+                        ununsettledHp++;
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (ununsettledhp > minimumununsettledhp)
+                    if (ununsettledHp > minimumUnunsettledHp)
                     {
-                        ununsettledhp--;
+                        ununsettledHp--;
                     }
                 }
             }
 
-            if (ununsettledintimacy == 0)
+            if (ununsettledIntimacy == 0)
             {
                 unsettledintimacyStar_first.enabled = false;
             }
 
             //未確定のHPのレベル1の強化選択状態
-            if (ununsettledhp == 1)
+            if (ununsettledHp == 1)
             {
                 unsettledhpStar_first.enabled = true;
                 unsettledhpStar_second.enabled = false;
@@ -880,7 +894,7 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledhp < 1)
+                if (minimumUnunsettledHp < 1)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
@@ -905,7 +919,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーのHPレベルを1にする
                                     GameController.Instance.hpLevel = 1;
 
-                                    minimumununsettledhp = 1;
+                                    minimumUnunsettledHp = 1;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= Level1;
@@ -945,7 +959,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定のHPのレベル2の強化選択状態
-            if (ununsettledhp == 2)
+            if (ununsettledHp == 2)
             {
                 unsettledhpStar_first.enabled = true;
                 unsettledhpStar_second.enabled = true;
@@ -954,7 +968,7 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fifth.enabled = false;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledhp < 2)
+                if (minimumUnunsettledHp < 2)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.hpLevel)
@@ -994,7 +1008,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーのHPレベルを2にする
                                     GameController.Instance.hpLevel = 2;
 
-                                    minimumununsettledhp = 2;
+                                    minimumUnunsettledHp = 2;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -1034,7 +1048,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定のHPのレベル3の強化選択状態
-            if (ununsettledhp == 3)
+            if (ununsettledHp == 3)
             {
                 unsettledhpStar_first.enabled = true;
                 unsettledhpStar_second.enabled = true;
@@ -1043,7 +1057,7 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fifth.enabled = false;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledhp < 3)
+                if (minimumUnunsettledHp < 3)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.hpLevel)
@@ -1087,7 +1101,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーのHPレベルを3にする
                                     GameController.Instance.hpLevel = 3;
 
-                                    minimumununsettledhp = 3;
+                                    minimumUnunsettledHp = 3;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -1127,7 +1141,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定のHPのレベル4の強化選択状態
-            if (ununsettledhp == 4)
+            if (ununsettledHp == 4)
             {
                 unsettledhpStar_first.enabled = true;
                 unsettledhpStar_second.enabled = true;
@@ -1138,7 +1152,7 @@ public class CustomController : MonoBehaviour
 
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledhp < 4)
+                if (minimumUnunsettledHp < 4)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.hpLevel)
@@ -1186,7 +1200,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーのHPレベルを4にする
                                     GameController.Instance.hpLevel = 4;
 
-                                    minimumununsettledhp = 4;
+                                    minimumUnunsettledHp = 4;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -1226,7 +1240,7 @@ public class CustomController : MonoBehaviour
             }
 
             //未確定のHPのレベル5の強化選択状態
-            if (ununsettledhp == 5)
+            if (ununsettledHp == 5)
             {
                 unsettledhpStar_first.enabled = true;
                 unsettledhpStar_second.enabled = true;
@@ -1235,7 +1249,7 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_fifth.enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumununsettledhp < 5)
+                if (minimumUnunsettledHp < 5)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.hpLevel)
@@ -1286,7 +1300,7 @@ public class CustomController : MonoBehaviour
                                     //ゲームコントローラーのHPレベルを5にする
                                     GameController.Instance.hpLevel = 5;
 
-                                    minimumununsettledhp = 5;
+                                    minimumUnunsettledHp = 5;
 
                                     //ポイントを消費
                                     GameController.Instance.score -= consumptionPoint;
@@ -1327,13 +1341,14 @@ public class CustomController : MonoBehaviour
         }
 
         //活動時間選択中
-        if (selectnumber == 2)
+        if (selectNumber == 2)
         {
-            intimacyImage.color = Color.gray;
-            hpImage.color = Color.gray;
-            activityTimeImage.color = selectedColor;
-            attackImage.color = Color.gray;
-            rapidfireImage.color = Color.gray;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = false;
+            selectedHpImage.enabled = false;
+            selectedActivityTimeImage.enabled = true;
+            selectedAttackImage.enabled = false;
+            selectedRapidfireImage.enabled = false;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -1831,13 +1846,14 @@ public class CustomController : MonoBehaviour
         }
 
         //攻撃選択中
-        if (selectnumber == 3)
+        if (selectNumber == 3)
         {
-            intimacyImage.color = Color.gray;
-            hpImage.color = Color.gray;
-            activityTimeImage.color = Color.gray;
-            attackImage.color = selectedColor;
-            rapidfireImage.color = Color.gray;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = false;
+            selectedHpImage.enabled = false;
+            selectedActivityTimeImage.enabled = false;
+            selectedAttackImage.enabled = true;
+            selectedRapidfireImage.enabled = false;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -2332,13 +2348,14 @@ public class CustomController : MonoBehaviour
         }
 
         //連射速度選択中
-        if (selectnumber == 4)
+        if (selectNumber == 4)
         {
-            intimacyImage.color = Color.gray;
-            hpImage.color = Color.gray;
-            activityTimeImage.color = Color.gray;
-            attackImage.color = Color.gray;
-            rapidfireImage.color = selectedColor;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = false;
+            selectedHpImage.enabled = false;
+            selectedActivityTimeImage.enabled = false;
+            selectedAttackImage.enabled = false;
+            selectedRapidfireImage.enabled = true;
             sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
@@ -2836,14 +2853,15 @@ public class CustomController : MonoBehaviour
         }
 
         //出撃選択中
-        if (selectnumber == 5)
+        if (selectNumber == 5)
         {
-            intimacyImage.color = Color.gray;
-            hpImage.color = Color.gray;
-            activityTimeImage.color = Color.gray;
-            attackImage.color = Color.gray;
-            rapidfireImage.color = Color.gray;
-            sortieImage.color = selectedColor;
+            //選択中の画像表示
+            selectedIntimacyImage.enabled = false;
+            selectedHpImage.enabled = false;
+            selectedActivityTimeImage.enabled = false;
+            selectedAttackImage.enabled = false;
+            selectedRapidfireImage.enabled = false;
+            sortieImage.color = Color.white;
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -2853,44 +2871,15 @@ public class CustomController : MonoBehaviour
         }
 
         //親愛度レベル1
-        if (GameController.Instance.intimacyLevel >= 1)
+        for(int i = 0; i < GameController.Instance.intimacyLevel; i++)
         {
-            //星を表示
-            intimacyStar_first.enabled = true;
-
-            //親愛度レベル2
-            if (GameController.Instance.intimacyLevel >= 2)
-            {
-                //星を表示
-                intimacyStar_second.enabled = true;
-
-                //親愛度レベル3
-                if (GameController.Instance.intimacyLevel >= 3)
-                {
-                    //星を表示
-                    intimacyStar_third.enabled = true;
-
-                    //親愛度レベル4
-                    if (GameController.Instance.intimacyLevel >= 4)
-                    {
-                        //星を表示
-                        intimacyStar_fourth.enabled = true;
-
-                        //親愛度レベル5
-                        if (GameController.Instance.intimacyLevel >= 5)
-                        {
-                            //星を表示
-                            intimacyStar_fifth.enabled = true;
-                        }
-                    }
-                }
-            }
+            intimacyStar[i].enabled = true;
         }
 
         //親愛度を選択していないときに未確定の星の画像を非表示
-        if (selectnumber != 0)
+        if (selectNumber != 0)
         {
-            ununsettledintimacy = minimumununsettledintimacy;
+            ununsettledIntimacy = minimumUnunsettledIntimacy;
 
             unsettledintimacyStar_first.enabled = false;
             unsettledintimacyStar_second.enabled = false;
@@ -2935,9 +2924,9 @@ public class CustomController : MonoBehaviour
         }
 
         //HPを選択していないときに未確定の星の画像を非表示
-        if (selectnumber != 1)
+        if (selectNumber != 1)
         {
-            ununsettledhp = minimumununsettledhp;
+            ununsettledHp = minimumUnunsettledHp;
 
             unsettledhpStar_first.enabled = false;
             unsettledhpStar_second.enabled = false;
@@ -2982,7 +2971,7 @@ public class CustomController : MonoBehaviour
         }
 
         //活動時間を選択していないときに未確定の星の画像を非表示
-        if (selectnumber != 2)
+        if (selectNumber != 2)
         {
            　 ununsettledactivityTime = minimumunununsettledactivityTime;
 
@@ -3029,7 +3018,7 @@ public class CustomController : MonoBehaviour
         }
 
         //攻撃を選択していないときに未確定の星の画像を非表示
-        if (selectnumber != 3)
+        if (selectNumber != 3)
         {
             ununsettledattack = minimumunununsettledattack;
 
@@ -3076,7 +3065,7 @@ public class CustomController : MonoBehaviour
         }
 
         //連射速度を選択していないときに未確定の星の画像を非表示
-        if (selectnumber != 4)
+        if (selectNumber != 4)
         {
             ununsettledrapidfire = minimumunununsettledrapidfire;
 
