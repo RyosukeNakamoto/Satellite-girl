@@ -76,14 +76,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Hp -= GameController.Instance.Attack;
-            //Debug.Log(Hp);
-        }
-
-        //if (collision.gameObject.tag == "explosion")
-        //{
-        //    Hp--;
-        //}
+            Hp -= GameController.Instance.Attack;            
+        }       
     }
 
     // 
