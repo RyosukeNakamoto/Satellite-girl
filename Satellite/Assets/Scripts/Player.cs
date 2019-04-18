@@ -45,8 +45,13 @@ public class Player : MonoBehaviour
     public GameObject camera;
     //発射する弾
     public GameObject rifleBullet;      // ライフル
+    // サウンドを指定
+    public AudioClip[] sound;
+    // サウンドの変数
+    AudioSource audioSource;
     public GameObject machinegunBullet; // マシンガン
     public GameObject bazookaBullet;    // バズーカ
+    // 
     //発射間隔の時間（オール）
     public float bulletDelay;
     // マシンガンの発射間隔の時間
@@ -75,7 +80,8 @@ public class Player : MonoBehaviour
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
 
         Time.timeScale = 1.0f;
-
+        // オーディオのコンポーネント
+        audioSource = GetComponent<AudioSource>();
 
         // スコアテキストのコンポーネント
         scoreText = scoreObject.GetComponent<Text>();
@@ -207,6 +213,9 @@ public class Player : MonoBehaviour
 
                 //弾の実体化
                 Instantiate(rifleBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+
+                // サウンドの再生
+                audioSource.PlayOneShot(sound[0]);
             }
         }
 
@@ -224,6 +233,9 @@ public class Player : MonoBehaviour
 
                 //弾の実体化
                 Instantiate(machinegunBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+
+                // サウンドの再生
+                audioSource.PlayOneShot(sound[1]);
             }
         }
 
@@ -240,6 +252,9 @@ public class Player : MonoBehaviour
 
                 //弾の実体化
                 Instantiate(bazookaBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+
+                // サウンドの再生
+                audioSource.PlayOneShot(sound[2]);
             }
         }
     }
@@ -282,6 +297,8 @@ public class Player : MonoBehaviour
             // スコア内容の変更
             scoreText.text = "Score: " + score;
             resultScoreText.text = "" + score + "p";
+            // サウンドの再生
+            audioSource.PlayOneShot(sound[3]);
         }
     }
 }
