@@ -4135,41 +4135,45 @@ MonoBehaviour:
   unsettledintimacyStar_third: {fileID: 740747597}
   unsettledintimacyStar_fourth: {fileID: 2079090454}
   unsettledintimacyStar_fifth: {fileID: 1595583991}
-  hpStar_first: {fileID: 1583970842}
-  hpStar_second: {fileID: 970359777}
-  hpStar_third: {fileID: 1350491618}
-  hpStar_fourth: {fileID: 1750641777}
-  hpStar_fifth: {fileID: 1167200810}
+  hpStar:
+  - {fileID: 1583970842}
+  - {fileID: 970359777}
+  - {fileID: 1350491618}
+  - {fileID: 1750641777}
+  - {fileID: 1167200810}
   unsettledhpStar_first: {fileID: 1387657720}
   unsettledhpStar_second: {fileID: 1213407661}
   unsettledhpStar_third: {fileID: 1129161178}
   unsettledhpStar_fourth: {fileID: 604456793}
   unsettledhpStar_fifth: {fileID: 1481986562}
-  activityTimeStar_first: {fileID: 1355116248}
-  activityTimeStar_second: {fileID: 1568824368}
-  activityTimeStar_third: {fileID: 241583961}
-  activityTimeStar_fourth: {fileID: 94649904}
-  activityTimeStar_fifth: {fileID: 1061761043}
+  activityTimeStar:
+  - {fileID: 1355116248}
+  - {fileID: 1568824368}
+  - {fileID: 241583961}
+  - {fileID: 94649904}
+  - {fileID: 1061761043}
   unsettledactivityTimeStar_first: {fileID: 1348690994}
   unsettledactivityTimeStar_second: {fileID: 236550050}
   unsettledactivityTimeStar_third: {fileID: 222378490}
   unsettledactivityTimeStar_fourth: {fileID: 1296666637}
   unsettledactivityTimeStar_fifth: {fileID: 1738853913}
-  attackStar_first: {fileID: 214046101}
-  attackStar_second: {fileID: 976359245}
-  attackStar_third: {fileID: 773167490}
-  attackStar_fourth: {fileID: 152232011}
-  attackStar_fifth: {fileID: 789956689}
+  attackStar:
+  - {fileID: 214046101}
+  - {fileID: 976359245}
+  - {fileID: 773167490}
+  - {fileID: 152232011}
+  - {fileID: 789956689}
   unsettledattackStar_first: {fileID: 777534787}
   unsettledattackStar_second: {fileID: 447042662}
   unsettledattackStar_third: {fileID: 1623556380}
   unsettledattackStar_fourth: {fileID: 1759061304}
   unsettledattackStar_fifth: {fileID: 1044480326}
-  rapidfireStar_first: {fileID: 556693069}
-  rapidfireStar_second: {fileID: 936272096}
-  rapidfireStar_third: {fileID: 2084307561}
-  rapidfireStar_fourth: {fileID: 755397457}
-  rapidfireStar_fifth: {fileID: 1929848530}
+  rapidfireStar:
+  - {fileID: 556693069}
+  - {fileID: 936272096}
+  - {fileID: 2084307561}
+  - {fileID: 755397457}
+  - {fileID: 1929848530}
   unsettledrapidfireStar_first: {fileID: 581480950}
   unsettledrapidfireStar_second: {fileID: 1764671915}
   unsettledrapidfireStar_third: {fileID: 570370485}

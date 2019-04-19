@@ -13,13 +13,12 @@ namespace Satellite.StageSelect
         Color selectedColor = Color.white;
 
 
-        public Image stage1;
-        public Image stage2;
-        public Image stage3;
-        public Image stage4;
-        public Image stage5;
-        public Image stage6;
-        public Image back;
+        public Image[] stage1;
+        public Image[] stage2;
+        public Image[] stage3;
+        public Image[] stage4;
+        public Image[] stage5;
+        public Image[] stage6;
 
         AudioSource audioSource;
         public AudioClip[] sound;
@@ -33,15 +32,6 @@ namespace Satellite.StageSelect
         // Start is called before the first frame update
         void Start()
         {
-            //シーン開始時に選択中の表示の非表示
-            stage1.color = Color.gray;
-            stage2.color = Color.gray;
-            stage3.color = Color.gray;
-            stage4.color = Color.gray;
-            stage5.color = Color.gray;
-            stage6.color = Color.gray;
-            back.color = Color.gray;
-
             //音コンポーネントの取得
             audioSource = GetComponent<AudioSource>();
         }
@@ -80,13 +70,8 @@ namespace Satellite.StageSelect
             //Stage1を選択状態
             if (selectnumber == 0)
             {
-                stage1.color = selectedColor;
-                stage2.color = Color.gray;
-                stage3.color = Color.gray;
-                stage4.color = Color.gray;
-                stage5.color = Color.gray;
-                stage6.color = Color.gray;
-                back.color = Color.gray;
+                stage1[0].enabled = false;
+                stage1[1].enabled = true;
 
                 //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                 if (Input.GetKeyDown(KeyCode.Return)||Input.GetKeyDown("joystick button 1"))
@@ -104,61 +89,66 @@ namespace Satellite.StageSelect
                     SceneManager.LoadScene("CharacterSelect");
                 }
             }
+            else
+            {
+                stage1[0].enabled = true;
+                stage1[1].enabled = false;
+            }
             //Stage2を選択状態
             if (selectnumber == 1)
             {
-                stage1.color = Color.gray;
-                stage2.color = selectedColor;
-                stage3.color = Color.gray;
-                stage4.color = Color.gray;
-                stage5.color = Color.gray;
-                stage6.color = Color.gray;
-                back.color = Color.gray;
+                stage2[0].enabled = false;
+                stage2[1].enabled = true;
+            }
+            else
+            {
+                stage2[0].enabled = true;
+                stage2[1].enabled = false;
             }
             //Stage3を選択状態
             if (selectnumber == 2)
             {
-                stage1.color = Color.gray;
-                stage2.color = Color.gray;
-                stage3.color = selectedColor;
-                stage4.color = Color.gray;
-                stage5.color = Color.gray;
-                stage6.color = Color.gray;
-                back.color = Color.gray;
+                stage3[0].enabled = false;
+                stage3[1].enabled = true;
+            }
+            else
+            {
+                stage3[0].enabled = true;
+                stage3[1].enabled = false;
             }
 
             //Stage4を選択状態
             if (selectnumber == 3)
             {
-                stage1.color = Color.gray;
-                stage2.color = Color.gray;
-                stage3.color = Color.gray;
-                stage4.color = selectedColor;
-                stage5.color = Color.gray;
-                stage6.color = Color.gray;
-                back.color = Color.gray;
+                stage4[0].enabled = false;
+                stage4[1].enabled = true;
+            }
+            else
+            {
+                stage4[0].enabled = true;
+                stage4[1].enabled = false;
             }
             //Stage5を選択状態
             if (selectnumber == 4)
             {
-                stage1.color = Color.gray;
-                stage2.color = Color.gray;
-                stage3.color = Color.gray;
-                stage4.color = Color.gray;
-                stage5.color = selectedColor;
-                stage6.color = Color.gray;
-                back.color = Color.gray;
+                stage5[0].enabled = false;
+                stage5[1].enabled = true;
+            }
+            else
+            {
+                stage5[0].enabled = true;
+                stage5[1].enabled = false;
             }
             //Stage6を選択状態
             if (selectnumber == 5)
             {
-                stage1.color = Color.gray;
-                stage2.color = Color.gray;
-                stage3.color = Color.gray;
-                stage4.color = Color.gray;
-                stage5.color = Color.gray;
-                stage6.color = selectedColor;
-                back.color = Color.gray;
+                stage6[0].enabled = false;
+                stage6[1].enabled = true;
+            }
+            else
+            {
+                stage6[0].enabled = true;
+                stage6[1].enabled = false;
             }
             }
 
