@@ -80,6 +80,7 @@ public class Player : MonoBehaviour
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
 
         Time.timeScale = 1.0f;
+
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
 
