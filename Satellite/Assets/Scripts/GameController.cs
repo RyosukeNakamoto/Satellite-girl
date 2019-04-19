@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 
     private static GameController instance = null;
 
+    //* セレステルステータス
     //それぞれのパラメーターのレベル
     public int intimacyLevel = 0;
     public int[] intimacyTable = new int[6] { 100, 95, 90, 85, 80, 75 };
@@ -62,10 +63,12 @@ public class GameController : MonoBehaviour
     {
         get { return rapidfireTable[rapidfireLevel]; }
     }
+    //*
     // public int sortieLevel = 0;
     public int score = 0;
 
-
+    // ステージの管理
+    public int stage = 0;
 
 
 
