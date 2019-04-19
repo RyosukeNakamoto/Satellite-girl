@@ -21,20 +21,14 @@ public class Enemy : MonoBehaviour
     public GameObject enemyBullet;
     // アイテムオブジェクトを指定
     public GameObject itemObj;
-    // 爆発エフェクトオブジェクトを指定
-    public GameObject effect;
     // カメラオブジェクト
     GameObject cameraObj;
+    // サウンドを指定
+    public AudioClip[] sound;
+    // サウンドの変数
+    AudioSource audioSource;
 
-    public void Death()
-    {
-        // エフェクトを表示(やめた)
-        //Instantiate(effect, transform.position, effect.transform.rotation);
-        // アイテムを表示
-        Instantiate(itemObj, transform.position, itemObj.transform.rotation);        
-        // デブリをデストロイ
-        Destroy(gameObject);
-    }
+
 
 
     // Start is called before the first frame update
@@ -42,6 +36,8 @@ public class Enemy : MonoBehaviour
     {
         // カメラの座標を取得
         cameraObj = Camera.main.gameObject;
+        // オーディオのコンポーネント
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -55,13 +51,14 @@ public class Enemy : MonoBehaviour
         if (isRendered)
         {
             timer += Time.deltaTime;
-            // Debug.Log("表示中");
             if (enemytime <= timer)
             {
                 // 弾が打てる状態
                 if (!Attack)
                 {
                     bullet();
+                    // サウンドの再生
+
                     // 弾を打たなくする
                     Attack = true;
                 }
@@ -70,6 +67,28 @@ public class Enemy : MonoBehaviour
 
         // カメラの範囲から再度外れたらfalse
         isRendered = false;        
+    }
+    // デブリが消滅する
+    public void Death()
+    {
+        // サウンドの再生
+        audioSource.PlayOneShot(sound[1]);
+        // デブリをデストロイ
+        Destroy(gameObject);
+        // アイテムを表示
+        Instantiate(itemObj, transform.position, itemObj.transform.rotation);
+    }
+    // 弾を表示する
+    void bullet()
+    {
+        timer = 0.0f;
+        Vector3 position = transform.position;
+        position.x += -1;
+
+        var bullet = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
+        bullet.transform.Rotate(0, 0, 180);
+
+        audioSource.PlayOneShot(sound[0]);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,14 +115,5 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 弾を表示する
-    void bullet()
-    {
-        timer = 0.0f;
-        Vector3 position = transform.position;
-        position.x += -1;
-        
-        var bullet = Instantiate(enemyBullet, position,enemyBullet.transform.rotation);
-        bullet.transform.Rotate(0,0,180);
-    }
+
 }
