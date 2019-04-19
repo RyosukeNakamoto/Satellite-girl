@@ -29,6 +29,9 @@ public class Enemy2 : MonoBehaviour
     // アイテムオブジェクトを指定
     public GameObject itemObj;
 
+    public Transform camera;
+    public Vector3 cam;
+
     public void Death()
     {      
         // アイテムを表示
@@ -39,7 +42,8 @@ public class Enemy2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //cam = camera.position;
+       //Debug.Log("取れた！！");
     }
 
     // Update is called once per frame
@@ -58,7 +62,7 @@ public class Enemy2 : MonoBehaviour
         {
             // 時間のカウント
             timer += Time.deltaTime;
-            // Debug.Log("表示中");
+           
             // enemytimeのタイムを経過したか
             if (enemytime <= timer)
             {
@@ -72,7 +76,15 @@ public class Enemy2 : MonoBehaviour
             }            
         }
         // カメラ範囲から再度外れたらfalse
-        isRendered = false;        
+        isRendered = false;
+        //if (!isRendered)
+        //{
+        //    if (transform.position.x - 1 >= gameObject.transform.position.x)
+        //    {
+        //        //Destroy(gameObject);
+        //      //  Debug.Log("カメラより左で死んだ");
+        //    }
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

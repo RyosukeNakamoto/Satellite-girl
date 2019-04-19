@@ -9,6 +9,10 @@ public class EnemyGenerator : MonoBehaviour
     // タイルID順にプレハブを指定します。
     public GameObject[] enemyPrefabs;
 
+    public GameObject boss;
+    public GameObject Slider;
+
+    int enemyCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +30,32 @@ public class EnemyGenerator : MonoBehaviour
                 var enemyId = int.Parse(column);
                 if (enemyId >= 0)
                 {
+                    enemyCount++ ;
                     var enemy = Instantiate(enemyPrefabs[enemyId], transform);
                     enemy.transform.localPosition = new Vector3(enemyX, -enemyY, 0);
                 }
             }
         }
+        Debug.Log(transform.childCount);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        int ObjectCount = transform.childCount;
+
+        //if (ObjectCount == 99)
+        //{            
+            //foreach (Transform enemy in gameObject.transform)
+            //{
+               
+            //}
+        Debug.Log(transform.childCount);
+        // ボスを表示
+        //boss.SetActive(true);
+        // ボスのHPゲージを表示
+        //Slider.SetActive(true);
+        //}
     }
 }

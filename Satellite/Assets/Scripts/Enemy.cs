@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public int Hp=0;
+    public int Hp = 0;
 
     // メインカメラを指定
     private const string cameraTagName = "MainCamera";
@@ -27,15 +27,15 @@ public class Enemy : MonoBehaviour
     public AudioClip[] sound;
     // サウンドの変数
     AudioSource audioSource;
-
-
+    // カメラの変数
+    public Camera camera;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        // カメラの座標を取得
-        cameraObj = Camera.main.gameObject;
+        // メインカメラを取得
+        camera = Camera.main;
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
     }
@@ -66,7 +66,14 @@ public class Enemy : MonoBehaviour
         }
 
         // カメラの範囲から再度外れたらfalse
-        isRendered = false;        
+        isRendered = false;
+        if (!isRendered)
+        {
+            if (camera.transform.position.x - 14 >= gameObject.transform.position.x)
+            {
+                Destroy(gameObject);                
+            }
+        }
     }
     // デブリが消滅する
     public void Death()
@@ -95,15 +102,15 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Hp -= GameController.Instance.Attack;            
-        }       
+            Hp -= GameController.Instance.Attack;
+        }
     }
 
     // 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-    }    
+
+    }
 
     // カメラの表示範囲に入ったら動作します
     private void OnWillRenderObject()
