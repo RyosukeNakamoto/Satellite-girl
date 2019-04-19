@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
+    // サウンドを指定
+    public AudioClip[] sound;
+    // サウンドの変数
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // オーディオのコンポーネント
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
