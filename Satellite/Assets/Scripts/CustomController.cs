@@ -33,19 +33,14 @@ public class CustomController : MonoBehaviour
     int minimumunununsettledrapidfire = 0;
 
     //親愛度
-    public Image intimacyImage;
     public Image selectedIntimacyImage;
     //HP
-    public Image hpImage;
     public Image selectedHpImage;
     //活動時間
-    public Image activityTimeImage;
     public Image selectedActivityTimeImage;
     //攻撃
-    public Image attackImage;
     public Image selectedAttackImage;
     //連射速度
-    public Image rapidfireImage;
     public Image selectedRapidfireImage;
     //出撃
     public Image sortieImage;
@@ -68,12 +63,6 @@ public class CustomController : MonoBehaviour
 
     //親愛度の星の画像
     public Image[] intimacyStar;
-    /*
-    public Image intimacyStar_second;
-    public Image intimacyStar_third;
-    public Image intimacyStar_fourth;
-    public Image intimacyStar_fifth;
-    */
 
     //未確定の親愛度の星の画像
     public Image unsettledintimacyStar_first;
@@ -156,6 +145,11 @@ public class CustomController : MonoBehaviour
     int consumptionPoint;
     //消費ポイントのテキスト
     public Text consumptionPointText;
+
+    //音
+    AudioSource audioSource;
+    //音を配列で管理
+    public AudioClip[] sound;
 
     // Start is called before the first frame update
     void Start()
@@ -244,6 +238,9 @@ public class CustomController : MonoBehaviour
 
         //シーン開始時にポイントが不足してた場合のウインドウ非表示
         shortagePointImage.SetActive(false);
+
+        //音のコンポーネントを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -270,12 +267,14 @@ public class CustomController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
             {
                 selectNumber--;
+                audioSource.PlayOneShot(sound[0]);
             }
 
             //下矢印キーを押したときSelectNumberを増やす
             if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
             {
                 selectNumber++;
+                audioSource.PlayOneShot(sound[0]);
             }
 
             //selectNumberが5を超えたときselectNumberを0にする
@@ -296,11 +295,13 @@ public class CustomController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
             {
                 strengtheningQuestionnumber = 1;
+                audioSource.PlayOneShot(sound[0]);
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
             {
                 strengtheningQuestionnumber = 2;
+                audioSource.PlayOneShot(sound[0]);
             }
         }
 
@@ -317,11 +318,17 @@ public class CustomController : MonoBehaviour
             //強化を確定するウインドウを非表示
             strengtheningQuestion.SetActive(false);
 
-            //いずれかのキーを押したときに非表示
+            //キーを押したときに非表示
             if (Input.GetKeyDown(KeyCode.Backspace)|| Input.GetKeyDown("joystick button 0"))
             {
                 shortagePointImage.SetActive(false);
             }
+        }
+
+        //ステージ選択画面に戻る
+        if(Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown("joystick button 0"))
+        {
+            SceneManager.LoadScene("StageSelect");
         }
 
         //親愛度選択中
@@ -347,6 +354,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledIntimacy < 5)
                     {
                         ununsettledIntimacy++;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -354,6 +363,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledIntimacy > minimumUnunsettledIntimacy)
                     {
                         ununsettledIntimacy--;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
@@ -418,6 +429,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[1]);
                                 }
 
                                 //強化するポイントが不足していた場合に画像表示
@@ -441,6 +455,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -508,6 +525,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[1]);
                                 }
 
                                 //ポイント不足
@@ -531,6 +551,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -603,6 +626,9 @@ public class CustomController : MonoBehaviour
 
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[1]);
                                 }
 
                                 //ポイント不足
@@ -611,6 +637,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -626,6 +655,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -701,6 +733,9 @@ public class CustomController : MonoBehaviour
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
 
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[1]);
+
                                 }
 
                                 //ポイント不足
@@ -709,6 +744,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -724,6 +762,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -802,6 +843,9 @@ public class CustomController : MonoBehaviour
                                     //強化するか尋ねるウインドウを非表示
                                     strengtheningQuestion.SetActive(false);
 
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[1]);
+
                                 }
 
                                 //ポイント不足
@@ -810,6 +854,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -825,6 +872,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -857,6 +907,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledHp < 5)
                     {
                         ununsettledHp++;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -864,6 +916,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledHp > minimumUnunsettledHp)
                     {
                         ununsettledHp--;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
@@ -928,6 +982,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -936,6 +993,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -951,6 +1011,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1017,6 +1080,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1025,6 +1091,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1040,6 +1109,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1110,6 +1182,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1118,6 +1193,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1133,6 +1211,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1148,8 +1229,6 @@ public class CustomController : MonoBehaviour
                 unsettledhpStar_third.enabled = true;
                 unsettledhpStar_fourth.enabled = true;
                 unsettledhpStar_fifth.enabled = false;
-
-
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 4)
@@ -1209,6 +1288,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1217,6 +1299,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1232,6 +1317,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1309,6 +1397,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1317,6 +1408,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1332,6 +1426,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1363,6 +1460,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledactivityTime < 5)
                     {
                         ununsettledactivityTime++;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -1370,6 +1469,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledactivityTime > minimumunununsettledactivityTime)
                     {
                         ununsettledactivityTime--;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
@@ -1435,6 +1536,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1443,6 +1547,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1458,6 +1565,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1524,6 +1634,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1532,6 +1645,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1547,6 +1663,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1617,6 +1736,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1625,6 +1747,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1640,6 +1765,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1714,6 +1842,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1722,6 +1853,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1737,6 +1871,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1814,6 +1951,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1822,6 +1962,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1837,6 +1980,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -1868,6 +2014,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledattack < 5)
                     {
                         ununsettledattack++;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -1875,6 +2023,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledattack > minimumunununsettledattack)
                     {
                         ununsettledattack--;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
@@ -1939,6 +2089,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -1947,6 +2100,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -1962,6 +2118,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2028,6 +2187,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2036,6 +2198,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2051,6 +2216,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2120,6 +2288,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2128,6 +2299,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2143,6 +2317,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2216,6 +2393,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2224,6 +2404,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2239,6 +2422,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2316,6 +2502,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2324,6 +2513,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2339,6 +2531,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2370,6 +2565,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledrapidfire < 5)
                     {
                         ununsettledrapidfire++;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -2377,6 +2574,8 @@ public class CustomController : MonoBehaviour
                     if (ununsettledrapidfire > minimumunununsettledrapidfire)
                     {
                         ununsettledrapidfire--;
+
+                        audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
@@ -2441,6 +2640,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2449,6 +2651,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2464,6 +2669,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2530,6 +2738,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2538,6 +2749,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2553,6 +2767,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2623,6 +2840,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2631,6 +2851,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2646,6 +2869,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2703,7 +2929,7 @@ public class CustomController : MonoBehaviour
                         {
                             yes.color = Color.white;
                             no.color = Color.gray;
-                            //強化をするか選択
+                            //強化を確定
                             if (Input.GetKeyDown(KeyCode.Return))
                             {
                                 if (GameController.Instance.score >= consumptionPoint)
@@ -2720,6 +2946,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2728,6 +2957,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2743,6 +2975,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2821,6 +3056,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestion.SetActive(false);
 
                                     strengtheningQuestionnumber = 0;
+
+                                    //強化確定時の音
+                                    audioSource.PlayOneShot(sound[2]);
                                 }
 
                                 //ポイント不足
@@ -2829,6 +3067,9 @@ public class CustomController : MonoBehaviour
                                     strengtheningQuestionnumber = 0;
 
                                     shortagePointImage.SetActive(true);
+
+                                    //No選択時の音
+                                    audioSource.PlayOneShot(sound[3]);
                                 }
                             }
                         }
@@ -2844,6 +3085,9 @@ public class CustomController : MonoBehaviour
                                 strengtheningQuestion.SetActive(false);
 
                                 strengtheningQuestionnumber = 0;
+
+                                //No選択時の音
+                                audioSource.PlayOneShot(sound[3]);
                             }
                         }
 
@@ -2870,7 +3114,7 @@ public class CustomController : MonoBehaviour
             }
         }
 
-        //親愛度レベル1
+        //親愛度の星表示
         for(int i = 0; i < GameController.Instance.intimacyLevel; i++)
         {
             intimacyStar[i].enabled = true;

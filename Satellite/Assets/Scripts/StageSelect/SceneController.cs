@@ -21,6 +21,11 @@ namespace Satellite.StageSelect
         public Image stage6;
         public Image back;
 
+        AudioSource audioSource;
+        public AudioClip[] sound;
+
+        //曲再生の判定
+        bool isAudioStart = false; 
         //どこを選択中か数値で管理
         int selectnumber = 0;
         int selectsecondnumber = 0;
@@ -36,6 +41,9 @@ namespace Satellite.StageSelect
             stage5.color = Color.gray;
             stage6.color = Color.gray;
             back.color = Color.gray;
+
+            //音コンポーネントの取得
+            audioSource = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -48,11 +56,15 @@ namespace Satellite.StageSelect
             if (Input.GetKeyDown(KeyCode.RightArrow)||dpv>0)
             {
                 selectnumber++;
+                //カーソル移動したとき音再生
+                audioSource.PlayOneShot(sound[0]);
             }
             //左矢印キーを押したときSelectnumberを減らす
             if (Input.GetKeyDown(KeyCode.LeftArrow)||dpv<0)
             {
                 selectnumber--;
+                //カーソル移動したとき音再生
+                audioSource.PlayOneShot(sound[0]);
             }
             //Selectnumberが5を越えた時0に戻す処理
             if (selectnumber > 5)
@@ -79,6 +91,16 @@ namespace Satellite.StageSelect
                 //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                 if (Input.GetKeyDown(KeyCode.Return)||Input.GetKeyDown("joystick button 1"))
                 {
+                    //決定時の音再生
+                    audioSource.PlayOneShot(sound[1]);
+
+                    isAudioStart = true;
+
+                    if (!audioSource.isPlaying && isAudioStart)
+                    {
+                        SceneManager.LoadScene("CharacterSelect");
+                    }
+                    //ホーム画面に遷移
                     SceneManager.LoadScene("CharacterSelect");
                 }
             }
