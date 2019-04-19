@@ -72,11 +72,7 @@ public class CustomController : MonoBehaviour
     public Image unsettledintimacyStar_fifth;
 
     //HPの星の画像
-    public Image hpStar_first;
-    public Image hpStar_second;
-    public Image hpStar_third;
-    public Image hpStar_fourth;
-    public Image hpStar_fifth;
+    public Image[] hpStar;
 
     //未確定のHPの星の画像
     public Image unsettledhpStar_first;
@@ -86,11 +82,7 @@ public class CustomController : MonoBehaviour
     public Image unsettledhpStar_fifth;
 
     //活動時間の星の画像
-    public Image activityTimeStar_first;
-    public Image activityTimeStar_second;
-    public Image activityTimeStar_third;
-    public Image activityTimeStar_fourth;
-    public Image activityTimeStar_fifth;
+    public Image[] activityTimeStar;
 
     //未確定の活動時間の星の画像
     public Image unsettledactivityTimeStar_first;
@@ -100,11 +92,7 @@ public class CustomController : MonoBehaviour
     public Image unsettledactivityTimeStar_fifth;
 
     //攻撃の星の画像
-    public Image attackStar_first;
-    public Image attackStar_second;
-    public Image attackStar_third;
-    public Image attackStar_fourth;
-    public Image attackStar_fifth;
+    public Image[] attackStar;
 
     //未確定の攻撃の星の画像
     public Image unsettledattackStar_first;
@@ -114,11 +102,7 @@ public class CustomController : MonoBehaviour
     public Image unsettledattackStar_fifth;
 
     //連射速度の星イメージ
-    public Image rapidfireStar_first;
-    public Image rapidfireStar_second;
-    public Image rapidfireStar_third;
-    public Image rapidfireStar_fourth;
-    public Image rapidfireStar_fifth;
+    public Image[] rapidfireStar;
 
     //未確定の連射速度の星イメージ
     public Image unsettledrapidfireStar_first;
@@ -178,11 +162,10 @@ public class CustomController : MonoBehaviour
         unsettledintimacyStar_fifth.enabled = false;
 
         //シーン開始時にHpの星を非表示
-        hpStar_first.enabled = false;
-        hpStar_second.enabled = false;
-        hpStar_third.enabled = false;
-        hpStar_fourth.enabled = false;
-        hpStar_fifth.enabled = false;
+        for (int i = 0; i < 5; i++)
+        {
+            hpStar[i].enabled = false;
+        }
 
         //シーン開始時に未確定のHpの星を非表示
         unsettledhpStar_first.enabled = false;
@@ -192,11 +175,10 @@ public class CustomController : MonoBehaviour
         unsettledhpStar_fifth.enabled = false;
 
         //シーン開始時に活動時間の星を非表示
-        activityTimeStar_first.enabled = false;
-        activityTimeStar_second.enabled = false;
-        activityTimeStar_third.enabled = false;
-        activityTimeStar_fourth.enabled = false;
-        activityTimeStar_fifth.enabled = false;
+        for (int i = 0; i < 5; i++)
+        {
+            activityTimeStar[i].enabled = false;
+        }
 
         //シーン開始時に未確定の活動時間の星を非表示
         unsettledactivityTimeStar_first.enabled = false;
@@ -206,11 +188,10 @@ public class CustomController : MonoBehaviour
         unsettledactivityTimeStar_fifth.enabled = false;
 
         //シーン開始時に攻撃の星を非表示
-        attackStar_first.enabled = false;
-        attackStar_second.enabled = false;
-        attackStar_third.enabled = false;
-        attackStar_fourth.enabled = false;
-        attackStar_fifth.enabled = false;
+        for (int i = 0; i < 5; i++)
+        {
+            attackStar[i].enabled = false;
+        }
 
         //シーン開始時に未確定の攻撃の星を非表示
         unsettledattackStar_first.enabled = false;
@@ -220,11 +201,10 @@ public class CustomController : MonoBehaviour
         unsettledattackStar_fifth.enabled = false;
 
         //シーン開始時に連射速度の星を非表示
-        rapidfireStar_first.enabled = false;
-        rapidfireStar_second.enabled = false;
-        rapidfireStar_third.enabled = false;
-        rapidfireStar_fourth.enabled = false;
-        rapidfireStar_fifth.enabled = false;
+        for (int i = 0; i < 5; i++)
+        {
+            rapidfireStar[i].enabled = false;
+        }
 
         //シーン開始時に未確定の連射速度の星を非表示
         unsettledrapidfireStar_first.enabled = false;
@@ -3132,39 +3112,10 @@ public class CustomController : MonoBehaviour
             unsettledintimacyStar_fifth.enabled = false;
         }
 
-        //Hpレベル1
-        if (GameController.Instance.hpLevel >= 1)
+        //Hpの星表示
+        for (int i = 0; i < GameController.Instance.hpLevel; i++)
         {
-            //星を表示
-            hpStar_first.enabled = true;
-
-            //Hpレベル2
-            if (GameController.Instance.hpLevel >= 2)
-            {
-                //星を表示
-                hpStar_second.enabled = true;
-
-                //Hpレベル3
-                if (GameController.Instance.hpLevel >= 3)
-                {
-                    //星を表示
-                    hpStar_third.enabled = true;
-
-                    //Hpレベル4
-                    if (GameController.Instance.hpLevel >= 4)
-                    {
-                        //星を表示
-                        hpStar_fourth.enabled = true;
-
-                        //Hpレベル5
-                        if (GameController.Instance.hpLevel >= 5)
-                        {
-                            //星を表示
-                            hpStar_fifth.enabled = true;
-                        }
-                    }
-                }
-            }
+            hpStar[i].enabled = true;
         }
 
         //HPを選択していないときに未確定の星の画像を非表示
@@ -3179,39 +3130,10 @@ public class CustomController : MonoBehaviour
             unsettledhpStar_fifth.enabled = false;
         }
 
-        //活動時間レベル1
-        if (GameController.Instance.activityTimeLevel >= 1)
+        //活動時間の星表示
+        for (int i = 0; i < GameController.Instance.activityTimeLevel; i++)
         {
-            //星を表示
-            activityTimeStar_first.enabled = true;
-
-            //活動時間レベル2
-            if (GameController.Instance.activityTimeLevel >= 2)
-            {
-                //星を表示
-                activityTimeStar_second.enabled = true;
-
-                //活動時間レベル3
-                if (GameController.Instance.activityTimeLevel >= 3)
-                {
-                    //星を表示
-                    activityTimeStar_third.enabled = true;
-
-                    //活動時間レベル4
-                    if (GameController.Instance.activityTimeLevel >= 4)
-                    {
-                        //星を表示
-                        activityTimeStar_fourth.enabled = true;
-
-                        //活動時間レベル5
-                        if (GameController.Instance.activityTimeLevel >= 5)
-                        {
-                            //星を表示
-                            activityTimeStar_fifth.enabled = true;
-                        }
-                    }
-                }
-            }
+            activityTimeStar[i].enabled = true;
         }
 
         //活動時間を選択していないときに未確定の星の画像を非表示
@@ -3226,39 +3148,10 @@ public class CustomController : MonoBehaviour
             unsettledactivityTimeStar_fifth.enabled = false;
         }
 
-        //攻撃レベル1
-        if (GameController.Instance.attackLevel >= 1)
+        //攻撃の星表示
+        for (int i = 0; i < GameController.Instance.attackLevel; i++)
         {
-            //星を表示
-            attackStar_first.enabled = true;
-
-            //攻撃レベル2
-            if (GameController.Instance.attackLevel >= 2)
-            {
-                //星を表示
-                attackStar_second.enabled = true;
-
-                //攻撃レベル3
-                if (GameController.Instance.attackLevel >= 3)
-                {
-                    //星を表示
-                    attackStar_third.enabled = true;
-
-                    //攻撃レベル4
-                    if (GameController.Instance.attackLevel >= 4)
-                    {
-                        //星を表示
-                        attackStar_fourth.enabled = true;
-
-                        //攻撃レベル5
-                        if (GameController.Instance.attackLevel >= 5)
-                        {
-                            //星を表示
-                            attackStar_fifth.enabled = true;
-                        }
-                    }
-                }
-            }
+            attackStar[i].enabled = true;
         }
 
         //攻撃を選択していないときに未確定の星の画像を非表示
@@ -3273,39 +3166,10 @@ public class CustomController : MonoBehaviour
             unsettledattackStar_fifth.enabled = false;
         }
 
-        //連射速度レベル1
-        if (GameController.Instance.rapidfireLevel >= 1)
+        //連射速度の星表示
+        for (int i = 0; i < GameController.Instance.rapidfireLevel; i++)
         {
-            //星を表示
-            rapidfireStar_first.enabled = true;
-
-            //連射速度レベル2
-            if (GameController.Instance.rapidfireLevel >= 2)
-            {
-                //星を表示
-                rapidfireStar_second.enabled = true;
-
-                //連射速度レベル3
-                if (GameController.Instance.rapidfireLevel >= 3)
-                {
-                    //星の表示
-                    rapidfireStar_third.enabled = true;
-
-                    //連射速度レベル4
-                    if (GameController.Instance.rapidfireLevel >= 4)
-                    {
-                        //星の表示
-                        rapidfireStar_fourth.enabled = true;
-
-                        //連射速度レベル5
-                        if (GameController.Instance.rapidfireLevel >= 5)
-                        {
-                            //星の表示
-                            rapidfireStar_fifth.enabled = true;
-                        }
-                    }
-                }
-            }
+            rapidfireStar[i].enabled = true;
         }
 
         //連射速度を選択していないときに未確定の星の画像を非表示
