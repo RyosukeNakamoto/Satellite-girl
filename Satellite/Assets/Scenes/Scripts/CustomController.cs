@@ -316,11 +316,6 @@ public class CustomController : MonoBehaviour
         {
             //選択中の画像表示
             selectedIntimacyImage.enabled = true;
-            selectedHpImage.enabled = false;
-            selectedActivityTimeImage.enabled = false;
-            selectedAttackImage.enabled = false;
-            selectedRapidfireImage.enabled = false;
-            sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -863,17 +858,16 @@ public class CustomController : MonoBehaviour
             }
                     
         }
+        else
+        {
+            selectedIntimacyImage.enabled = false;
+        }
 
         //Hp選択中
         if (selectNumber == 1)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = false;
             selectedHpImage.enabled = true;
-            selectedActivityTimeImage.enabled = false;
-            selectedAttackImage.enabled = false;
-            selectedRapidfireImage.enabled = false;
-            sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1416,17 +1410,16 @@ public class CustomController : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            selectedHpImage.enabled = false;
+        }
 
         //活動時間選択中
         if (selectNumber == 2)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = false;
-            selectedHpImage.enabled = false;
             selectedActivityTimeImage.enabled = true;
-            selectedAttackImage.enabled = false;
-            selectedRapidfireImage.enabled = false;
-            sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1970,17 +1963,17 @@ public class CustomController : MonoBehaviour
                 }
             }
         }
+        //選択中の画像非表示
+        else
+        {
+            selectedActivityTimeImage.enabled = false;
+        }
 
         //攻撃選択中
         if (selectNumber == 3)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = false;
-            selectedHpImage.enabled = false;
-            selectedActivityTimeImage.enabled = false;
             selectedAttackImage.enabled = true;
-            selectedRapidfireImage.enabled = false;
-            sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -2522,16 +2515,17 @@ public class CustomController : MonoBehaviour
             }
         }
 
+        else
+        {
+            //選択中の画像非表示
+            selectedAttackImage.enabled = false;
+        }
+
         //連射速度選択中
         if (selectNumber == 4)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = false;
-            selectedHpImage.enabled = false;
-            selectedActivityTimeImage.enabled = false;
-            selectedAttackImage.enabled = false;
             selectedRapidfireImage.enabled = true;
-            sortieImage.color = Color.gray;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -3075,23 +3069,66 @@ public class CustomController : MonoBehaviour
                 }
             }
         }
+        //選択中の画像非表示
+        else
+        {
+            selectedRapidfireImage.enabled = false;
+        }
 
         //出撃選択中
         if (selectNumber == 5)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = false;
-            selectedHpImage.enabled = false;
-            selectedActivityTimeImage.enabled = false;
-            selectedAttackImage.enabled = false;
-            selectedRapidfireImage.enabled = false;
             sortieImage.color = Color.white;
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
             {
-                SceneManager.LoadScene("Stage1");
+                switch (GameController.Instance.stage)
+                {
+                    case 0:
+                        SceneManager.LoadScene("Stage1");
+                        break;
+                    case 1:
+                        SceneManager.LoadScene("Stage2");
+                        break;
+                    case 2:
+                        SceneManager.LoadScene("Stage3");
+                        break;
+                    case 3:
+                        SceneManager.LoadScene("Stage4");
+                        break;
+                    case 4:
+                        SceneManager.LoadScene("Stage5");
+                        break;
+                    case 5:
+                        SceneManager.LoadScene("Stage6");
+                        break;
+                    case 6:
+                        SceneManager.LoadScene("Stage7");
+                        break;
+                    case 7:
+                        SceneManager.LoadScene("Stage8");
+                        break;
+                    case 8:
+                        SceneManager.LoadScene("Stage9");
+                        break;
+                    case 9:
+                        SceneManager.LoadScene("Stage10");
+                        break;
+                    case 10:
+                        SceneManager.LoadScene("Stage11");
+                        break;
+                    case 11:
+                        SceneManager.LoadScene("Stage12");
+                        break;
+                }
             }
+        }
+        else
+        {
+            //選択中の画像非表示
+            sortieImage.color = Color.gray;
         }
 
         //親愛度の星表示
