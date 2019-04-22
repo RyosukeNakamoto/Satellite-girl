@@ -2,34 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy2 : Enemy
 {
-
-    public int Hp = 0;
-
-    // メインカメラを指定
-    private const string cameraTagName = "MainCamera";
-    // 表示確認(最初はfalse)
-    private bool isRendered = false;
-    // 攻撃開始までの時間
-    public float enemytime = 1.0f;
-    // 時間処理計算
-    public float timer;
-    // 一回だけ弾を撃つための変数
-    bool Attack = false;
-    // 弾を指定
-    public GameObject enemyBullet;
-    // アイテムオブジェクトを指定
-    public GameObject itemObj;
-    // カメラオブジェクト
-    GameObject cameraObj;
     // サウンドを指定
     public AudioClip[] sound;
     // サウンドの変数
     AudioSource audioSource;
-    // カメラの変数
-    public Camera camera;
-
 
     // Start is called before the first frame update
     void Start()
@@ -43,38 +21,50 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // HPが0になったら死ぬ
         if (Hp <= 0)
         {
             Death();
         }
+
         // カメラの範囲に入ったら呼び出されます
         if (isRendered)
         {
+            // 時間のカウント
             timer += Time.deltaTime;
+            // enemytimeのタイムを経過したか
             if (enemytime <= timer)
             {
                 // 弾が打てる状態
                 if (!Attack)
                 {
-                    bullet();
-                    // サウンドの再生
-
+                    // 画面の上半分にいるとき
+                    if (transform.position.y >= 0)
+                    {
+                        bulletUp();
+                    }
+                    // 画面の上半分にいるとき
+                    if (transform.position.y <= 0)
+                    {
+                        bulletUnder();
+                    }
                     // 弾を打たなくする
                     Attack = true;
                 }
-            }
+            }            
         }
-
         // カメラの範囲から再度外れたらfalse
         isRendered = false;
+        // カメラより左なら消滅
         if (!isRendered)
         {
             if (camera.transform.position.x - 14 >= gameObject.transform.position.x)
             {
-                Destroy(gameObject);                
+                Destroy(gameObject);
             }
         }
     }
+
     // デブリが消滅する
     public void Death()
     {
@@ -85,17 +75,28 @@ public class Enemy : MonoBehaviour
         // アイテムを表示
         Instantiate(itemObj, transform.position, itemObj.transform.rotation);
     }
-    // 弾を表示する
-    void bullet()
+
+    // 弾を下に打つ
+    void bulletUp()
     {
         timer = 0.0f;
         Vector3 position = transform.position;
         position.x += -1;
-
-        var bullet = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
-        bullet.transform.Rotate(0, 0, 180);
-
-        audioSource.PlayOneShot(sound[0]);
+        var bullet1 = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
+        bullet1.transform.Rotate(0, 0, 180);
+        var bullet2 = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
+        bullet2.transform.Rotate(0, 0, 225);
+    }
+    // 弾を上に打つ
+    void bulletUnder()
+    {
+        timer = 0.0f;
+        Vector3 position = transform.position;
+        position.x += -1;
+        var bullet1 = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
+        bullet1.transform.Rotate(0, 0, 180);
+        var bullet2 = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
+        bullet2.transform.Rotate(0, 0, 135);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,12 +107,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-
-    }
-
     // カメラの表示範囲に入ったら動作します
     private void OnWillRenderObject()
     {
@@ -120,7 +115,5 @@ public class Enemy : MonoBehaviour
         {
             isRendered = true;
         }
-    }
-
-
+    }        
 }
