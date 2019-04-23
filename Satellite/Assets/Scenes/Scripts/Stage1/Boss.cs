@@ -22,16 +22,13 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.gameObject.SetActive(false);
-
+        // ボスのMAXHPスライダー
         hpslider.maxValue = maxhp;
+        // ボスのHPスライダー
         hpslider.value = hp;
 
         clearImage.SetActive(false);
-        hpslider.enabled = false;
-
-        
-        
+        hpslider.enabled = false;        
     }
 
     // Update is called once per frame
