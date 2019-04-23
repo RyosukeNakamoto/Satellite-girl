@@ -51,7 +51,7 @@ public class EnemyGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(transform.childCount);
+        //Debug.Log(transform.childCount);
         // ジェネレート数
         int ObjectCount = transform.childCount;
         if (ObjectCount==0)
