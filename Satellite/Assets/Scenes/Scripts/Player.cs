@@ -177,11 +177,20 @@ public class Player : MonoBehaviour
             activsSwitch = false;
             if (!activsSwitch)
             {
-                // 活動ゲージの加算
-                activ += 0.1f;
-                activTimeSlider.value = activ;
+                if (activTimeSlider.value < activTimeSlider.maxValue)
+                {
+                    // 活動ゲージの加算
+                    activ += 0.1f;
+                    activTimeSlider.value = activ;
+                }
+                else
+                {
+                    activTimeSlider.value = activTimeSlider.maxValue;
+                }
             }
         }
+        
+        Debug.Log(activTimeSlider.value);
     }
 
     //プレイヤーの移動制限関数
