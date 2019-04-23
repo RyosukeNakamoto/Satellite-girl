@@ -21,16 +21,16 @@ public class CustomController : MonoBehaviour
     int minimumUnunsettledHp = 0;
 
     //未確定の活動時間の星の画像の表示を数値で管理
-    int ununsettledactivityTime = 0;
-    int minimumunununsettledactivityTime = 0;
+    int ununsettledActivityTime = 0;
+    int minimumUnununsettledActivityTime = 0;
 
     //未確定の攻撃の星の画像の表示を数値で管理
-    int ununsettledattack = 0;
-    int minimumunununsettledattack = 0;
+    int ununsettledAttack = 0;
+    int minimumUnununsettledAttack = 0;
 
     //未確定の連射速度の星の画像の表示を数値で管理
-    int ununsettledrapidfire = 0;
-    int minimumunununsettledrapidfire = 0;
+    int ununsettledRapidfire = 0;
+    int minimumUnununsettledRapidfire = 0;
 
     //親愛度
     public Image selectedIntimacyImage;
@@ -65,51 +65,31 @@ public class CustomController : MonoBehaviour
     public Image[] intimacyStar;
 
     //未確定の親愛度の星の画像
-    public Image unsettledintimacyStar_first;
-    public Image unsettledintimacyStar_second;
-    public Image unsettledintimacyStar_third;
-    public Image unsettledintimacyStar_fourth;
-    public Image unsettledintimacyStar_fifth;
+    public Image[] unsettledIntimacyStar;
 
     //HPの星の画像
     public Image[] hpStar;
 
     //未確定のHPの星の画像
-    public Image unsettledhpStar_first;
-    public Image unsettledhpStar_second;
-    public Image unsettledhpStar_third;
-    public Image unsettledhpStar_fourth;
-    public Image unsettledhpStar_fifth;
+    public Image[] unsettledHpStar;
 
     //活動時間の星の画像
     public Image[] activityTimeStar;
 
     //未確定の活動時間の星の画像
-    public Image unsettledactivityTimeStar_first;
-    public Image unsettledactivityTimeStar_second;
-    public Image unsettledactivityTimeStar_third;
-    public Image unsettledactivityTimeStar_fourth;
-    public Image unsettledactivityTimeStar_fifth;
+    public Image[] unsettledActivityTimeStar;
 
     //攻撃の星の画像
     public Image[] attackStar;
 
     //未確定の攻撃の星の画像
-    public Image unsettledattackStar_first;
-    public Image unsettledattackStar_second;
-    public Image unsettledattackStar_third;
-    public Image unsettledattackStar_fourth;
-    public Image unsettledattackStar_fifth;
+    public Image[] unsettledAttackStar;
 
     //連射速度の星イメージ
     public Image[] rapidfireStar;
 
     //未確定の連射速度の星イメージ
-    public Image unsettledrapidfireStar_first;
-    public Image unsettledrapidfireStar_second;
-    public Image unsettledrapidfireStar_third;
-    public Image unsettledrapidfireStar_fourth;
-    public Image unsettledrapidfireStar_fifth;
+    public Image[] unsettledRapidfireStar;
 
     //強化するか選択するオブジェクト
     public GameObject strengtheningQuestion;
@@ -147,71 +127,26 @@ public class CustomController : MonoBehaviour
 
         //シーン開始時に選択イメージをグレーに
         sortieImage.color = Color.gray;
-        
-        //シーン開始時に親愛度の星の画像をを非表示
-        for(int i = 0; i < 5; i++)
+
+        //シーン開始時に星の画像、未確定の星の画像を非表示
+        for (int i = 0; i < 5; i++)
         {
+            //親愛度
             intimacyStar[i].enabled = false;
-        }
-
-        //シーン開始時に未確定の親愛度の星の画像を非表示
-        unsettledintimacyStar_first.enabled = false;
-        unsettledintimacyStar_second.enabled = false;
-        unsettledintimacyStar_third.enabled = false;
-        unsettledintimacyStar_fourth.enabled = false;
-        unsettledintimacyStar_fifth.enabled = false;
-
-        //シーン開始時にHpの星を非表示
-        for (int i = 0; i < 5; i++)
-        {
+            unsettledIntimacyStar[i].enabled = false;
+            //HP
             hpStar[i].enabled = false;
-        }
-
-        //シーン開始時に未確定のHpの星を非表示
-        unsettledhpStar_first.enabled = false;
-        unsettledhpStar_second.enabled = false;
-        unsettledhpStar_third.enabled = false;
-        unsettledhpStar_fourth.enabled = false;
-        unsettledhpStar_fifth.enabled = false;
-
-        //シーン開始時に活動時間の星を非表示
-        for (int i = 0; i < 5; i++)
-        {
+            unsettledHpStar[i].enabled = false;
+            //活動時間
             activityTimeStar[i].enabled = false;
-        }
-
-        //シーン開始時に未確定の活動時間の星を非表示
-        unsettledactivityTimeStar_first.enabled = false;
-        unsettledactivityTimeStar_second.enabled = false;
-        unsettledactivityTimeStar_third.enabled = false;
-        unsettledactivityTimeStar_fourth.enabled = false;
-        unsettledactivityTimeStar_fifth.enabled = false;
-
-        //シーン開始時に攻撃の星を非表示
-        for (int i = 0; i < 5; i++)
-        {
+            unsettledActivityTimeStar[i].enabled = false;
+            //攻撃
             attackStar[i].enabled = false;
-        }
-
-        //シーン開始時に未確定の攻撃の星を非表示
-        unsettledattackStar_first.enabled = false;
-        unsettledattackStar_second.enabled = false;
-        unsettledattackStar_third.enabled = false;
-        unsettledattackStar_fourth.enabled = false;
-        unsettledattackStar_fifth.enabled = false;
-
-        //シーン開始時に連射速度の星を非表示
-        for (int i = 0; i < 5; i++)
-        {
+            unsettledAttackStar[i].enabled = false;
+            //連射速度
             rapidfireStar[i].enabled = false;
+            unsettledRapidfireStar[i].enabled = false;
         }
-
-        //シーン開始時に未確定の連射速度の星を非表示
-        unsettledrapidfireStar_first.enabled = false;
-        unsettledrapidfireStar_second.enabled = false;
-        unsettledrapidfireStar_third.enabled = false;
-        unsettledrapidfireStar_fourth.enabled = false;
-        unsettledrapidfireStar_fifth.enabled = false;
 
         //シーン開始時に強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
@@ -241,7 +176,7 @@ public class CustomController : MonoBehaviour
         possessionPointText.text = (GameController.Instance.score).ToString();
 
         //強化の確定を選択する画面が表示中にSelectNumberの数値が変更されないようにする
-        if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
+        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
         {
             //上矢印キーを押したときSelectNumberを減らす
             if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
@@ -299,14 +234,14 @@ public class CustomController : MonoBehaviour
             strengtheningQuestion.SetActive(false);
 
             //キーを押したときに非表示
-            if (Input.GetKeyDown(KeyCode.Backspace)|| Input.GetKeyDown("joystick button 0"))
+            if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown("joystick button 0"))
             {
                 shortagePointImage.SetActive(false);
             }
         }
 
         //ステージ選択画面に戻る
-        if(Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown("joystick button 0"))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
         {
             SceneManager.LoadScene("StageSelect");
         }
@@ -321,7 +256,7 @@ public class CustomController : MonoBehaviour
             consumptionPointText.text = "0";
 
             //強化するか尋ねるウインドウが非表示の時に処理
-            if (!strengtheningQuestion.activeSelf&&!shortagePointImage.activeSelf)
+            if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //親愛度選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -344,19 +279,13 @@ public class CustomController : MonoBehaviour
                 }
             }
 
-            if (ununsettledIntimacy == 0)
-            {
-                unsettledintimacyStar_first.enabled = false;
-            }
-
             //未確定の親愛度のレベル1の強化選択状態
-            if (ununsettledIntimacy == 1)
+            if (ununsettledIntimacy >= 1)
             {
-                unsettledintimacyStar_first.enabled = true;
-                unsettledintimacyStar_second.enabled = false;
-                unsettledintimacyStar_third.enabled = false;
-                unsettledintimacyStar_fourth.enabled = false;
-                unsettledintimacyStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledIntimacyStar[0].enabled = true;
+                //消費ポイントの変更
+                consumptionPoint = Level1;
 
                 if (GameController.Instance.intimacyLevel == 0)
                 {
@@ -378,77 +307,19 @@ public class CustomController : MonoBehaviour
                         strengtheningQuestion.SetActive(true);
                     }
 
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= Level1)
-                                {
-                                    //ゲームコントローラーの親愛度レベルを1にする
-                                    GameController.Instance.intimacyLevel = 1;
-
-                                    minimumUnunsettledIntimacy = 1;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= Level1;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[1]);
-                                }
-
-                                //強化するポイントが不足していた場合に画像表示
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledIntimacyStar[0].enabled = false;
             }
 
             //未確定の親愛度のレベル2の強化選択状態
-            if (ununsettledIntimacy == 2)
+            if (ununsettledIntimacy >= 2)
             {
-                unsettledintimacyStar_first.enabled = true;
-                unsettledintimacyStar_second.enabled = true;
-                unsettledintimacyStar_third.enabled = false;
-                unsettledintimacyStar_fourth.enabled = false;
-                unsettledintimacyStar_fifth.enabled = false;
-
+                //未確定の星表示
+                unsettledIntimacyStar[1].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledIntimacy < 2)
@@ -473,7 +344,7 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
+                    /*
                     //強化するか尋ねるウインドウ表示状態
                     if (strengtheningQuestion.activeSelf)
                     {
@@ -532,20 +403,20 @@ public class CustomController : MonoBehaviour
                             }
                         }
 
-                    }
+                    }*/
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledIntimacyStar[1].enabled = false;
             }
 
             //未確定の親愛度レベル3の強化選択状態
-            if (ununsettledIntimacy == 3)
+            if (ununsettledIntimacy >= 3)
             {
-                unsettledintimacyStar_first.enabled = true;
-                unsettledintimacyStar_second.enabled = true;
-                unsettledintimacyStar_third.enabled = true;
-                unsettledintimacyStar_fourth.enabled = false;
-                unsettledintimacyStar_fifth.enabled = false;
-
-               
+                //未確定の星表示
+                unsettledIntimacyStar[2].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledIntimacy < 3)
@@ -574,80 +445,19 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの親愛度レベルを3にする
-                                    GameController.Instance.intimacyLevel = 3;
-
-                                    minimumUnunsettledIntimacy = 3;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[1]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledIntimacyStar[2].enabled = false;
             }
 
             //未確定の親愛度レベル4の強化選択状態
-            if (ununsettledIntimacy == 4)
+            if (ununsettledIntimacy >= 4)
             {
-                unsettledintimacyStar_first.enabled = true;
-                unsettledintimacyStar_second.enabled = true;
-                unsettledintimacyStar_third.enabled = true;
-                unsettledintimacyStar_fourth.enabled = true;
-                unsettledintimacyStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledIntimacyStar[3].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledIntimacy < 4)
@@ -680,81 +490,19 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの親愛度レベルを4にする
-                                    GameController.Instance.intimacyLevel = 4;
-
-                                    minimumUnunsettledIntimacy = 4;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[1]);
-
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledIntimacyStar[3].enabled = false;
             }
 
             //未確定の親愛度レベル5の強化選択状態
             if (ununsettledIntimacy == 5)
             {
-                unsettledintimacyStar_first.enabled = true;
-                unsettledintimacyStar_second.enabled = true;
-                unsettledintimacyStar_third.enabled = true;
-                unsettledintimacyStar_fourth.enabled = true;
-                unsettledintimacyStar_fifth.enabled = true;
+                //未確定の星表示
+                unsettledIntimacyStar[4].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledIntimacy < 5)
@@ -790,76 +538,77 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの親愛度レベルを5にする
-                                    GameController.Instance.intimacyLevel = 5;
-
-                                    minimumUnunsettledIntimacy = 5;
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[1]);
-
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
             }
-                    
+            else
+            {
+                //未確定の星非表示
+                unsettledIntimacyStar[4].enabled = false;
+            }
+            //強化するか尋ねるウインドウ表示状態
+            if (strengtheningQuestion.activeSelf)
+            {
+
+                //Yes選択状態
+                if (strengtheningQuestionnumber == 1)
+                {
+                    yes.color = Color.white;
+                    no.color = Color.gray;
+                    //強化を確定
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        if (GameController.Instance.score >= Level1)
+                        {
+                            //ゲームコントローラーの親愛度レベルを変更する
+                            GameController.Instance.intimacyLevel = ununsettledIntimacy;
+
+                            minimumUnunsettledIntimacy = ununsettledIntimacy;
+
+                            //ポイントを消費
+                            GameController.Instance.score -= consumptionPoint;
+
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            strengtheningQuestionnumber = 0;
+
+                            //強化確定時の音
+                            audioSource.PlayOneShot(sound[1]);
+                        }
+
+                        //強化するポイントが不足していた場合に画像表示
+                        else
+                        {
+                            strengtheningQuestionnumber = 0;
+
+                            shortagePointImage.SetActive(true);
+                        }
+                    }
+                }
+
+                //No選択状態
+                if (strengtheningQuestionnumber == 2)
+                {
+                    yes.color = Color.gray;
+                    no.color = Color.white;
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        //強化するか尋ねるウインドウを非表示
+                        strengtheningQuestion.SetActive(false);
+
+                        strengtheningQuestionnumber = 0;
+
+                        //No選択時の音
+                        audioSource.PlayOneShot(sound[3]);
+                    }
+                }
+
+            }
+
         }
         else
         {
+            //選択イメージの非表示
             selectedIntimacyImage.enabled = false;
         }
 
@@ -896,19 +645,11 @@ public class CustomController : MonoBehaviour
                 }
             }
 
-            if (ununsettledIntimacy == 0)
-            {
-                unsettledintimacyStar_first.enabled = false;
-            }
-
             //未確定のHPのレベル1の強化選択状態
-            if (ununsettledHp == 1)
+            if (ununsettledHp >= 1)
             {
-                unsettledhpStar_first.enabled = true;
-                unsettledhpStar_second.enabled = false;
-                unsettledhpStar_third.enabled = false;
-                unsettledhpStar_fourth.enabled = false;
-                unsettledhpStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledHpStar[0].enabled = true;
 
                 if (GameController.Instance.hpLevel == 0)
                 {
@@ -929,80 +670,19 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= Level1)
-                                {
-                                    //ゲームコントローラーのHPレベルを1にする
-                                    GameController.Instance.hpLevel = 1;
-
-                                    minimumUnunsettledHp = 1;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= Level1;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledHpStar[0].enabled = false;
             }
 
             //未確定のHPのレベル2の強化選択状態
-            if (ununsettledHp == 2)
+            if (ununsettledHp >= 2)
             {
-                unsettledhpStar_first.enabled = true;
-                unsettledhpStar_second.enabled = true;
-                unsettledhpStar_third.enabled = false;
-                unsettledhpStar_fourth.enabled = false;
-                unsettledhpStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledHpStar[1].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 2)
@@ -1027,80 +707,19 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーのHPレベルを2にする
-                                    GameController.Instance.hpLevel = 2;
-
-                                    minimumUnunsettledHp = 2;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星表示
+                unsettledHpStar[1].enabled = false;
             }
 
             //未確定のHPのレベル3の強化選択状態
-            if (ununsettledHp == 3)
+            if (ununsettledHp >= 3)
             {
-                unsettledhpStar_first.enabled = true;
-                unsettledhpStar_second.enabled = true;
-                unsettledhpStar_third.enabled = true;
-                unsettledhpStar_fourth.enabled = false;
-                unsettledhpStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledHpStar[2].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 3)
@@ -1129,80 +748,18 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化をするか選択
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーのHPレベルを3にする
-                                    GameController.Instance.hpLevel = 3;
-
-                                    minimumUnunsettledHp = 3;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星表示
+                unsettledHpStar[2].enabled = false;
             }
 
             //未確定のHPのレベル4の強化選択状態
-            if (ununsettledHp == 4)
+            if (ununsettledHp >= 4)
             {
-                unsettledhpStar_first.enabled = true;
-                unsettledhpStar_second.enabled = true;
-                unsettledhpStar_third.enabled = true;
-                unsettledhpStar_fourth.enabled = true;
-                unsettledhpStar_fifth.enabled = false;
+                unsettledHpStar[3].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 4)
@@ -1235,80 +792,19 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーのHPレベルを4にする
-                                    GameController.Instance.hpLevel = 4;
-
-                                    minimumUnunsettledHp = 4;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledHpStar[3].enabled = false;
             }
 
             //未確定のHPのレベル5の強化選択状態
             if (ununsettledHp == 5)
             {
-                unsettledhpStar_first.enabled = true;
-                unsettledhpStar_second.enabled = true;
-                unsettledhpStar_third.enabled = true;
-                unsettledhpStar_fourth.enabled = true;
-                unsettledhpStar_fifth.enabled = true;
+                //未確定の星表示
+                unsettledHpStar[4].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 5)
@@ -1344,70 +840,74 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
+                }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledHpStar[4].enabled = false;
+            }
+            //強化するか尋ねるウインドウ表示状態
+            if (strengtheningQuestion.activeSelf)
+            {
 
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
+                //Yes選択状態
+                if (strengtheningQuestionnumber == 1)
+                {
+                    yes.color = Color.white;
+                    no.color = Color.gray;
+                    //強化を確定
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
+                        if (GameController.Instance.score >= consumptionPoint)
                         {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーのHPレベルを5にする
-                                    GameController.Instance.hpLevel = 5;
+                            //ゲームコントローラーのHPレベルを変更する
+                            GameController.Instance.hpLevel = ununsettledHp;
 
-                                    minimumUnunsettledHp = 5;
+                            minimumUnunsettledHp = ununsettledHp;
 
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
+                            //ポイントを消費
+                            GameController.Instance.score -= consumptionPoint;
 
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
 
-                                    strengtheningQuestionnumber = 0;
+                            strengtheningQuestionnumber = 0;
 
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
+                            //強化確定時の音
+                            audioSource.PlayOneShot(sound[2]);
                         }
 
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
+                        //ポイント不足
+                        else
                         {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                            strengtheningQuestionnumber = 0;
 
-                                strengtheningQuestionnumber = 0;
+                            shortagePointImage.SetActive(true);
 
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
+                            //No選択時の音
+                            audioSource.PlayOneShot(sound[3]);
                         }
-
                     }
                 }
+
+                //No選択状態
+                if (strengtheningQuestionnumber == 2)
+                {
+                    yes.color = Color.gray;
+                    no.color = Color.white;
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        //強化するか尋ねるウインドウを非表示
+                        strengtheningQuestion.SetActive(false);
+
+                        strengtheningQuestionnumber = 0;
+
+                        //No選択時の音
+                        audioSource.PlayOneShot(sound[3]);
+                    }
+                }
+
             }
         }
         else
@@ -1430,38 +930,32 @@ public class CustomController : MonoBehaviour
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    if (ununsettledactivityTime < 5)
+                    if (ununsettledActivityTime < 5)
                     {
-                        ununsettledactivityTime++;
+                        ununsettledActivityTime++;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (ununsettledactivityTime > minimumunununsettledactivityTime)
+                    if (ununsettledActivityTime > minimumUnununsettledActivityTime)
                     {
-                        ununsettledactivityTime--;
+                        ununsettledActivityTime--;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
 
-            //何も選択していないとき星を非表示
-            if (ununsettledactivityTime == 0)
-            {
-                unsettledactivityTimeStar_first.enabled = false;
-            }
-
             //未確定の活動時間のレベル1の強化選択状態
-            if (ununsettledactivityTime == 1)
+            if (ununsettledActivityTime >= 1)
             {
-                unsettledactivityTimeStar_first.enabled = true;
-                unsettledactivityTimeStar_second.enabled = false;
-                unsettledactivityTimeStar_third.enabled = false;
-                unsettledactivityTimeStar_fourth.enabled = false;
-                unsettledactivityTimeStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledActivityTimeStar[0].enabled = true;
+
+                //消費ポイントを変更
+                consumptionPoint = Level1;
 
                 if (GameController.Instance.activityTimeLevel == 0)
                 {
@@ -1475,90 +969,29 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledactivityTime < 1)
+                if (minimumUnununsettledActivityTime < 1)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= Level1)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを1にする
-                                    GameController.Instance.activityTimeLevel = 1;
-
-                                    minimumunununsettledactivityTime = 1;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= Level1;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledActivityTimeStar[0].enabled = false;
             }
 
             //未確定の活動時間のレベル2の強化選択状態
-            if (ununsettledactivityTime == 2)
+            if (ununsettledActivityTime >= 2)
             {
-                unsettledactivityTimeStar_first.enabled = true;
-                unsettledactivityTimeStar_second.enabled = true;
-                unsettledactivityTimeStar_third.enabled = false;
-                unsettledactivityTimeStar_fourth.enabled = false;
-                unsettledactivityTimeStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledActivityTimeStar[1].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledactivityTime < 2)
+                if (minimumUnununsettledActivityTime < 2)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.activityTimeLevel)
@@ -1580,83 +1013,22 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを2にする
-                                    GameController.Instance.activityTimeLevel = 2;
-
-                                    minimumunununsettledactivityTime = 2;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledActivityTimeStar[1].enabled = false;
             }
 
             //未確定の活動時間のレベル3の強化選択状態
-            if (ununsettledactivityTime == 3)
+            if (ununsettledActivityTime >= 3)
             {
-                unsettledactivityTimeStar_first.enabled = true;
-                unsettledactivityTimeStar_second.enabled = true;
-                unsettledactivityTimeStar_third.enabled = true;
-                unsettledactivityTimeStar_fourth.enabled = false;
-                unsettledactivityTimeStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledActivityTimeStar[2].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledactivityTime < 3)
+                if (minimumUnununsettledActivityTime < 3)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.activityTimeLevel)
@@ -1682,83 +1054,22 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを3にする
-                                    GameController.Instance.activityTimeLevel = 3;
-
-                                    minimumunununsettledactivityTime = 3;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledActivityTimeStar[2].enabled = false;
             }
 
             //未確定の活動時間のレベル4の強化選択状態
-            if (ununsettledactivityTime == 4)
+            if (ununsettledActivityTime >= 4)
             {
-                unsettledactivityTimeStar_first.enabled = true;
-                unsettledactivityTimeStar_second.enabled = true;
-                unsettledactivityTimeStar_third.enabled = true;
-                unsettledactivityTimeStar_fourth.enabled = true;
-                unsettledactivityTimeStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledActivityTimeStar[3].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledactivityTime < 4)
+                if (minimumUnununsettledActivityTime < 4)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.activityTimeLevel)
@@ -1788,82 +1099,21 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを4にする
-                                    GameController.Instance.activityTimeLevel = 4;
-
-                                    minimumunununsettledactivityTime = 4;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledActivityTimeStar[3].enabled = false;
             }
 
             //未確定の活動時間のレベル5の強化選択状態
-            if (ununsettledactivityTime == 5)
+            if (ununsettledActivityTime == 5)
             {
-                unsettledactivityTimeStar_second.enabled = true;
-                unsettledactivityTimeStar_third.enabled = true;
-                unsettledactivityTimeStar_fourth.enabled = true;
-                unsettledactivityTimeStar_fifth.enabled = true;
+                unsettledActivityTimeStar[4].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledactivityTime < 5)
+                if (minimumUnununsettledActivityTime < 5)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.activityTimeLevel)
@@ -1897,70 +1147,74 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
+                }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledActivityTimeStar[4].enabled = false;
+            }
+            //強化するか尋ねるウインドウ表示状態
+            if (strengtheningQuestion.activeSelf)
+            {
 
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
+                //Yes選択状態
+                if (strengtheningQuestionnumber == 1)
+                {
+                    yes.color = Color.white;
+                    no.color = Color.gray;
+                    //強化を確定
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
+                        if (GameController.Instance.score >= consumptionPoint)
                         {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを5にする
-                                    GameController.Instance.activityTimeLevel = 5;
+                            //ゲームコントローラーの活動時間レベルを変更する
+                            GameController.Instance.activityTimeLevel = ununsettledActivityTime;
 
-                                    minimumunununsettledactivityTime = 5;
+                            minimumUnununsettledActivityTime = ununsettledActivityTime;
 
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
+                            //ポイントを消費
+                            GameController.Instance.score -= consumptionPoint;
 
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
 
-                                    strengtheningQuestionnumber = 0;
+                            strengtheningQuestionnumber = 0;
 
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
+                            //強化確定時の音
+                            audioSource.PlayOneShot(sound[2]);
                         }
 
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
+                        //ポイント不足
+                        else
                         {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                            strengtheningQuestionnumber = 0;
 
-                                strengtheningQuestionnumber = 0;
+                            shortagePointImage.SetActive(true);
 
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
+                            //No選択時の音
+                            audioSource.PlayOneShot(sound[3]);
                         }
-
                     }
                 }
+
+                //No選択状態
+                if (strengtheningQuestionnumber == 2)
+                {
+                    yes.color = Color.gray;
+                    no.color = Color.white;
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        //強化するか尋ねるウインドウを非表示
+                        strengtheningQuestion.SetActive(false);
+
+                        strengtheningQuestionnumber = 0;
+
+                        //No選択時の音
+                        audioSource.PlayOneShot(sound[3]);
+                    }
+                }
+
             }
         }
         //選択中の画像非表示
@@ -1984,37 +1238,32 @@ public class CustomController : MonoBehaviour
                 //HP選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    if (ununsettledattack < 5)
+                    if (ununsettledAttack < 5)
                     {
-                        ununsettledattack++;
+                        ununsettledAttack++;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (ununsettledattack > minimumunununsettledattack)
+                    if (ununsettledAttack > minimumUnununsettledAttack)
                     {
-                        ununsettledattack--;
+                        ununsettledAttack--;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
 
-            if (ununsettledattack == 0)
-            {
-                unsettledattackStar_first.enabled = false;
-            }
-
             //未確定の攻撃のレベル1の強化選択状態
-            if (ununsettledattack == 1)
+            if (ununsettledAttack >= 1)
             {
-                unsettledattackStar_first.enabled = true;
-                unsettledattackStar_second.enabled = false;
-                unsettledattackStar_third.enabled = false;
-                unsettledattackStar_fourth.enabled = false;
-                unsettledattackStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledAttackStar[0].enabled = true;
+
+                //消費ポイントを変更
+                consumptionPoint = Level1;
 
                 if (GameController.Instance.attackLevel == 0)
                 {
@@ -2028,90 +1277,29 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledattack < 1)
+                if (minimumUnununsettledAttack < 1)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= Level1)
-                                {
-                                    //ゲームコントローラーの攻撃レベルを1にする
-                                    GameController.Instance.attackLevel = 1;
-
-                                    minimumunununsettledattack = 1;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= Level1;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledAttackStar[0].enabled = false;
             }
 
             //未確定の攻撃のレベル2の強化選択状態
-            if (ununsettledattack == 2)
+            if (ununsettledAttack >= 2)
             {
-                unsettledattackStar_first.enabled = true;
-                unsettledattackStar_second.enabled = true;
-                unsettledattackStar_third.enabled = false;
-                unsettledattackStar_fourth.enabled = false;
-                unsettledattackStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledAttackStar[1].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledattack < 2)
+                if (minimumUnununsettledAttack < 2)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.attackLevel)
@@ -2133,80 +1321,20 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの攻撃レベルを2にする
-                                    GameController.Instance.attackLevel = 2;
-
-                                    minimumunununsettledattack = 2;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledAttackStar[1].enabled = false;
             }
 
             //未確定の攻撃のレベル3の強化選択状態
-            if (ununsettledattack == 3)
+            if (ununsettledAttack >= 3)
             {
-                unsettledattackStar_first.enabled = true;
-                unsettledattackStar_second.enabled = true;
-                unsettledattackStar_third.enabled = true;
-                unsettledattackStar_fourth.enabled = false;
-                unsettledattackStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledAttackStar[2].enabled = true;
+
                 //消費ポイントを現在のレベルによって変更
                 switch (GameController.Instance.attackLevel)
                 {
@@ -2227,87 +1355,27 @@ public class CustomController : MonoBehaviour
                 consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledattack < 3)
+                if (minimumUnununsettledAttack < 3)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの攻撃レベルを3にする
-                                    GameController.Instance.attackLevel = 3;
-
-                                    minimumunununsettledattack = 3;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledAttackStar[2].enabled = false;
             }
 
             //未確定の攻撃のレベル4の強化選択状態
-            if (ununsettledattack == 4)
+            if (ununsettledAttack >= 4)
             {
-                unsettledattackStar_first.enabled = true;
-                unsettledattackStar_second.enabled = true;
-                unsettledattackStar_third.enabled = true;
-                unsettledattackStar_fourth.enabled = true;
-                unsettledattackStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledAttackStar[3].enabled = true;
+
                 //消費ポイントを現在のレベルによって変更
                 switch (GameController.Instance.attackLevel)
                 {
@@ -2332,87 +1400,27 @@ public class CustomController : MonoBehaviour
                 consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledattack < 4)
+                if (minimumUnununsettledAttack < 4)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの攻撃レベルを4にする
-                                    GameController.Instance.attackLevel = 4;
-
-                                    minimumunununsettledattack = 4;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledAttackStar[3].enabled = false;
             }
 
             //未確定の攻撃のレベル5の強化選択状態
-            if (ununsettledattack == 5)
+            if (ununsettledAttack == 5)
             {
-                unsettledattackStar_first.enabled = true;
-                unsettledattackStar_second.enabled = true;
-                unsettledattackStar_third.enabled = true;
-                unsettledattackStar_fourth.enabled = true;
-                unsettledattackStar_fifth.enabled = true;
+                //未確定の星表示
+                unsettledAttackStar[4].enabled = true;
+
                 //消費ポイントを現在のレベルによって変更
                 switch (GameController.Instance.attackLevel)
                 {
@@ -2441,80 +1449,83 @@ public class CustomController : MonoBehaviour
                 consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledattack < 5)
+                if (minimumUnununsettledAttack < 5)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの攻撃レベルを5にする
-                                    GameController.Instance.attackLevel = 5;
-
-                                    minimumunununsettledattack = 5;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
             }
-        }
+            else
+            {
+                //未確定の星非表示
+                unsettledAttackStar[4].enabled = false;
+            }
+            //強化するか尋ねるウインドウ表示状態
+            if (strengtheningQuestion.activeSelf)
+            {
 
+                //Yes選択状態
+                if (strengtheningQuestionnumber == 1)
+                {
+                    yes.color = Color.white;
+                    no.color = Color.gray;
+                    //強化を確定
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        if (GameController.Instance.score >= consumptionPoint)
+                        {
+                            //ゲームコントローラーの攻撃レベルを変更する
+                            GameController.Instance.attackLevel = ununsettledAttack;
+
+                            minimumUnununsettledAttack = ununsettledAttack;
+
+                            //ポイントを消費
+                            GameController.Instance.score -= consumptionPoint;
+
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            strengtheningQuestionnumber = 0;
+
+                            //強化確定時の音
+                            audioSource.PlayOneShot(sound[2]);
+                        }
+
+                        //ポイント不足
+                        else
+                        {
+                            strengtheningQuestionnumber = 0;
+
+                            shortagePointImage.SetActive(true);
+
+                            //No選択時の音
+                            audioSource.PlayOneShot(sound[3]);
+                        }
+                    }
+                }
+
+                //No選択状態
+                if (strengtheningQuestionnumber == 2)
+                {
+                    yes.color = Color.gray;
+                    no.color = Color.white;
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        //強化するか尋ねるウインドウを非表示
+                        strengtheningQuestion.SetActive(false);
+
+                        strengtheningQuestionnumber = 0;
+
+                        //No選択時の音
+                        audioSource.PlayOneShot(sound[3]);
+                    }
+                }
+
+            }
+        }
         else
         {
             //選択中の画像非表示
@@ -2536,37 +1547,32 @@ public class CustomController : MonoBehaviour
                 //連射速度選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-                    if (ununsettledrapidfire < 5)
+                    if (ununsettledRapidfire < 5)
                     {
-                        ununsettledrapidfire++;
+                        ununsettledRapidfire++;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
                 if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-                    if (ununsettledrapidfire > minimumunununsettledrapidfire)
+                    if (ununsettledRapidfire > minimumUnununsettledRapidfire)
                     {
-                        ununsettledrapidfire--;
+                        ununsettledRapidfire--;
 
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
             }
 
-            if (ununsettledrapidfire == 0)
-            {
-                unsettledrapidfireStar_first.enabled = false;
-            }
-
             //未確定の活動時間のレベル1の強化選択状態
-            if (ununsettledrapidfire == 1)
+            if (ununsettledRapidfire >= 1)
             {
-                unsettledrapidfireStar_first.enabled = true;
-                unsettledrapidfireStar_second.enabled = false;
-                unsettledrapidfireStar_third.enabled = false;
-                unsettledrapidfireStar_fourth.enabled = false;
-                unsettledrapidfireStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledRapidfireStar[0].enabled = true;
+
+                //消費ポイントを変更
+                consumptionPoint = Level1;
 
                 if (GameController.Instance.rapidfireLevel == 0)
                 {
@@ -2580,90 +1586,29 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledrapidfire < 1)
+                if (minimumUnununsettledRapidfire < 1)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= Level1)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを1にする
-                                    GameController.Instance.rapidfireLevel = 1;
-
-                                    minimumunununsettledrapidfire = 1;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= Level1;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledRapidfireStar[0].enabled = false;
             }
 
             //未確定の活動時間のレベル2の強化選択状態
-            if (ununsettledrapidfire == 2)
+            if (ununsettledRapidfire >= 2)
             {
-                unsettledrapidfireStar_first.enabled = true;
-                unsettledrapidfireStar_second.enabled = true;
-                unsettledrapidfireStar_third.enabled = false;
-                unsettledrapidfireStar_fourth.enabled = false;
-                unsettledrapidfireStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledRapidfireStar[1].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledrapidfire < 2)
+                if (minimumUnununsettledRapidfire < 2)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.rapidfireLevel)
@@ -2685,83 +1630,22 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化をするか選択
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを2にする
-                                    GameController.Instance.rapidfireLevel = 2;
-
-                                    minimumunununsettledrapidfire = 2;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledRapidfireStar[1].enabled = false;
             }
 
             //未確定の活動時間のレベル3の強化選択状態
-            if (ununsettledrapidfire == 3)
+            if (ununsettledRapidfire >= 3)
             {
-                unsettledrapidfireStar_first.enabled = true;
-                unsettledrapidfireStar_second.enabled = true;
-                unsettledrapidfireStar_third.enabled = true;
-                unsettledrapidfireStar_fourth.enabled = false;
-                unsettledrapidfireStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledRapidfireStar[2].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledrapidfire < 3)
+                if (minimumUnununsettledRapidfire < 3)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.rapidfireLevel)
@@ -2787,83 +1671,22 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを3にする
-                                    GameController.Instance.rapidfireLevel = 3;
-
-                                    minimumunununsettledrapidfire = 3;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledRapidfireStar[2].enabled = false;
             }
 
             //未確定の活動時間のレベル4の強化選択状態
-            if (ununsettledrapidfire == 4)
+            if (ununsettledRapidfire >= 4)
             {
-                unsettledrapidfireStar_first.enabled = true;
-                unsettledrapidfireStar_second.enabled = true;
-                unsettledrapidfireStar_third.enabled = true;
-                unsettledrapidfireStar_fourth.enabled = true;
-                unsettledrapidfireStar_fifth.enabled = false;
+                //未確定の星表示
+                unsettledRapidfireStar[3].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledrapidfire < 4)
+                if (minimumUnununsettledRapidfire < 4)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.rapidfireLevel)
@@ -2893,83 +1716,22 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
-
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを4にする
-                                    GameController.Instance.rapidfireLevel = 4;
-
-                                    minimumunununsettledrapidfire = 4;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }
                 }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledRapidfireStar[3].enabled = false;
             }
 
             //未確定の活動時間のレベル5の強化選択状態
-            if (ununsettledrapidfire == 5)
+            if (ununsettledRapidfire == 5)
             {
-                unsettledrapidfireStar_first.enabled = true;
-                unsettledrapidfireStar_second.enabled = true;
-                unsettledrapidfireStar_third.enabled = true;
-                unsettledrapidfireStar_fourth.enabled = true;
-                unsettledrapidfireStar_fifth.enabled = true;
+                //未確定の星表示
+                unsettledRapidfireStar[4].enabled = true;
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumunununsettledrapidfire < 5)
+                if (minimumUnununsettledRapidfire < 5)
                 {
                     //消費ポイントを現在のレベルによって変更
                     switch (GameController.Instance.rapidfireLevel)
@@ -3003,70 +1765,74 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
+                }
+            }
+            else
+            {
+                //未確定の星非表示
+                unsettledRapidfireStar[4].enabled = false;
+            }
+            //強化するか尋ねるウインドウ表示状態
+            if (strengtheningQuestion.activeSelf)
+            {
 
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
+                //Yes選択状態
+                if (strengtheningQuestionnumber == 1)
+                {
+                    yes.color = Color.white;
+                    no.color = Color.gray;
+                    //強化を確定
+                    if (Input.GetKeyDown(KeyCode.Return))
                     {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
+                        if (GameController.Instance.score >= consumptionPoint)
                         {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの活動時間レベルを5にする
-                                    GameController.Instance.rapidfireLevel = 5;
+                            //ゲームコントローラーの活動時間レベルを変更する
+                            GameController.Instance.rapidfireLevel = ununsettledRapidfire;
 
-                                    minimumunununsettledrapidfire = 5;
+                            minimumUnununsettledRapidfire = ununsettledRapidfire;
 
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
+                            //ポイントを消費
+                            GameController.Instance.score -= consumptionPoint;
 
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
 
-                                    strengtheningQuestionnumber = 0;
+                            strengtheningQuestionnumber = 0;
 
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[2]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-
-                                    //No選択時の音
-                                    audioSource.PlayOneShot(sound[3]);
-                                }
-                            }
+                            //強化確定時の音
+                            audioSource.PlayOneShot(sound[2]);
                         }
 
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
+                        //ポイント不足
+                        else
                         {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
+                            strengtheningQuestionnumber = 0;
 
-                                strengtheningQuestionnumber = 0;
+                            shortagePointImage.SetActive(true);
 
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
+                            //No選択時の音
+                            audioSource.PlayOneShot(sound[3]);
                         }
-
                     }
                 }
+
+                //No選択状態
+                if (strengtheningQuestionnumber == 2)
+                {
+                    yes.color = Color.gray;
+                    no.color = Color.white;
+                    if (Input.GetKeyDown(KeyCode.Return))
+                    {
+                        //強化するか尋ねるウインドウを非表示
+                        strengtheningQuestion.SetActive(false);
+
+                        strengtheningQuestionnumber = 0;
+
+                        //No選択時の音
+                        audioSource.PlayOneShot(sound[3]);
+                    }
+                }
+
             }
         }
         //選択中の画像非表示
@@ -3075,151 +1841,146 @@ public class CustomController : MonoBehaviour
             selectedRapidfireImage.enabled = false;
         }
 
-        //出撃選択中
-        if (selectNumber == 5)
-        {
-            //選択中の画像表示
-            sortieImage.color = Color.white;
-
-            //Bボタン、もしくはエンターキーで出撃
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+            //出撃選択中
+            if (selectNumber == 5)
             {
-                switch (GameController.Instance.stage)
+                //選択中の画像表示
+                sortieImage.color = Color.white;
+
+                //Bボタン、もしくはエンターキーで出撃
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                 {
-                    case 0:
-                        SceneManager.LoadScene("Stage1");
-                        break;
-                    case 1:
-                        SceneManager.LoadScene("Stage2");
-                        break;
-                    case 2:
-                        SceneManager.LoadScene("Stage3");
-                        break;
-                    case 3:
-                        SceneManager.LoadScene("Stage4");
-                        break;
-                    case 4:
-                        SceneManager.LoadScene("Stage5");
-                        break;
-                    case 5:
-                        SceneManager.LoadScene("Stage6");
-                        break;
-                    case 6:
-                        SceneManager.LoadScene("Stage7");
-                        break;
-                    case 7:
-                        SceneManager.LoadScene("Stage8");
-                        break;
-                    case 8:
-                        SceneManager.LoadScene("Stage9");
-                        break;
-                    case 9:
-                        SceneManager.LoadScene("Stage10");
-                        break;
-                    case 10:
-                        SceneManager.LoadScene("Stage11");
-                        break;
-                    case 11:
-                        SceneManager.LoadScene("Stage12");
-                        break;
+                    switch (GameController.Instance.stage)
+                    {
+                        case 0:
+                            SceneManager.LoadScene("Stage1");
+                            break;
+                        case 1:
+                            SceneManager.LoadScene("Stage2");
+                            break;
+                        case 2:
+                            SceneManager.LoadScene("Stage3");
+                            break;
+                        case 3:
+                            SceneManager.LoadScene("Stage4");
+                            break;
+                        case 4:
+                            SceneManager.LoadScene("Stage5");
+                            break;
+                        case 5:
+                            SceneManager.LoadScene("Stage6");
+                            break;
+                        case 6:
+                            SceneManager.LoadScene("Stage7");
+                            break;
+                        case 7:
+                            SceneManager.LoadScene("Stage8");
+                            break;
+                        case 8:
+                            SceneManager.LoadScene("Stage9");
+                            break;
+                        case 9:
+                            SceneManager.LoadScene("Stage10");
+                            break;
+                        case 10:
+                            SceneManager.LoadScene("Stage11");
+                            break;
+                        case 11:
+                            SceneManager.LoadScene("Stage12");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                //選択中の画像非表示
+                sortieImage.color = Color.gray;
+            }
+
+            //親愛度の星表示
+            for (int i = 0; i < GameController.Instance.intimacyLevel; i++)
+            {
+                intimacyStar[i].enabled = true;
+            }
+
+            //親愛度を選択していないときに未確定の星の画像を非表示
+            if (selectNumber != 0)
+            {
+                ununsettledIntimacy = minimumUnunsettledIntimacy;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    unsettledIntimacyStar[i].enabled = false;
+                }
+            }
+
+            //Hpの星表示
+            for (int i = 0; i < GameController.Instance.hpLevel; i++)
+            {
+                hpStar[i].enabled = true;
+            }
+
+            //HPを選択していないときに未確定の星の画像を非表示
+            if (selectNumber != 1)
+            {
+                ununsettledHp = minimumUnunsettledHp;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    unsettledHpStar[i].enabled = false;
+                }
+            }
+
+            //活動時間の星表示
+            for (int i = 0; i < GameController.Instance.activityTimeLevel; i++)
+            {
+                activityTimeStar[i].enabled = true;
+            }
+
+            //活動時間を選択していないときに未確定の星の画像を非表示
+            if (selectNumber != 2)
+            {
+                ununsettledActivityTime = minimumUnununsettledActivityTime;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    unsettledActivityTimeStar[i].enabled = false;
+                }
+            }
+
+            //攻撃の星表示
+            for (int i = 0; i < GameController.Instance.attackLevel; i++)
+            {
+                attackStar[i].enabled = true;
+            }
+
+            //攻撃を選択していないときに未確定の星の画像を非表示
+            if (selectNumber != 3)
+            {
+                ununsettledAttack = minimumUnununsettledAttack;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    unsettledAttackStar[i].enabled = false;
+                }
+            }
+
+            //連射速度の星表示
+            for (int i = 0; i < GameController.Instance.rapidfireLevel; i++)
+            {
+                rapidfireStar[i].enabled = true;
+            }
+
+            //連射速度を選択していないときに未確定の星の画像を非表示
+            if (selectNumber != 4)
+            {
+                ununsettledRapidfire = minimumUnununsettledRapidfire;
+
+                for (int i = 0; i < 5; i++)
+                {
+                    unsettledRapidfireStar[i].enabled = false;
                 }
             }
         }
-        else
-        {
-            //選択中の画像非表示
-            sortieImage.color = Color.gray;
-        }
-
-        //親愛度の星表示
-        for(int i = 0; i < GameController.Instance.intimacyLevel; i++)
-        {
-            intimacyStar[i].enabled = true;
-        }
-
-        //親愛度を選択していないときに未確定の星の画像を非表示
-        if (selectNumber != 0)
-        {
-            ununsettledIntimacy = minimumUnunsettledIntimacy;
-
-            unsettledintimacyStar_first.enabled = false;
-            unsettledintimacyStar_second.enabled = false;
-            unsettledintimacyStar_third.enabled = false;
-            unsettledintimacyStar_fourth.enabled = false;
-            unsettledintimacyStar_fifth.enabled = false;
-        }
-
-        //Hpの星表示
-        for (int i = 0; i < GameController.Instance.hpLevel; i++)
-        {
-            hpStar[i].enabled = true;
-        }
-
-        //HPを選択していないときに未確定の星の画像を非表示
-        if (selectNumber != 1)
-        {
-            ununsettledHp = minimumUnunsettledHp;
-
-            unsettledhpStar_first.enabled = false;
-            unsettledhpStar_second.enabled = false;
-            unsettledhpStar_third.enabled = false;
-            unsettledhpStar_fourth.enabled = false;
-            unsettledhpStar_fifth.enabled = false;
-        }
-
-        //活動時間の星表示
-        for (int i = 0; i < GameController.Instance.activityTimeLevel; i++)
-        {
-            activityTimeStar[i].enabled = true;
-        }
-
-        //活動時間を選択していないときに未確定の星の画像を非表示
-        if (selectNumber != 2)
-        {
-           　 ununsettledactivityTime = minimumunununsettledactivityTime;
-
-            unsettledactivityTimeStar_first.enabled = false;
-            unsettledactivityTimeStar_second.enabled = false;
-            unsettledactivityTimeStar_third.enabled = false;
-            unsettledactivityTimeStar_fourth.enabled = false;
-            unsettledactivityTimeStar_fifth.enabled = false;
-        }
-
-        //攻撃の星表示
-        for (int i = 0; i < GameController.Instance.attackLevel; i++)
-        {
-            attackStar[i].enabled = true;
-        }
-
-        //攻撃を選択していないときに未確定の星の画像を非表示
-        if (selectNumber != 3)
-        {
-            ununsettledattack = minimumunununsettledattack;
-
-            unsettledattackStar_first.enabled = false;
-            unsettledattackStar_second.enabled = false;
-            unsettledattackStar_third.enabled = false;
-            unsettledattackStar_fourth.enabled = false;
-            unsettledattackStar_fifth.enabled = false;
-        }
-
-        //連射速度の星表示
-        for (int i = 0; i < GameController.Instance.rapidfireLevel; i++)
-        {
-            rapidfireStar[i].enabled = true;
-        }
-
-        //連射速度を選択していないときに未確定の星の画像を非表示
-        if (selectNumber != 4)
-        {
-            ununsettledrapidfire = minimumunununsettledrapidfire;
-
-            unsettledrapidfireStar_first.enabled = false;
-            unsettledrapidfireStar_second.enabled = false;
-            unsettledrapidfireStar_third.enabled = false;
-            unsettledrapidfireStar_fourth.enabled = false;
-            unsettledrapidfireStar_fifth.enabled = false;
-        }
     }
-}
 
