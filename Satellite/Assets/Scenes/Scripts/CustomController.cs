@@ -32,17 +32,8 @@ public class CustomController : MonoBehaviour
     int ununsettledRapidfire = 0;
     int minimumUnununsettledRapidfire = 0;
 
-    //親愛度
-    public Image selectedIntimacyImage;
-    //HP
-    public Image selectedHpImage;
-    //活動時間
-    public Image selectedActivityTimeImage;
-    //攻撃
-    public Image selectedAttackImage;
-    //連射速度
-    public Image selectedRapidfireImage;
-    //出撃
+    //選択中の画像表示
+    public Image[] selectedImage;
     public Image sortieImage;
 
     /*
@@ -106,7 +97,7 @@ public class CustomController : MonoBehaviour
     //所持ポイント
     public Text possessionPointText;
     //消費ポイント
-    int consumptionPoint;
+    public int consumptionPoint;
     //消費ポイントのテキスト
     public Text consumptionPointText;
 
@@ -118,19 +109,11 @@ public class CustomController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //シーン開始時に選択中画像を非表示
-        selectedIntimacyImage.enabled = false;
-        selectedHpImage.enabled = false;
-        selectedActivityTimeImage.enabled = false;
-        selectedAttackImage.enabled = false;
-        selectedRapidfireImage.enabled = false;
-
-        //シーン開始時に選択イメージをグレーに
-        sortieImage.color = Color.gray;
-
         //シーン開始時に星の画像、未確定の星の画像を非表示
         for (int i = 0; i < 5; i++)
         {
+            //シーン開始時に選択中画像を非表示
+            selectedImage[i].enabled = false;
             //親愛度
             intimacyStar[i].enabled = false;
             unsettledIntimacyStar[i].enabled = false;
@@ -147,6 +130,9 @@ public class CustomController : MonoBehaviour
             rapidfireStar[i].enabled = false;
             unsettledRapidfireStar[i].enabled = false;
         }
+
+        //シーン開始時に出撃選択イメージをグレーに
+        sortieImage.color = Color.gray;
 
         //シーン開始時に強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
@@ -183,6 +169,8 @@ public class CustomController : MonoBehaviour
             {
                 selectNumber--;
                 audioSource.PlayOneShot(sound[0]);
+
+                dph = 0;
             }
 
             //下矢印キーを押したときSelectNumberを増やす
@@ -190,6 +178,8 @@ public class CustomController : MonoBehaviour
             {
                 selectNumber++;
                 audioSource.PlayOneShot(sound[0]);
+
+                dph = 0;
             }
 
             //selectNumberが5を超えたときselectNumberを0にする
@@ -250,7 +240,7 @@ public class CustomController : MonoBehaviour
         if (selectNumber == 0)
         {
             //選択中の画像表示
-            selectedIntimacyImage.enabled = true;
+            selectedImage[0].enabled = true;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -259,7 +249,7 @@ public class CustomController : MonoBehaviour
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
                 //親愛度選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
                 {
                     if (ununsettledIntimacy < 5)
                     {
@@ -268,7 +258,7 @@ public class CustomController : MonoBehaviour
                         audioSource.PlayOneShot(sound[0]);
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
                 {
                     if (ununsettledIntimacy > minimumUnunsettledIntimacy)
                     {
@@ -299,7 +289,7 @@ public class CustomController : MonoBehaviour
                 }
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumUnunsettledIntimacy < 1)
+                if (minimumUnunsettledIntimacy < 1 && !shortagePointImage.activeSelf)
                 {
                     if (Input.GetKeyDown(KeyCode.Return))
                     {
@@ -339,71 +329,15 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
-                    /*
-                    //強化するか尋ねるウインドウ表示状態
-                    if (strengtheningQuestion.activeSelf)
-                    {
-
-                        //Yes選択状態
-                        if (strengtheningQuestionnumber == 1)
-                        {
-                            yes.color = Color.white;
-                            no.color = Color.gray;
-                            //強化を確定
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                if (GameController.Instance.score >= consumptionPoint)
-                                {
-                                    //ゲームコントローラーの親愛度レベルを2にする
-                                    GameController.Instance.intimacyLevel = 2;
-
-                                    minimumUnunsettledIntimacy = 2;
-
-                                    //ポイントを消費
-                                    GameController.Instance.score -= consumptionPoint;
-
-                                    //強化するか尋ねるウインドウを非表示
-                                    strengtheningQuestion.SetActive(false);
-
-                                    strengtheningQuestionnumber = 0;
-
-                                    //強化確定時の音
-                                    audioSource.PlayOneShot(sound[1]);
-                                }
-
-                                //ポイント不足
-                                else
-                                {
-                                    strengtheningQuestionnumber = 0;
-
-                                    shortagePointImage.SetActive(true);
-                                }
-                            }
-                        }
-
-                        //No選択状態
-                        if (strengtheningQuestionnumber == 2)
-                        {
-                            yes.color = Color.gray;
-                            no.color = Color.white;
-                            if (Input.GetKeyDown(KeyCode.Return))
-                            {
-                                //強化するか尋ねるウインドウを非表示
-                                strengtheningQuestion.SetActive(false);
-
-                                strengtheningQuestionnumber = 0;
-
-                                //No選択時の音
-                                audioSource.PlayOneShot(sound[3]);
-                            }
-                        }
-
-                    }*/
                 }
             }
             else
@@ -440,10 +374,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -485,10 +423,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -533,10 +475,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -581,7 +527,16 @@ public class CustomController : MonoBehaviour
                         {
                             strengtheningQuestionnumber = 0;
 
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            //音の再生
+                            audioSource.PlayOneShot(sound[3]);
+
+                            //画像表示
                             shortagePointImage.SetActive(true);
+
+
                         }
                     }
                 }
@@ -609,14 +564,14 @@ public class CustomController : MonoBehaviour
         else
         {
             //選択イメージの非表示
-            selectedIntimacyImage.enabled = false;
+            selectedImage[0].enabled = false;
         }
 
         //Hp選択中
         if (selectNumber == 1)
         {
             //選択中の画像表示
-            selectedHpImage.enabled = true;
+            selectedImage[1].enabled = true;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -651,6 +606,9 @@ public class CustomController : MonoBehaviour
                 //未確定の星表示
                 unsettledHpStar[0].enabled = true;
 
+                //消費ポイントを変更
+                consumptionPoint = Level1;
+
                 if (GameController.Instance.hpLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
@@ -665,10 +623,14 @@ public class CustomController : MonoBehaviour
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledHp < 1)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -702,16 +664,20 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
             else
             {
-                //未確定の星表示
+                //未確定の星非表示
                 unsettledHpStar[1].enabled = false;
             }
 
@@ -743,10 +709,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -787,10 +757,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -827,6 +801,7 @@ public class CustomController : MonoBehaviour
                         case 3:
                             consumptionPoint = Level4 + Level5;
                             break;
+
                         case 4:
                             consumptionPoint = Level5;
                             break;
@@ -835,10 +810,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -878,14 +857,21 @@ public class CustomController : MonoBehaviour
                             audioSource.PlayOneShot(sound[2]);
                         }
 
-                        //ポイント不足
+                        //ポイント不足の画像表示
                         else
                         {
                             strengtheningQuestionnumber = 0;
 
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            //音の再生
+                            audioSource.PlayOneShot(sound[3]);
+
+                            //画像表示
                             shortagePointImage.SetActive(true);
 
-                            //No選択時の音
+                            //音の再生
                             audioSource.PlayOneShot(sound[3]);
                         }
                     }
@@ -912,14 +898,14 @@ public class CustomController : MonoBehaviour
         }
         else
         {
-            selectedHpImage.enabled = false;
+            selectedImage[1].enabled = false;
         }
 
         //活動時間選択中
         if (selectNumber == 2)
         {
             //選択中の画像表示
-            selectedActivityTimeImage.enabled = true;
+            selectedImage[2].enabled = true;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -927,7 +913,7 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //HP選択中に左右キーで強化するレベルを選択
+                //活動時間選択中に左右キーで強化するレベルを選択
                 if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
                     if (ununsettledActivityTime < 5)
@@ -971,10 +957,14 @@ public class CustomController : MonoBehaviour
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledActivityTime < 1)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1008,10 +998,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1049,10 +1043,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1094,10 +1092,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1142,10 +1144,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1157,7 +1163,6 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウ表示状態
             if (strengtheningQuestion.activeSelf)
             {
-
                 //Yes選択状態
                 if (strengtheningQuestionnumber == 1)
                 {
@@ -1190,9 +1195,16 @@ public class CustomController : MonoBehaviour
                         {
                             strengtheningQuestionnumber = 0;
 
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            //音の再生
+                            audioSource.PlayOneShot(sound[3]);
+
+                            //画像表示
                             shortagePointImage.SetActive(true);
 
-                            //No選択時の音
+                            //音の再生
                             audioSource.PlayOneShot(sound[3]);
                         }
                     }
@@ -1214,20 +1226,19 @@ public class CustomController : MonoBehaviour
                         audioSource.PlayOneShot(sound[3]);
                     }
                 }
-
             }
         }
         //選択中の画像非表示
         else
         {
-            selectedActivityTimeImage.enabled = false;
+            selectedImage[2].enabled = false;
         }
 
         //攻撃選択中
         if (selectNumber == 3)
         {
             //選択中の画像表示
-            selectedAttackImage.enabled = true;
+            selectedImage[3].enabled = true;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1279,10 +1290,14 @@ public class CustomController : MonoBehaviour
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledAttack < 1)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1316,10 +1331,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1335,32 +1354,37 @@ public class CustomController : MonoBehaviour
                 //未確定の星表示
                 unsettledAttackStar[2].enabled = true;
 
-                //消費ポイントを現在のレベルによって変更
-                switch (GameController.Instance.attackLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3;
-                        break;
-                }
-
-                //消費ポイントの表示を変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledAttack < 3)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.attackLevel)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
+
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1376,36 +1400,42 @@ public class CustomController : MonoBehaviour
                 //未確定の星表示
                 unsettledAttackStar[3].enabled = true;
 
-                //消費ポイントを現在のレベルによって変更
-                switch (GameController.Instance.attackLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4;
-                        break;
-                }
-
-                //消費ポイントの表示を変更
-                consumptionPointText.text = (consumptionPoint).ToString();
 
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledAttack < 4)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.attackLevel)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
+
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1421,40 +1451,45 @@ public class CustomController : MonoBehaviour
                 //未確定の星表示
                 unsettledAttackStar[4].enabled = true;
 
-                //消費ポイントを現在のレベルによって変更
-                switch (GameController.Instance.attackLevel)
-                {
-                    case 0:
-                        consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 1:
-                        consumptionPoint = Level2 + Level3 + Level4 + Level5;
-                        break;
-
-                    case 2:
-                        consumptionPoint = Level3 + Level4 + Level5;
-                        break;
-
-                    case 3:
-                        consumptionPoint = Level4 + Level5;
-                        break;
-
-                    case 4:
-                        consumptionPoint = Level5;
-                        break;
-                }
-
-                //消費ポイントの表示を変更
-                consumptionPointText.text = (consumptionPoint).ToString();
-
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledAttack < 5)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //消費ポイントを現在のレベルによって変更
+                    switch (GameController.Instance.attackLevel)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        case 0:
+                            consumptionPoint = Level1 + Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 1:
+                            consumptionPoint = Level2 + Level3 + Level4 + Level5;
+                            break;
+
+                        case 2:
+                            consumptionPoint = Level3 + Level4 + Level5;
+                            break;
+
+                        case 3:
+                            consumptionPoint = Level4 + Level5;
+                            break;
+
+                        case 4:
+                            consumptionPoint = Level5;
+                            break;
+                    }
+
+                    //消費ポイントの表示を変更
+                    consumptionPointText.text = (consumptionPoint).ToString();
+
+
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
+                    {
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1494,14 +1529,21 @@ public class CustomController : MonoBehaviour
                             audioSource.PlayOneShot(sound[2]);
                         }
 
-                        //ポイント不足
+                        //ポイント不足の画像表示
                         else
                         {
                             strengtheningQuestionnumber = 0;
 
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            //音の再生
+                            audioSource.PlayOneShot(sound[3]);
+
+                            //画像表示
                             shortagePointImage.SetActive(true);
 
-                            //No選択時の音
+                            //音の再生
                             audioSource.PlayOneShot(sound[3]);
                         }
                     }
@@ -1523,20 +1565,19 @@ public class CustomController : MonoBehaviour
                         audioSource.PlayOneShot(sound[3]);
                     }
                 }
-
             }
         }
         else
         {
             //選択中の画像非表示
-            selectedAttackImage.enabled = false;
+            selectedImage[3].enabled = false;
         }
 
         //連射速度選択中
         if (selectNumber == 4)
         {
             //選択中の画像表示
-            selectedRapidfireImage.enabled = true;
+            selectedImage[4].enabled = true;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1588,10 +1629,14 @@ public class CustomController : MonoBehaviour
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnununsettledRapidfire < 1)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1625,10 +1670,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1666,10 +1715,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1711,10 +1764,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1760,10 +1817,14 @@ public class CustomController : MonoBehaviour
                     //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
 
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    //ポイント不足が非表示のとき
+                    if (!shortagePointImage.activeSelf)
                     {
-                        //強化するか選択するウインドウを表示
-                        strengtheningQuestion.SetActive(true);
+                        if (Input.GetKeyDown(KeyCode.Return))
+                        {
+                            //強化するか選択するウインドウを表示
+                            strengtheningQuestion.SetActive(true);
+                        }
                     }
                 }
             }
@@ -1808,9 +1869,16 @@ public class CustomController : MonoBehaviour
                         {
                             strengtheningQuestionnumber = 0;
 
+                            //強化するか尋ねるウインドウを非表示
+                            strengtheningQuestion.SetActive(false);
+
+                            //音の再生
+                            audioSource.PlayOneShot(sound[3]);
+
+                            //画像表示
                             shortagePointImage.SetActive(true);
 
-                            //No選択時の音
+                            //音の再生
                             audioSource.PlayOneShot(sound[3]);
                         }
                     }
@@ -1838,149 +1906,149 @@ public class CustomController : MonoBehaviour
         //選択中の画像非表示
         else
         {
-            selectedRapidfireImage.enabled = false;
+            selectedImage[4].enabled = false;
         }
 
-            //出撃選択中
-            if (selectNumber == 5)
-            {
-                //選択中の画像表示
-                sortieImage.color = Color.white;
+        //出撃選択中
+        if (selectNumber == 5)
+        {
+            //選択中の画像表示
+            sortieImage.color = Color.white;
 
-                //Bボタン、もしくはエンターキーで出撃
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+            //Bボタン、もしくはエンターキーで出撃
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+            {
+                switch (GameController.Instance.stage)
                 {
-                    switch (GameController.Instance.stage)
-                    {
-                        case 0:
-                            SceneManager.LoadScene("Stage1");
-                            break;
-                        case 1:
-                            SceneManager.LoadScene("Stage2");
-                            break;
-                        case 2:
-                            SceneManager.LoadScene("Stage3");
-                            break;
-                        case 3:
-                            SceneManager.LoadScene("Stage4");
-                            break;
-                        case 4:
-                            SceneManager.LoadScene("Stage5");
-                            break;
-                        case 5:
-                            SceneManager.LoadScene("Stage6");
-                            break;
-                        case 6:
-                            SceneManager.LoadScene("Stage7");
-                            break;
-                        case 7:
-                            SceneManager.LoadScene("Stage8");
-                            break;
-                        case 8:
-                            SceneManager.LoadScene("Stage9");
-                            break;
-                        case 9:
-                            SceneManager.LoadScene("Stage10");
-                            break;
-                        case 10:
-                            SceneManager.LoadScene("Stage11");
-                            break;
-                        case 11:
-                            SceneManager.LoadScene("Stage12");
-                            break;
-                    }
+                    case 0:
+                        SceneManager.LoadScene("Stage1");
+                        break;
+                    case 1:
+                        SceneManager.LoadScene("Stage2");
+                        break;
+                    case 2:
+                        SceneManager.LoadScene("Stage3");
+                        break;
+                    case 3:
+                        SceneManager.LoadScene("Stage4");
+                        break;
+                    case 4:
+                        SceneManager.LoadScene("Stage5");
+                        break;
+                    case 5:
+                        SceneManager.LoadScene("Stage6");
+                        break;
+                    case 6:
+                        SceneManager.LoadScene("Stage7");
+                        break;
+                    case 7:
+                        SceneManager.LoadScene("Stage8");
+                        break;
+                    case 8:
+                        SceneManager.LoadScene("Stage9");
+                        break;
+                    case 9:
+                        SceneManager.LoadScene("Stage10");
+                        break;
+                    case 10:
+                        SceneManager.LoadScene("Stage11");
+                        break;
+                    case 11:
+                        SceneManager.LoadScene("Stage12");
+                        break;
                 }
             }
-            else
+        }
+        else
+        {
+            //選択中の画像非表示
+            sortieImage.color = Color.gray;
+        }
+
+        //親愛度の星表示
+        for (int i = 0; i < GameController.Instance.intimacyLevel; i++)
+        {
+            intimacyStar[i].enabled = true;
+        }
+
+        //親愛度を選択していないときに未確定の星の画像を非表示
+        if (selectNumber != 0)
+        {
+            ununsettledIntimacy = minimumUnunsettledIntimacy;
+
+            for (int i = 0; i < 5; i++)
             {
-                //選択中の画像非表示
-                sortieImage.color = Color.gray;
+                unsettledIntimacyStar[i].enabled = false;
             }
+        }
 
-            //親愛度の星表示
-            for (int i = 0; i < GameController.Instance.intimacyLevel; i++)
+        //Hpの星表示
+        for (int i = 0; i < GameController.Instance.hpLevel; i++)
+        {
+            hpStar[i].enabled = true;
+        }
+
+        //HPを選択していないときに未確定の星の画像を非表示
+        if (selectNumber != 1)
+        {
+            ununsettledHp = minimumUnunsettledHp;
+
+            for (int i = 0; i < 5; i++)
             {
-                intimacyStar[i].enabled = true;
+                unsettledHpStar[i].enabled = false;
             }
+        }
 
-            //親愛度を選択していないときに未確定の星の画像を非表示
-            if (selectNumber != 0)
+        //活動時間の星表示
+        for (int i = 0; i < GameController.Instance.activityTimeLevel; i++)
+        {
+            activityTimeStar[i].enabled = true;
+        }
+
+        //活動時間を選択していないときに未確定の星の画像を非表示
+        if (selectNumber != 2)
+        {
+            ununsettledActivityTime = minimumUnununsettledActivityTime;
+
+            for (int i = 0; i < 5; i++)
             {
-                ununsettledIntimacy = minimumUnunsettledIntimacy;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    unsettledIntimacyStar[i].enabled = false;
-                }
+                unsettledActivityTimeStar[i].enabled = false;
             }
+        }
 
-            //Hpの星表示
-            for (int i = 0; i < GameController.Instance.hpLevel; i++)
+        //攻撃の星表示
+        for (int i = 0; i < GameController.Instance.attackLevel; i++)
+        {
+            attackStar[i].enabled = true;
+        }
+
+        //攻撃を選択していないときに未確定の星の画像を非表示
+        if (selectNumber != 3)
+        {
+            ununsettledAttack = minimumUnununsettledAttack;
+
+            for (int i = 0; i < 5; i++)
             {
-                hpStar[i].enabled = true;
+                unsettledAttackStar[i].enabled = false;
             }
+        }
 
-            //HPを選択していないときに未確定の星の画像を非表示
-            if (selectNumber != 1)
+        //連射速度の星表示
+        for (int i = 0; i < GameController.Instance.rapidfireLevel; i++)
+        {
+            rapidfireStar[i].enabled = true;
+        }
+
+        //連射速度を選択していないときに未確定の星の画像を非表示
+        if (selectNumber != 4)
+        {
+            ununsettledRapidfire = minimumUnununsettledRapidfire;
+
+            for (int i = 0; i < 5; i++)
             {
-                ununsettledHp = minimumUnunsettledHp;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    unsettledHpStar[i].enabled = false;
-                }
-            }
-
-            //活動時間の星表示
-            for (int i = 0; i < GameController.Instance.activityTimeLevel; i++)
-            {
-                activityTimeStar[i].enabled = true;
-            }
-
-            //活動時間を選択していないときに未確定の星の画像を非表示
-            if (selectNumber != 2)
-            {
-                ununsettledActivityTime = minimumUnununsettledActivityTime;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    unsettledActivityTimeStar[i].enabled = false;
-                }
-            }
-
-            //攻撃の星表示
-            for (int i = 0; i < GameController.Instance.attackLevel; i++)
-            {
-                attackStar[i].enabled = true;
-            }
-
-            //攻撃を選択していないときに未確定の星の画像を非表示
-            if (selectNumber != 3)
-            {
-                ununsettledAttack = minimumUnununsettledAttack;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    unsettledAttackStar[i].enabled = false;
-                }
-            }
-
-            //連射速度の星表示
-            for (int i = 0; i < GameController.Instance.rapidfireLevel; i++)
-            {
-                rapidfireStar[i].enabled = true;
-            }
-
-            //連射速度を選択していないときに未確定の星の画像を非表示
-            if (selectNumber != 4)
-            {
-                ununsettledRapidfire = minimumUnununsettledRapidfire;
-
-                for (int i = 0; i < 5; i++)
-                {
-                    unsettledRapidfireStar[i].enabled = false;
-                }
+                unsettledRapidfireStar[i].enabled = false;
             }
         }
     }
+}
 
