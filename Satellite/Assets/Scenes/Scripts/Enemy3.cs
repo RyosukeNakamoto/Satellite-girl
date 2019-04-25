@@ -16,6 +16,9 @@ public class Enemy3 : Enemy
         camera = Camera.main;
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
+        // 
+        var player = GameObject.FindGameObjectWithTag("Player");
+        playerSc = player.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -66,6 +69,12 @@ public class Enemy3 : Enemy
         Destroy(gameObject);
         // アイテムを表示
         Instantiate(itemObj, transform.position, itemObj.transform.rotation);
+        // プレイヤーのゲージを加算
+        playerSc.buffValue += 5;
+
+        // プレイヤーのカウンターに加算
+        //playerSc.debriDsCount++;
+        //Debug.Log(playerSc.debriDsCount);
     }
 
     // 弾を3方向に打つ

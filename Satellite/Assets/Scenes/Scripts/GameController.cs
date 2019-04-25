@@ -13,11 +13,14 @@ public class GameController : MonoBehaviour
     private static GameController instance = null;
 
     //* セレステルステータス
-    //それぞれのパラメーターのレベル
+    // 親密度ステータスレベル
     public int intimacyLevel = 0;
-    public int[] intimacyTable = new int[6] { 100, 95, 90, 85, 80, 75 };
-    public int Intimacy
+    // レベルテーブル
+    public float[] intimacyTable = new float[6] { 100, 95, 90, 85, 80, 75 };
+    // ステータスとレブルを連結
+    public float Intimacy
     {
+        // 戻り値で判別
         get { return intimacyTable[intimacyLevel]; }
     }
 

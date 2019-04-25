@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     public GameObject itemObj;   
     // カメラの変数
     public Camera camera;
+    // 
+    public Player playerSc;
 
     // Start is called before the first frame update
     void Start()

@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
     bool activsSwitch = false;
     // プレイヤーのバフゲージ       
     public GameObject buffObject;
-    Image buffGauge;
+    public Image buffGauge = null;
+    public int buffValue = 0;
 
     //ダメージフラグ
     public bool ondamage = false;
@@ -44,13 +45,14 @@ public class Player : MonoBehaviour
     // 
     public GameObject camera;
     //発射する弾
-    public GameObject rifleBullet;      // ライフル
+    public GameObject rifleBullet;      // ライフル    
+    public GameObject machinegunBullet; // マシンガン
+    public GameObject bazookaBullet;    // バズーカ
     // サウンドを指定
     public AudioClip[] sound;
     // サウンドの変数
     AudioSource audioSource;
-    public GameObject machinegunBullet; // マシンガン
-    public GameObject bazookaBullet;    // バズーカ
+
     // 
     //発射間隔の時間（オール）
     public float bulletDelay;
@@ -70,11 +72,13 @@ public class Player : MonoBehaviour
     public GameObject resultScoreObject;
     //　アイテムの点数
     int itemScore = 5;
+    // 倒した敵をカウントする変数
+    //public int debriDsCount;
 
 
     // Use this for initialization
     void Start()
-    {
+    {        
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
@@ -118,7 +122,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        buffGauge.fillAmount += 0.01f * Time.deltaTime / 10 * 100;
+        buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
+        
         //HPが0以下になったときの処理
         if (hp <= 0 || activ <= 0)
         {
@@ -132,13 +137,13 @@ public class Player : MonoBehaviour
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             //renderer.color = new Color(1f, 1f, 1f, level);
         }
-
+        
         // 移動処理
         Move();
         //移動制限
         Clamp();
         //弾を発射する処理
-        Shot();
+        Shot();        
         //発射間隔の時間計測
         timer += Time.deltaTime;
     }
@@ -171,12 +176,14 @@ public class Player : MonoBehaviour
                 }
             }
         }
+
         // 移動していないとき
         else
         {
             activsSwitch = false;
             if (!activsSwitch)
             {
+                // ゲージが減っているとき
                 if (activTimeSlider.value < activTimeSlider.maxValue)
                 {
                     // 活動ゲージの加算
@@ -185,12 +192,11 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
+                    // HPがMAXを超えないようにする
                     activTimeSlider.value = activTimeSlider.maxValue;
                 }
             }
-        }
-        
-        Debug.Log(activTimeSlider.value);
+        }      
     }
 
     //プレイヤーの移動制限関数
