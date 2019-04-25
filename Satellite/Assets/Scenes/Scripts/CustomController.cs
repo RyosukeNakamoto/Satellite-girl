@@ -101,6 +101,9 @@ public class CustomController : MonoBehaviour
     //消費ポイントのテキスト
     public Text consumptionPointText;
 
+    //選択したステージによってテキストを変更
+    public Text selectedStage;
+
     //音
     AudioSource audioSource;
     //音を配列で管理
@@ -2048,6 +2051,47 @@ public class CustomController : MonoBehaviour
             {
                 unsettledRapidfireStar[i].enabled = false;
             }
+        }
+
+        //選択したステージのテキスト表示の変更
+        switch (GameController.Instance.stage)
+        {
+            case 0:
+                selectedStage.text = ("Stage-1");
+                break;
+            case 1:
+                selectedStage.text = ("Stage-2");
+                break;
+            case 2:
+                selectedStage.text = ("Stage-3");
+                break;
+            case 3:
+                selectedStage.text = ("Stage-4");
+                break;
+            case 4:
+                selectedStage.text = ("Stage-5");
+                break;
+            case 5:
+                selectedStage.text = ("Stage-6");
+                break;
+            case 6:
+                selectedStage.text = ("Stage-7");
+                break;
+            case 7:
+                selectedStage.text = ("Stage-8");
+                break;
+            case 8:
+                selectedStage.text = ("Stage-9");
+                break;
+            case 9:
+                selectedStage.text = ("Stage-10");
+                break;
+            case 10:
+                selectedStage.text = ("Stage-11");
+                break;
+            case 11:
+                selectedStage.text = ("Stage-12");
+                break;
         }
     }
 }

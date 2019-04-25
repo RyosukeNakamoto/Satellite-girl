@@ -26,13 +26,15 @@ namespace Satellite.StageSelect
         public Image[] stage11;
         public Image[] stage12;
 
+        public Text[] stageImageText;
+
         public Canvas[] stage;
 
         AudioSource audioSource;
         public AudioClip[] sound;
 
         //曲再生の判定
-        bool isAudioStart = false; 
+        bool isAudioStart = false;
         //どこを選択中か数値で管理
         int selectNumber = 0;
         int stageHalf = 0;
@@ -43,8 +45,16 @@ namespace Satellite.StageSelect
             //音コンポーネントの取得
             audioSource = GetComponent<AudioSource>();
 
+            //シーン開始時にステージ前半を表示
             stage[0].enabled = true;
+            //シーン開始時にステージ後半を非表示
             stage[1].enabled = false;
+
+            //シーン開始時に選択中のステージテキストを非表示
+            for (int i = 0; i < 12; i++)
+            {
+                stageImageText[i].enabled = false;
+            }
         }
 
         // Update is called once per frame
@@ -52,6 +62,9 @@ namespace Satellite.StageSelect
         {
             //十字キーの横の入力
             float dpv = Input.GetAxis("D_Pad_V");
+
+            //トリガー入力でステージの前半、後半切り替え
+            float tri = Input.GetAxis("L_R_Trigger");
 
             //右矢印キーを押したときSelectNumberを増やす
             if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
@@ -78,7 +91,7 @@ namespace Satellite.StageSelect
                 selectNumber = 5;
             }
             //ステージの前半後半を切替
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)|| tri < 0 || tri > 0)
             {
                 if (stageHalf == 0)
                 {
@@ -106,8 +119,12 @@ namespace Satellite.StageSelect
                 //Stage1を選択状態
                 if (selectNumber == 0)
                 {
+                    //ステージ選択イメージの切り替え
                     stage1[0].enabled = false;
                     stage1[1].enabled = true;
+
+                    //ステージ選択表示をステージ1に切り替え
+                    stageImageText[0].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -117,20 +134,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 0;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage1[0].enabled = true;
                     stage1[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[0].enabled = false;
                 }
                 //Stage2を選択状態
                 if (selectNumber == 1)
                 {
                     stage2[0].enabled = false;
                     stage2[1].enabled = true;
+
+                    //ステージ選択表示をステージ2に切り替え
+                    stageImageText[1].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -140,20 +163,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 1;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage2[0].enabled = true;
                     stage2[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[1].enabled = false;
                 }
                 //Stage3を選択状態
                 if (selectNumber == 2)
                 {
                     stage3[0].enabled = false;
                     stage3[1].enabled = true;
+
+                    //ステージ選択表示をステージ3に切り替え
+                    stageImageText[2].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -163,14 +192,17 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 2;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage3[0].enabled = true;
                     stage3[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[2].enabled = false;
                 }
 
                 //Stage4を選択状態
@@ -178,6 +210,9 @@ namespace Satellite.StageSelect
                 {
                     stage4[0].enabled = false;
                     stage4[1].enabled = true;
+
+                    //ステージ選択表示をステージ3に切り替え
+                    stageImageText[3].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -187,20 +222,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 3;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage4[0].enabled = true;
                     stage4[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[3].enabled = false;
                 }
                 //Stage5を選択状態
                 if (selectNumber == 4)
                 {
                     stage5[0].enabled = false;
                     stage5[1].enabled = true;
+
+                    //ステージ選択表示をステージ5に切り替え
+                    stageImageText[4].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -210,20 +251,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 4;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage5[0].enabled = true;
                     stage5[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[4].enabled = false;
                 }
                 //Stage6を選択状態
                 if (selectNumber == 5)
                 {
                     stage6[0].enabled = false;
                     stage6[1].enabled = true;
+
+                    //ステージ選択表示をステージ6に切り替え
+                    stageImageText[5].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -233,14 +280,17 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 5;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage6[0].enabled = true;
                     stage6[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[5].enabled = false;
                 }
             }
 
@@ -253,6 +303,9 @@ namespace Satellite.StageSelect
                     stage7[0].enabled = false;
                     stage7[1].enabled = true;
 
+                    //ステージ選択表示をステージ7に切り替え
+                    stageImageText[6].enabled = true;
+
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
@@ -261,20 +314,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 6;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage7[0].enabled = true;
                     stage7[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[6].enabled = false;
                 }
                 //Stage8を選択状態
                 if (selectNumber == 1)
                 {
                     stage8[0].enabled = false;
                     stage8[1].enabled = true;
+
+                    //ステージ選択表示をステージ8に切り替え
+                    stageImageText[7].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -284,20 +343,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 7;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage8[0].enabled = true;
                     stage8[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[7].enabled = false;
                 }
                 //Stage9を選択状態
                 if (selectNumber == 2)
                 {
                     stage9[0].enabled = false;
                     stage9[1].enabled = true;
+
+                    //ステージ選択表示をステージ9に切り替え
+                    stageImageText[8].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -307,14 +372,17 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 8;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage9[0].enabled = true;
                     stage9[1].enabled = false;
+
+                    //ステージ選択表示をステージ9に切り替え
+                    stageImageText[8].enabled = false;
                 }
 
                 //Stage10を選択状態
@@ -322,6 +390,9 @@ namespace Satellite.StageSelect
                 {
                     stage10[0].enabled = false;
                     stage10[1].enabled = true;
+
+                    //ステージ選択表示をステージ10に切り替え
+                    stageImageText[9].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -331,20 +402,26 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 9;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage10[0].enabled = true;
                     stage10[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[9].enabled = false;
                 }
                 //Stage11を選択状態
                 if (selectNumber == 4)
                 {
                     stage11[0].enabled = false;
                     stage11[1].enabled = true;
+
+                    //ステージ選択表示をステージ11に切り替え
+                    stageImageText[10].enabled = true;
 
                     //エンターキーを押したときキャラクター選択画面に遷移(プロト)
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -354,14 +431,17 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 10;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage11[0].enabled = true;
                     stage11[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[10].enabled = false;
                 }
                 //Stage12を選択状態
                 if (selectNumber == 5)
@@ -369,7 +449,10 @@ namespace Satellite.StageSelect
                     stage12[0].enabled = false;
                     stage12[1].enabled = true;
 
-                    //エンターキーを押したときキャラクター選択画面に遷移(プロト)
+                    //ステージ選択表示をステージ12に切り替え
+                    stageImageText[11].enabled = true;
+
+                    //エンターキーを押したときキャラクター選択画面に遷移
                     if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //決定時の音再生
@@ -377,17 +460,30 @@ namespace Satellite.StageSelect
 
                         GameController.Instance.stage = 11;
 
-                        //キャラクター選択画面に遷移
-                        SceneManager.LoadScene("CharacterSelect");
+                        //一秒後にシーン遷移
+                        Invoke("MoveScene", 1);
                     }
                 }
                 else
                 {
                     stage12[0].enabled = true;
                     stage12[1].enabled = false;
+
+                    //ステージ選択表示を非表示
+                    stageImageText[11].enabled = false;
                 }
             }
         }
 
+        //シーンの遷移
+        private void MoveScene()
+        {
+
+            SceneManager.LoadScene("CharacterSelect");
+
         }
+
     }
+
+
+}
