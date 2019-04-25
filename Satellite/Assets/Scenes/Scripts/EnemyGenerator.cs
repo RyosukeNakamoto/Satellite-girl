@@ -17,7 +17,9 @@ public class EnemyGenerator : MonoBehaviour
     public float lossTime = 3.0f;
     // Alert後ボス遷移までのタイム
     public float changeTime = 2.0f;
-
+    // 
+    [SerializeField]
+    Player playerSc;
 
     int enemyCount = 0;
 
@@ -41,10 +43,12 @@ public class EnemyGenerator : MonoBehaviour
                     enemyCount++ ;
                     var enemy = Instantiate(enemyPrefabs[enemyId], transform);
                     enemy.transform.localPosition = new Vector3(enemyX, -enemyY, 0);
+                    //Enemy enemySc = enemy.GetComponent<Enemy>();
+                    //enemySc.playerSc = playerSc;
                 }
             }
         }
-        Debug.Log(transform.childCount);
+        //Debug.Log(transform.childCount);
 
     }
 

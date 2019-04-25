@@ -20,6 +20,7 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // ゲームを止める
         Time.timeScale = 0.0f;
 
         //Scene loadscene = SceneManager.GetActiveScene();
@@ -28,6 +29,8 @@ public class GameOver : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene("Title");
+            // ゲームの時間を戻す
+            Time.timeScale = 1.0f;
         }
     }
 }

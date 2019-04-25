@@ -1482,8 +1482,9 @@ MonoBehaviour:
   - {fileID: 247440628791822168, guid: 5c7d8472f07f6c14ea41f3af28c98fb6, type: 3}
   - {fileID: 6465052087144793740, guid: 993541285496f8a4fa714a68518647e6, type: 3}
   - {fileID: 6465052087144793740, guid: e0eb83c58101f7f448068b78ca8ca28b, type: 3}
-  boss: {fileID: 1795683425}
-  Slider: {fileID: 949796717}
+  bossAlert: {fileID: 0}
+  lossTime: 3
+  changeTime: 2
 --- !u!1 &655264986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &655264987
 Transform:
   m_ObjectHideFlags: 0
@@ -2481,6 +2482,7 @@ MonoBehaviour:
   machineGunDelay: 0
   scoreObject: {fileID: 149076470}
   resultScoreObject: {fileID: 909888173}
+  debriDsCount: 0
 --- !u!1 &1207778019
 GameObject:
   m_ObjectHideFlags: 0
