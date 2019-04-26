@@ -109,6 +109,11 @@ public class CustomController : MonoBehaviour
     //音を配列で管理
     public AudioClip[] sound;
 
+    bool dpvInput = false;
+    bool dphInput = false;
+
+    bool shortagePoint = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -161,28 +166,42 @@ public class CustomController : MonoBehaviour
         //十字キー横の入力
         float dpv = Input.GetAxis("D_Pad_V");
 
+        if (dph == 0)
+        {
+            dphInput = false;
+        }
+        if (dpv == 0)
+        {
+            dpvInput = false;
+        }
+        //トリガー入力でキャラクター切り替え
+        float tri = Input.GetAxis("L_R_Trigger");
+
         //所持ポイントを表示
         possessionPointText.text = (GameController.Instance.score).ToString();
 
         //強化の確定を選択する画面が表示中にSelectNumberの数値が変更されないようにする
         if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
         {
-            //上矢印キーを押したときSelectNumberを減らす
-            if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+            if (dphInput == false)
             {
-                selectNumber--;
-                audioSource.PlayOneShot(sound[0]);
+                //上矢印キーを押したときSelectNumberを減らす
+                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+                {
+                    selectNumber--;
+                    audioSource.PlayOneShot(sound[0]);
 
-                dph = 0;
-            }
+                    dphInput = true;
+                }
 
-            //下矢印キーを押したときSelectNumberを増やす
-            if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
-            {
-                selectNumber++;
-                audioSource.PlayOneShot(sound[0]);
+                //下矢印キーを押したときSelectNumberを増やす
+                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
+                {
+                    selectNumber++;
+                    audioSource.PlayOneShot(sound[0]);
 
-                dph = 0;
+                    dphInput = true;
+                }
             }
 
             //selectNumberが5を超えたときselectNumberを0にする
@@ -200,16 +219,23 @@ public class CustomController : MonoBehaviour
         //強化を確定するウインドウでの選択
         if (strengtheningQuestion.activeSelf)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+            if (dphInput == false)
             {
-                strengtheningQuestionnumber = 1;
-                audioSource.PlayOneShot(sound[0]);
-            }
+                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+                {
+                    strengtheningQuestionnumber = 1;
+                    audioSource.PlayOneShot(sound[0]);
 
-            if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
-            {
-                strengtheningQuestionnumber = 2;
-                audioSource.PlayOneShot(sound[0]);
+                    dphInput = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
+                {
+                    strengtheningQuestionnumber = 2;
+                    audioSource.PlayOneShot(sound[0]);
+
+                    dphInput = true;
+                }
             }
         }
 
@@ -230,13 +256,22 @@ public class CustomController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown("joystick button 0"))
             {
                 shortagePointImage.SetActive(false);
+
+                shortagePoint = true;
             }
         }
-
-        //ステージ選択画面に戻る
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+        else
         {
-            SceneManager.LoadScene("StageSelect");
+            shortagePoint = false;
+        }
+
+        if (shortagePoint == false)
+        {
+            //ステージ選択画面に戻る
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
+            {
+                SceneManager.LoadScene("StageSelect");
+            }
         }
 
         //親愛度選択中
@@ -251,23 +286,30 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //親愛度選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
+                if (dpvInput == false)
                 {
-                    if (ununsettledIntimacy < 5)
+                    //親愛度選択中に左右キーで強化するレベルを選択
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
                     {
-                        ununsettledIntimacy++;
+                        if (ununsettledIntimacy < 5)
+                        {
+                            ununsettledIntimacy++;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
-                {
-                    if (ununsettledIntimacy > minimumUnunsettledIntimacy)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
                     {
-                        ununsettledIntimacy--;
+                        if (ununsettledIntimacy > minimumUnunsettledIntimacy)
+                        {
+                            ununsettledIntimacy--;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
                 }
             }
@@ -294,7 +336,7 @@ public class CustomController : MonoBehaviour
                 //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
                 if (minimumUnunsettledIntimacy < 1 && !shortagePointImage.activeSelf)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
@@ -335,7 +377,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -380,7 +422,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -429,7 +471,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -481,7 +523,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -504,7 +546,7 @@ public class CustomController : MonoBehaviour
                     yes.color = Color.white;
                     no.color = Color.gray;
                     //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         if (GameController.Instance.score >= Level1)
                         {
@@ -549,7 +591,7 @@ public class CustomController : MonoBehaviour
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか尋ねるウインドウを非表示
                         strengtheningQuestion.SetActive(false);
@@ -582,23 +624,30 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //HP選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (dpvInput == false)
                 {
-                    if (ununsettledHp < 5)
+                    //HP選択中に左右キーで強化するレベルを選択
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
                     {
-                        ununsettledHp++;
+                        if (ununsettledHp < 5)
+                        {
+                            ununsettledHp++;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    if (ununsettledHp > minimumUnunsettledHp)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
                     {
-                        ununsettledHp--;
+                        if (ununsettledHp > minimumUnunsettledHp)
+                        {
+                            ununsettledHp--;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
                 }
             }
@@ -629,7 +678,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -670,7 +719,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -715,7 +764,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -763,7 +812,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -816,7 +865,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -839,7 +888,7 @@ public class CustomController : MonoBehaviour
                     yes.color = Color.white;
                     no.color = Color.gray;
                     //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         if (GameController.Instance.score >= consumptionPoint)
                         {
@@ -885,7 +934,7 @@ public class CustomController : MonoBehaviour
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか尋ねるウインドウを非表示
                         strengtheningQuestion.SetActive(false);
@@ -916,23 +965,30 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //活動時間選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (dpvInput == false)
                 {
-                    if (ununsettledActivityTime < 5)
+                    //活動時間選択中に左右キーで強化するレベルを選択
+                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv > 0)
                     {
-                        ununsettledActivityTime++;
+                        if (ununsettledActivityTime < 5)
+                        {
+                            ununsettledActivityTime++;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    if (ununsettledActivityTime > minimumUnununsettledActivityTime)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
                     {
-                        ununsettledActivityTime--;
+                        if (ununsettledActivityTime > minimumUnununsettledActivityTime)
+                        {
+                            ununsettledActivityTime--;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
                 }
             }
@@ -963,7 +1019,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1004,7 +1060,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1049,7 +1105,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1098,7 +1154,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1150,7 +1206,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1172,7 +1228,7 @@ public class CustomController : MonoBehaviour
                     yes.color = Color.white;
                     no.color = Color.gray;
                     //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         if (GameController.Instance.score >= consumptionPoint)
                         {
@@ -1218,7 +1274,7 @@ public class CustomController : MonoBehaviour
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか尋ねるウインドウを非表示
                         strengtheningQuestion.SetActive(false);
@@ -1249,23 +1305,30 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //HP選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (dpvInput == false)
                 {
-                    if (ununsettledAttack < 5)
+                    //攻撃選択中に左右キーで強化するレベルを選択
+                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv > 0)
                     {
-                        ununsettledAttack++;
+                        if (ununsettledAttack < 5)
+                        {
+                            ununsettledAttack++;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    if (ununsettledAttack > minimumUnununsettledAttack)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
                     {
-                        ununsettledAttack--;
+                        if (ununsettledAttack > minimumUnununsettledAttack)
+                        {
+                            ununsettledAttack--;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
                 }
             }
@@ -1296,7 +1359,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1337,7 +1400,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1383,7 +1446,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1434,7 +1497,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1488,7 +1551,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1511,7 +1574,7 @@ public class CustomController : MonoBehaviour
                     yes.color = Color.white;
                     no.color = Color.gray;
                     //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         if (GameController.Instance.score >= consumptionPoint)
                         {
@@ -1557,7 +1620,7 @@ public class CustomController : MonoBehaviour
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか尋ねるウインドウを非表示
                         strengtheningQuestion.SetActive(false);
@@ -1588,23 +1651,30 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                //連射速度選択中に左右キーで強化するレベルを選択
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (dpvInput == false)
                 {
-                    if (ununsettledRapidfire < 5)
+                    //連射速度選択中に左右キーで強化するレベルを選択
+                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv>0)
                     {
-                        ununsettledRapidfire++;
+                        if (ununsettledRapidfire < 5)
+                        {
+                            ununsettledRapidfire++;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
-                }
-                if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    if (ununsettledRapidfire > minimumUnununsettledRapidfire)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
                     {
-                        ununsettledRapidfire--;
+                        if (ununsettledRapidfire > minimumUnununsettledRapidfire)
+                        {
+                            ununsettledRapidfire--;
 
-                        audioSource.PlayOneShot(sound[0]);
+                            audioSource.PlayOneShot(sound[0]);
+
+                            dpvInput = true;
+                        }
                     }
                 }
             }
@@ -1635,7 +1705,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1676,7 +1746,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1721,7 +1791,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1770,7 +1840,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1823,7 +1893,7 @@ public class CustomController : MonoBehaviour
                     //ポイント不足が非表示のとき
                     if (!shortagePointImage.activeSelf)
                     {
-                        if (Input.GetKeyDown(KeyCode.Return))
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
@@ -1846,7 +1916,7 @@ public class CustomController : MonoBehaviour
                     yes.color = Color.white;
                     no.color = Color.gray;
                     //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         if (GameController.Instance.score >= consumptionPoint)
                         {
@@ -1892,7 +1962,7 @@ public class CustomController : MonoBehaviour
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
-                    if (Input.GetKeyDown(KeyCode.Return))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                     {
                         //強化するか尋ねるウインドウを非表示
                         strengtheningQuestion.SetActive(false);
