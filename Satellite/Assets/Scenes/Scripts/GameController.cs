@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
     // 弾を撃つ間隔レベル
     public int rapidfireLevel = 0;
     // レベルテーブル
-    public float[] rapidfireTable = new float[6] { 0.48f, 0.46f, 0.44f, 0.42f, 0.40f, 0.3f };
+    public float[] rapidfireTable = new float[6] { 0.3f, 0.46f, 0.44f, 0.42f, 0.40f, 0.2f };
     // ステータスとレベルを連結
     public float Rapidfire
     {

@@ -44,19 +44,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intimacyLevel: 0
-  intimacyTable: 640000005f0000005a00000055000000500000004b000000
+  intimacyTable:
+  - 100
+  - 95
+  - 90
+  - 85
+  - 80
+  - 75
   hpLevel: 0
   hpTable: 090000000c0000000f000000120000001500000018000000
   activityTimeLevel: 0
-  activityTimeTable: 060000000700000008000000090000000a0000000b000000
+  activityTimeTable: 1e00000023000000280000002d0000003200000037000000
   attackLevel: 0
   attackTable: 030000000500000007000000090000000b0000000d000000
   rapidfireLevel: 0
   rapidfireTable:
-  - 7
-  - 8
-  - 9
-  - 10
-  - 11
-  - 12
+  - 0.07
+  - 0.46
+  - 0.44
+  - 0.42
+  - 0.4
+  - 0.3
   score: 0
+  stage: 0

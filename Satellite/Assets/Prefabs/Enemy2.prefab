@@ -114,10 +114,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.004812002, y: -0.038554788}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.7728257, y: 2.8313584}
   m_EdgeRadius: 0
 --- !u!114 &6465052087144793741
 MonoBehaviour:
@@ -151,6 +151,7 @@ MonoBehaviour:
     type: 3}
   itemObj: {fileID: 6167792974611453852, guid: 5753f6912ea53654786ce5937b763867, type: 3}
   camera: {fileID: 0}
+  playerSc: {fileID: 0}
   sound:
   - {fileID: 8300000, guid: 202409d9da7a1864aa3a9a59b6fe0b56, type: 3}
   - {fileID: 8300000, guid: 787c0dc63e4c6274289b26da45c63721, type: 3}
