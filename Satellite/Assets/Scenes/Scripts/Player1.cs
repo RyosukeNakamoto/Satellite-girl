@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     Rigidbody2D rigidbody;
 
@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     //プレイヤーのHP
     [SerializeField]
-    public static int hp = 0;
+    int hp = 0;
     [SerializeField]
     float activ = 0;
 
@@ -72,13 +72,10 @@ public class Player : MonoBehaviour
     public GameObject resultScoreObject;
     //　アイテムの点数
     int itemScore = 5;
-    // 倒した敵をカウントする変数
-    //public int debriDsCount;
-
 
     // Use this for initialization
     void Start()
-    {        
+    {      
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
@@ -90,8 +87,8 @@ public class Player : MonoBehaviour
 
         // スコアテキストのコンポーネント
         scoreText = scoreObject.GetComponent<Text>();
-        // スコアを0で初期化
-        score = 0;
+        // スコアを道中から取得
+        score = Player.score;
         // スコアを表示
         scoreText.text = "Score: " + score;
         // リザルトスコアテキストのコンポーネント
@@ -103,7 +100,7 @@ public class Player : MonoBehaviour
         buffGauge.fillAmount = 0;
 
         // 一号機セレステルのHPを取得
-        hp = GameController.Instance.HitPoint;
+        hp = Player.hp;
         // 一号機セレステルの活動時間を取得
         activ = GameController.Instance.ActivityTime;
         // 一号機セレステルの攻撃力を取得
@@ -112,7 +109,7 @@ public class Player : MonoBehaviour
 
         //// スライダーの値をセット
         // HPのゲージ
-        hpSlider.maxValue = GameController.Instance.HitPoint;
+        hpSlider.maxValue = GameController.Instance.HitPoint;     
         hpSlider.value = hp;
         // 活動時間のゲージ
         activTimeSlider.maxValue = GameController.Instance.ActivityTime;
