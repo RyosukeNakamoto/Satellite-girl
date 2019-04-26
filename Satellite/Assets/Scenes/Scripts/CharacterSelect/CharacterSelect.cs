@@ -8,6 +8,7 @@ public class CharacterSelect : MonoBehaviour
     public Canvas[] character;
 
     bool characterSelect = true;
+    bool characterChange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,16 +21,31 @@ public class CharacterSelect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //キーを押したときにキャラクター切り替え
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.S))
+        //トリガー入力でステージの前半、後半切り替え
+        float tri = Input.GetAxis("L_R_Trigger");
+
+        if (tri == 0)
         {
-            if (characterSelect == true)
+            characterChange = false;
+        }
+
+        if (characterChange == false)
+        {
+            //キーを押したときにキャラクター切り替え
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.S)|| tri > 0 || tri < 0)
             {
-                characterSelect = false;
-            }
-            else
-            {
-                characterSelect = true;
+                if (characterSelect == true)
+                {
+                    characterSelect = false;
+
+                    characterChange = true;
+                }
+                else
+                {
+                    characterSelect = true;
+
+                    characterChange = true;
+                }
             }
         }
 
