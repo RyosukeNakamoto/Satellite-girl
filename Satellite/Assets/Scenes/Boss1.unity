@@ -2283,7 +2283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1192846845
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3718,6 +3718,16 @@ MonoBehaviour:
   clearImage: {fileID: 1319542329}
   target: {fileID: 1090074773}
   offset: 12
+  player: {fileID: 1192846844}
+  bulletPrefab: {fileID: 1879095314465036589, guid: b2cc39446016f60459c7bd649fc4c8d8,
+    type: 3}
+  aimBullet: {fileID: 1879095314465036589, guid: 157cc52f706c0744a854c86d49ed45b1,
+    type: 3}
+  laserPrefab: {fileID: 1879095314465036589, guid: d223067cdb94ed74188a748ec31fb92d,
+    type: 3}
+  largeLaserPrefab: {fileID: 1879095314465036589, guid: 930b5f0486ee4684aae81b46c00bc1ee,
+    type: 3}
+  bossAttack: 0
 --- !u!61 &1795683427
 BoxCollider2D:
   m_ObjectHideFlags: 0
