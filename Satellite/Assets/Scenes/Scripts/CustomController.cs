@@ -174,8 +174,11 @@ public class CustomController : MonoBehaviour
         {
             dpvInput = false;
         }
+
+        /*
         //トリガー入力でキャラクター切り替え
         float tri = Input.GetAxis("L_R_Trigger");
+        */
 
         //所持ポイントを表示
         possessionPointText.text = (GameController.Instance.score).ToString();
