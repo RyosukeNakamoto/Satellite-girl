@@ -73,7 +73,7 @@ public class Clear : MonoBehaviour
             //選択中画像の色を白に
             selectImage[0].color = Color.white;
 
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("CharacterSelect");
             }
@@ -90,7 +90,7 @@ public class Clear : MonoBehaviour
             selectImage[1].color = Color.white;
 
             //エンターキーを押したときの処理
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 //現在のステージによって、次で向かうステージを指定
                 switch (GameController.Instance.stage)
@@ -149,7 +149,7 @@ public class Clear : MonoBehaviour
             selectImage[2].color = Color.white;
 
             //エンターキーでステージセレクト画面に遷移
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("StageSelect");
             }

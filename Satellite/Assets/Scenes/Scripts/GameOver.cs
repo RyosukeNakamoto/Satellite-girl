@@ -50,7 +50,7 @@ public class GameOver : MonoBehaviour
         {
             selectImage[0].color = Color.white;
             //エンターキーでキャラクター選択画面に遷移
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("CharacterSelect");
                 // ゲームの時間を戻す
@@ -67,7 +67,7 @@ public class GameOver : MonoBehaviour
         {
             selectImage[1].color = Color.white;
             //エンターキーでステージセレクト画面に遷移
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("Stageselect");
                 // ゲームの時間を戻す
