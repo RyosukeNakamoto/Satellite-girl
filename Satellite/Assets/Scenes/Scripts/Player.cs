@@ -20,8 +20,10 @@ public class Player : MonoBehaviour
 
     // プレイヤーのHPゲージ
     public Slider hpSlider;
+
     // プレイヤーの活動時間ゲージ
     public Slider activTimeSlider;
+
     // 活動時間ゲージのスイッチ
     bool activsSwitch = false;
     // プレイヤーのバフゲージ       
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
     public GameObject gameClear;
 
     //武器を数値で管理
-    public static int bulletstatus = 1;
+    public static int bulletstatus = 0;
     // 
     public GameObject camera;
     //発射する弾
@@ -123,6 +125,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
+        // ゲージがMAXになったらバフ発動
+        if (buffValue >= 1)
+        {
+            
+        }
         
         //HPが0以下になったときの処理
         if (hp <= 0 || activ <= 0)
@@ -219,7 +226,7 @@ public class Player : MonoBehaviour
         //ライフルを装備中の発射間隔
         if (bulletstatus == 0)
         {
-            bulletDelay = 0.5f;
+            bulletDelay = GameController.Instance.Rapidfire; 
 
             //Spaceキーを押したとき弾を発射
             if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
@@ -239,7 +246,7 @@ public class Player : MonoBehaviour
         if (bulletstatus == 1)
         {
             // マシンガンの連射間隔の取得
-            machineGunDelay = GameController.Instance.Rapidfire;
+            machineGunDelay = 0.5f;
 
             //Spaceキーを押したとき弾を発射
             if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey("joystick button 1") && timer > machineGunDelay)
