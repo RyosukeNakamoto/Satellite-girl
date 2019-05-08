@@ -35,6 +35,11 @@ public class GameController : MonoBehaviour
         get { return hpTable[hpLevel]; }
     }
 
+    public int[] Hp
+    {
+        get { return hpTable; }
+    }
+
     // 活動時間ステータスレベル
     public int activityTimeLevel = 0;
     // レベルテーブル
