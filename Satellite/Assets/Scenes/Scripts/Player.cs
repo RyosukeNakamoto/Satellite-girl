@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     // プレイヤーのバフゲージ       
     public GameObject buffObject;
     public Image buffGauge = null;
-    public int buffValue = 0;
+    public float buffValue = 0;
 
     //ダメージフラグ
     public bool ondamage = false;
@@ -72,11 +72,15 @@ public class Player : MonoBehaviour
     public GameObject scoreObject;
     // リザルト画面のスコア表示
     public GameObject resultScoreObject;
-    //　アイテムの点数
+    // アイテムの点数
     int itemScore = 5;
-    // 倒した敵をカウントする変数
-    //public int debriDsCount;
+    // バフを使うフラグ
+    public bool buffUse = false;
+    // バフをかける
+    bool buffSet = false;
 
+    // 打つ弾のスクリプトを参照
+    PlayerBullet playerBulletSc;
 
     // Use this for initialization
     void Start()
@@ -84,6 +88,8 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
+        playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
+        Debug.Log(playerBulletSc.damage);
 
         Time.timeScale = 1.0f;
 
@@ -125,10 +131,26 @@ public class Player : MonoBehaviour
     void Update()
     {
         buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
-        // ゲージがMAXになったらバフ発動
-        if (buffValue >= 1)
+        // ゲージがMAXになったらバフ発動フラグ
+        if (buffGauge.fillAmount >= 1)
+        {            
+            buffUse = true; // バフを使うフラグON
+            if (buffUse)
+            {
+                buffSet = true; // バフをかける
+            }           
+        }
+        // ゲージを使い切ったらバフ終了
+        else if (buffGauge.fillAmount <= 0)
         {
-            
+            buffUse = false;    // バフフラグOFF
+            buffSet = false;    // 
+        }
+        // バフ発動
+        if (buffSet)
+        {
+            // ゲージを消費
+            buffValue -= 0.5f;
         }
         
         //HPが0以下になったときの処理
