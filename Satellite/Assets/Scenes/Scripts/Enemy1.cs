@@ -70,12 +70,16 @@ public class Enemy1 : Enemy
         Destroy(gameObject);
         // アイテムを表示
         Instantiate(itemObj, transform.position, itemObj.transform.rotation);
-        // プレイヤーのゲージを加算
-        playerSc.buffValue += 5;
-
-        // プレイヤーのカウンターに加算
-        //playerSc.debriDsCount++;
-        //Debug.Log(playerSc.debriDsCount);
+        if (!playerSc.buffUse)
+        {
+            // プレイヤーのゲージを加算
+            playerSc.buffValue += 5;
+        }
+        else
+        {
+            Debug.Log("上がらないよ");
+            return;
+        }
     }
 
     // 弾を表示する
