@@ -297,7 +297,7 @@ public class Player1 : MonoBehaviour
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            hp -= bulletSc.damage;
+            hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             hpSlider.value -= bulletSc.damage;
             OndamageEffect();

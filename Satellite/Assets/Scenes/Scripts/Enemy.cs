@@ -19,7 +19,9 @@ public class Enemy : MonoBehaviour
     // 弾を指定
     public GameObject enemyBullet;
     // アイテムオブジェクトを指定
-    public GameObject itemObj;   
+    public GameObject itemObj;
+    // エフェクトのオブジェクトを指定
+    public GameObject effectObject;
     // カメラの変数
     public Camera camera;
     // 

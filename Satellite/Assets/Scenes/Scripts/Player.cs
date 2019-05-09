@@ -19,10 +19,16 @@ public class Player : MonoBehaviour
     float activ = 0;
 
     // プレイヤーのHPゲージ
-    public Slider hpSlider;
+    public GameObject HpObject;
+    public Image HpGauge = null;
+    public float HpValue = 0;
 
     // プレイヤーの活動時間ゲージ
-    public Slider activTimeSlider;
+    ////public Slider activTimeSlider;
+    // プレイヤーのスタミナゲージ       
+    public GameObject staminaObject;
+    public Image staminaGauge = null;
+    public float staminaValue = 0;
 
     // 活動時間ゲージのスイッチ
     bool activsSwitch = false;
@@ -89,7 +95,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
-        Debug.Log(playerBulletSc.damage);
+        //Debug.Log(playerBulletSc.damage);
 
         Time.timeScale = 1.0f;
 
@@ -106,6 +112,12 @@ public class Player : MonoBehaviour
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
+        // HPゲージ
+        HpGauge = HpObject.GetComponent<Image>();
+        HpGauge.fillAmount = 1;
+        // スタミナゲージ
+        staminaGauge = staminaObject.GetComponent<Image>();
+        staminaGauge.fillAmount = 1;
         // バフゲージ
         buffGauge = buffObject.GetComponent<Image>();
         buffGauge.fillAmount = 0;
@@ -120,11 +132,11 @@ public class Player : MonoBehaviour
 
         //// スライダーの値をセット
         // HPのゲージ
-        hpSlider.maxValue = GameController.Instance.HitPoint;
-        hpSlider.value = hp;
+        HpGauge.fillAmount = GameController.Instance.HitPoint / HpValue;
         // 活動時間のゲージ
-        activTimeSlider.maxValue = GameController.Instance.ActivityTime;
-        activTimeSlider.value = activ;
+        staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
+        ////activTimeSlider.maxValue = GameController.Instance.ActivityTime;
+        ////activTimeSlider.value = activ;
     }
 
     // Update is called once per frame
@@ -196,12 +208,11 @@ public class Player : MonoBehaviour
             if (activsSwitch)
             {
                 // 活動ゲージの減算
-                activ -= 0.05f;
-                activTimeSlider.value = activ;
-                // 活動ゲージの値が0以下にはならない
-                if (activ < 0)
+                staminaGauge.fillAmount -= 0.01f;
+                ////// 活動ゲージの値が0以下にはならない
+                if (staminaGauge.fillAmount < 0)
                 {
-                    activ = 0;
+                    staminaGauge.fillAmount = 0;
                 }
             }
         }
@@ -213,16 +224,16 @@ public class Player : MonoBehaviour
             if (!activsSwitch)
             {
                 // ゲージが減っているとき
-                if (activTimeSlider.value < activTimeSlider.maxValue)
+                if (staminaValue < staminaGauge.fillAmount)
                 {
                     // 活動ゲージの加算
-                    activ += 0.1f;
-                    activTimeSlider.value = activ;
+                    staminaGauge.fillAmount += 0.005f;
+                    //activTimeSlider.value = activ;
                 }
                 else
                 {
                     // HPがMAXを超えないようにする
-                    activTimeSlider.value = activTimeSlider.maxValue;
+                    staminaValue = staminaGauge.fillAmount;
                 }
             }
         }      
@@ -329,9 +340,10 @@ public class Player : MonoBehaviour
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            hp -= bulletSc.damage;
+            hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
-            hpSlider.value -= bulletSc.damage;
+            HpGauge.fillAmount -= bulletSc.damage ;
+            //hpSlider.value -= bulletSc.damage;
             OndamageEffect();
         }
 
