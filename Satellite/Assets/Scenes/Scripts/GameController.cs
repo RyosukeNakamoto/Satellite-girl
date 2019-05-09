@@ -35,6 +35,11 @@ public class GameController : MonoBehaviour
         get { return hpTable[hpLevel]; }
     }
 
+    public int[] Hp
+    {
+        get { return hpTable; }
+    }
+
     // 活動時間ステータスレベル
     public int activityTimeLevel = 0;
     // レベルテーブル
@@ -72,9 +77,6 @@ public class GameController : MonoBehaviour
 
     // ステージの管理
     public int stage = 0;
-
-
-
 
     // Start is called before the first frame update
     void Awake()

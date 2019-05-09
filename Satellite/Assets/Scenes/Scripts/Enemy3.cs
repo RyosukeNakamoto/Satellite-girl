@@ -64,11 +64,15 @@ public class Enemy3 : Enemy
     public void Death()
     {
         // サウンドの再生
-        audioSource.PlayOneShot(sound[1]);
+        audioSource.PlayOneShot(sound[1]);        
+        // 爆発エフェクトを出す
+        Instantiate(effectObject, transform.position, effectObject.transform.rotation);
         // デブリをデストロイ
         Destroy(gameObject);
         // アイテムを表示
-        Instantiate(itemObj, transform.position, itemObj.transform.rotation);
+        Vector3 position = transform.position;
+        position.x += 1;
+        Instantiate(itemObj, position, itemObj.transform.rotation);
         if (!playerSc.buffUse)
         {
             // プレイヤーのゲージを加算
