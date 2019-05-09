@@ -283,6 +283,10 @@ public class CustomController : MonoBehaviour
             //選択中の画像表示
             selectedImage[0].enabled = true;
 
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            selectedImage[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
 
@@ -620,6 +624,10 @@ public class CustomController : MonoBehaviour
         {
             //選択中の画像表示
             selectedImage[1].enabled = true;
+
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            selectedImage[1].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -962,6 +970,10 @@ public class CustomController : MonoBehaviour
             //選択中の画像表示
             selectedImage[2].enabled = true;
 
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            selectedImage[2].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
 
@@ -1301,6 +1313,10 @@ public class CustomController : MonoBehaviour
         {
             //選択中の画像表示
             selectedImage[3].enabled = true;
+
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            selectedImage[3].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1648,6 +1664,10 @@ public class CustomController : MonoBehaviour
             //選択中の画像表示
             selectedImage[4].enabled = true;
 
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            selectedImage[4].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
 
@@ -1990,6 +2010,10 @@ public class CustomController : MonoBehaviour
         {
             //選択中の画像表示
             sortieImage.color = Color.white;
+
+            //選択画像を点滅
+            float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
+            sortieImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
