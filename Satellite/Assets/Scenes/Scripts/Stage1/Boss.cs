@@ -49,7 +49,10 @@ public class Boss : MonoBehaviour
         hpslider.value = hp;
 
         clearImage.SetActive(false);
-        hpslider.enabled = false;        
+        hpslider.enabled = false;
+
+        //音のコンポーネントを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
