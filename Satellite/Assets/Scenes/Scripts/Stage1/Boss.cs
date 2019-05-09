@@ -33,7 +33,12 @@ public class Boss : MonoBehaviour
     private float targetTime = 1.0f;
     private float currentTime = 0;
 
+    //ボス攻撃パターン
     public float bossAttack = 0;
+
+    //オーディオ
+    AudioSource audioSource;
+    public AudioClip[] sound; 
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +49,10 @@ public class Boss : MonoBehaviour
         hpslider.value = hp;
 
         clearImage.SetActive(false);
-        hpslider.enabled = false;        
+        hpslider.enabled = false;
+
+        //音のコンポーネントを取得
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -130,6 +138,9 @@ public class Boss : MonoBehaviour
         bullet1.transform.Rotate(0, 0, 180);
         var bullet2 = Instantiate(bulletPrefab, position, bulletPrefab.transform.rotation);
         bullet2.transform.Rotate(0, 0, 225);
+
+        //音の再生
+        audioSource.PlayOneShot(sound[0]);
     }
 
     
@@ -148,6 +159,9 @@ public class Boss : MonoBehaviour
         bullet3.transform.Rotate(0, 0, 210);
         var bullet4 = Instantiate(bulletPrefab, position, bulletPrefab.transform.rotation);
         bullet4.transform.Rotate(0, 0, 240);
+
+        //音の再生
+        audioSource.PlayOneShot(sound[0]);
     }
 
     //プレイヤーに向かって弾3発発射
@@ -166,6 +180,8 @@ public class Boss : MonoBehaviour
             Vector2 vec = player.transform.position - pos;
             //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
             bullet.GetComponent<Rigidbody2D>().velocity = vec;
+            //音の再生
+            audioSource.PlayOneShot(sound[0]);
             //0.5秒弾の間隔を空ける
             yield return new WaitForSeconds(0.5f);
         }
@@ -187,6 +203,8 @@ public class Boss : MonoBehaviour
             Vector2 vec = player.transform.position - position;
             //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
             bullet.GetComponent<Rigidbody2D>().velocity = vec;
+            //音の再生
+            audioSource.PlayOneShot(sound[0]);
             //0.5秒弾の間隔を空ける
             yield return new WaitForSeconds(0.5f);
         }
@@ -208,6 +226,8 @@ public class Boss : MonoBehaviour
             Vector2 vec = player.transform.position - pos;
             //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
             bullet.GetComponent<Rigidbody2D>().velocity = vec;
+            //音の再生
+            audioSource.PlayOneShot(sound[0]);
             //0.5秒弾の間隔を空ける
             yield return new WaitForSeconds(0.5f);
         }
@@ -218,6 +238,8 @@ public class Boss : MonoBehaviour
     {
         Vector3 position = transform.position;
 
+        //音の再生
+        audioSource.PlayOneShot(sound[1]);
         //レーザーの実体化
         position.x = 12;
         position.y = -1.4f;
@@ -275,6 +297,10 @@ public class Boss : MonoBehaviour
     {
         Vector3 position = transform.position;
         position.x = 17;
+
+        //音の再生
+        audioSource.PlayOneShot(sound[1]);
+
 
         var largeLaser = Instantiate(largeLaserPrefab, position, largeLaserPrefab.transform.rotation);
         largeLaser.transform.SetParent(transform, false);
