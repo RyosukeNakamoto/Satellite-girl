@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField]
+    GameObject acquisitionEffect;
     //// Start is called before the first frame update
     //void Start()
     //{
@@ -20,6 +22,9 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Vector3 position = transform.position;
+            position.x -= 1;
+            Instantiate(acquisitionEffect, position, acquisitionEffect.transform.rotation);
             Destroy(gameObject);
         }
     }

@@ -78,9 +78,6 @@ public class GameController : MonoBehaviour
     // ステージの管理
     public int stage = 0;
 
-
-
-
     // Start is called before the first frame update
     void Awake()
     {

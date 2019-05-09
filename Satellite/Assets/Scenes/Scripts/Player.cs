@@ -21,10 +21,14 @@ public class Player : MonoBehaviour
     // プレイヤーのHPゲージ
     public GameObject HpObject;
     public Image HpGauge = null;
-    public float HpValue = 1;
+    public float HpValue = 0;
 
     // プレイヤーの活動時間ゲージ
     ////public Slider activTimeSlider;
+    // プレイヤーのスタミナゲージ       
+    public GameObject staminaObject;
+    public Image staminaGauge = null;
+    public float staminaValue = 0;
 
     // 活動時間ゲージのスイッチ
     bool activsSwitch = false;
@@ -111,6 +115,9 @@ public class Player : MonoBehaviour
         // HPゲージ
         HpGauge = HpObject.GetComponent<Image>();
         HpGauge.fillAmount = 1;
+        // スタミナゲージ
+        staminaGauge = staminaObject.GetComponent<Image>();
+        staminaGauge.fillAmount = 1;
         // バフゲージ
         buffGauge = buffObject.GetComponent<Image>();
         buffGauge.fillAmount = 0;
@@ -127,6 +134,7 @@ public class Player : MonoBehaviour
         // HPのゲージ
         HpGauge.fillAmount = GameController.Instance.HitPoint / HpValue;
         // 活動時間のゲージ
+        staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
         ////activTimeSlider.maxValue = GameController.Instance.ActivityTime;
         ////activTimeSlider.value = activ;
     }
@@ -200,13 +208,12 @@ public class Player : MonoBehaviour
             if (activsSwitch)
             {
                 // 活動ゲージの減算
-                ////activ -= 0.05f;
-                ////activTimeSlider.value = activ;
+                staminaGauge.fillAmount -= 0.01f;
                 ////// 活動ゲージの値が0以下にはならない
-                ////if (activ < 0)
-                ////{
-                ////    activ = 0;
-                ////}
+                if (staminaGauge.fillAmount < 0)
+                {
+                    staminaGauge.fillAmount = 0;
+                }
             }
         }
 
@@ -216,18 +223,18 @@ public class Player : MonoBehaviour
             activsSwitch = false;
             if (!activsSwitch)
             {
-                ////// ゲージが減っているとき
-                ////if (activTimeSlider.value < activTimeSlider.maxValue)
-                ////{
-                ////    // 活動ゲージの加算
-                ////    activ += 0.1f;
-                ////    activTimeSlider.value = activ;
-                ////}
-                ////else
-                ////{
-                ////    // HPがMAXを超えないようにする
-                ////    activTimeSlider.value = activTimeSlider.maxValue;
-                ////}
+                // ゲージが減っているとき
+                if (staminaValue < staminaGauge.fillAmount)
+                {
+                    // 活動ゲージの加算
+                    staminaGauge.fillAmount += 0.005f;
+                    //activTimeSlider.value = activ;
+                }
+                else
+                {
+                    // HPがMAXを超えないようにする
+                    staminaValue = staminaGauge.fillAmount;
+                }
             }
         }      
     }

@@ -1650,9 +1650,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   csvData: {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
   enemyPrefabs:
-  - {fileID: 247440628791822168, guid: 5c7d8472f07f6c14ea41f3af28c98fb6, type: 3}
-  - {fileID: 6465052087144793740, guid: 993541285496f8a4fa714a68518647e6, type: 3}
-  - {fileID: 6465052087144793740, guid: e0eb83c58101f7f448068b78ca8ca28b, type: 3}
+  - {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9, type: 3}
+  - {fileID: 1979040781948784279, guid: 6a100632288a0a542b0efcaf6519550e, type: 3}
+  - {fileID: 5534083576414507721, guid: e3992ea3b8f1978429072f14c8dddc46, type: 3}
   bossAlert: {fileID: 1901994275}
   lossTime: 3
   changeTime: 2
@@ -2697,9 +2697,9 @@ MonoBehaviour:
   HpObject: {fileID: 68966437}
   HpGauge: {fileID: 0}
   HpValue: 0
-  StaminaObject: {fileID: 717039652}
-  StaminaGauge: {fileID: 0}
-  StaminaValue: 0
+  staminaObject: {fileID: 717039652}
+  staminaGauge: {fileID: 0}
+  staminaValue: 0
   buffObject: {fileID: 1231676889}
   buffGauge: {fileID: 0}
   buffValue: 0
