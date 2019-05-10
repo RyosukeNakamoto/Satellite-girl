@@ -105,16 +105,14 @@ public class Player : MonoBehaviour
         // スコアテキストのコンポーネント
         scoreText = scoreObject.GetComponent<Text>();
         // スコアを0で初期化
-        score = 0;
+        score = GameController.Instance.scoreText;
         // スコアを表示
         scoreText.text = "Score: " + score;
         // リザルトスコアテキストのコンポーネント
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
-        // HPゲージ
-        HpGauge = HpObject.GetComponent<Image>();
-        HpGauge.fillAmount = 1;
+        
         // スタミナゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = 1;
@@ -132,7 +130,10 @@ public class Player : MonoBehaviour
 
         //// スライダーの値をセット
         // HPのゲージ
+        HpGauge = HpObject.GetComponent<Image>();
         HpGauge.fillAmount = GameController.Instance.HitPoint / HpValue;
+        // HPゲージ
+        HpValue = GameController.Instance.HpGet;
         // 活動時間のゲージ
         staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
         ////activTimeSlider.maxValue = GameController.Instance.ActivityTime;
@@ -344,6 +345,7 @@ public class Player : MonoBehaviour
             //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             HpGauge.fillAmount -= bulletSc.damage ;
+            GameController.Instance.HpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {
                 gameOver.SetActive(true);
@@ -356,6 +358,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Item")
         {
             score += itemScore;
+            GameController.Instance.scoreText = score;
             // スコア内容の変更
             scoreText.text = "Score: " + score;
             resultScoreText.text = "" + score + "p";

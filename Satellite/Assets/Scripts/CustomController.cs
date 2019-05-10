@@ -156,7 +156,7 @@ public class CustomController : MonoBehaviour
     void Update()
     {
         //デバッグ用
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             GameController.Instance.score += 10000;
         }
@@ -256,7 +256,7 @@ public class CustomController : MonoBehaviour
             strengtheningQuestion.SetActive(false);
 
             //キーを押したときに非表示
-            if (Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown("joystick button 0"))
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown("joystick button 0"))
             {
                 shortagePointImage.SetActive(false);
 

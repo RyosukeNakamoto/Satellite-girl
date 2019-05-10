@@ -23,6 +23,9 @@ public class GameOver : MonoBehaviour
 
         selectImage[0].color = Color.gray;
         selectImage[1].color = Color.gray;
+
+        GameController.Instance.scoreText = 0;
+        GameController.Instance.HpGet = 1;
     }
 
     // Update is called once per frame

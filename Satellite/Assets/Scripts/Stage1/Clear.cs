@@ -20,6 +20,9 @@ public class Clear : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameController.Instance.scoreText = 0;
+        GameController.Instance.HpGet = 1;
+
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
 
