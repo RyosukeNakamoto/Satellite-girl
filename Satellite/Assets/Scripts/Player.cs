@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
-        //Debug.Log(playerBulletSc.damage);
+        Debug.Log(playerBulletSc.damage);
 
         Time.timeScale = 1.0f;
 
@@ -208,12 +208,13 @@ public class Player : MonoBehaviour
             if (activsSwitch)
             {
                 // 活動ゲージの減算
-                staminaGauge.fillAmount -= 0.01f;
+                staminaGauge.fillAmount -= 0.0025f;
+                Debug.Log(staminaGauge.fillAmount);
                 ////// 活動ゲージの値が0以下にはならない
-                if (staminaGauge.fillAmount < 0)
-                {
-                    staminaGauge.fillAmount = 0;
-                }
+                //if (staminaGauge.fillAmount < 0)
+                //{
+                //    staminaGauge.fillAmount = 0;
+                //}
             }
         }
 
@@ -232,7 +233,7 @@ public class Player : MonoBehaviour
                 }
                 else
                 {
-                    // HPがMAXを超えないようにする
+                    // スタミナがMAXを超えないようにする
                     staminaValue = staminaGauge.fillAmount;
                 }
             }
@@ -340,9 +341,13 @@ public class Player : MonoBehaviour
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            hp -= (int)bulletSc.damage;
+            //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             HpGauge.fillAmount -= bulletSc.damage ;
+            if (HpGauge.fillAmount <= 0)
+            {
+                gameOver.SetActive(true);
+            }
             //hpSlider.value -= bulletSc.damage;
             OndamageEffect();
         }
