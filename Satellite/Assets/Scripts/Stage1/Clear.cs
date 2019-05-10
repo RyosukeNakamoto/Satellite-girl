@@ -76,6 +76,9 @@ public class Clear : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("CharacterSelect");
+
+                // ゲームの時間を戻す
+                Time.timeScale = 1.0f;
             }
         }
         else
@@ -135,6 +138,9 @@ public class Clear : MonoBehaviour
 
                 //キャラクター選択画面に遷移
                 SceneManager.LoadScene("CharacterSelect");
+
+                // ゲームの時間を戻す
+                Time.timeScale = 1.0f;
             }
         }
         else
@@ -152,6 +158,9 @@ public class Clear : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
             {
                 SceneManager.LoadScene("StageSelect");
+
+                // ゲームの時間を戻す
+                Time.timeScale = 1.0f;
             }
         }
         else
