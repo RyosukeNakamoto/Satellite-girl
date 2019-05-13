@@ -16,7 +16,7 @@ public class BossBullet : EnemyBullet
     void Update()
     {
         Vector3 pos = transform.position;
-        pos += transform.right * speed * Time.deltaTime;
+        pos -= transform.right * speed * Time.deltaTime;
         transform.position = pos;
     }
 }
