@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.07635069, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1527014, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &6964871060109835030
 MonoBehaviour:
@@ -150,7 +150,7 @@ MonoBehaviour:
   enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
     type: 3}
   itemObj: {fileID: 1795834864178317102, guid: 928be834ea857204dae806fbc8a73bc1, type: 3}
-  effectObject: {fileID: 7744614594547608968, guid: debab9a717afac049991c7726569aa65,
+  effectObject: {fileID: 5908219524231412484, guid: 249d23830c517924cb38726c12c20f30,
     type: 3}
   camera: {fileID: 0}
   playerSc: {fileID: 0}

@@ -210,15 +210,13 @@ public class Player : MonoBehaviour
             {
                 // 活動ゲージの減算
                 staminaGauge.fillAmount -= 0.0025f;
-                Debug.Log(staminaGauge.fillAmount);
-                ////// 活動ゲージの値が0以下にはならない
-                //if (staminaGauge.fillAmount < 0)
-                //{
-                //    staminaGauge.fillAmount = 0;
-                //}
+                //// 活動ゲージの値が0以下にはならない
+                if (staminaGauge.fillAmount < 0)
+                {
+                    staminaGauge.fillAmount = 0;
+                }
             }
         }
-
         // 移動していないとき
         else
         {

@@ -73,7 +73,7 @@ public class Enemy1 : Enemy
         // アイテムを表示
         Vector3 position = transform.position;
         position.x += 1;
-        Instantiate(itemObj, position, itemObj.transform.rotation);
+        //Instantiate(itemObj, position, itemObj.transform.rotation);
         if (!playerSc.buffUse)
         {
             // プレイヤーのゲージを加算
