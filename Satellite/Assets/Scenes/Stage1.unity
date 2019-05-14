@@ -1337,7 +1337,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367a261c0f7da2449be689002fafee34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvData: {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
+  csvData:
+  - {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
+  - {fileID: 4900000, guid: 699faa9ef124b3c47880cdbd3d7df004, type: 3}
+  - {fileID: 4900000, guid: e8f9d56c24df7bb4fba965e05a080721, type: 3}
+  - {fileID: 4900000, guid: f5851039c38ae204890ceb9722fb4880, type: 3}
+  - {fileID: 4900000, guid: 81e553eb30dd993448c975d1d7389000, type: 3}
+  - {fileID: 4900000, guid: 352d5f12d811902419231ab57ccc7174, type: 3}
+  - {fileID: 4900000, guid: b00c4c5f546cceb488fa42f6248ec377, type: 3}
+  - {fileID: 4900000, guid: 7277b0f37d41a944dbf2ce65ccc7e0e9, type: 3}
+  - {fileID: 4900000, guid: 5392b8704888dcd47bf5e39ebf3541d8, type: 3}
+  - {fileID: 4900000, guid: ea25898cd867e9043b59367a6687ca05, type: 3}
+  - {fileID: 4900000, guid: 7ddbe1f7584d5ee4496ff9c20542737f, type: 3}
+  - {fileID: 4900000, guid: a96e639069953b445a095f0534a65e65, type: 3}
   enemyPrefabs:
   - {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9, type: 3}
   - {fileID: 1979040781948784279, guid: 6a100632288a0a542b0efcaf6519550e, type: 3}
@@ -3369,6 +3381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: activityTimeTable.Array.data[5]
       value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
+        type: 3}
+      propertyPath: stage
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4df64328e9ed74886e78456fce40bb, type: 3}
