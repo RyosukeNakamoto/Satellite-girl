@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class EnemyGenerator : MonoBehaviour
 {
     // CSVファイルを指定します。
-    public TextAsset csvData;
+    [SerializeField]
+    TextAsset[] csvData;
     // タイルID順にプレハブを指定します。
     public GameObject[] enemyPrefabs;
 
@@ -27,7 +28,7 @@ public class EnemyGenerator : MonoBehaviour
     void Start()
     {
         // 行に分割
-        var lines = csvData.text.Split('\n');
+        var lines = csvData[GameController.Instance.stage].text.Split('\n');
         // 各行を順に繰返し処理
         for (var enemyY = 0; enemyY < lines.Length; enemyY++)
         {
@@ -69,11 +70,13 @@ public class EnemyGenerator : MonoBehaviour
                 // ボスシーン遷移までのカウント
                 if (lossTime + changeTime <= timer)
                 {
-                    switch (GameController.Instance.stage)
-                    {
-                        case 0:
-                            SceneManager.LoadScene("Boss1");
-                            break;
+                    SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
+
+                    //switch (GameController.Instance.stage)
+                    //{
+                    //    case 0:
+                            
+                    //        break;
                         //case 1:
                         //    SceneManager.LoadScene("Boss2");
                         //    break;
@@ -107,7 +110,7 @@ public class EnemyGenerator : MonoBehaviour
                         //case 11:
                         //    SceneManager.LoadScene("Boss12");
                         //    break;
-                    }
+                   //}
                 }
             }
         }
