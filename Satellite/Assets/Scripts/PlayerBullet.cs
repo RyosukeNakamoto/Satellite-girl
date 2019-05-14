@@ -13,13 +13,15 @@ public class PlayerBullet : Bullet
     //武器のスプライト
     SpriteRenderer bulletsprite;
 
+    private void Awake()
+    {
+        // 弾の威力設定
+        damage = GameController.Instance.Attack;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-
-        // 弾の威力設定
-        damage = GameController.Instance.Attack;        
+        rigidbody = GetComponent<Rigidbody2D>();                  
     }
 
     // Update is called once per frame

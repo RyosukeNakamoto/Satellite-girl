@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1719386042407944976}
   - component: {fileID: 6964871060109835030}
   - component: {fileID: 1221905289562648686}
+  - component: {fileID: 769743541754218583}
   m_Layer: 9
   m_Name: Enemy1
   m_TagString: Enemy
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 33986d3601a523941a515a540ea50ae4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 238ce153af0670244bd600369a06efb4, type: 3}
   m_Color: {r: 0.643, g: 0.643, b: 0.643, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,14 +143,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291d6613d7ee09e43b92efc277a8ea6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 1
+  Hp: 6
   isRendered: 0
   enemytime: 1
   timer: 0
   Attack: 0
   enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
     type: 3}
-  itemObj: {fileID: 1795834864178317102, guid: 928be834ea857204dae806fbc8a73bc1, type: 3}
+  itemObj: {fileID: 5963002734199674796, guid: 5753f6912ea53654786ce5937b763867, type: 3}
   effectObject: {fileID: 5908219524231412484, guid: 249d23830c517924cb38726c12c20f30,
     type: 3}
   camera: {fileID: 0}
@@ -253,3 +254,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &769743541754218583
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943467288051095588}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80162d8a15f2bd046bdd52161f1d2cd9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
