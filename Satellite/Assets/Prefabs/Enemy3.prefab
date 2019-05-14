@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3756756716079067938}
   - component: {fileID: 4688180861608500593}
   - component: {fileID: 3676293499890538900}
+  - component: {fileID: 1244422462996205935}
   m_Layer: 9
   m_Name: Enemy3
   m_TagString: Enemy
@@ -142,18 +143,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80de88ab0752544c9fd243a2ba825e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 1
+  Hp: 18
   isRendered: 0
   enemytime: 1
   timer: 0
   Attack: 0
   enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
     type: 3}
-  itemObj: {fileID: 1795834864178317102, guid: 928be834ea857204dae806fbc8a73bc1, type: 3}
+  itemObj: {fileID: 5963002734199674796, guid: 5753f6912ea53654786ce5937b763867, type: 3}
   effectObject: {fileID: 5908219524231412484, guid: 249d23830c517924cb38726c12c20f30,
     type: 3}
   camera: {fileID: 0}
   playerSc: {fileID: 0}
+  enemyAnimator: {fileID: 0}
   sound:
   - {fileID: 8300000, guid: 202409d9da7a1864aa3a9a59b6fe0b56, type: 3}
   - {fileID: 8300000, guid: 787c0dc63e4c6274289b26da45c63721, type: 3}
@@ -253,3 +255,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1244422462996205935
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5534083576414507721}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51bea6b968ac031459b930fa32a4f0da, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

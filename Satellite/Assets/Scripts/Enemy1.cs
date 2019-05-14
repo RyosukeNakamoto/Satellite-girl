@@ -7,8 +7,7 @@ public class Enemy1 : Enemy
     // サウンドを指定
     public AudioClip[] sound;
     // サウンドの変数
-    AudioSource audioSource;
-    
+    AudioSource audioSource;   
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +19,8 @@ public class Enemy1 : Enemy
         // 
         var player = GameObject.FindGameObjectWithTag("Player");
         playerSc = player.GetComponent<Player>();
+
+        enemyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -73,7 +74,7 @@ public class Enemy1 : Enemy
         // アイテムを表示
         Vector3 position = transform.position;
         position.x += 1;
-        //Instantiate(itemObj, position, itemObj.transform.rotation);
+        Instantiate(itemObj, position, itemObj.transform.rotation);
         if (!playerSc.buffUse)
         {
             // プレイヤーのゲージを加算
@@ -104,9 +105,17 @@ public class Enemy1 : Enemy
         if (collision.gameObject.tag == "Bullet")
         {
             Hp -= GameController.Instance.Attack;
+            StartCoroutine(DamageIEnumeretor());
         }
     }
 
+    IEnumerator DamageIEnumeretor()
+    {
+        enemyAnimator.SetBool("Damage", true);
+        yield return new WaitForSeconds(1.0f);
+        enemyAnimator.SetBool("Damage", false);
+
+    }
     // カメラの表示範囲に入ったら動作します
     private void OnWillRenderObject()
     {

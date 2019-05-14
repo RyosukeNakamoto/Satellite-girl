@@ -19,6 +19,8 @@ public class Enemy3 : Enemy
         // 
         var player = GameObject.FindGameObjectWithTag("Player");
         playerSc = player.GetComponent<Player>();
+
+        enemyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -64,7 +66,7 @@ public class Enemy3 : Enemy
     public void Death()
     {
         // サウンドの再生
-        audioSource.PlayOneShot(sound[1]);        
+        audioSource.PlayOneShot(sound[1]);
         // 爆発エフェクトを出す
         Instantiate(effectObject, transform.position, effectObject.transform.rotation);
         // デブリをデストロイ
@@ -72,7 +74,7 @@ public class Enemy3 : Enemy
         // アイテムを表示
         Vector3 position = transform.position;
         position.x += 1;
-        //Instantiate(itemObj, position, itemObj.transform.rotation);
+        Instantiate(itemObj, position, itemObj.transform.rotation);
         if (!playerSc.buffUse)
         {
             // プレイヤーのゲージを加算
@@ -104,8 +106,18 @@ public class Enemy3 : Enemy
         if (collision.gameObject.tag == "Bullet")
         {
             Hp -= GameController.Instance.Attack;
+            StartCoroutine(DamageIEnumeretor());
+            Debug.Log(Hp);
         }
     }
+
+    IEnumerator DamageIEnumeretor()
+    {
+        enemyAnimator.SetBool("Damage", true);
+        yield return new WaitForSeconds(1.0f);
+        enemyAnimator.SetBool("Damage", false);
+    }
+
 
     // カメラの表示範囲に入ったら動作します
     private void OnWillRenderObject()
@@ -115,5 +127,5 @@ public class Enemy3 : Enemy
         {
             isRendered = true;
         }
-    }    
+    }
 }
