@@ -38,7 +38,7 @@ public class Boss : MonoBehaviour
 
     //オーディオ
     AudioSource audioSource;
-    public AudioClip[] sound; 
+    public AudioClip[] sound;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +53,7 @@ public class Boss : MonoBehaviour
 
         //音のコンポーネントを取得
         audioSource = GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -169,14 +170,14 @@ public class Boss : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             //座標を変数posに保存
-            var pos = this.gameObject.transform.position;
+            var position = this.gameObject.transform.position;
             //弾のプレハブを作成
             var bullet = Instantiate(aimBullet) as GameObject;
             //弾のプレハブの位置を自分の位置にする
-            bullet.transform.position = pos;
+            bullet.transform.position = position;
 
             //プレイヤーの位置から自分の位置を引く
-            Vector2 vec = player.transform.position - pos;
+            Vector2 vec = player.transform.position - position;
             //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
             bullet.GetComponent<Rigidbody2D>().velocity = vec;
             //音の再生
@@ -240,53 +241,53 @@ public class Boss : MonoBehaviour
         //音の再生
         audioSource.PlayOneShot(sound[1]);
         //レーザーの実体化
-        position.x = 12;
-        position.y = -1.4f;
+        position.x = 22.5f;
+        position.y = -0.8f;
         var laser = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser.transform.SetParent(transform, false);
-        laser.transform.Rotate(0, 0, -7);
-        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 10);
+        laser.transform.Rotate(0, 0, -9);
+        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 3.1f);
         laser.transform.parent = transform;
 
-        position.x = 12;
-        position.y = 1.4f;
+        position.x = 22.5f;
+        position.y = 0.8f;
         var laser1 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser1.transform.SetParent(transform, false);
-        laser1.transform.Rotate(0, 0, 7);
-        laser1.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -10);
+        laser1.transform.Rotate(0, 0, 9);
+        laser1.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -3.1f);
         laser1.transform.parent = transform;
 
-        position.x = 12;
-        position.y = -0.8f;
+        position.x = 22.5f;
+        position.y = -0.4f;
         var laser2 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser2.transform.SetParent(transform, false);
-        laser2.transform.Rotate(0, 0, -4);
-        laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 5.5f);
+        laser2.transform.Rotate(0, 0, -5);
+        laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 1.8f);
         laser2.transform.parent = transform;
 
-        position.x = 12;
-        position.y = 0.8f;
+        position.x = 22.5f;
+        position.y = 0.4f;
         var laser3 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser3.transform.SetParent(transform, false);
-        laser3.transform.Rotate(0, 0, 4);
-        laser3.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -5.5f);
+        laser3.transform.Rotate(0, 0, 5);
+        laser3.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -1.8f);
         laser3.transform.parent = transform;
 
 
-        position.x = 12;
+        position.x = 22.5f;
         position.y = -0.2f;
         var laser4 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser4.transform.SetParent(transform, false);
-        laser4.transform.Rotate(0, 0, -1);
-        laser4.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 1.4f);
+        laser4.transform.Rotate(0, 0, -2);
+        laser4.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 0.7f);
         laser4.transform.parent = transform;
 
-        position.x = 12;
+        position.x = 22.5f;
         position.y = 0.2f;
         var laser5 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser5.transform.SetParent(transform, false);
-        laser5.transform.Rotate(0, 0, 1);
-        laser5.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -1.4f);
+        laser5.transform.Rotate(0, 0, 2);
+        laser5.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -0.7f);
         laser5.transform.parent = transform;
         
     }
@@ -295,11 +296,10 @@ public class Boss : MonoBehaviour
     public void LargeLaser()
     {
         Vector3 position = transform.position;
-        position.x = 17;
+        position.x = 36f;
 
         //音の再生
         audioSource.PlayOneShot(sound[1]);
-
 
         var largeLaser = Instantiate(largeLaserPrefab, position, largeLaserPrefab.transform.rotation);
         largeLaser.transform.SetParent(transform, false);
