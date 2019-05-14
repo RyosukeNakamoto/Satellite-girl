@@ -23,5 +23,7 @@ public class BossLaser : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
     }
 }
