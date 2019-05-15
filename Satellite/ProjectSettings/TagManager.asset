@@ -12,6 +12,7 @@ TagManager:
   - Enemy_Bullet1
   - Enemy_Bullet2
   - Enemy_Bullet3
+  - SmallMeteorite
   layers:
   - Default
   - TransparentFX
