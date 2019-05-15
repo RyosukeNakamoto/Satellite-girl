@@ -1057,7 +1057,7 @@ RectTransform:
   - {fileID: 717039653}
   - {fileID: 1736880388}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1352,8 +1352,14 @@ MonoBehaviour:
   - {fileID: 4900000, guid: a96e639069953b445a095f0534a65e65, type: 3}
   enemyPrefabs:
   - {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9, type: 3}
+  - {fileID: 1943467288051095588, guid: b61820dc1ce60a648a54773cda5f080c, type: 3}
+  - {fileID: 4181740663607818675, guid: 93eb5d4b69f4def49a0f23bfe8018006, type: 3}
   - {fileID: 1979040781948784279, guid: 6a100632288a0a542b0efcaf6519550e, type: 3}
+  - {fileID: 1979040781948784279, guid: 09c9d9bb445cd464d9df6180beca8a13, type: 3}
+  - {fileID: 3148871286655619692, guid: 96c5ecbd8afc07d409fb255df7763c3d, type: 3}
   - {fileID: 5534083576414507721, guid: e3992ea3b8f1978429072f14c8dddc46, type: 3}
+  - {fileID: 5534083576414507721, guid: bdd62b7411999bc4ba6466f3bcf7fa80, type: 3}
+  - {fileID: 3797738513035458365, guid: 86ba9cae882f5c2438619855aa65dbef, type: 3}
   bossAlert: {fileID: 1901994275}
   lossTime: 3
   changeTime: 2
@@ -1387,7 +1393,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &655264988
 MonoBehaviour:
@@ -1788,7 +1794,7 @@ Transform:
   - {fileID: 758454117}
   - {fileID: 2064553819}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1090074770
 GameObject:
@@ -2041,7 +2047,7 @@ Transform:
   - {fileID: 146317284}
   - {fileID: 1965810972}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1192846848
 Rigidbody2D:
@@ -3223,7 +3229,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1655554761
 PrefabInstance:
@@ -3275,7 +3281,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528876, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7314726446618528876, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
@@ -3385,7 +3391,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: stage
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4df64328e9ed74886e78456fce40bb, type: 3}

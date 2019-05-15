@@ -95,7 +95,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
-        Debug.Log(playerBulletSc.damage);
+//        Debug.Log(playerBulletSc.damage);
 
         Time.timeScale = 1.0f;
 

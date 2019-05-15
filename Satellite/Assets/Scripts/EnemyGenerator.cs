@@ -70,13 +70,13 @@ public class EnemyGenerator : MonoBehaviour
                 // ボスシーン遷移までのカウント
                 if (lossTime + changeTime <= timer)
                 {
-                    SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
+                    //SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
 
-                    //switch (GameController.Instance.stage)
-                    //{
-                    //    case 0:
-                            
-                    //        break;
+                    switch (GameController.Instance.stage)
+                    {
+                        case 0:
+                            SceneManager.LoadScene("Boss1");
+                            break;
                         //case 1:
                         //    SceneManager.LoadScene("Boss2");
                         //    break;
@@ -110,7 +110,7 @@ public class EnemyGenerator : MonoBehaviour
                         //case 11:
                         //    SceneManager.LoadScene("Boss12");
                         //    break;
-                   //}
+                   }
                 }
             }
         }
