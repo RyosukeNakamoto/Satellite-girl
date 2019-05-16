@@ -498,6 +498,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178061175}
   m_CullTransparentMesh: 0
+--- !u!224 &201238570 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+    type: 3}
+  m_PrefabInstance: {fileID: 517256905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &228277593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1680,7 @@ RectTransform:
   - {fileID: 572666820}
   - {fileID: 470342922}
   - {fileID: 1385803380}
+  - {fileID: 201238570}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1780,6 +1787,130 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514867530}
   m_CullTransparentMesh: 0
+--- !u!1001 &517256905
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 481361723}
+    m_Modifications:
+    - target: {fileID: 2032902608157865855, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_Name
+      value: FadeChenge
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865855, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032902608157865848, guid: 66c984e65b8aae04e952000112a31611,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66c984e65b8aae04e952000112a31611, type: 3}
 --- !u!1 &523839031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,7 +2308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367a261c0f7da2449be689002fafee34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  csvData: {fileID: 4900000, guid: 955b3585e35a8d846994211b1b51028b, type: 3}
+  csvData:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enemyPrefabs:
   - {fileID: 247440628791822168, guid: 5c7d8472f07f6c14ea41f3af28c98fb6, type: 3}
   - {fileID: 6465052087144793740, guid: 993541285496f8a4fa714a68518647e6, type: 3}
@@ -2186,6 +2320,7 @@ MonoBehaviour:
   lossTime: 3
   changeTime: 2
   playerSc: {fileID: 0}
+  fadeChengeImage: {fileID: 0}
 --- !u!1 &655264986
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,17 +6,25 @@ namespace Satellite.Stage1
 {
     public class SceneController : MonoBehaviour
     {
-        
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] private FadeLayer fadeLayer;
+
+        IEnumerator FadeInIEnumerator()
         {
-            
+            yield return fadeLayer.FadeInEnumerator(2.0f);
+            yield return fadeLayer.FadeOutEnumerator(Color.yellow, 2.0f);
         }
 
-        // Update is called once per frame
-        void Update()
+        IEnumerator FadeOutIEnumerator()
         {
-            
+            yield return fadeLayer.FadeOutEnumerator(Color.yellow,2.0f);
+        }
+        private void Awake()
+        {
+            fadeLayer.ForceColor(Color.black);
+        }
+        private void Start()
+        {
+            StartCoroutine(FadeInIEnumerator());
         }
     }
 }
