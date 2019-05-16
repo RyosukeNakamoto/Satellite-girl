@@ -23,12 +23,11 @@ public class Player : MonoBehaviour
     public Image HpGauge = null;
     public float HpValue = 0;
 
-    // プレイヤーの活動時間ゲージ
-    ////public Slider activTimeSlider;
     // プレイヤーのスタミナゲージ       
     public GameObject staminaObject;
     public Image staminaGauge = null;
     public float staminaValue = 0;
+    bool stamina = false;
 
     // 活動時間ゲージのスイッチ
     bool activsSwitch = false;
@@ -83,19 +82,18 @@ public class Player : MonoBehaviour
     // バフを使うフラグ
     public bool buffUse = false;
     // バフをかける
-    bool buffSet = false;
+    public  static bool buffSet = false;
 
     // 打つ弾のスクリプトを参照
     PlayerBullet playerBulletSc;
 
     // Use this for initialization
     void Start()
-    {        
+    {
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
-//        Debug.Log(playerBulletSc.damage);
 
         Time.timeScale = 1.0f;
 
@@ -112,7 +110,7 @@ public class Player : MonoBehaviour
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
-        
+
         // スタミナゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = 1;
@@ -132,12 +130,9 @@ public class Player : MonoBehaviour
         // HPのゲージ
         HpGauge = HpObject.GetComponent<Image>();
         HpGauge.fillAmount = GameController.Instance.HitPoint / HpValue;
-        // HPゲージ
-        HpValue = GameController.Instance.HpGet;
+        HpGauge.fillAmount = GameController.Instance.HpGet;
         // 活動時間のゲージ
         staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
-        ////activTimeSlider.maxValue = GameController.Instance.ActivityTime;
-        ////activTimeSlider.value = activ;
     }
 
     // Update is called once per frame
@@ -146,12 +141,13 @@ public class Player : MonoBehaviour
         buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
         // ゲージがMAXになったらバフ発動フラグ
         if (buffGauge.fillAmount >= 1)
-        {            
+        {
             buffUse = true; // バフを使うフラグON
             if (buffUse)
             {
                 buffSet = true; // バフをかける
-            }           
+                PlayerBullet.buffTrigger = true;
+            }
         }
         // ゲージを使い切ったらバフ終了
         else if (buffGauge.fillAmount <= 0)
@@ -165,7 +161,7 @@ public class Player : MonoBehaviour
             // ゲージを消費
             buffValue -= 0.5f;
         }
-        
+
         //HPが0以下になったときの処理
         if (hp <= 0 || activ <= 0)
         {
@@ -179,13 +175,13 @@ public class Player : MonoBehaviour
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
             //renderer.color = new Color(1f, 1f, 1f, level);
         }
-        
+
         // 移動処理
         Move();
         //移動制限
         Clamp();
         //弾を発射する処理
-        Shot();        
+        Shot();
         //発射間隔の時間計測
         timer += Time.deltaTime;
     }
@@ -202,6 +198,7 @@ public class Player : MonoBehaviour
 
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * speed;
+
         // 移動時の活動時間の変化
         if (x != 0 || y != 0)
         {
@@ -210,11 +207,6 @@ public class Player : MonoBehaviour
             {
                 // 活動ゲージの減算
                 staminaGauge.fillAmount -= 0.0025f;
-                //// 活動ゲージの値が0以下にはならない
-                if (staminaGauge.fillAmount < 0)
-                {
-                    staminaGauge.fillAmount = 0;
-                }
             }
         }
         // 移動していないとき
@@ -224,19 +216,13 @@ public class Player : MonoBehaviour
             if (!activsSwitch)
             {
                 // ゲージが減っているとき
-                if (staminaValue < staminaGauge.fillAmount)
+                if (staminaValue <= staminaGauge.fillAmount)
                 {
                     // 活動ゲージの加算
                     staminaGauge.fillAmount += 0.005f;
-                    //activTimeSlider.value = activ;
-                }
-                else
-                {
-                    // スタミナがMAXを超えないようにする
-                    staminaValue = staminaGauge.fillAmount;
                 }
             }
-        }      
+        }
     }
 
     //プレイヤーの移動制限関数
@@ -259,7 +245,7 @@ public class Player : MonoBehaviour
         //ライフルを装備中の発射間隔
         if (bulletstatus == 0)
         {
-            bulletDelay = GameController.Instance.Rapidfire; 
+            bulletDelay = GameController.Instance.Rapidfire;
 
             //Spaceキーを押したとき弾を発射
             if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
@@ -334,15 +320,14 @@ public class Player : MonoBehaviour
         ondamage = false;
         //       renderer.color = new Color(1f, 1f, 1f, 1f);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
             //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
-            HpGauge.fillAmount -= bulletSc.damage ;
+            HpGauge.fillAmount -= bulletSc.damage;
             GameController.Instance.HpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {

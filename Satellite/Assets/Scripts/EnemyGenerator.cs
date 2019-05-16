@@ -22,12 +22,8 @@ public class EnemyGenerator : MonoBehaviour
     // 
     [SerializeField]
     Player playerSc;
-    // フェードチェンジオブジェクト
-    [SerializeField]
-    GameObject fadeChengeImage;
-    int enemyCount = 0;
 
-    public static bool fadeChenge = false;
+    int enemyCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -56,56 +52,7 @@ public class EnemyGenerator : MonoBehaviour
         }
         //Debug.Log(transform.childCount);
     }
-    IEnumerator enumerator()
-    {
-        yield return new WaitForSeconds(3.0f);
-        bossAlert.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
-        fadeChengeImage.SetActive(true);
-        fadeChenge = true;        
-        yield return new WaitForSeconds(3.0f);
-        fadeChenge = false;
-        switch (GameController.Instance.stage)
-        {
-            case 0:
-                SceneManager.LoadScene("Boss1");
-                break;
-            case 1:
-                SceneManager.LoadScene("Boss2");
-                break;
-            case 2:
-                SceneManager.LoadScene("Boss3");
-                break;
-            case 3:
-                SceneManager.LoadScene("Boss4");
-                break;
-            case 4:
-                SceneManager.LoadScene("Boss5");
-                break;
-            case 5:
-                SceneManager.LoadScene("Boss6");
-                break;
-            case 6:
-                SceneManager.LoadScene("Boss7");
-                break;
-            case 7:
-                SceneManager.LoadScene("Boss8");
-                break;
-            case 8:
-                SceneManager.LoadScene("Boss9");
-                break;
-            case 9:
-                SceneManager.LoadScene("Boss10");
-                break;
-            case 10:
-                SceneManager.LoadScene("Boss11");
-                break;
-            case 11:
-                SceneManager.LoadScene("Boss12");
-                break;
-        }
-    }
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -114,59 +61,58 @@ public class EnemyGenerator : MonoBehaviour
         int ObjectCount = transform.childCount;
         if (ObjectCount==0)
         {
-            StartCoroutine(enumerator());
-            //timer += Time.deltaTime;
-            //// 敵が全滅してからAlertまでのカウント
-            //if (lossTime <= timer )
-            //{
-            //    // アラートを表示
-            //    bossAlert.gameObject.SetActive(true);
-            //    // ボスシーン遷移までのカウント
-            //    if (lossTime + changeTime <= timer)
-            //    {
-            //        //SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
+            timer += Time.deltaTime;
+            //敵が全滅してからAlertまでのカウント
+            if (lossTime <= timer)
+            {
+                //アラートを表示
+                bossAlert.gameObject.SetActive(true);
+                //ボスシーン遷移までのカウント
+                if (lossTime + changeTime <= timer)
+                {
+                    //SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
 
-            //        switch (GameController.Instance.stage)
-            //        {
-            //            case 0:
-            //                SceneManager.LoadScene("Boss1");
-            //                break;
-            //            //case 1:
-            //            //    SceneManager.LoadScene("Boss2");
-            //            //    break;
-            //            //case 2:
-            //            //    SceneManager.LoadScene("Boss3");
-            //            //    break;
-            //            //case 3:
-            //            //    SceneManager.LoadScene("Boss4");
-            //            //    break;
-            //            //case 4:
-            //            //    SceneManager.LoadScene("Boss5");
-            //            //    break;
-            //            //case 5:
-            //            //    SceneManager.LoadScene("Boss6");
-            //            //    break;
-            //            //case 6:
-            //            //    SceneManager.LoadScene("Boss7");
-            //            //    break;
-            //            //case 7:
-            //            //    SceneManager.LoadScene("Boss8");
-            //            //    break;
-            //            //case 8:
-            //            //    SceneManager.LoadScene("Boss9");
-            //            //    break;
-            //            //case 9:
-            //            //    SceneManager.LoadScene("Boss10");
-            //            //    break;
-            //            //case 10:
-            //            //    SceneManager.LoadScene("Boss11");
-            //            //    break;
-            //            //case 11:
-            //            //    SceneManager.LoadScene("Boss12");
-            //            //    break;
-            //       }
-            //    }
-            //}
+                    switch (GameController.Instance.stage)
+                    {
+                        case 0:
+                            SceneManager.LoadScene("Boss1");
+                            break;
+                        case 1:
+                            SceneManager.LoadScene("Boss2");
+                            break;
+                        case 2:
+                            SceneManager.LoadScene("Boss3");
+                            break;
+                        case 3:
+                            SceneManager.LoadScene("Boss4");
+                            break;
+                        case 4:
+                            SceneManager.LoadScene("Boss5");
+                            break;
+                        case 5:
+                            SceneManager.LoadScene("Boss6");
+                            break;
+                        case 6:
+                            SceneManager.LoadScene("Boss7");
+                            break;
+                        case 7:
+                            SceneManager.LoadScene("Boss8");
+                            break;
+                        case 8:
+                            SceneManager.LoadScene("Boss9");
+                            break;
+                        case 9:
+                            SceneManager.LoadScene("Boss10");
+                            break;
+                        case 10:
+                            SceneManager.LoadScene("Boss11");
+                            break;
+                        case 11:
+                            SceneManager.LoadScene("Boss12");
+                            break;
+                    }
+                }
+            }
         }
         //if (ObjectCount == 99)
         //{            

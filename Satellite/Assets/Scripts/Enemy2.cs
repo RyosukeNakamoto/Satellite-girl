@@ -117,9 +117,8 @@ public class Enemy2 : Enemy
         var bullet2 = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
         bullet2.transform.Rotate(0, 0, 135);
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {        
         if (collision.gameObject.tag == "Bullet")
         {
             Hp -= GameController.Instance.Attack;

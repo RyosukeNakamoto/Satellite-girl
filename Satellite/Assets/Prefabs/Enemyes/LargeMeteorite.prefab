@@ -95,6 +95,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 18
   damage: 5
+  camera: {fileID: 0}
+  isRendered: 0
 --- !u!58 &9051490577449306053
 CircleCollider2D:
   m_ObjectHideFlags: 0

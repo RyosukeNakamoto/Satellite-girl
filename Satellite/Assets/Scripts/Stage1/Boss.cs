@@ -117,9 +117,8 @@ public class Boss : MonoBehaviour
         }
         
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {        
         if (collision.gameObject.tag == "Bullet")
         {
             hp -= GameController.Instance.Attack;

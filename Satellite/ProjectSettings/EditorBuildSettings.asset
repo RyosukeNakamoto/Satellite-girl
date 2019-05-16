@@ -31,37 +31,37 @@ EditorBuildSettings:
     guid: 5ab0bab3b1f0cf54ebd07b263f9e352d
   - enabled: 1
     path: Assets/Scenes/Stage2.unity
-    guid: 25a8995f38493514cb4e658e3fbe5b56
+    guid: 91fec88ec34fe61439e6ccab570d4057
   - enabled: 1
     path: Assets/Scenes/Stage3.unity
-    guid: 5d5af6ef2eb4b234ca023405e356b6d1
+    guid: 1dc9a72f5b2e037429c806e04a184dc6
   - enabled: 1
     path: Assets/Scenes/Stage4.unity
-    guid: 6da354114fb295343a4a06dd3393c51a
+    guid: d8d6ce16b9ba50846b3f75b7e10b6c88
   - enabled: 1
     path: Assets/Scenes/Stage5.unity
-    guid: e60dc6f4a0880c54188304c554fe6f79
+    guid: 9c64353fc9790694d8c1ecd577f9cd9d
   - enabled: 1
     path: Assets/Scenes/Stage6.unity
-    guid: 32871c086da157941b8693160fa99ec0
+    guid: 85e11c12d35f8c942bb1fca156645ed1
   - enabled: 1
     path: Assets/Scenes/Stage7.unity
-    guid: 729d08b8fc7d06740bc48afc35789cde
+    guid: f7e11fa0237c56245838c5fb6de07197
   - enabled: 1
     path: Assets/Scenes/Stage8.unity
-    guid: 21fe04ab0bc7f6f428d5e5e5d0b4284b
+    guid: 4679387ff1b07894c9e13ba768a716c9
   - enabled: 1
     path: Assets/Scenes/Stage9.unity
-    guid: c77ecd7b5ceac0d4ba9635213b7a8f92
+    guid: a3b9adeeb3961dd4cac25fe3b03dca67
   - enabled: 1
     path: Assets/Scenes/Stage10.unity
-    guid: e301cddecf24fdf42ba0c50f7e4ca2d7
+    guid: cecbca40baac44345b62cc77c67658d0
   - enabled: 1
     path: Assets/Scenes/Stage11.unity
-    guid: dcda5dde24d46aa40ae08e0cf0c423b1
+    guid: 7ec6bab91273bfb4fabd65315d7e7721
   - enabled: 1
     path: Assets/Scenes/Stage12.unity
-    guid: 43da851153c306f4b87474f87741e4e8
+    guid: c78825bcee10562429472e5c4e52ab28
   - enabled: 1
     path: Assets/Scenes/Boss1.unity
     guid: 4c61aa8518ed8234eb2296d3b2a0da3c
