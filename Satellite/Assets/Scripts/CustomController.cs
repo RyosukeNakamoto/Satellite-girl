@@ -103,24 +103,35 @@ public class CustomController : MonoBehaviour
 
     //選択したステージによってテキストを変更
     public Text selectedStage;
+    public Image[] selectedStageImage;
 
     //音
     AudioSource audioSource;
     //音を配列で管理
     public AudioClip[] sound;
 
+    //十字キーでの入力可能判定
     bool dpvInput = false;
     bool dphInput = false;
+
+    //スティックキーでの入力判定
+    bool xInput = false;
+    bool yInput = false;
+
+    //決定を選択できるか判定
+    bool decisionStrengthening=false;
+
+    public float longPress = 0.0f;
 
     bool shortagePoint = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        //シーン開始時に星の画像、未確定の星の画像を非表示
+        //シーン開始時に、星の画像、未確定の星の画像を非表示
         for (int i = 0; i < 5; i++)
         {
-            //シーン開始時に選択中画像を非表示
+            //シーン開始時に、選択中画像を非表示
             selectedImage[i].enabled = false;
             //親愛度
             intimacyStar[i].enabled = false;
@@ -139,13 +150,13 @@ public class CustomController : MonoBehaviour
             unsettledRapidfireStar[i].enabled = false;
         }
 
-        //シーン開始時に出撃選択イメージをグレーに
+        //シーン開始時に、出撃選択イメージをグレーに
         sortieImage.color = Color.gray;
 
-        //シーン開始時に強化するか選択するウインドウを非表示
+        //シーン開始時に、強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
 
-        //シーン開始時にポイントが不足してた場合のウインドウ非表示
+        //シーン開始時に、ポイントが不足してた場合のウインドウ非表示
         shortagePointImage.SetActive(false);
 
         //音のコンポーネントを取得
@@ -161,11 +172,18 @@ public class CustomController : MonoBehaviour
             GameController.Instance.score += 10000;
         }
 
+       
+
         //十字キー縦の入力
         float dph = Input.GetAxis("D_Pad_H");
         //十字キー横の入力
         float dpv = Input.GetAxis("D_Pad_V");
+        //スティックキーの横の入力
+        float x = Input.GetAxis("Horizontal");
+        //スティックキーの縦の入力
+        float y = Input.GetAxis("Vertical");
 
+        //十字キーの入力判定
         if (dph == 0)
         {
             dphInput = false;
@@ -175,10 +193,23 @@ public class CustomController : MonoBehaviour
             dpvInput = false;
         }
 
-        /*
-        //トリガー入力でキャラクター切り替え
-        float tri = Input.GetAxis("L_R_Trigger");
-        */
+        //スティックキーの入力判定
+        if (x == 0)
+        {
+            xInput = false;
+        }
+        else
+        {
+            longPress += Time.deltaTime;
+        }
+        if (y == 0)
+        {
+            yInput = false;
+        }
+        else
+        {
+            longPress += Time.deltaTime;
+        }
 
         //所持ポイントを表示
         possessionPointText.text = (GameController.Instance.score).ToString();
@@ -186,24 +217,32 @@ public class CustomController : MonoBehaviour
         //強化の確定を選択する画面が表示中にSelectNumberの数値が変更されないようにする
         if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
         {
-            if (dphInput == false)
+            //連続入力の制御
+            if (dphInput == false && yInput == false)
             {
                 //上矢印キーを押したときSelectNumberを減らす
-                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
                 {
                     selectNumber--;
+
+                    //音の再生
                     audioSource.PlayOneShot(sound[0]);
 
+                    //連続入力の制御
                     dphInput = true;
+                    yInput = true;
                 }
 
                 //下矢印キーを押したときSelectNumberを増やす
-                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
+                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || y < 0)
                 {
                     selectNumber++;
+                    //音の再生
                     audioSource.PlayOneShot(sound[0]);
 
+                    //連続入力できないよう制限
                     dphInput = true;
+                    yInput = true;
                 }
             }
 
@@ -222,24 +261,35 @@ public class CustomController : MonoBehaviour
         //強化を確定するウインドウでの選択
         if (strengtheningQuestion.activeSelf)
         {
-            if (dphInput == false)
+            if (dphInput == false && xInput == false)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || x > 0)
+                {
+                    strengtheningQuestionnumber = 0;
+
+                    //音の再生
+                    audioSource.PlayOneShot(sound[0]);
+
+                    //連続入力の制御
+                    dphInput = true;
+                    xInput = true;
+                }
+
+                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || x < 0)
                 {
                     strengtheningQuestionnumber = 1;
                     audioSource.PlayOneShot(sound[0]);
 
+                    //連続入力の制御
                     dphInput = true;
-                }
-
-                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
-                {
-                    strengtheningQuestionnumber = 2;
-                    audioSource.PlayOneShot(sound[0]);
-
-                    dphInput = true;
+                    xInput = true;
                 }
             }
+        }
+        else
+        {
+            //強化を確定するウインドウが非表示の時、連続入力しないよう指定
+            decisionStrengthening = false;
         }
 
         //強化を確定するウインドウが表示されたときはどこも選択していない状態にする
@@ -268,7 +318,7 @@ public class CustomController : MonoBehaviour
             shortagePoint = false;
         }
 
-        if (shortagePoint == false)
+        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
         {
             //ステージ選択画面に戻る
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
@@ -293,29 +343,35 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                if (dpvInput == false)
+                if (dpvInput == false && xInput == false)
                 {
                     //親愛度選択中に左右キーで強化するレベルを選択
-                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                     {
                         if (ununsettledIntimacy < 5)
                         {
                             ununsettledIntimacy++;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                     {
                         if (ununsettledIntimacy > minimumUnunsettledIntimacy)
                         {
                             ununsettledIntimacy--;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
                 }
@@ -348,6 +404,11 @@ public class CustomController : MonoBehaviour
                         //強化するか選択するウインドウを表示
                         strengtheningQuestion.SetActive(true);
                     }
+                    //連続入力できないよう指定
+                        if(Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
 
                 }
             }
@@ -388,6 +449,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -433,6 +499,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -482,6 +553,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -535,6 +611,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if(Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -548,53 +629,58 @@ public class CustomController : MonoBehaviour
             {
 
                 //Yes選択状態
-                if (strengtheningQuestionnumber == 1)
+                if (strengtheningQuestionnumber == 0)
                 {
                     yes.color = Color.white;
                     no.color = Color.gray;
-                    //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    //連続入力されないように判定
+                    if (decisionStrengthening == true)
                     {
-                        if (GameController.Instance.score >= Level1)
+                        //強化を確定
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            //ゲームコントローラーの親愛度レベルを変更する
-                            GameController.Instance.intimacyLevel = ununsettledIntimacy;
+                            if (GameController.Instance.score >= Level1)
+                            {
+                                //ゲームコントローラーの親愛度レベルを変更する
+                                GameController.Instance.intimacyLevel = ununsettledIntimacy;
 
-                            minimumUnunsettledIntimacy = ununsettledIntimacy;
+                                minimumUnunsettledIntimacy = ununsettledIntimacy;
 
-                            //ポイントを消費
-                            GameController.Instance.score -= consumptionPoint;
+                                //ポイントを消費
+                                GameController.Instance.score -= consumptionPoint;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            strengtheningQuestionnumber = 0;
+                                strengtheningQuestionnumber = 0;
 
-                            //強化確定時の音
-                            audioSource.PlayOneShot(sound[1]);
-                        }
+                                //強化確定時の音
+                                audioSource.PlayOneShot(sound[1]);
 
-                        //強化するポイントが不足していた場合に画像表示
-                        else
-                        {
-                            strengtheningQuestionnumber = 0;
+                                //連続入力判定
+                                decisionStrengthening = false;
+                            }
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                            //強化するポイントが不足していた場合に画像表示
+                            else
+                            {
+                                strengtheningQuestionnumber = 0;
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            //画像表示
-                            shortagePointImage.SetActive(true);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
 
-
+                                //画像表示
+                                shortagePointImage.SetActive(true);
+                            }
                         }
                     }
                 }
 
                 //No選択状態
-                if (strengtheningQuestionnumber == 2)
+                if (strengtheningQuestionnumber == 1)
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
@@ -635,29 +721,35 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                if (dpvInput == false)
+                if (dpvInput == false && xInput == false)
                 {
                     //HP選択中に左右キーで強化するレベルを選択
-                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                     {
                         if (ununsettledHp < 5)
                         {
                             ununsettledHp++;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                     {
                         if (ununsettledHp > minimumUnunsettledHp)
                         {
                             ununsettledHp--;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
                 }
@@ -693,6 +785,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -734,6 +831,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -779,6 +881,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -827,6 +934,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -881,6 +993,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -894,54 +1011,58 @@ public class CustomController : MonoBehaviour
             {
 
                 //Yes選択状態
-                if (strengtheningQuestionnumber == 1)
+                if (strengtheningQuestionnumber == 0)
                 {
                     yes.color = Color.white;
                     no.color = Color.gray;
-                    //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    //連続入力されないように判定
+                    if (decisionStrengthening == true)
                     {
-                        if (GameController.Instance.score >= consumptionPoint)
+                        //強化を確定
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            //ゲームコントローラーのHPレベルを変更する
-                            GameController.Instance.hpLevel = ununsettledHp;
+                            if (GameController.Instance.score >= consumptionPoint)
+                            {
+                                //ゲームコントローラーのHPレベルを変更する
+                                GameController.Instance.hpLevel = ununsettledHp;
 
-                            minimumUnunsettledHp = ununsettledHp;
+                                minimumUnunsettledHp = ununsettledHp;
 
-                            //ポイントを消費
-                            GameController.Instance.score -= consumptionPoint;
+                                //ポイントを消費
+                                GameController.Instance.score -= consumptionPoint;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            strengtheningQuestionnumber = 0;
+                                strengtheningQuestionnumber = 0;
 
-                            //強化確定時の音
-                            audioSource.PlayOneShot(sound[2]);
-                        }
+                                //強化確定時の音
+                                audioSource.PlayOneShot(sound[2]);
+                            }
 
-                        //ポイント不足の画像表示
-                        else
-                        {
-                            strengtheningQuestionnumber = 0;
+                            //ポイント不足の画像表示
+                            else
+                            {
+                                strengtheningQuestionnumber = 0;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
 
-                            //画像表示
-                            shortagePointImage.SetActive(true);
+                                //画像表示
+                                shortagePointImage.SetActive(true);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
+                            }
                         }
                     }
                 }
 
                 //No選択状態
-                if (strengtheningQuestionnumber == 2)
+                if (strengtheningQuestionnumber == 1)
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
@@ -980,29 +1101,35 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                if (dpvInput == false)
+                if (dpvInput == false && xInput == false)
                 {
                     //活動時間選択中に左右キーで強化するレベルを選択
-                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv > 0)
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                     {
                         if (ununsettledActivityTime < 5)
                         {
                             ununsettledActivityTime++;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                     {
                         if (ununsettledActivityTime > minimumUnununsettledActivityTime)
                         {
                             ununsettledActivityTime--;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
                 }
@@ -1038,6 +1165,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1079,6 +1211,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1124,6 +1261,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1173,6 +1315,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1226,6 +1373,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -1238,54 +1390,58 @@ public class CustomController : MonoBehaviour
             if (strengtheningQuestion.activeSelf)
             {
                 //Yes選択状態
-                if (strengtheningQuestionnumber == 1)
+                if (strengtheningQuestionnumber == 0)
                 {
                     yes.color = Color.white;
                     no.color = Color.gray;
-                    //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    //連続入力されないように判定
+                    if (decisionStrengthening == true)
                     {
-                        if (GameController.Instance.score >= consumptionPoint)
+                        //強化を確定
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            //ゲームコントローラーの活動時間レベルを変更する
-                            GameController.Instance.activityTimeLevel = ununsettledActivityTime;
+                            if (GameController.Instance.score >= consumptionPoint)
+                            {
+                                //ゲームコントローラーの活動時間レベルを変更する
+                                GameController.Instance.activityTimeLevel = ununsettledActivityTime;
 
-                            minimumUnununsettledActivityTime = ununsettledActivityTime;
+                                minimumUnununsettledActivityTime = ununsettledActivityTime;
 
-                            //ポイントを消費
-                            GameController.Instance.score -= consumptionPoint;
+                                //ポイントを消費
+                                GameController.Instance.score -= consumptionPoint;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            strengtheningQuestionnumber = 0;
+                                strengtheningQuestionnumber = 0;
 
-                            //強化確定時の音
-                            audioSource.PlayOneShot(sound[2]);
-                        }
+                                //強化確定時の音
+                                audioSource.PlayOneShot(sound[2]);
+                            }
 
-                        //ポイント不足
-                        else
-                        {
-                            strengtheningQuestionnumber = 0;
+                            //ポイント不足
+                            else
+                            {
+                                strengtheningQuestionnumber = 0;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
 
-                            //画像表示
-                            shortagePointImage.SetActive(true);
+                                //画像表示
+                                shortagePointImage.SetActive(true);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
+                            }
                         }
                     }
                 }
 
                 //No選択状態
-                if (strengtheningQuestionnumber == 2)
+                if (strengtheningQuestionnumber == 1)
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
@@ -1324,29 +1480,35 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                if (dpvInput == false)
+                if (dpvInput == false && xInput == false)
                 {
                     //攻撃選択中に左右キーで強化するレベルを選択
-                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv > 0)
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                     {
                         if (ununsettledAttack < 5)
                         {
                             ununsettledAttack++;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                     {
                         if (ununsettledAttack > minimumUnununsettledAttack)
                         {
                             ununsettledAttack--;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
                 }
@@ -1382,6 +1544,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1423,6 +1590,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1469,6 +1641,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1520,6 +1697,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1575,6 +1757,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -1588,54 +1775,58 @@ public class CustomController : MonoBehaviour
             {
 
                 //Yes選択状態
-                if (strengtheningQuestionnumber == 1)
+                if (strengtheningQuestionnumber == 0)
                 {
                     yes.color = Color.white;
                     no.color = Color.gray;
-                    //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    //連続入力されないように判定
+                    if (decisionStrengthening == true)
                     {
-                        if (GameController.Instance.score >= consumptionPoint)
+                        //強化を確定
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            //ゲームコントローラーの攻撃レベルを変更する
-                            GameController.Instance.attackLevel = ununsettledAttack;
+                            if (GameController.Instance.score >= consumptionPoint)
+                            {
+                                //ゲームコントローラーの攻撃レベルを変更する
+                                GameController.Instance.attackLevel = ununsettledAttack;
 
-                            minimumUnununsettledAttack = ununsettledAttack;
+                                minimumUnununsettledAttack = ununsettledAttack;
 
-                            //ポイントを消費
-                            GameController.Instance.score -= consumptionPoint;
+                                //ポイントを消費
+                                GameController.Instance.score -= consumptionPoint;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            strengtheningQuestionnumber = 0;
+                                strengtheningQuestionnumber = 0;
 
-                            //強化確定時の音
-                            audioSource.PlayOneShot(sound[2]);
-                        }
+                                //強化確定時の音
+                                audioSource.PlayOneShot(sound[2]);
+                            }
 
-                        //ポイント不足の画像表示
-                        else
-                        {
-                            strengtheningQuestionnumber = 0;
+                            //ポイント不足の画像表示
+                            else
+                            {
+                                strengtheningQuestionnumber = 0;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
 
-                            //画像表示
-                            shortagePointImage.SetActive(true);
+                                //画像表示
+                                shortagePointImage.SetActive(true);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
+                            }
                         }
                     }
                 }
 
                 //No選択状態
-                if (strengtheningQuestionnumber == 2)
+                if (strengtheningQuestionnumber == 1)
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
@@ -1674,29 +1865,35 @@ public class CustomController : MonoBehaviour
             //強化するか尋ねるウインドウが非表示の時に処理
             if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
             {
-                if (dpvInput == false)
+                if (dpvInput == false && xInput == false)
                 {
                     //連射速度選択中に左右キーで強化するレベルを選択
-                    if (Input.GetKeyDown(KeyCode.RightArrow)|| dpv>0)
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                     {
                         if (ununsettledRapidfire < 5)
                         {
                             ununsettledRapidfire++;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力できないよう制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.LeftArrow)|| dpv < 0)
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                     {
                         if (ununsettledRapidfire > minimumUnununsettledRapidfire)
                         {
                             ununsettledRapidfire--;
 
+                            //音の再生
                             audioSource.PlayOneShot(sound[0]);
 
+                            //連続入力の制御
                             dpvInput = true;
+                            xInput = true;
                         }
                     }
                 }
@@ -1732,6 +1929,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1773,6 +1975,11 @@ public class CustomController : MonoBehaviour
                         {
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
+                        }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
                         }
                     }
                 }
@@ -1868,6 +2075,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -1921,6 +2133,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -1934,54 +2151,55 @@ public class CustomController : MonoBehaviour
             {
 
                 //Yes選択状態
-                if (strengtheningQuestionnumber == 1)
+                if (strengtheningQuestionnumber == 0)
                 {
                     yes.color = Color.white;
                     no.color = Color.gray;
-                    //強化を確定
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    //連続入力されないように判定
+                    if (decisionStrengthening == true)
                     {
-                        if (GameController.Instance.score >= consumptionPoint)
+                        //強化を確定
+                        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            //ゲームコントローラーの活動時間レベルを変更する
-                            GameController.Instance.rapidfireLevel = ununsettledRapidfire;
+                            if (GameController.Instance.score >= consumptionPoint)
+                            {
+                                //ゲームコントローラーの活動時間レベルを変更する
+                                GameController.Instance.rapidfireLevel = ununsettledRapidfire;
 
-                            minimumUnununsettledRapidfire = ununsettledRapidfire;
+                                minimumUnununsettledRapidfire = ununsettledRapidfire;
 
-                            //ポイントを消費
-                            GameController.Instance.score -= consumptionPoint;
+                                //ポイントを消費
+                                GameController.Instance.score -= consumptionPoint;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            strengtheningQuestionnumber = 0;
+                                strengtheningQuestionnumber = 0;
 
-                            //強化確定時の音
-                            audioSource.PlayOneShot(sound[2]);
-                        }
+                                //強化確定時の音
+                                audioSource.PlayOneShot(sound[2]);
+                            }
 
-                        //ポイント不足
-                        else
-                        {
-                            strengtheningQuestionnumber = 0;
+                            //ポイント不足
+                            else
+                            {
+                                strengtheningQuestionnumber = 0;
 
-                            //強化するか尋ねるウインドウを非表示
-                            strengtheningQuestion.SetActive(false);
+                                //強化するか尋ねるウインドウを非表示
+                                strengtheningQuestion.SetActive(false);
 
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //音の再生
+                                audioSource.PlayOneShot(sound[3]);
 
-                            //画像表示
-                            shortagePointImage.SetActive(true);
-
-                            //音の再生
-                            audioSource.PlayOneShot(sound[3]);
+                                //画像表示
+                                shortagePointImage.SetActive(true);
+                            }
                         }
                     }
                 }
 
                 //No選択状態
-                if (strengtheningQuestionnumber == 2)
+                if (strengtheningQuestionnumber == 1)
                 {
                     yes.color = Color.gray;
                     no.color = Color.white;
@@ -2014,6 +2232,9 @@ public class CustomController : MonoBehaviour
             //選択画像を点滅
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             sortieImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
+            //消費ポイントの表示を変更
+            consumptionPointText.text = (0).ToString();
 
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
@@ -2154,42 +2375,86 @@ public class CustomController : MonoBehaviour
         switch (GameController.Instance.stage)
         {
             case 0:
-                selectedStage.text = ("Stage-1");
+                selectedStage.text = ("STAGE1");
                 break;
             case 1:
-                selectedStage.text = ("Stage-2");
+                selectedStage.text = ("STAGE2");
                 break;
             case 2:
-                selectedStage.text = ("Stage-3");
+                selectedStage.text = ("STAGE3");
                 break;
             case 3:
-                selectedStage.text = ("Stage-4");
+                selectedStage.text = ("STAGE4");
                 break;
             case 4:
-                selectedStage.text = ("Stage-5");
+                selectedStage.text = ("STAGE5");
                 break;
             case 5:
-                selectedStage.text = ("Stage-6");
+                selectedStage.text = ("STAGE6");
                 break;
             case 6:
-                selectedStage.text = ("Stage-7");
+                selectedStage.text = ("STAGE7");
                 break;
             case 7:
-                selectedStage.text = ("Stage-8");
+                selectedStage.text = ("STAGE8");
                 break;
             case 8:
-                selectedStage.text = ("Stage-9");
+                selectedStage.text = ("STAGE9");
                 break;
             case 9:
-                selectedStage.text = ("Stage-10");
+                selectedStage.text = ("STAGE10");
                 break;
             case 10:
-                selectedStage.text = ("Stage-11");
+                selectedStage.text = ("STAGE11");
                 break;
             case 11:
-                selectedStage.text = ("Stage-12");
+                selectedStage.text = ("STAGE12");
                 break;
         }
+        /*
+        switch (GameController.Instance.stage)
+        {
+            case 0:
+                selectedStageImage[0].enabled = true;
+                break;
+            case 1:
+                selectedStageImage[1].enabled = true;
+                break;
+            case 2:
+                selectedStageImage[2].enabled = true;
+                break;
+            case 3:
+                selectedStageImage[3].enabled = true;
+                break;
+            case 4:
+                selectedStageImage[4].enabled = true;
+                break;
+            case 5:
+                selectedStageImage[5].enabled = true;
+                break;
+            case 6:
+                selectedStageImage[6].enabled = true;
+                break;
+            case 7:
+                selectedStageImage[7].enabled = true;
+                break;
+            case 8:
+                selectedStageImage[8].enabled = true;
+                break;
+            case 9:
+                selectedStageImage[9].enabled = true;
+                break;
+            case 10:
+                selectedStageImage[10].enabled = true;
+                break;
+            case 11:
+                selectedStageImage[11].enabled = true;
+                break;
+            case 12:
+                selectedStageImage[12].enabled = true;
+                break;
+        }
+        */
     }
 }
 
