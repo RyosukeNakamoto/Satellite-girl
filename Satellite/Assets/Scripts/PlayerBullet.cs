@@ -9,19 +9,34 @@ public class PlayerBullet : Bullet
 
     Rigidbody2D rigidbody;
 
-    
+    // 着弾エフェクト
+    [SerializeField]
+    private GameObject landing;
+
     //武器のスプライト
     SpriteRenderer bulletsprite;
 
+    // バフ発動
+    public static bool buffTrigger = false;
     private void Awake()
     {
-        // 弾の威力設定
-        damage = GameController.Instance.Attack;
+       
+    }
+    private void OnEnable()
+    {
+
+    }
+    private void Reset()
+    {
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();                  
+        rigidbody = GetComponent<Rigidbody2D>();
+        // 弾の威力設定
+        damage = GameController.Instance.Attack;
+        Debug.Log(damage);
     }
 
     // Update is called once per frame
@@ -32,21 +47,22 @@ public class PlayerBullet : Bullet
         pos += transform.right * speed * Time.deltaTime;
         transform.position = pos;
 
-        ////弾の移動
-        //rigidbody.velocity = transform.right.normalized * speed;
-
-              
+        if (buffTrigger)
+        {
+            damage += 3;
+            Debug.Log(damage);
+            buffTrigger = false;
+        }
+        if (!Player.buffSet)
+        {
+            damage = GameController.Instance.Attack;
+            Debug.Log(damage);            
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            Destroy(gameObject);
-        }
-        if (collision.gameObject.tag == "Boss")
-        {
-            Destroy(gameObject);
-        }
+        Instantiate(landing, transform.position, landing.transform.rotation);
+        Destroy(gameObject);
     }  
 }
