@@ -83,6 +83,10 @@ public class Player : MonoBehaviour
     public bool buffUse = false;
     // バフをかける
     public  static bool buffSet = false;
+    // スピードバフON
+    private bool speedOnBuff = false;
+    // スピードバフOFF
+    private bool speedOffBuff = true;
 
     // 打つ弾のスクリプトを参照
     PlayerBullet playerBulletSc;
@@ -133,6 +137,7 @@ public class Player : MonoBehaviour
         HpGauge.fillAmount = GameController.Instance.HpGet;
         // 活動時間のゲージ
         staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
+        Debug.Log(GameController.Instance.ActivityTime);
     }
 
     // Update is called once per frame
@@ -147,6 +152,8 @@ public class Player : MonoBehaviour
             {
                 buffSet = true; // バフをかける
                 PlayerBullet.buffTrigger = true;
+                speedOnBuff = true;
+                speedOffBuff = false;
             }
         }
         // ゲージを使い切ったらバフ終了
@@ -154,12 +161,14 @@ public class Player : MonoBehaviour
         {
             buffUse = false;    // バフフラグOFF
             buffSet = false;    // 
+            speedOnBuff = false;    // バフ終了
+            speedOffBuff = true;    // 通常モード
         }
         // バフ発動
         if (buffSet)
         {
             // ゲージを消費
-            buffValue -= 0.5f;
+            buffValue -= 0.1f;
         }
 
         //HPが0以下になったときの処理
@@ -195,6 +204,18 @@ public class Player : MonoBehaviour
 
         //移動する向きを作成
         Vector2 direction = new Vector2(x, y).normalized;
+
+        if (speedOnBuff)
+        {
+            speed = speed * 1.3f;
+            Debug.Log(speed);
+            speedOnBuff = false;
+        }
+        if (speedOffBuff)
+        {
+            speed = 10;
+            Debug.Log(speed);
+        }
 
         //移動する向きとスピードを代入
         rigidbody.velocity = direction * speed;

@@ -36,7 +36,6 @@ public class PlayerBullet : Bullet
         rigidbody = GetComponent<Rigidbody2D>();
         // 弾の威力設定
         damage = GameController.Instance.Attack;
-        Debug.Log(damage);
     }
 
     // Update is called once per frame
@@ -56,7 +55,6 @@ public class PlayerBullet : Bullet
         if (!Player.buffSet)
         {
             damage = GameController.Instance.Attack;
-            Debug.Log(damage);            
         }
     }
 
