@@ -120,8 +120,11 @@ public class CustomController : MonoBehaviour
 
     //決定を選択できるか判定
     bool decisionStrengthening=false;
-    //
+    //ステージセレクトに戻れるか判定
     bool back = false;
+    //音の連続再生制御
+    bool selectedYesSound = false;
+    bool selectedNoSound = false;
 
     public float longPress = 0.0f;
 
@@ -185,32 +188,30 @@ public class CustomController : MonoBehaviour
         //スティックキーの縦の入力
         float y = Input.GetAxis("Vertical");
 
-        //十字キーの入力判定
+        //十字キーの連続入力制御判定
         if (dph == 0)
         {
+            //十字キーの縦の入力がないとき、縦の入力ができるように
             dphInput = false;
         }
+
         if (dpv == 0)
         {
+            //十字キーの横の入力がないとき、横の入力ができるように
             dpvInput = false;
         }
 
-        //スティックキーの入力判定
+        //スティックキーの連続入力制御判定
         if (x == 0)
         {
+            //スティックキーの横入力をできるように
             xInput = false;
         }
-        else
-        {
-            longPress += Time.deltaTime;
-        }
+        
         if (y == 0)
         {
+            //スティックキーの縦入力をできるように
             yInput = false;
-        }
-        else
-        {
-            longPress += Time.deltaTime;
         }
 
         //所持ポイントを表示
@@ -263,29 +264,47 @@ public class CustomController : MonoBehaviour
         //強化を確定するウインドウでの選択
         if (strengtheningQuestion.activeSelf)
         {
+            //連続入力の制御判定
             if (dphInput == false && xInput == false)
             {
+                //「はい」選択中
                 if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
                 {
                     strengtheningQuestionnumber = 0;
+                    selectedNoSound = false;
 
-                    //音の再生
-                    audioSource.PlayOneShot(sound[0]);
+                    //音の連続再生制御判定
+                    if (selectedYesSound == false)
+                    {
+                        //音の再生
+                        audioSource.PlayOneShot(sound[0]);
+                    }
+                    //音の連続再生されないように設定
+                    selectedYesSound = true;
 
                     //連続入力の制御
                     dphInput = true;
                     yInput = true;
                 }
-
+                //「いいえ」選択中
                 if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || y < 0)
                 {
                     strengtheningQuestionnumber = 1;
-                    audioSource.PlayOneShot(sound[0]);
+                    selectedYesSound = false;
+                    //音の連続再生制御判定
+                    if (selectedNoSound == false)
+                    {
+                        //音の再生
+                        audioSource.PlayOneShot(sound[0]);
+                    }
+                    //音の連続再生されないように設定
+                    selectedNoSound = true;
 
                     //連続入力の制御
                     dphInput = true;
                     yInput = true;
                 }
+
             }
         }
         else
@@ -294,7 +313,7 @@ public class CustomController : MonoBehaviour
             decisionStrengthening = false;
         }
 
-        //強化を確定するウインドウが表示されたときはどこも選択していない状態にする
+        //強化を確定するウインドウが表示されたときは「はい」選択状態にする
         if (strengtheningQuestionnumber == 0)
         {
             yes.color = Color.grey;
@@ -313,15 +332,17 @@ public class CustomController : MonoBehaviour
                 shortagePointImage.SetActive(false);
 
                 shortagePoint = true;
+                //ステージ選択に戻れないように
                 back = true;
             }
         }
         else
         {
             shortagePoint = false;
+            back = false;
         }
 
-        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
+        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf && back == false)
         {
             //ステージ選択画面に戻る
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
@@ -2414,50 +2435,7 @@ public class CustomController : MonoBehaviour
                 selectedStage.text = ("STAGE12");
                 break;
         }
-        /*
-        switch (GameController.Instance.stage)
-        {
-            case 0:
-                selectedStageImage[0].enabled = true;
-                break;
-            case 1:
-                selectedStageImage[1].enabled = true;
-                break;
-            case 2:
-                selectedStageImage[2].enabled = true;
-                break;
-            case 3:
-                selectedStageImage[3].enabled = true;
-                break;
-            case 4:
-                selectedStageImage[4].enabled = true;
-                break;
-            case 5:
-                selectedStageImage[5].enabled = true;
-                break;
-            case 6:
-                selectedStageImage[6].enabled = true;
-                break;
-            case 7:
-                selectedStageImage[7].enabled = true;
-                break;
-            case 8:
-                selectedStageImage[8].enabled = true;
-                break;
-            case 9:
-                selectedStageImage[9].enabled = true;
-                break;
-            case 10:
-                selectedStageImage[10].enabled = true;
-                break;
-            case 11:
-                selectedStageImage[11].enabled = true;
-                break;
-            case 12:
-                selectedStageImage[12].enabled = true;
-                break;
-        }
-        */
+        
     }
 }
 
