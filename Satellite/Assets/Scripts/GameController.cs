@@ -104,6 +104,10 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //スコアの上限設定
+        if (score >= 99999)
+        {
+            score = 99999;
+        }
     }
 }
