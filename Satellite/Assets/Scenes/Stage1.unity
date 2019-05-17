@@ -2033,6 +2033,8 @@ MonoBehaviour:
   ondamage: 0
   enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
     type: 3}
+  bossBullet: {fileID: 1879095314465036589, guid: b2cc39446016f60459c7bd649fc4c8d8,
+    type: 3}
   gameOver: {fileID: 1501223481}
   gameClear: {fileID: 1319542329}
   camera: {fileID: 1090074770}

@@ -67,35 +67,35 @@ EditorBuildSettings:
     guid: 4c61aa8518ed8234eb2296d3b2a0da3c
   - enabled: 1
     path: Assets/Scenes/Boss2.unity
-    guid: 543c46306bf1c114886249652a63f9e4
+    guid: 4ce9df7e001046648a0cb70802412926
   - enabled: 1
     path: Assets/Scenes/Boss3.unity
-    guid: ef37081ffded3314488c820f3311c20b
+    guid: ab58c38b9e9ba094a9ebc8f7978f420b
   - enabled: 1
     path: Assets/Scenes/Boss4.unity
-    guid: 97399a2f61f9bb1488b5c0d21fedbe73
+    guid: 6a3bdee06182aa64aad8ff1356733b1b
   - enabled: 1
     path: Assets/Scenes/Boss5.unity
-    guid: 30cb310a48efe3b49850ea6b86d13559
+    guid: 0b00ec1196e052841acbd41675cdd812
   - enabled: 1
     path: Assets/Scenes/Boss6.unity
-    guid: e2401e4a3dd41ae438c32372db24615b
+    guid: 0745ea48b3cfc9c4eb51832e8da30fff
   - enabled: 1
     path: Assets/Scenes/Boss7.unity
-    guid: 83c0bfa559cd6ab4e843c94d644c0e3a
+    guid: 979d96f38c3d912489e7b8e0bb74e303
   - enabled: 1
     path: Assets/Scenes/Boss8.unity
-    guid: fc8484159d18c2b43bed7fe52bfd9be0
+    guid: 6bb9c0019e949d442b8c0aed97681b3a
   - enabled: 1
     path: Assets/Scenes/Boss9.unity
-    guid: 742c6924b1955774b9090bda2775710e
+    guid: 1adb1b3f08afc744b9153b6b2e239655
   - enabled: 1
     path: Assets/Scenes/Boss10.unity
-    guid: c113d597b00616244a2ed70e05db53f2
+    guid: eecb104f9776c8c40a2bb02824639c09
   - enabled: 1
     path: Assets/Scenes/Boss11.unity
-    guid: baed807fb9b0d8e4993ea0138b343d31
+    guid: 45652cde181a2bb48a5ca221c61974fe
   - enabled: 1
     path: Assets/Scenes/Boss12.unity
-    guid: d13aca519c751a649afe8e069da66b52
+    guid: b30d540b1c7e95d449938d1234ba3da8
   m_configObjects: {}
