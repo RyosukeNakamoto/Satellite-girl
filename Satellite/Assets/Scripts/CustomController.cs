@@ -46,7 +46,7 @@ public class CustomController : MonoBehaviour
     public int sortielevel = 0;
     */
     //レベルごとの消費ポイント
-    int Level1 = 500;
+    int Level1 = 50;
     int Level2 = 600;
     int Level3 = 700;
     int Level4 = 800;
@@ -120,6 +120,8 @@ public class CustomController : MonoBehaviour
 
     //決定を選択できるか判定
     bool decisionStrengthening=false;
+    //
+    bool back = false;
 
     public float longPress = 0.0f;
 
@@ -263,7 +265,7 @@ public class CustomController : MonoBehaviour
         {
             if (dphInput == false && xInput == false)
             {
-                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || x > 0)
+                if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
                 {
                     strengtheningQuestionnumber = 0;
 
@@ -272,17 +274,17 @@ public class CustomController : MonoBehaviour
 
                     //連続入力の制御
                     dphInput = true;
-                    xInput = true;
+                    yInput = true;
                 }
 
-                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || x < 0)
+                if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || y < 0)
                 {
                     strengtheningQuestionnumber = 1;
                     audioSource.PlayOneShot(sound[0]);
 
                     //連続入力の制御
                     dphInput = true;
-                    xInput = true;
+                    yInput = true;
                 }
             }
         }
@@ -311,6 +313,7 @@ public class CustomController : MonoBehaviour
                 shortagePointImage.SetActive(false);
 
                 shortagePoint = true;
+                back = true;
             }
         }
         else
@@ -388,7 +391,7 @@ public class CustomController : MonoBehaviour
                 if (GameController.Instance.intimacyLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
-                    consumptionPointText.text = "500";
+                    consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
                 {
@@ -767,7 +770,7 @@ public class CustomController : MonoBehaviour
                 if (GameController.Instance.hpLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
-                    consumptionPointText.text = "500";
+                    consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
                 {
@@ -1147,7 +1150,7 @@ public class CustomController : MonoBehaviour
                 if (GameController.Instance.activityTimeLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
-                    consumptionPointText.text = "500";
+                    consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
                 {
@@ -1526,7 +1529,7 @@ public class CustomController : MonoBehaviour
                 if (GameController.Instance.attackLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
-                    consumptionPointText.text = "500";
+                    consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
                 {
@@ -1911,7 +1914,7 @@ public class CustomController : MonoBehaviour
                 if (GameController.Instance.rapidfireLevel == 0)
                 {
                     //消費ポイントの表示を500に変更
-                    consumptionPointText.text = "500";
+                    consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
                 {
