@@ -17,7 +17,7 @@ public class EnemyBullet : Bullet
     }
 
     // オブジェクトに当たったら呼び出されます
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         // プレイヤーか判別します
         if (collision.gameObject.tag == "Player")

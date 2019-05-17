@@ -40,7 +40,9 @@ public class Player : MonoBehaviour
     public bool ondamage = false;
     public static SpriteRenderer renderer;
     public GameObject enemyBullet;
+    public GameObject bossBullet;
     Bullet bulletSc;
+    Bullet bossSc;
     private int Damage = 25;
     //ゲームオーバー表示
     public GameObject gameOver;
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
+        bossSc = bossBullet.GetComponent<Bullet>();
         playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
 
         Time.timeScale = 1.0f;
@@ -349,6 +352,22 @@ public class Player : MonoBehaviour
             //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             HpGauge.fillAmount -= bulletSc.damage;
+            GameController.Instance.HpGet = HpGauge.fillAmount;
+            if (HpGauge.fillAmount <= 0)
+            {
+                gameOver.SetActive(true);
+            }
+            //hpSlider.value -= bulletSc.damage;
+            OndamageEffect();
+        }
+
+        //ボスの弾に当たったら
+        if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
+        {
+            Debug.Log("A");
+            //hp -= (int)bulletSc.damage;
+            //HPバーを減らす（プロト版）
+            HpGauge.fillAmount -= bossSc.damage;
             GameController.Instance.HpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {
