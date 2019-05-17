@@ -80,7 +80,7 @@ public class Boss : MonoBehaviour
         if (currentTime>5)
         {
 
-            bossAttack = Random.Range(0, 7);
+            bossAttack = Random.Range(0, 5);
             currentTime = 0;
 
             switch (bossAttack)
