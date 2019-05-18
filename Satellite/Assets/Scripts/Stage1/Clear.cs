@@ -131,6 +131,8 @@ public class Clear : MonoBehaviour
                     //音の再生
                     audioSource.PlayOneShot(sound[1]);
 
+                    inputControl = false;
+
                     // ゲームの時間を戻す
                     Time.timeScale = 1.0f;
                 }
@@ -172,6 +174,8 @@ public class Clear : MonoBehaviour
                     //キャラクター選択画面に遷移
                     SceneManager.LoadScene("CharacterSelect");
 
+                    inputControl = false;
+
                     // ゲームの時間を戻す
                     Time.timeScale = 1.0f;
                 }
@@ -197,6 +201,8 @@ public class Clear : MonoBehaviour
 
                     //音の再生
                     audioSource.PlayOneShot(sound[1]);
+
+                    inputControl = false;
 
                     // ゲームの時間を戻す
                     Time.timeScale = 1.0f;
