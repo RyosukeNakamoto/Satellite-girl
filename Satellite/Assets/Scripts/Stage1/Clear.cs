@@ -8,14 +8,23 @@ public class Clear : MonoBehaviour
 {
     // サウンドを指定
     public AudioClip[] sound;
+    public AudioClip[] voice;
     // サウンドの変数
     AudioSource audioSource;
 
-    public Image[] selectImage;
-
+    //選択中の画像
+    public Image[] selectedImage;
+    //選択を数値で管理
     int selectNumber = 0;
 
+    //十字キー縦の入力判定
     bool dphInput = false;
+    bool yInput = false;
+
+    float count;
+
+    //連打でのシーン遷移制御
+    bool inputControl=false;
 
     // Start is called before the first frame update
     void Start()
@@ -26,170 +35,183 @@ public class Clear : MonoBehaviour
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
 
-        for(int i = 0; i < 3; i++)
+        //ボイスの再生
+        audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+
+        //シーン開始時に選択画像の色の変更
+        for (int i = 0; i < 2; i++)
         {
-            selectImage[i].color = Color.gray;
+            selectedImage[i].color = Color.gray;
         }
+
+        count = 0.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(inputControl);
+
         // ゲームを止める
         Time.timeScale = 0.0f;
         Scene loadscene = SceneManager.GetActiveScene();
 
+        count += Time.unscaledDeltaTime;
+        if (count > 3)
+        {
+            inputControl = true;
+        }
+
         //十字キー縦の入力
         float dph = Input.GetAxis("D_Pad_H");
+        //スティックキーの縦の入力
+        float y = Input.GetAxis("Vertical");
 
+        //十字キーの連続入力制御判定
         if (dph == 0)
         {
             dphInput = false;
         }
-
-        if (dphInput == false)
+        //スティックキーの連続入力制御判定
+        if (y == 0)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0)
+            //スティックキーの縦入力をできるように
+            yInput = false;
+        }
+
+        //連続入力できないように判定
+        if (dphInput == false && yInput == false)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
             {
                 selectNumber--;
+
+
+                //音の再生
+                audioSource.PlayOneShot(sound[0]);
+
+                //連続入力の制御
                 dphInput = true;
+                yInput = true;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0)
+            if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || y < 0)
             {
                 selectNumber++;
+
+                //音の再生
+                audioSource.PlayOneShot(sound[0]);
+
+                //連続入力の制御
                 dphInput = true;
+                yInput = true;
             }
         }
 
-        if (selectNumber > 3)
+        if (selectNumber > 2)
         {
-            selectNumber = 1;
+            selectNumber = 0;
         }
-        if (selectNumber < 1)
+        if (selectNumber < 0)
         {
-            selectNumber = 3;
+            selectNumber = 2;
         }
 
         //もう一回選択中
-        if (selectNumber == 1)
+        if (selectNumber == 0)
         {
             //選択中画像の色を白に
-            selectImage[0].color = Color.white;
+            selectedImage[0].color = Color.white;
 
-            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
+            if (inputControl == true)
             {
-                SceneManager.LoadScene("CharacterSelect");
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                {
+                    SceneManager.LoadScene("CharacterSelect");
 
-                // ゲームの時間を戻す
-                Time.timeScale = 1.0f;
+                    //音の再生
+                    audioSource.PlayOneShot(sound[1]);
+
+                    inputControl = false;
+
+                    // ゲームの時間を戻す
+                    Time.timeScale = 1.0f;
+                }
             }
         }
         else
         {
-            selectImage[0].color = Color.gray;
+            selectedImage[0].color = Color.gray;
         }
 
         //次選択中
-        if (selectNumber == 2)
+        if (selectNumber == 1)
         {
             //選択中画像の色を白に
-            selectImage[1].color = Color.white;
+            selectedImage[1].color = Color.white;
 
-            //エンターキーを押したときの処理
-            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
+            if (inputControl == true)
             {
-                //現在のステージによって、次で向かうステージを指定
-                switch (GameController.Instance.stage)
+                //エンターキーを押したときの処理
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                 {
-                    case 0:
-                        GameController.Instance.stage = 1;
-                        break;
-                    case 1:
-                        GameController.Instance.stage = 2;
-                        break;
-                    case 2:
-                        GameController.Instance.stage = 3;
-                        break;
-                    case 3:
-                        GameController.Instance.stage = 4;
-                        break;
-                    case 4:
-                        GameController.Instance.stage = 5;
-                        break;
-                    case 5:
-                        GameController.Instance.stage = 6;
-                        break;
-                    case 6:
-                        GameController.Instance.stage = 7;
-                        break;
-                    case 7:
-                        GameController.Instance.stage = 8;
-                        break;
-                    case 8:
-                        GameController.Instance.stage = 9;
-                        break;
-                    case 9:
-                        GameController.Instance.stage = 10;
-                        break;
-                    case 10:
-                        GameController.Instance.stage = 11;
-                        break;
-                    case 11:
-                        GameController.Instance.stage = 12;
-                        break;
+                    //現在のステージによって、次で向かうステージを指定
+                    switch (GameController.Instance.stage)
+                    {
+                        case 0:
+                            GameController.Instance.stage = 1;
+                            break;
+                        case 1:
+                            GameController.Instance.stage = 2;
+                            break;
+                        case 2:
+                            GameController.Instance.stage = 3;
+                            break;
+                    }
+
+                    //音の再生
+                    audioSource.PlayOneShot(sound[1]);
+
+                    //キャラクター選択画面に遷移
+                    SceneManager.LoadScene("CharacterSelect");
+
+                    inputControl = false;
+
+                    // ゲームの時間を戻す
+                    Time.timeScale = 1.0f;
                 }
-
-                //キャラクター選択画面に遷移
-                SceneManager.LoadScene("CharacterSelect");
-
-                // ゲームの時間を戻す
-                Time.timeScale = 1.0f;
             }
         }
         else
         {
-            selectImage[1].color = Color.gray;
+            selectedImage[1].color = Color.gray;
         }
 
         //マップ選択中
-        if (selectNumber == 3)
+        if (selectNumber == 2)
         {
             //選択中画像の色を白に
-            selectImage[2].color = Color.white;
+            selectedImage[2].color = Color.white;
 
-            //エンターキーでステージセレクト画面に遷移
-            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
+            if (inputControl == true)
             {
-                SceneManager.LoadScene("StageSelect");
+                //エンターキーでステージセレクト画面に遷移
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                {
+                    SceneManager.LoadScene("StageSelect");
 
-                // ゲームの時間を戻す
-                Time.timeScale = 1.0f;
+                    //音の再生
+                    audioSource.PlayOneShot(sound[1]);
+
+                    inputControl = false;
+
+                    // ゲームの時間を戻す
+                    Time.timeScale = 1.0f;
+                }
             }
         }
         else
         {
-            selectImage[2].color = Color.gray;
+            selectedImage[2].color = Color.gray;
         }
-
-        /*
-        if (this)
-        {
-            //クリア表示後に、エンターキーでステージ選択画面に遷移
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                SceneManager.LoadScene("StageSelect");
-                // ゲームの時間を戻す
-                Time.timeScale = 1.0f;
-            }
-
-            //クリア表示後に、スペースキーでもう一回
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(loadscene.name);
-                // ゲームの時間を戻す
-                Time.timeScale = 1.0f;
-            }
-        }
-        */
     }
 }
