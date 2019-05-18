@@ -110,6 +110,7 @@ public class CustomController : MonoBehaviour
     //音を配列で管理
     public AudioClip[] sound;
     public AudioClip[] voice;
+    public AudioClip[] strengtheningVoice;
 
     //十字キーでの入力可能判定
     bool dpvInput = false;
@@ -685,6 +686,9 @@ public class CustomController : MonoBehaviour
                                 //強化確定時の音
                                 audioSource.PlayOneShot(sound[1]);
 
+                                //強化時のボイス再生
+                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+
                                 //連続入力判定
                                 decisionStrengthening = false;
                             }
@@ -1066,6 +1070,12 @@ public class CustomController : MonoBehaviour
 
                                 //強化確定時の音
                                 audioSource.PlayOneShot(sound[2]);
+
+                                //強化時のボイス再生
+                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+
+                                //連続入力判定
+                                decisionStrengthening = false;
                             }
 
                             //ポイント不足の画像表示
@@ -1445,6 +1455,12 @@ public class CustomController : MonoBehaviour
 
                                 //強化確定時の音
                                 audioSource.PlayOneShot(sound[2]);
+
+                                //強化時のボイス再生
+                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+
+                                //連続入力判定
+                                decisionStrengthening = false;
                             }
 
                             //ポイント不足
@@ -2054,6 +2070,11 @@ public class CustomController : MonoBehaviour
                             //強化するか選択するウインドウを表示
                             strengtheningQuestion.SetActive(true);
                         }
+                        //連続入力できないよう指定
+                        if (Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp("joystick button 1"))
+                        {
+                            decisionStrengthening = true;
+                        }
                     }
                 }
             }
@@ -2206,6 +2227,12 @@ public class CustomController : MonoBehaviour
 
                                 //強化確定時の音
                                 audioSource.PlayOneShot(sound[2]);
+
+                                //強化時のボイス再生
+                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+
+                                //連続入力判定
+                                decisionStrengthening = false;
                             }
 
                             //ポイント不足
