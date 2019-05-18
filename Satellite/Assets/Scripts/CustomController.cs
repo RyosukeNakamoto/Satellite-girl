@@ -109,6 +109,7 @@ public class CustomController : MonoBehaviour
     AudioSource audioSource;
     //音を配列で管理
     public AudioClip[] sound;
+    public AudioClip[] voice;
 
     //十字キーでの入力可能判定
     bool dpvInput = false;
@@ -271,6 +272,8 @@ public class CustomController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
                 {
                     strengtheningQuestionnumber = 0;
+
+                    //「いいえ」選択音連続再生されないように設定
                     selectedNoSound = false;
 
                     //音の連続再生制御判定
@@ -290,6 +293,7 @@ public class CustomController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.DownArrow) || dph < 0 || y < 0)
                 {
                     strengtheningQuestionnumber = 1;
+                    //「はい」選択音連続再生されないように設定
                     selectedYesSound = false;
                     //音の連続再生制御判定
                     if (selectedNoSound == false)
@@ -2263,45 +2267,11 @@ public class CustomController : MonoBehaviour
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
             {
-                switch (GameController.Instance.stage)
-                {
-                    case 0:
-                        SceneManager.LoadScene("Stage1");
-                        break;
-                    case 1:
-                        SceneManager.LoadScene("Stage2");
-                        break;
-                    case 2:
-                        SceneManager.LoadScene("Stage3");
-                        break;
-                    case 3:
-                        SceneManager.LoadScene("Stage4");
-                        break;
-                    case 4:
-                        SceneManager.LoadScene("Stage5");
-                        break;
-                    case 5:
-                        SceneManager.LoadScene("Stage6");
-                        break;
-                    case 6:
-                        SceneManager.LoadScene("Stage7");
-                        break;
-                    case 7:
-                        SceneManager.LoadScene("Stage8");
-                        break;
-                    case 8:
-                        SceneManager.LoadScene("Stage9");
-                        break;
-                    case 9:
-                        SceneManager.LoadScene("Stage10");
-                        break;
-                    case 10:
-                        SceneManager.LoadScene("Stage11");
-                        break;
-                    case 11:
-                        SceneManager.LoadScene("Stage12");
-                        break;
-                }
+                //ボイスの再生
+                audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+
+                //6秒後にシーン遷移
+                Invoke("MoveScene", 6);
             }
         }
         else
@@ -2309,6 +2279,9 @@ public class CustomController : MonoBehaviour
             //選択中の画像非表示
             sortieImage.color = Color.gray;
         }
+
+        
+        
 
         //親愛度の星表示
         for (int i = 0; i < GameController.Instance.intimacyLevel; i++)
@@ -2436,6 +2409,26 @@ public class CustomController : MonoBehaviour
                 break;
         }
         
+    }
+
+    //出撃を選択したとき、ボイスの再生が終わってからシーン遷移
+    public void MoveScene()
+    {
+        switch (GameController.Instance.stage)
+        {
+            case 0:
+                SceneManager.LoadScene("Stage1");
+                break;
+            case 1:
+                SceneManager.LoadScene("Stage2");
+                break;
+            case 2:
+                SceneManager.LoadScene("Stage3");
+                break;
+            case 3:
+                SceneManager.LoadScene("Stage4");
+                break;
+        }
     }
 }
 

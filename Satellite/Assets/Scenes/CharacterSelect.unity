@@ -9059,6 +9059,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5648f89778ea61b43917e5e1f2da9524, type: 3}
   - {fileID: 8300000, guid: cd022368c7bf3b347a7ebd49a104cd1c, type: 3}
   - {fileID: 8300000, guid: 431d9e09784483e479684f6347175d73, type: 3}
+  voice:
+  - {fileID: 8300000, guid: 6af435bb7c8df5740bcd9258d6f20c2b, type: 3}
+  - {fileID: 8300000, guid: 35cc7cab35c6c7a4ca918a884078f1fa, type: 3}
+  - {fileID: 8300000, guid: 6b12fc186ea371f47b24fe29310c0957, type: 3}
   longPress: 0
 --- !u!4 &948009231
 Transform:
