@@ -186,6 +186,7 @@ public class Player : MonoBehaviour
         if (hp <= 0 || activ <= 0)
         {
             Destroy(gameObject);
+            playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
             gameOver.SetActive(true);
         }
 
@@ -265,7 +266,7 @@ public class Player : MonoBehaviour
         //横の移動の制限
         player_pos.x = Mathf.Clamp(player_pos.x, camera.transform.position.x - 11.0f, camera.transform.position.x + 11.0f);
         //縦の移動制限
-        player_pos.y = Mathf.Clamp(player_pos.y, -4.9f, 4.9f);
+        player_pos.y = Mathf.Clamp(player_pos.y, -6.0f, 6.0f);
         transform.position = new Vector2(player_pos.x, player_pos.y);
     }
 
