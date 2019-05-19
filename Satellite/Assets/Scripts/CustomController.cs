@@ -2444,16 +2444,16 @@ public class CustomController : MonoBehaviour
         switch (GameController.Instance.stage)
         {
             case 0:
-                SceneManager.LoadScene("Stage1");
+                SceneManager.LoadScene("Stage");
                 break;
             case 1:
-                SceneManager.LoadScene("Stage2");
+                SceneManager.LoadScene("Stage");
                 break;
             case 2:
-                SceneManager.LoadScene("Stage3");
+                SceneManager.LoadScene("Stage");
                 break;
             case 3:
-                SceneManager.LoadScene("Stage4");
+                SceneManager.LoadScene("Stage");
                 break;
         }
     }
