@@ -7,7 +7,8 @@ namespace Satellite.Stage1
     public class SceneController : MonoBehaviour
     {
         [SerializeField] private FadeLayer fadeLayer;
-
+        [SerializeField] private AudioClip audioClip;
+        AudioSource clear;
         //IEnumerator FadeInIEnumerator()
         //{
         //    yield return fadeLayer.FadeInEnumerator(2.0f);

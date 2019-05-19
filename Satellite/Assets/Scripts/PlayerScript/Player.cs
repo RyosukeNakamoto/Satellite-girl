@@ -62,6 +62,10 @@ public class Player : MonoBehaviour
     // サウンドの変数
     AudioSource audioSource;
 
+    // プレイヤーのボイス
+    [SerializeField] public AudioClip[] playerVoice;
+    AudioSource playerVoiceSource;
+
     // 
     //発射間隔の時間（オール）
     public float bulletDelay;
@@ -104,6 +108,8 @@ public class Player : MonoBehaviour
 
         Time.timeScale = 1.0f;
 
+        // オーディオのコンポーネント
+        playerVoiceSource = GetComponent<AudioSource>();
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
 
@@ -150,6 +156,8 @@ public class Player : MonoBehaviour
         // ゲージがMAXになったらバフ発動フラグ
         if (buffGauge.fillAmount >= 1)
         {
+            // ボイスの再生
+            playerVoiceSource.PlayOneShot(playerVoice[Random.Range(0, 3)]);
             buffUse = true; // バフを使うフラグON
             if (buffUse)
             {
