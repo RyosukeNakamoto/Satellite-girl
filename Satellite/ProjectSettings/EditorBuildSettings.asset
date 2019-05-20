@@ -29,39 +29,39 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage.unity
     guid: 5ab0bab3b1f0cf54ebd07b263f9e352d
-  - enabled: 1
-    path: Assets/Scenes/Stage2.unity
-    guid: ae6afe24bffd12f4eb42a153b2281d3d
-  - enabled: 1
-    path: Assets/Scenes/Stage3.unity
-    guid: 6275e2d73bf724546a62349230243fb4
-  - enabled: 1
-    path: Assets/Scenes/Stage4.unity
-    guid: bd2e097704484854cab222692beb2518
-  - enabled: 1
-    path: Assets/Scenes/Stage5.unity
-    guid: 0be039e9cedb50644840e220a25bc8de
-  - enabled: 1
-    path: Assets/Scenes/Stage6.unity
-    guid: 5cb0458b9e09a754abef274e953e7128
-  - enabled: 1
-    path: Assets/Scenes/Stage7.unity
-    guid: d3c90ddb7b505d445b60ae5c151868f7
-  - enabled: 1
-    path: Assets/Scenes/Stage8.unity
-    guid: e1a044fcd20a5fa4694da9e138c1a1ab
-  - enabled: 1
-    path: Assets/Scenes/Stage9.unity
-    guid: a8c7adb984d25bf42890b638d40e1258
-  - enabled: 1
-    path: Assets/Scenes/Stage10.unity
-    guid: 65fdb383e34f1e34385a548bccdc0c22
-  - enabled: 1
-    path: Assets/Scenes/Stage11.unity
-    guid: 43c991f06bdf64b4d9f52ef8a848fd8d
-  - enabled: 1
-    path: Assets/Scenes/Stage12.unity
-    guid: a553c67a5b842194daef3eaceb94fe9c
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Boss1.unity
     guid: 4c61aa8518ed8234eb2296d3b2a0da3c
