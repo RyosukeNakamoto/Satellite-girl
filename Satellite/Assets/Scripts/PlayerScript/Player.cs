@@ -21,12 +21,12 @@ public class Player : MonoBehaviour
     // プレイヤーのHPゲージ
     public GameObject HpObject;
     public Image HpGauge = null;
-    public float HpValue = 0;
+    public float HpValue = 1;
 
     // プレイヤーのスタミナゲージ       
     public GameObject staminaObject;
     public Image staminaGauge = null;
-    public float staminaValue = 0;
+    public float staminaValue = 1;
     bool stamina = false;
 
     // 活動時間ゲージのスイッチ
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
     public GameObject bossBullet;
     Bullet bulletSc;
     Bullet bossSc;
-    private int Damage = 25;
+
     //ゲームオーバー表示
     public GameObject gameOver;
     // ゲームクリア表示
@@ -85,6 +85,8 @@ public class Player : MonoBehaviour
     public GameObject resultScoreObject;
     // アイテムの点数
     int itemScore = 5;
+    // スタミナ制御
+    bool staminaControl = true;
     // バフを使うフラグ
     public bool buffUse = false;
     // バフをかける
@@ -94,9 +96,6 @@ public class Player : MonoBehaviour
     // スピードバフOFF
     private bool speedOffBuff = true;
 
-    // 打つ弾のスクリプトを参照
-    PlayerBullet playerBulletSc;
-
     // Use this for initialization
     void Start()
     {
@@ -104,7 +103,6 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         bossSc = bossBullet.GetComponent<Bullet>();
-        playerBulletSc = rifleBullet.GetComponent<PlayerBullet>();
 
         Time.timeScale = 1.0f;
 
@@ -118,15 +116,11 @@ public class Player : MonoBehaviour
         // スコアを0で初期化
         score = GameController.Instance.scoreText;
         // スコアを表示
-        scoreText.text = "Score: " + score;
+        scoreText.text = "POINT：" + score;
         // リザルトスコアテキストのコンポーネント
         resultScoreText = resultScoreObject.GetComponent<Text>();
         resultScoreText.text = "" + score + "p";
 
-
-        // スタミナゲージ
-        staminaGauge = staminaObject.GetComponent<Image>();
-        staminaGauge.fillAmount = 1;
         // バフゲージ
         buffGauge = buffObject.GetComponent<Image>();
         buffGauge.fillAmount = 0;
@@ -142,10 +136,12 @@ public class Player : MonoBehaviour
         //// スライダーの値をセット
         // HPのゲージ
         HpGauge = HpObject.GetComponent<Image>();
-        HpGauge.fillAmount = GameController.Instance.HitPoint / HpValue;
+        //HpGauge.fillAmount = HpValue/ GameController.Instance.HitPoint ;
+        Debug.Log(GameController.Instance.HitPoint);
         HpGauge.fillAmount = GameController.Instance.HpGet;
         // 活動時間のゲージ
-        staminaGauge.fillAmount = GameController.Instance.ActivityTime / staminaValue;
+        staminaGauge = staminaObject.GetComponent<Image>();
+        staminaGauge.fillAmount = staminaValue;
         Debug.Log(GameController.Instance.ActivityTime);
     }
 
@@ -161,6 +157,7 @@ public class Player : MonoBehaviour
             buffUse = true; // バフを使うフラグON
             if (buffUse)
             {
+                buffUse = false;
                 buffSet = true; // バフをかける
                 PlayerBullet.buffTrigger = true;
                 speedOnBuff = true;
@@ -182,13 +179,13 @@ public class Player : MonoBehaviour
             buffValue -= 0.1f;
         }
 
-        //HPが0以下になったときの処理
-        if (hp <= 0 || activ <= 0)
-        {
-            Destroy(gameObject);
-            playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
-            gameOver.SetActive(true);
-        }
+        ////HPが0以下になったときの処理
+        //if (hp <= 0 || activ <= 0)
+        //{
+        //    Destroy(gameObject);
+        //    playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
+        //    gameOver.SetActive(true);
+        //}
 
         //ダメージを受けた時点滅
         if (ondamage)
@@ -210,50 +207,65 @@ public class Player : MonoBehaviour
     // 移動関数
     void Move()
     {
-        //矢印キーの入力情報を取得
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
+        if (staminaControl) {
+            //矢印キーの入力情報を取得
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
 
-        //移動する向きを作成
-        Vector2 direction = new Vector2(x, y).normalized;
+            //移動する向きを作成
+            Vector2 direction = new Vector2(x, y).normalized;
 
-        if (speedOnBuff)
-        {
-            speed = speed * 1.3f;
-            Debug.Log(speed);
-            speedOnBuff = false;
-        }
-        if (speedOffBuff)
-        {
-            speed = 10;
-            Debug.Log(speed);
-        }
-
-        //移動する向きとスピードを代入
-        rigidbody.velocity = direction * speed;
-
-        // 移動時の活動時間の変化
-        if (x != 0 || y != 0)
-        {
-            activsSwitch = true;
-            if (activsSwitch)
+            if (speedOnBuff)
             {
-                // 活動ゲージの減算
-                staminaGauge.fillAmount -= 0.0025f;
+                speed = speed * 1.3f;
+                Debug.Log(speed);
+                speedOnBuff = false;
+            }
+            if (speedOffBuff)
+            {
+                speed = 10;
+            }
+
+            //移動する向きとスピードを代入
+            rigidbody.velocity = direction * speed;
+
+            // 移動時の活動時間の変化
+            if (x != 0 || y != 0)
+            {
+                activsSwitch = true;
+                if (activsSwitch)
+                {
+                    // 活動ゲージの減算
+                    staminaGauge.fillAmount -= staminaValue / GameController.Instance.ActivityTime * 0.05f;
+                }
+                if (staminaGauge.fillAmount == 0)
+                {
+                    staminaControl = false;
+                    Debug.Log("kita");
+                }
+            }            
+            // 移動していないとき
+            else
+            {
+                activsSwitch = false;
+                if (!activsSwitch)
+                {
+                    // ゲージが減っているとき
+                    //if (staminaValue >= staminaGauge.fillAmount)
+                    //{
+                        // 活動ゲージの加算
+                        staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
+                    //}
+                }
             }
         }
-        // 移動していないとき
-        else
+        if (!staminaControl)
         {
-            activsSwitch = false;
-            if (!activsSwitch)
+            // 活動ゲージの加算
+            staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
+            if (staminaGauge.fillAmount>0.5)
             {
-                // ゲージが減っているとき
-                if (staminaValue <= staminaGauge.fillAmount)
-                {
-                    // 活動ゲージの加算
-                    staminaGauge.fillAmount += 0.005f;
-                }
+                staminaControl = true;
             }
         }
     }
@@ -358,15 +370,14 @@ public class Player : MonoBehaviour
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            //hp -= (int)bulletSc.damage;
-            //HPバーを減らす（プロト版）
-            HpGauge.fillAmount -= bulletSc.damage;
+            // ダメージ処理
+            HpGauge.fillAmount -= HpValue / GameController.Instance.HitPoint * bulletSc.damage;
             GameController.Instance.HpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {
+                playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
                 gameOver.SetActive(true);
             }
-            //hpSlider.value -= bulletSc.damage;
             OndamageEffect();
         }
 
@@ -392,7 +403,7 @@ public class Player : MonoBehaviour
             score += itemScore;
             GameController.Instance.scoreText = score;
             // スコア内容の変更
-            scoreText.text = "Score: " + score;
+            scoreText.text = "POINT：" + score;
             resultScoreText.text = "" + score + "p";
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);

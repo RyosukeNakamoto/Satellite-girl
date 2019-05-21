@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 149076473}
   - component: {fileID: 149076472}
   - component: {fileID: 149076471}
+  - component: {fileID: 149076474}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -362,7 +363,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 9feabc151cdcb6e46aa24731d5932119, type: 3}
     m_FontSize: 75
     m_FontStyle: 0
     m_BestFit: 0
@@ -374,7 +375,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uFF10"
+  m_Text: "POINT\uFF1A0"
 --- !u!222 &149076472
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -399,9 +400,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1630, y: -70}
+  m_AnchoredPosition: {x: 1525.1, y: -101}
   m_SizeDelta: {x: 160, y: 30.9}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &149076474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149076470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &270189566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,9 +1189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvData:
-  - {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
-  - {fileID: 4900000, guid: 699faa9ef124b3c47880cdbd3d7df004, type: 3}
-  - {fileID: 4900000, guid: e8f9d56c24df7bb4fba965e05a080721, type: 3}
+  - {fileID: 4900000, guid: 6202cfae644d85e48b035a980860ea97, type: 3}
+  - {fileID: 4900000, guid: f545d1e9f5cc2474f972de65deff844a, type: 3}
+  - {fileID: 4900000, guid: 6202cfae644d85e48b035a980860ea97, type: 3}
   - {fileID: 4900000, guid: f5851039c38ae204890ceb9722fb4880, type: 3}
   - {fileID: 4900000, guid: 81e553eb30dd993448c975d1d7389000, type: 3}
   - {fileID: 4900000, guid: 352d5f12d811902419231ab57ccc7174, type: 3}
@@ -2267,7 +2283,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2918,7 +2934,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: hpTable.Array.data[0]
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
@@ -3009,6 +3025,21 @@ PrefabInstance:
         type: 3}
       propertyPath: stage
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
+        type: 3}
+      propertyPath: attackLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
+        type: 3}
+      propertyPath: activityTimeLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
+        type: 3}
+      propertyPath: hpLevel
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4df64328e9ed74886e78456fce40bb, type: 3}
@@ -3243,6 +3274,7 @@ GameObject:
   - component: {fileID: 1901994277}
   - component: {fileID: 1901994276}
   - component: {fileID: 1901994279}
+  - component: {fileID: 1901994280}
   m_Layer: 5
   m_Name: BossAlert
   m_TagString: Untagged
@@ -3326,6 +3358,102 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &1901994280
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901994275}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6c767e370f9238d4994f218ffd6e48a3, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &2064553816
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,6 +3935,16 @@ PrefabInstance:
       propertyPath: resultScoreObject
       value: 
       objectReference: {fileID: 909888173}
+    - target: {fileID: 4660935517234375367, guid: 6050e9d41d3dd84449dda3f074b2611e,
+        type: 3}
+      propertyPath: HpValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4660935517234375367, guid: 6050e9d41d3dd84449dda3f074b2611e,
+        type: 3}
+      propertyPath: staminaValue
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6050e9d41d3dd84449dda3f074b2611e, type: 3}
 --- !u!1001 &6732496031177923642
