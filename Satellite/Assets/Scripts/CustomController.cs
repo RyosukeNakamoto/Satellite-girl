@@ -352,7 +352,7 @@ public class CustomController : MonoBehaviour
             back = false;
         }
 
-        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf && back == false)
+        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf && back == false && selectInput == false)
         {
             //ステージ選択画面に戻る
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick button 0"))
@@ -2303,19 +2303,22 @@ public class CustomController : MonoBehaviour
             //消費ポイントの表示を変更
             consumptionPointText.text = (0).ToString();
 
-            //Bボタン、もしくはエンターキーで出撃
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+            if (selectInput == false)
             {
-                //音の再生
-                audioSource.PlayOneShot(sound[4]);
+                //Bボタン、もしくはエンターキーで出撃
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                {
+                    //音の再生
+                    audioSource.PlayOneShot(sound[4]);
 
-                //ボイスの再生
-                audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+                    //ボイスの再生
+                    audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
-                selectInput = true;
+                    selectInput = true;
 
-                //6秒後にシーン遷移
-                Invoke("MoveScene", 6);
+                    //6秒後にシーン遷移
+                    Invoke("MoveScene", 6);
+                }
             }
         }
         else
