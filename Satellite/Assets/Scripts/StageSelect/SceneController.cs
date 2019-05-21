@@ -16,21 +16,11 @@ namespace Satellite.StageSelect
         public Image[] stage1;
         public Image[] stage2;
         public Image[] stage3;
-        public Image[] stage4;
-        public Image[] stage5;
-        public Image[] stage6;
-        public Image[] stage7;
-        public Image[] stage8;
-        public Image[] stage9;
-        public Image[] stage10;
-        public Image[] stage11;
-        public Image[] stage12;
-        
+
+        public GameObject[] stageCircle;
+
         //選んだステージのテキスト
         public Text[] stageImageText;
-
-        //ステージ前半、後半
-        public Canvas[] stage;
 
         //音
         AudioSource audioSource;
@@ -40,9 +30,9 @@ namespace Satellite.StageSelect
         int selectNumber = 0;
         int stageHalf = 0;
 
-        bool stageChangeOff = false;
-        bool stageHalfChange = false;
         bool keyInput = false;
+        bool stageChangeOff = false;
+        bool xInput = false;
 
         // Start is called before the first frame update
         void Start()
@@ -50,16 +40,13 @@ namespace Satellite.StageSelect
             //音コンポーネントの取得
             audioSource = GetComponent<AudioSource>();
 
-            //シーン開始時にステージ前半を表示
-            stage[0].enabled = true;
-            //シーン開始時にステージ後半を非表示
-            stage[1].enabled = false;
-
             //シーン開始時に選択中のステージテキストを非表示
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 3; i++)
             {
                 stageImageText[i].enabled = false;
             }
+
+
         }
 
         // Update is called once per frame
@@ -68,83 +55,56 @@ namespace Satellite.StageSelect
             //十字キーの横の入力
             float dpv = Input.GetAxis("D_Pad_V");
 
-            //トリガー入力でステージの前半、後半切り替え
-            float tri = Input.GetAxis("L_R_Trigger");
+            //スティックキーの横の入力
+            float x = Input.GetAxis("Horizontal");
 
             if (dpv == 0)
             {
                 keyInput = false;
             }
-            if (tri == 0)
+
+            //スティックキーの連続入力制御判定
+            if (x == 0)
             {
-                stageHalfChange = false;
+                //スティックキーの横入力をできるように
+                xInput = false;
             }
 
-            if (stageChangeOff == false && keyInput == false)
+            if (stageChangeOff == false && keyInput == false && xInput == false)
             {
                 //右矢印キーを押したときSelectNumberを増やす
-                if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0)
+                if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                 {
                     selectNumber++;
 
                     keyInput = true;
+                    xInput = true;
 
                     //カーソル移動したとき音再生
                     audioSource.PlayOneShot(sound[0]);
                 }
                 //左矢印キーを押したときSelectNumberを減らす
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0)
+                if (Input.GetKeyDown(KeyCode.LeftArrow) || dpv < 0 || x < 0)
                 {
                     selectNumber--;
 
                     keyInput = true;
+                    xInput = true;
 
                     //カーソル移動したとき音再生
                     audioSource.PlayOneShot(sound[0]);
                 }
-                //SelectNumberが5を越えた時0に戻す処理
+                //SelectNumberが2を越えた時0に戻す処理
                 if (selectNumber > 2)
                 {
                     selectNumber = 0;
                 }
-                //SelectNumberが0を下回った時5にする処理
+                //SelectNumberが0を下回った時2にする処理
                 if (selectNumber < 0)
                 {
                     selectNumber = 2;
                 }
-                /*
-                if (stageHalfChange == false)
-                {
-                    //ステージの前半後半を切替
-                    if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || tri < 0 || tri > 0)
-                    {
-                        if (stageHalf == 0)
-                        {
-                            stageHalf = 1;
-
-                            //音の再生
-                            audioSource.PlayOneShot(sound[0]);
-
-                            stageHalfChange = true;
-
-                            stage[0].enabled = false;
-                            stage[1].enabled = true;
-                        }
-                        else
-                        {
-                            stageHalf = 0;
-
-                            //音の再生
-                            audioSource.PlayOneShot(sound[0]);
-
-                            stageHalfChange = true;
-
-                            stage[0].enabled = true;
-                            stage[1].enabled = false;
-                        }
-                    }
-                }
-                */
+               
             }
 
             //Stage1を選択状態
@@ -153,6 +113,10 @@ namespace Satellite.StageSelect
                 //ステージ選択イメージの切り替え
                 stage1[0].enabled = false;
                 stage1[1].enabled = true;
+                stage1[2].enabled = true;
+
+                //選択中に円の画像を回転
+                stage1[2].transform.Rotate(0, 0, 5);
 
                 //ステージ選択表示をステージ1に切り替え
                 stageImageText[0].enabled = true;
@@ -177,6 +141,7 @@ namespace Satellite.StageSelect
             {
                 stage1[0].enabled = true;
                 stage1[1].enabled = false;
+                stage1[2].enabled = false;
 
                 //ステージ選択表示を非表示
                 stageImageText[0].enabled = false;
@@ -186,6 +151,10 @@ namespace Satellite.StageSelect
             {
                 stage2[0].enabled = false;
                 stage2[1].enabled = true;
+                stage2[2].enabled = true;
+
+                //選択中に円の画像を回転
+                stage2[2].transform.Rotate(0, 0, 5);
 
                 //ステージ選択表示をステージ2に切り替え
                 stageImageText[1].enabled = true;
@@ -210,6 +179,7 @@ namespace Satellite.StageSelect
             {
                 stage2[0].enabled = true;
                 stage2[1].enabled = false;
+                stage2[2].enabled = false;
 
                 //ステージ選択表示を非表示
                 stageImageText[1].enabled = false;
@@ -219,6 +189,10 @@ namespace Satellite.StageSelect
             {
                 stage3[0].enabled = false;
                 stage3[1].enabled = true;
+                stage3[2].enabled = true;
+
+                //選択中に円の画像を回転
+                stage3[2].transform.Rotate(0, 0, 5);
 
                 //ステージ選択表示をステージ3に切り替え
                 stageImageText[2].enabled = true;
@@ -243,6 +217,7 @@ namespace Satellite.StageSelect
             {
                 stage3[0].enabled = true;
                 stage3[1].enabled = false;
+                stage3[2].enabled = false;
 
                 //ステージ選択表示を非表示
                 stageImageText[2].enabled = false;

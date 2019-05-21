@@ -34,7 +34,7 @@ public class CustomController : MonoBehaviour
 
     //選択中の画像表示
     public Image[] selectedImage;
-    public Image sortieImage;
+    public Image[] sortieImage;
 
     /*
     //それぞれのパラメーターのレベル
@@ -128,7 +128,7 @@ public class CustomController : MonoBehaviour
     bool selectedYesSound = false;
     bool selectedNoSound = false;
 
-    public float longPress = 0.0f;
+    bool selectInput=false;
 
     bool shortagePoint = false;
 
@@ -158,7 +158,10 @@ public class CustomController : MonoBehaviour
         }
 
         //シーン開始時に、出撃選択イメージをグレーに
-        sortieImage.color = Color.gray;
+        for (int i = 0; i < 5; i++)
+        {
+            sortieImage[i].color = Color.gray;
+        }
 
         //シーン開始時に、強化するか選択するウインドウを非表示
         strengtheningQuestion.SetActive(false);
@@ -168,6 +171,8 @@ public class CustomController : MonoBehaviour
 
         //音のコンポーネントを取得
         audioSource = GetComponent<AudioSource>();
+
+        Time.timeScale = 1.0f;
     }
 
     // Update is called once per frame
@@ -220,7 +225,7 @@ public class CustomController : MonoBehaviour
         possessionPointText.text = (GameController.Instance.score).ToString();
 
         //強化の確定を選択する画面が表示中にSelectNumberの数値が変更されないようにする
-        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf)
+        if (!strengtheningQuestion.activeSelf && !shortagePointImage.activeSelf&&selectInput==false)
         {
             //連続入力の制御
             if (dphInput == false && yInput == false)
@@ -2282,11 +2287,18 @@ public class CustomController : MonoBehaviour
         if (selectNumber == 5)
         {
             //選択中の画像表示
-            sortieImage.color = Color.white;
+            sortieImage[0].color = Color.white;
+            sortieImage[1].color = Color.white;
+            sortieImage[2].color = Color.white;
+            sortieImage[3].color = Color.white;
+            sortieImage[4].color = Color.white;
 
             //選択画像を点滅
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
-            sortieImage.GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+            sortieImage[1].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+            sortieImage[2].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+            sortieImage[3].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+            sortieImage[4].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
             //消費ポイントの表示を変更
             consumptionPointText.text = (0).ToString();
@@ -2294,8 +2306,13 @@ public class CustomController : MonoBehaviour
             //Bボタン、もしくはエンターキーで出撃
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
             {
+                //音の再生
+                audioSource.PlayOneShot(sound[4]);
+
                 //ボイスの再生
                 audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+
+                selectInput = true;
 
                 //6秒後にシーン遷移
                 Invoke("MoveScene", 6);
@@ -2304,7 +2321,11 @@ public class CustomController : MonoBehaviour
         else
         {
             //選択中の画像非表示
-            sortieImage.color = Color.gray;
+            sortieImage[0].color = Color.gray;
+            sortieImage[1].color = Color.gray;
+            sortieImage[2].color = Color.gray;
+            sortieImage[3].color = Color.gray;
+            sortieImage[4].color = Color.gray;
         }
 
         
