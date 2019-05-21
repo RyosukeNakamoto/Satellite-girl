@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 0.1
+  damage: 1
   landing: {fileID: 286038888519794324, guid: 90023444dca79f046adce30689e523af, type: 3}
 --- !u!61 &8679468213999391476
 BoxCollider2D:
