@@ -116,7 +116,7 @@ namespace Satellite.StageSelect
                 stage1[2].enabled = true;
 
                 //選択中に円の画像を回転
-                stage1[2].transform.Rotate(0, 0, 5);
+                stage1[2].transform.Rotate(0, 0, 3);
 
                 //ステージ選択表示をステージ1に切り替え
                 stageImageText[0].enabled = true;
@@ -154,7 +154,7 @@ namespace Satellite.StageSelect
                 stage2[2].enabled = true;
 
                 //選択中に円の画像を回転
-                stage2[2].transform.Rotate(0, 0, 5);
+                stage2[2].transform.Rotate(0, 0, 3);
 
                 //ステージ選択表示をステージ2に切り替え
                 stageImageText[1].enabled = true;
@@ -192,7 +192,7 @@ namespace Satellite.StageSelect
                 stage3[2].enabled = true;
 
                 //選択中に円の画像を回転
-                stage3[2].transform.Rotate(0, 0, 5);
+                stage3[2].transform.Rotate(0, 0, 3);
 
                 //ステージ選択表示をステージ3に切り替え
                 stageImageText[2].enabled = true;
