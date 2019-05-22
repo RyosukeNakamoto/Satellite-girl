@@ -6,11 +6,12 @@ public class BossLaser : MonoBehaviour
 {
 
     float deleteTime = 0;
+    Collider2D collider;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        collider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -24,6 +25,18 @@ public class BossLaser : MonoBehaviour
             Destroy(gameObject);
         }
 
-        
+        if (Time.timeScale == 1)
+        {
+            //レーザーの移動
+            this.transform.Translate(-0.5f, 0, 0);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collider.isTrigger = true;
+        }
     }
 }
