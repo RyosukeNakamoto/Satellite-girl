@@ -272,7 +272,7 @@ public class CustomController : MonoBehaviour
         if (strengtheningQuestion.activeSelf)
         {
             //連続入力の制御判定
-            if (dphInput == false && xInput == false)
+            if (dphInput == false && yInput == false)
             {
                 //「はい」選択中
                 if (Input.GetKeyDown(KeyCode.UpArrow) || dph > 0 || y > 0)
