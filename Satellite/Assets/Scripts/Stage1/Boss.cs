@@ -76,8 +76,8 @@ public class Boss : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        //5秒ごとに弾、発射
-        if (currentTime>5)
+        //3秒ごとに弾、発射
+        if (currentTime>3)
         {
 
             bossAttack = Random.Range(0, 5);
