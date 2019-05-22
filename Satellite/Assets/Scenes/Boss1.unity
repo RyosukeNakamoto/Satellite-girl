@@ -3759,8 +3759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323fc79ae295bd43832a7953190af2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  maxhp: 100
+  hp: 450
+  maxhp: 450
   hpslider: {fileID: 949796719}
   clearImage: {fileID: 1319542329}
   target: {fileID: 1090074773}
@@ -3770,11 +3770,22 @@ MonoBehaviour:
     type: 3}
   aimBullet: {fileID: 1879095314465036589, guid: 157cc52f706c0744a854c86d49ed45b1,
     type: 3}
+  meteoriteSmall: {fileID: 1879095314465036589, guid: 55ed486247a3f66438087beee5f509db,
+    type: 3}
+  meteoriteMedium: {fileID: 1879095314465036589, guid: ed7d6dcc64dd512428ef496277e0197b,
+    type: 3}
+  meteoriteLarge: {fileID: 1879095314465036589, guid: 49067ac764226414cbbb9796c8777767,
+    type: 3}
+  debriSmall: {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9,
+    type: 3}
+  debriMedium: {fileID: 1979040781948784279, guid: 6a100632288a0a542b0efcaf6519550e,
+    type: 3}
+  debriLarge: {fileID: 5534083576414507721, guid: e3992ea3b8f1978429072f14c8dddc46,
+    type: 3}
   laserPrefab: {fileID: 1879095314465036589, guid: d223067cdb94ed74188a748ec31fb92d,
     type: 3}
   largeLaserPrefab: {fileID: 1879095314465036589, guid: 930b5f0486ee4684aae81b46c00bc1ee,
     type: 3}
-  bossAttack: 0
   sound:
   - {fileID: 8300000, guid: 202409d9da7a1864aa3a9a59b6fe0b56, type: 3}
   - {fileID: 8300000, guid: e46b484712dcc5047a73392b79a4f86c, type: 3}
@@ -3874,7 +3885,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795683425}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

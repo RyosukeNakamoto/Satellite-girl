@@ -24,6 +24,14 @@ public class Boss : MonoBehaviour
     //ボス弾プレハブ
     public GameObject bulletPrefab;
     public GameObject aimBullet;
+    //ボス隕石プレハブ
+    public GameObject meteoriteSmall;
+    public GameObject meteoriteMedium;
+    public GameObject meteoriteLarge;
+    //デブリプレハブ
+    public GameObject debriSmall;
+    public GameObject debriMedium;
+    public GameObject debriLarge;
 
     //ボスレーザープレハブ
     public GameObject laserPrefab;
@@ -34,7 +42,7 @@ public class Boss : MonoBehaviour
     private float currentTime = 0;
 
     //ボス攻撃パターン
-    public float bossAttack = 0;
+    float bossAttack = 0;
 
     //オーディオ
     AudioSource audioSource;
@@ -79,38 +87,75 @@ public class Boss : MonoBehaviour
         //3秒ごとに弾、発射
         if (currentTime>3)
         {
-
-            bossAttack = Random.Range(0, 5);
+            
+            //ステージによって攻撃パターン変更
+            switch (GameController.Instance.stage)
+            {
+                case 0:
+                    bossAttack = Random.Range(0, 3);
+                    break;
+                case 1:
+                    bossAttack = Random.Range(3, 10);
+                    break;
+                case 2:
+                    bossAttack = Random.Range(3, 13);
+                    break;
+            }
+            
             currentTime = 0;
 
             switch (bossAttack)
             {
-                //3方向の弾発射
+                //隕石(小)発射
                 case 0:
+                    ShotMeteoriteSmall();
+                    break;
+                //隕石(中)発射
+                case 1:
+                    ShotMeteoriteMedium(); ;
+                    break;
+                //隕石(大)発射
+                case 2:
+                    ShotMeteoriteLarge(); ;
+                    break;
+                //三方向に弾発射
+                case 3:
                     EnemyShotThreeDirections();
                     break;
-                //5方向の弾発射
-                case 1:
-                    EnemyShotFiveDirections();
-                    break;
-                //プレイヤーに向かって弾3発発射
-                case 2:
+                //プレイヤーに向かって三発発射
+                case 4:
                     StartCoroutine("AimShotThreeConsecutive");
                     break;
-                //プレイヤーに向かって弾4発発射
-                case 3:
+                //デブリ(小)発生
+                case 5:
+                    debriOccurrenceSmall();
+                    break;
+                //デブリ(中)発生
+                case 6:
+                    debriOccurrenceMedium();
+                    break;
+                //デブリ(大)発生
+                case 7:
+                    debriOccurrenceLarge();
+                    break;
+                    //五方向に弾発射
+                case 8:
+                    EnemyShotFiveDirections();
+                    break;
+                //プレイヤーに向かって四発発射
+                case 9:
                     StartCoroutine("AimShotFourConsecutive");
                     break;
-                //プレイヤーに向かって弾5発発射
-                case 4:
+                //プレイヤーに向かって五発発射
+                case 10:
                     StartCoroutine("AimShotFiveConsecutive");
                     break;
-                //レーザー6発発射
-                case 5:
+                //六方向にレーザー発射
+                case 11:
                     Laser();
                     break;
                 //太いレーザー発射
-                case 6:
+                case 12:
                     LargeLaser();
                     break;
             }
@@ -124,6 +169,90 @@ public class Boss : MonoBehaviour
             hp -= GameController.Instance.Attack;
             hpslider.value -= GameController.Instance.Attack;
         }
+    }
+
+    //プレイヤーに向かって隕石(小)発射
+    public void ShotMeteoriteSmall()
+    {
+        //座標を変数posに保存
+        var position = this.gameObject.transform.position;
+        //弾のプレハブを作成
+        var bullet = Instantiate(meteoriteSmall) as GameObject;
+        //弾のプレハブの位置を自分の位置にする
+        bullet.transform.position = position;
+
+        //プレイヤーの位置から自分の位置を引く
+        Vector2 vec = player.transform.position - position;
+        //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
+        bullet.GetComponent<Rigidbody2D>().velocity = vec;
+    }
+
+    //プレイヤーに向かって隕石(中)発射
+    public void ShotMeteoriteMedium()
+    {
+        //座標を変数posに保存
+        var position = this.gameObject.transform.position;
+        //弾のプレハブを作成
+        var bullet = Instantiate(meteoriteMedium) as GameObject;
+        //弾のプレハブの位置を自分の位置にする
+        bullet.transform.position = position;
+
+        //プレイヤーの位置から自分の位置を引く
+        Vector2 vec = player.transform.position - position;
+        //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
+        bullet.GetComponent<Rigidbody2D>().velocity = vec;
+    }
+
+    //プレイヤーに向かって隕石(大)発射
+    public void ShotMeteoriteLarge()
+    {
+        //座標を変数posに保存
+        var position = this.gameObject.transform.position;
+        //弾のプレハブを作成
+        var bullet = Instantiate(meteoriteLarge) as GameObject;
+        //弾のプレハブの位置を自分の位置にする
+        bullet.transform.position = position;
+
+        //プレイヤーの位置から自分の位置を引く
+        Vector2 vec = player.transform.position - position;
+        //弾のRigidBody2Dコンポネントのvelocityに、求めたベクトルを入れて力を加える
+        bullet.GetComponent<Rigidbody2D>().velocity = vec;
+    }
+
+    //デブリ(小)発生
+    public void debriOccurrenceSmall()
+    {
+        //座標を変数posに保存
+        Vector2 position = this.gameObject.transform.position;
+        position.y = Random.Range(-5, 5);
+        //デブリのプレハブを作成
+        var bullet = Instantiate(debriSmall) as GameObject;
+        //デブリのプレハブの位置を変更
+        bullet.transform.position = position;
+    }
+
+    //デブリ(中)発生
+    public void debriOccurrenceMedium()
+    {
+        //座標を変数posに保存
+        Vector2 position = this.gameObject.transform.position;
+        position.y = Random.Range(-5, 5);
+        //デブリのプレハブを作成
+        var bullet = Instantiate(debriMedium) as GameObject;
+        //デブリのプレハブの位置を変更
+        bullet.transform.position = position;
+    }
+
+    //デブリ(大)発生
+    public void debriOccurrenceLarge()
+    {
+        //座標を変数posに保存
+        Vector2 position = this.gameObject.transform.position;
+        position.y = Random.Range(-5, 5);
+        //デブリのプレハブを作成
+        var bullet = Instantiate(debriLarge) as GameObject;
+        //デブリのプレハブの位置を変更
+        bullet.transform.position = position;
     }
 
     //3方向の弾の発射
@@ -244,15 +373,15 @@ public class Boss : MonoBehaviour
         position.y = -0.8f;
         var laser = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser.transform.SetParent(transform, false);
-        laser.transform.Rotate(0, 0, -9);
-        laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 3.1f);
+        laser.transform.Rotate(0, 0, -12);
+        //laser.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 3.1f);
         laser.transform.parent = transform;
 
         position.x = 22.5f;
         position.y = 0.8f;
         var laser1 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser1.transform.SetParent(transform, false);
-        laser1.transform.Rotate(0, 0, 9);
+        laser1.transform.Rotate(0, 0, 12);
         laser1.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -3.1f);
         laser1.transform.parent = transform;
 
@@ -260,7 +389,7 @@ public class Boss : MonoBehaviour
         position.y = -0.4f;
         var laser2 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser2.transform.SetParent(transform, false);
-        laser2.transform.Rotate(0, 0, -5);
+        laser2.transform.Rotate(0, 0, -7);
         laser2.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 1.8f);
         laser2.transform.parent = transform;
 
@@ -268,7 +397,7 @@ public class Boss : MonoBehaviour
         position.y = 0.4f;
         var laser3 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser3.transform.SetParent(transform, false);
-        laser3.transform.Rotate(0, 0, 5);
+        laser3.transform.Rotate(0, 0, 7);
         laser3.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -1.8f);
         laser3.transform.parent = transform;
 
@@ -277,7 +406,7 @@ public class Boss : MonoBehaviour
         position.y = -0.2f;
         var laser4 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser4.transform.SetParent(transform, false);
-        laser4.transform.Rotate(0, 0, -2);
+        laser4.transform.Rotate(0, 0, -2.5f);
         laser4.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, 0.7f);
         laser4.transform.parent = transform;
 
@@ -285,7 +414,7 @@ public class Boss : MonoBehaviour
         position.y = 0.2f;
         var laser5 = Instantiate(laserPrefab, position, laserPrefab.transform.rotation);
         laser5.transform.SetParent(transform, false);
-        laser5.transform.Rotate(0, 0, 2);
+        laser5.transform.Rotate(0, 0, 2.5f);
         laser5.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -0.7f);
         laser5.transform.parent = transform;
         
