@@ -24,6 +24,34 @@ public class StaminaBar : MonoBehaviour
     {
         GetComponent<Image>().sprite = StaminaBar1;
         GetComponent<Image>().SetNativeSize();
+        switch (GameController.Instance.activityTimeLevel)
+        {
+            case 0:
+                GetComponent<Image>().sprite = StaminaBar6;
+                GetComponent<Image>().SetNativeSize();
+                Debug.Log("kita");
+                break;
+            case 1:
+                GetComponent<Image>().sprite = StaminaBar5;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 2:
+                GetComponent<Image>().sprite = StaminaBar4;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 3:
+                GetComponent<Image>().sprite = StaminaBar3;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 4:
+                GetComponent<Image>().sprite = StaminaBar2;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 5:
+                GetComponent<Image>().sprite = StaminaBar1;
+                GetComponent<Image>().SetNativeSize();
+                break;
+        }
     }
 
     // Update is called once per frame
