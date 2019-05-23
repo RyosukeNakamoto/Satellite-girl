@@ -29,7 +29,6 @@ public class StaminaBar : MonoBehaviour
             case 0:
                 GetComponent<Image>().sprite = StaminaBar6;
                 GetComponent<Image>().SetNativeSize();
-                Debug.Log("kita");
                 break;
             case 1:
                 GetComponent<Image>().sprite = StaminaBar5;

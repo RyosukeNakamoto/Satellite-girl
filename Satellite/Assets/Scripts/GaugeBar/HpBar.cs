@@ -47,7 +47,6 @@ public class HpBar : MonoBehaviour
             case 0:
                 GetComponent<Image>().sprite = hpBar6;
                 GetComponent<Image>().SetNativeSize();
-                Debug.Log("kita");
                 break;
             case 1:
                 GetComponent<Image>().sprite = hpBar5;

@@ -48,7 +48,7 @@ public class PlayerBullet : Bullet
 
         if (buffTrigger)
         {
-            damage += 3;
+            damage = GameController.Instance.Attack + 3;
             Debug.Log(damage);
             buffTrigger = false;
         }
