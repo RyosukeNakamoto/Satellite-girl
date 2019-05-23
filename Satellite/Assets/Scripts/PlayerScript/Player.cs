@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
         // 活動時間のゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = staminaValue;
-        Debug.Log(GameController.Instance.ActivityTime);
+        Debug.Log(buffValue);
     }
 
     // Update is called once per frame
@@ -164,14 +164,12 @@ public class Player : MonoBehaviour
                 speedOnBuff = true;
                 speedOffBuff = false;
             }
-        }else if (buffGauge.fillAmount != 1)
-        {
-            PlayerBullet.buffTrigger = false;
-            speedOnBuff = false;
         }
         // ゲージを使い切ったらバフ終了
         else if (buffGauge.fillAmount <= 0)
         {
+            speedOnBuff = false;
+            PlayerBullet.buffTrigger = false;
             buffUse = false;    // バフフラグOFF
             buffSet = false;    // 
             speedOffBuff = true;    // 通常モード
@@ -181,6 +179,8 @@ public class Player : MonoBehaviour
         {
             // ゲージを消費
             buffValue -= 0.1f;
+            //buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
+            Debug.Log(buffValue);
         }
 
         ////HPが0以下になったときの処理
@@ -266,7 +266,7 @@ public class Player : MonoBehaviour
         {
             // 活動ゲージの加算
             staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
-            if (staminaGauge.fillAmount>0.5)
+            if (staminaGauge.fillAmount>0.2)
             {
                 staminaControl = true;
             }
@@ -387,7 +387,6 @@ public class Player : MonoBehaviour
         //ボスの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            Debug.Log("A");
             //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             HpGauge.fillAmount -= bossSc.damage;
