@@ -3213,6 +3213,11 @@ PrefabInstance:
       propertyPath: activityTimeTable.Array.data[5]
       value: 55
       objectReference: {fileID: 0}
+    - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
+        type: 3}
+      propertyPath: stage
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4df64328e9ed74886e78456fce40bb, type: 3}
 --- !u!1 &1681578609
@@ -3627,7 +3632,7 @@ MonoBehaviour:
     type: 3}
   meteoriteMedium: {fileID: 1879095314465036589, guid: ed7d6dcc64dd512428ef496277e0197b,
     type: 3}
-  meteoriteLarge: {fileID: 1879095314465036589, guid: 49067ac764226414cbbb9796c8777767,
+  meteoriteLarge: {fileID: 1879095314465036589, guid: 930b5f0486ee4684aae81b46c00bc1ee,
     type: 3}
   debriSmall: {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9,
     type: 3}

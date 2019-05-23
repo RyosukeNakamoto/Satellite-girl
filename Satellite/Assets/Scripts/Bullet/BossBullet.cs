@@ -18,5 +18,18 @@ public class BossBullet : EnemyBullet
         Vector3 pos = transform.position;
         pos -= transform.right * speed * Time.deltaTime;
         transform.position = pos;
+
+        switch (GameController.Instance.stage)
+        {
+            case 0:
+                damage = 10;
+                break;
+            case 1:
+                damage = 30;
+                break;
+            case 2:
+                damage = 60;
+                break;
+        }
     }
 }
