@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     Rigidbody2D rigidbody;
 
     // 速度
-    public float speed = 100.0f;
+    public float speed = 10f;
+    private float speedBuff = 10;
     //プレイヤーの位置
     private Vector2 player_pos;
 
@@ -163,13 +164,16 @@ public class Player : MonoBehaviour
                 speedOnBuff = true;
                 speedOffBuff = false;
             }
+        }else if (buffGauge.fillAmount != 1)
+        {
+            PlayerBullet.buffTrigger = false;
+            speedOnBuff = false;
         }
         // ゲージを使い切ったらバフ終了
         else if (buffGauge.fillAmount <= 0)
         {
             buffUse = false;    // バフフラグOFF
             buffSet = false;    // 
-            speedOnBuff = false;    // バフ終了
             speedOffBuff = true;    // 通常モード
         }
         // バフ発動
@@ -217,8 +221,7 @@ public class Player : MonoBehaviour
 
             if (speedOnBuff)
             {
-                speed = speed * 1.3f;
-                Debug.Log(speed);
+                speed = speedBuff * 1.3f;
                 speedOnBuff = false;
             }
             if (speedOffBuff)
