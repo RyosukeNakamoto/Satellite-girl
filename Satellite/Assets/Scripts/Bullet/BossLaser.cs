@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossLaser : MonoBehaviour
+public class BossLaser : Bullet
 {
 
     float deleteTime = 0;
@@ -19,6 +19,8 @@ public class BossLaser : MonoBehaviour
     {
         deleteTime += Time.deltaTime;
 
+        damage = 60;
+
         //3秒を越えると消去
         if (deleteTime > 3)
         {
@@ -28,7 +30,7 @@ public class BossLaser : MonoBehaviour
         if (Time.timeScale == 1)
         {
             //レーザーの移動
-            this.transform.Translate(-0.5f, 0, 0);
+            this.transform.Translate(-0.7f, 0, 0);
         }
     }
 

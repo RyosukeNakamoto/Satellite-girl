@@ -49,6 +49,7 @@ public class Boss : MonoBehaviour
     float bossAttack = 0;
     //ボスポイント
     int bossPoint;
+    float scoreCount;
 
     //オーディオ
     AudioSource audioSource;
@@ -94,13 +95,17 @@ public class Boss : MonoBehaviour
         //ボスの体力が0になったときに、自分を消去
         if (HpGauge.fillAmount <= 0)
         {
+            scoreCount += Time.deltaTime;
             //スコア加算
             Player.score += bossPoint;
-            Debug.Log(Player.score);
 
-            Destroy(gameObject);
-            
-            clearImage.SetActive(true);
+            if (scoreCount >= 0.3f)
+            {
+
+                Destroy(gameObject);
+
+                clearImage.SetActive(true);
+            }
 
             // sceneをまたいで保存
             GameController.Instance.score += Player.score;
@@ -122,7 +127,7 @@ public class Boss : MonoBehaviour
                     bossAttack = Random.Range(3, 10);
                     break;
                 case 2:
-                    bossAttack = Random.Range(3, 13);
+                    bossAttack = Random.Range(5, 13);
                     break;
             }
             
