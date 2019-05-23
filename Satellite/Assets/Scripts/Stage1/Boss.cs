@@ -87,7 +87,7 @@ public class Boss : MonoBehaviour
         transform.position = pos;
 
         //ボスの体力が0になったときに、自分を消去
-        if (hp <= 0)
+        if (HpGauge.fillAmount <= 0)
         {
             Destroy(gameObject);
 
