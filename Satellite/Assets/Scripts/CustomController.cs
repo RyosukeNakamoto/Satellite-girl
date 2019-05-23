@@ -673,7 +673,7 @@ public class CustomController : MonoBehaviour
                         //強化を確定
                         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
                         {
-                            if (GameController.Instance.score >= Level1)
+                            if (GameController.Instance.score >= consumptionPoint)
                             {
                                 //ゲームコントローラーの親愛度レベルを変更する
                                 GameController.Instance.intimacyLevel = ununsettledIntimacy;
@@ -692,7 +692,7 @@ public class CustomController : MonoBehaviour
                                 audioSource.PlayOneShot(sound[1]);
 
                                 //強化時のボイス再生
-                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+                                //audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
 
                                 //連続入力判定
                                 decisionStrengthening = false;
@@ -1077,7 +1077,7 @@ public class CustomController : MonoBehaviour
                                 audioSource.PlayOneShot(sound[2]);
 
                                 //強化時のボイス再生
-                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+                                //audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
 
                                 //連続入力判定
                                 decisionStrengthening = false;
@@ -1462,7 +1462,7 @@ public class CustomController : MonoBehaviour
                                 audioSource.PlayOneShot(sound[2]);
 
                                 //強化時のボイス再生
-                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+                                //audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
 
                                 //連続入力判定
                                 decisionStrengthening = false;
@@ -2234,7 +2234,7 @@ public class CustomController : MonoBehaviour
                                 audioSource.PlayOneShot(sound[2]);
 
                                 //強化時のボイス再生
-                                audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
+                                //audioSource.PlayOneShot(strengtheningVoice[Random.Range(0, 3)]);
 
                                 //連続入力判定
                                 decisionStrengthening = false;
@@ -2312,12 +2312,12 @@ public class CustomController : MonoBehaviour
                     audioSource.PlayOneShot(sound[4]);
 
                     //ボイスの再生
-                    audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+                    //audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
                     selectInput = true;
 
-                    //6秒後にシーン遷移
-                    Invoke("MoveScene", 6);
+                    //シーン遷移
+                    Invoke("MoveScene", 0.5f);
                 }
             }
         }
@@ -2431,55 +2431,14 @@ public class CustomController : MonoBehaviour
             case 2:
                 selectedStage.text = ("STAGE3");
                 break;
-            case 3:
-                selectedStage.text = ("STAGE4");
-                break;
-            case 4:
-                selectedStage.text = ("STAGE5");
-                break;
-            case 5:
-                selectedStage.text = ("STAGE6");
-                break;
-            case 6:
-                selectedStage.text = ("STAGE7");
-                break;
-            case 7:
-                selectedStage.text = ("STAGE8");
-                break;
-            case 8:
-                selectedStage.text = ("STAGE9");
-                break;
-            case 9:
-                selectedStage.text = ("STAGE10");
-                break;
-            case 10:
-                selectedStage.text = ("STAGE11");
-                break;
-            case 11:
-                selectedStage.text = ("STAGE12");
-                break;
         }
         
     }
 
-    //出撃を選択したとき、ボイスの再生が終わってからシーン遷移
+    //出撃を選択したときシーン遷移
     public void MoveScene()
     {
-        switch (GameController.Instance.stage)
-        {
-            case 0:
-                SceneManager.LoadScene("Stage");
-                break;
-            case 1:
-                SceneManager.LoadScene("Stage");
-                break;
-            case 2:
-                SceneManager.LoadScene("Stage");
-                break;
-            case 3:
-                SceneManager.LoadScene("Stage");
-                break;
-        }
+        SceneManager.LoadScene("Stage");
     }
 }
 

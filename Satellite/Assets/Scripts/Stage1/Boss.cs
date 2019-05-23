@@ -94,12 +94,14 @@ public class Boss : MonoBehaviour
         //ボスの体力が0になったときに、自分を消去
         if (HpGauge.fillAmount <= 0)
         {
-            Destroy(gameObject);
-
-            clearImage.SetActive(true);
-
             //スコア加算
             Player.score += bossPoint;
+            Debug.Log(Player.score);
+
+            Destroy(gameObject);
+            
+            clearImage.SetActive(true);
+
             // sceneをまたいで保存
             GameController.Instance.score += Player.score;
         }
