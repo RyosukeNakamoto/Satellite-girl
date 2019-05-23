@@ -75,6 +75,7 @@ public class GameController : MonoBehaviour
     // public int sortieLevel = 0;
     public int score = 0;
     public int scoreText = 0;
+    [HideInInspector]
     public float HpGet = 1;
     
     // ステージの管理

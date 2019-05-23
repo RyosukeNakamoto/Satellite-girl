@@ -3999,6 +3999,11 @@ PrefabInstance:
       propertyPath: staminaValue
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4660935517234375367, guid: 6050e9d41d3dd84449dda3f074b2611e,
+        type: 3}
+      propertyPath: buffValue
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6050e9d41d3dd84449dda3f074b2611e, type: 3}
 --- !u!1001 &6732496031177923642

@@ -14,6 +14,8 @@ public class Meteorite : MonoBehaviour
     public Camera camera;
     // 表示確認(最初はfalse)
     public bool isRendered = false;
+    // エフェクトのオブジェクトを指定
+    public GameObject effectObject;
 
     // Start is called before the first frame update
     void Start()

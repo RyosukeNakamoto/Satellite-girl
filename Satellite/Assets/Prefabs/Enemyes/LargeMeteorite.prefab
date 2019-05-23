@@ -97,6 +97,10 @@ MonoBehaviour:
   damage: 5
   camera: {fileID: 0}
   isRendered: 0
+  effectObject: {fileID: 5908219524231412484, guid: 249d23830c517924cb38726c12c20f30,
+    type: 3}
+  sound:
+  - {fileID: 8300000, guid: 787c0dc63e4c6274289b26da45c63721, type: 3}
 --- !u!58 &9051490577449306053
 CircleCollider2D:
   m_ObjectHideFlags: 0
