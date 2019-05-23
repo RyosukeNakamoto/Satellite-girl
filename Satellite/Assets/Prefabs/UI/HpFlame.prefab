@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1435578327126586789}
   - component: {fileID: 9006866757240825384}
   - component: {fileID: 5361026195167667013}
+  - component: {fileID: 6049414896223432129}
   m_Layer: 5
   m_Name: HpFlame
   m_TagString: Untagged
@@ -74,3 +75,21 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &6049414896223432129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6359773746364424751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9f81e51c393c9d4c8e8db654a1d731e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar1: {fileID: 21300000, guid: a288e7873c69bf849b1da00ec4952f64, type: 3}
+  hpBar2: {fileID: 21300000, guid: 8287a9af7a9ce35438159b9201cfe046, type: 3}
+  hpBar3: {fileID: 21300000, guid: 74144b0de897d6d478a60233d22151a2, type: 3}
+  hpBar4: {fileID: 21300000, guid: 17b4d7e883c5e6148b4f9922da7d3ebd, type: 3}
+  hpBar5: {fileID: 21300000, guid: c0b53cae2149b2540be36003c01965a9, type: 3}
+  hpBar6: {fileID: 21300000, guid: a93dbd9f357708545af28d3472f32a72, type: 3}

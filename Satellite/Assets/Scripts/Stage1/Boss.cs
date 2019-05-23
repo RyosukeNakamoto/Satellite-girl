@@ -11,6 +11,10 @@ public class Boss : MonoBehaviour
     public float hp=100f;
     public float maxhp=100;
 
+    public GameObject HpObject;
+    public Image HpGauge = null;
+    public float HpValue = 1;
+
     //ボスのHPスライダー
     public Slider hpslider;
 
@@ -51,13 +55,23 @@ public class Boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // ボスのMAXHPスライダー
-        hpslider.maxValue = maxhp;
-        // ボスのHPスライダー
-        hpslider.value = hp;
+        // HPのゲージ
+        HpGauge = HpObject.GetComponent<Image>();
+        switch (GameController.Instance.stage)
+        {
+            case 0:
+                maxhp = 450;
+                break;
+            case 1:
+                maxhp = 1500;
+                break;
+            case 2:
+                maxhp = 3000;
+                break;
+        }
+        HpGauge.fillAmount = 1;
 
         clearImage.SetActive(false);
-        hpslider.enabled = false;
 
         //音のコンポーネントを取得
         audioSource = GetComponent<AudioSource>();
@@ -166,8 +180,8 @@ public class Boss : MonoBehaviour
     {        
         if (collision.gameObject.tag == "Bullet")
         {
-            hp -= GameController.Instance.Attack;
-            hpslider.value -= GameController.Instance.Attack;
+            HpGauge.fillAmount -= HpValue / maxhp * GameController.Instance.Attack;
+            Debug.Log(HpValue / maxhp * GameController.Instance.Attack);
         }
     }
 
