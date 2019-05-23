@@ -1658,7 +1658,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3a99c2e560e4bfa43aff900bc7cadb07, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ff2fe481807d40b4aae523b189a96102, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -3609,8 +3609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323fc79ae295bd43832a7953190af2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 450
-  maxhp: 450
+  hp: 3000
+  maxhp: 3000
   HpObject: {fileID: 534616267}
   HpGauge: {fileID: 534616269}
   HpValue: 1
@@ -3857,7 +3857,7 @@ Animator:
   m_GameObject: {fileID: 1795683425}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ae88ab5cdc17ca64393d18ca26334e88, type: 2}
+  m_Controller: {fileID: 9100000, guid: 13670fd1e4ccea942929b499fc2a06ef, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
