@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
 
     //ボスのHPスライダー
     public Slider hpslider;
-
+    //クリア画面
     public GameObject clearImage;
 
     public Transform target;
@@ -47,6 +47,8 @@ public class Boss : MonoBehaviour
 
     //ボス攻撃パターン
     float bossAttack = 0;
+    //ボスポイント
+    int bossPoint;
 
     //オーディオ
     AudioSource audioSource;
@@ -61,12 +63,15 @@ public class Boss : MonoBehaviour
         {
             case 0:
                 maxhp = 450;
+                bossPoint = 60;
                 break;
             case 1:
                 maxhp = 1500;
+                bossPoint = 180;
                 break;
             case 2:
                 maxhp = 3000;
+                bossPoint = 300;
                 break;
         }
         HpGauge.fillAmount = 1;
@@ -92,6 +97,9 @@ public class Boss : MonoBehaviour
             Destroy(gameObject);
 
             clearImage.SetActive(true);
+
+            //スコア加算
+            Player.score += bossPoint;
             // sceneをまたいで保存
             GameController.Instance.score += Player.score;
         }
