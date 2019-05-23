@@ -42,8 +42,35 @@ public class HpBar : MonoBehaviour
         //if ( GameController.Instance.hpTable ==(GameController.Instance.hpTable))
         //{
         //    Debug.Log("kita");
-          GetComponent<Image>().sprite = hpBar1;
-          GetComponent<Image>().SetNativeSize();
+        switch (GameController.Instance.hpLevel)
+        {
+            case 0:
+                GetComponent<Image>().sprite = hpBar6;
+                GetComponent<Image>().SetNativeSize();
+                Debug.Log("kita");
+                break;
+            case 1:
+                GetComponent<Image>().sprite = hpBar5;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 2:
+                GetComponent<Image>().sprite = hpBar4;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 3:
+                GetComponent<Image>().sprite = hpBar3;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 4:
+                GetComponent<Image>().sprite = hpBar2;
+                GetComponent<Image>().SetNativeSize();
+                break;
+            case 5:
+                GetComponent<Image>().sprite = hpBar1;
+                GetComponent<Image>().SetNativeSize();
+                break;
+        }
+
         //}
         //Debug.Log(a);
     }
