@@ -94,6 +94,24 @@ MonoBehaviour:
   StaminaBar4: {fileID: 21300000, guid: ee3acb4ddbf266e45887c4130d1c15a6, type: 3}
   StaminaBar5: {fileID: 21300000, guid: 6cfdbb6115349bf4c8b0488d88e432ad, type: 3}
   StaminaBar6: {fileID: 21300000, guid: e6a2c17990b43e0428352403d6e454c0, type: 3}
+--- !u!114 &5399429020651653514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491479135525645304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c91a8a7e2630984cb8080601ad7e6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StaminaBar1: {fileID: 21300000, guid: a288e7873c69bf849b1da00ec4952f64, type: 3}
+  StaminaBar2: {fileID: 21300000, guid: 8287a9af7a9ce35438159b9201cfe046, type: 3}
+  StaminaBar3: {fileID: 21300000, guid: 74144b0de897d6d478a60233d22151a2, type: 3}
+  StaminaBar4: {fileID: 21300000, guid: 17b4d7e883c5e6148b4f9922da7d3ebd, type: 3}
+  StaminaBar5: {fileID: 21300000, guid: c0b53cae2149b2540be36003c01965a9, type: 3}
+  StaminaBar6: {fileID: 21300000, guid: a93dbd9f357708545af28d3472f32a72, type: 3}
 --- !u!1001 &8276839157259260784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -213,6 +231,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a77d163a5dc6d51458ca89b2d7a9d40c, type: 3}
+--- !u!1 &3491479135525645304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4803375537219893384, guid: a77d163a5dc6d51458ca89b2d7a9d40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8276839157259260784}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2983831947923428457 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6608344178651514649, guid: a77d163a5dc6d51458ca89b2d7a9d40c,
