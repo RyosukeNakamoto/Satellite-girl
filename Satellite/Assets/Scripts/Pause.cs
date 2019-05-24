@@ -111,6 +111,8 @@ public class Pause : MonoBehaviour
 
                         pauseImage.SetActive(false);
 
+                        count = 0;
+
                         // ゲームの時間を戻す
                         Time.timeScale = 1.0f;
                     }
@@ -146,6 +148,8 @@ public class Pause : MonoBehaviour
                         audioSource.PlayOneShot(sound[2]);
 
                         pauseImage.SetActive(false);
+
+                        count = 0;
 
                         SceneManager.LoadScene("Stageselect");
                         GameController.Instance.scoreText = 0;

@@ -13,24 +13,24 @@ public class CustomController : MonoBehaviour
     int selectNumber = 0;
 
     //未確定の親愛度の星の画像の表示を数値で管理
-    int ununsettledIntimacy = 0;
-    int minimumUnunsettledIntimacy = 0;
+    public int ununsettledIntimacy;
+    public static int minimumUnunsettledIntimacy ;
 
     //未確定のHPの星の画像の表示を数値で管理
     int ununsettledHp = 0;
-    int minimumUnunsettledHp = 0;
+    static int minimumUnunsettledHp = 0;
 
     //未確定の活動時間の星の画像の表示を数値で管理
     int ununsettledActivityTime = 0;
-    int minimumUnununsettledActivityTime = 0;
+    static int minimumUnununsettledActivityTime = 0;
 
     //未確定の攻撃の星の画像の表示を数値で管理
     int ununsettledAttack = 0;
-    int minimumUnununsettledAttack = 0;
+    static int minimumUnununsettledAttack = 0;
 
     //未確定の連射速度の星の画像の表示を数値で管理
     int ununsettledRapidfire = 0;
-    int minimumUnununsettledRapidfire = 0;
+    static int minimumUnununsettledRapidfire = 0;
 
     //選択中の画像表示
     public Image[] selectedImage;
@@ -47,10 +47,10 @@ public class CustomController : MonoBehaviour
     */
     //レベルごとの消費ポイント
     int Level1 = 50;
-    int Level2 = 600;
-    int Level3 = 700;
+    int Level2 = 150;
+    int Level3 = 500;
     int Level4 = 800;
-    int Level5 = 1000;
+    int Level5 = 1500;
 
     //親愛度の星の画像
     public Image[] intimacyStar;
@@ -173,19 +173,16 @@ public class CustomController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         Time.timeScale = 1.0f;
+        ununsettledIntimacy = minimumUnunsettledIntimacy;
+        ununsettledHp = minimumUnunsettledHp;
+        ununsettledActivityTime = minimumUnununsettledActivityTime;
+        ununsettledAttack = minimumUnununsettledAttack;
+        ununsettledRapidfire= minimumUnununsettledRapidfire;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //デバッグ用
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            GameController.Instance.score += 10000;
-        }
-
-       
-
         //十字キー縦の入力
         float dph = Input.GetAxis("D_Pad_H");
         //十字キー横の入力
