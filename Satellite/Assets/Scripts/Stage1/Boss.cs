@@ -196,7 +196,6 @@ public class Boss : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             HpGauge.fillAmount -= HpValue / maxhp * GameController.Instance.Attack;
-            Debug.Log(HpValue / maxhp * GameController.Instance.Attack);
         }
     }
 

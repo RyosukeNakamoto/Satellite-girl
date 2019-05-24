@@ -75,9 +75,9 @@ public class GameController : MonoBehaviour
     // public int sortieLevel = 0;
     public int score = 0;
     public int scoreText = 0;
-    [HideInInspector]
-    public float HpGet = 1;
-    
+    [HideInInspector] public float hpGet = 1;
+    [HideInInspector] public float buffGaugeValue = 0;
+
     // ステージの管理
     public int stage = 0;
 

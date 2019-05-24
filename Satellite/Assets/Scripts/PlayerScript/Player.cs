@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
     public GameObject resultScoreObject;
     // アイテムの点数
     int itemScore = 5;
+    int itemScore1 = 10;
+    int itemScore2 = 15;
     // スタミナ制御
     bool staminaControl = true;
     // バフを使うフラグ
@@ -104,6 +106,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         bossSc = bossBullet.GetComponent<Bullet>();
+        //
 
         Time.timeScale = 1.0f;
 
@@ -117,14 +120,14 @@ public class Player : MonoBehaviour
         // スコアを0で初期化
         score = GameController.Instance.scoreText;
         // スコアを表示
-        scoreText.text = "POINT：" + score;
+        scoreText.text = score.ToString();
         // リザルトスコアテキストのコンポーネント
         resultScoreText = resultScoreObject.GetComponent<Text>();
-        resultScoreText.text = "" + score + "p";
+        resultScoreText.text = "" + score + "P";
 
         // バフゲージ
         buffGauge = buffObject.GetComponent<Image>();
-        buffGauge.fillAmount = 0;
+        buffGauge.fillAmount = GameController.Instance.buffGaugeValue;
 
         // 一号機セレステルのHPを取得
         hp = GameController.Instance.HitPoint;
@@ -138,32 +141,28 @@ public class Player : MonoBehaviour
         // HPのゲージ
         HpGauge = HpObject.GetComponent<Image>();
         //HpGauge.fillAmount = HpValue/ GameController.Instance.HitPoint ;
-        Debug.Log(GameController.Instance.HitPoint);
-        HpGauge.fillAmount = GameController.Instance.HpGet;
+        //Debug.Log(GameController.Instance.HitPoint);
+        HpGauge.fillAmount = GameController.Instance.hpGet;
         // 活動時間のゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = staminaValue;
-        Debug.Log(buffValue);
     }
 
     // Update is called once per frame
     void Update()
     {
-        buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
         // ゲージがMAXになったらバフ発動フラグ
         if (buffGauge.fillAmount >= 1)
         {
             // ボイスの再生
-            playerVoiceSource.PlayOneShot(playerVoice[Random.Range(0, 3)]);
+            //playerVoiceSource.PlayOneShot(playerVoice[Random.Range(0, 3)]);
             buffUse = true; // バフを使うフラグON
-            if (buffUse)
-            {
-                buffUse = false;
+
                 buffSet = true; // バフをかける
                 PlayerBullet.buffTrigger = true;
                 speedOnBuff = true;
                 speedOffBuff = false;
-            }
+            
         }
         // ゲージを使い切ったらバフ終了
         else if (buffGauge.fillAmount <= 0)
@@ -178,19 +177,9 @@ public class Player : MonoBehaviour
         if (buffSet)
         {
             // ゲージを消費
-            buffValue -= 0.1f;
-            //buffGauge.fillAmount = buffValue / GameController.Instance.Intimacy;
-            Debug.Log(buffValue);
+            buffGauge.fillAmount -= 0.0025f;
         }
-
-        ////HPが0以下になったときの処理
-        //if (hp <= 0 || activ <= 0)
-        //{
-        //    Destroy(gameObject);
-        //    playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
-        //    gameOver.SetActive(true);
-        //}
-
+        GameController.Instance.buffGaugeValue = buffGauge.fillAmount;
         //ダメージを受けた時点滅
         if (ondamage)
         {
@@ -375,7 +364,7 @@ public class Player : MonoBehaviour
         {
             // ダメージ処理
             HpGauge.fillAmount -= HpValue / GameController.Instance.HitPoint * bulletSc.damage;
-            GameController.Instance.HpGet = HpGauge.fillAmount;
+            GameController.Instance.hpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {
                 playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
@@ -390,7 +379,7 @@ public class Player : MonoBehaviour
             //hp -= (int)bulletSc.damage;
             //HPバーを減らす（プロト版）
             HpGauge.fillAmount -= bossSc.damage;
-            GameController.Instance.HpGet = HpGauge.fillAmount;
+            GameController.Instance.hpGet = HpGauge.fillAmount;
             if (HpGauge.fillAmount <= 0)
             {
                 gameOver.SetActive(true);
@@ -405,8 +394,30 @@ public class Player : MonoBehaviour
             score += itemScore;
             GameController.Instance.scoreText = score;
             // スコア内容の変更
-            scoreText.text = "POINT：" + score;
-            resultScoreText.text = "" + score + "p";
+            scoreText.text = score.ToString();
+            resultScoreText.text = "" + score + "P";
+            // サウンドの再生
+            audioSource.PlayOneShot(sound[3]);
+        }
+
+        if (collision.gameObject.tag == "Item1")
+        {
+            score += itemScore1;
+            GameController.Instance.scoreText = score;
+            // スコア内容の変更
+            scoreText.text = score.ToString();
+            resultScoreText.text = "" + score + "P";
+            // サウンドの再生
+            audioSource.PlayOneShot(sound[3]);
+        }
+
+        if (collision.gameObject.tag == "Item2")
+        {
+            score += itemScore2;
+            GameController.Instance.scoreText = score;
+            // スコア内容の変更
+            scoreText.text = score.ToString();
+            resultScoreText.text = "" + score + "P";
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
         }

@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 {
     [SerializeField]
     GameObject acquisitionEffect;
+    [SerializeField]
+    int point;
     //// Start is called before the first frame update
     //void Start()
     //{

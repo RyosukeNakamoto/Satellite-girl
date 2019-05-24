@@ -145,7 +145,6 @@ MonoBehaviour:
   speed: 40
   damage: 1
   landing: {fileID: 286038888519794324, guid: 90023444dca79f046adce30689e523af, type: 3}
-  damage: 1
 --- !u!82 &8873783251050890644
 AudioSource:
   m_ObjectHideFlags: 0
