@@ -33,7 +33,8 @@ public class GameOver : MonoBehaviour
         selectImage[1].color = Color.gray;
 
         GameController.Instance.scoreText = 0;
-        GameController.Instance.HpGet = 1;
+        GameController.Instance.hpGet = 1;
+        GameController.Instance.buffGaugeValue = 0;
 
         inputControl = false;
     }

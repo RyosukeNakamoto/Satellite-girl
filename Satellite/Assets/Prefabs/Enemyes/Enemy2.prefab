@@ -150,7 +150,7 @@ MonoBehaviour:
   Attack: 0
   enemyBullet: {fileID: 1879095314465036589, guid: 4980d67a45d550448bbb5aa5a2adddd1,
     type: 3}
-  itemObj: {fileID: 5963002734199674796, guid: 5753f6912ea53654786ce5937b763867, type: 3}
+  itemObj: {fileID: 5963002734199674796, guid: 38eb22312a3f36f4f8c01a8c033179ee, type: 3}
   effectObject: {fileID: 5908219524231412484, guid: 249d23830c517924cb38726c12c20f30,
     type: 3}
   camera: {fileID: 0}

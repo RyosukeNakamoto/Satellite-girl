@@ -122,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acquisitionEffect: {fileID: 3538082768402345504, guid: c48a095c47e74b848b3acc85e0dd2463,
     type: 3}
+  point: 5
 --- !u!95 &9042025113157066627
 Animator:
   serializedVersion: 3

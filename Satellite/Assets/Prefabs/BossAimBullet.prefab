@@ -143,3 +143,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   damage: 10
+  landing: {fileID: 286038888519794324, guid: 90023444dca79f046adce30689e523af, type: 3}

@@ -75,10 +75,11 @@ public class Enemy1 : Enemy
         Vector3 position = transform.position;
         position.x += 1;
         Instantiate(itemObj, position, itemObj.transform.rotation);
-        if (!playerSc.buffUse)
+
+        if (!Player.buffSet)
         {
             // プレイヤーのゲージを加算
-            playerSc.buffValue += 5;
+            playerSc.buffGauge.fillAmount += playerSc.buffValue / GameController.Instance.Intimacy * 5;
         }
         else
         {

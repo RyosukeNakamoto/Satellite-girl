@@ -30,7 +30,8 @@ public class Clear : MonoBehaviour
     void Start()
     {
         GameController.Instance.scoreText = 0;
-        GameController.Instance.HpGet = 1;
+        GameController.Instance.hpGet = 1;
+        GameController.Instance.buffGaugeValue = 0;
 
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
