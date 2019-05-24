@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd9e3edfcc1075b40a432209c94f6c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseImage: {fileID: 1796495050}
+  pauseImage: {fileID: 1067867538}
   sound:
   - {fileID: 8300000, guid: 084cc7a8394038046868cbd161253000, type: 3}
   - {fileID: 8300000, guid: a051323683d703b41b8542b330354c1c, type: 3}
@@ -904,9 +904,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvData:
-  - {fileID: 4900000, guid: 3a80b5050b4d5d34c9a88732a434f0bf, type: 3}
-  - {fileID: 4900000, guid: 6202cfae644d85e48b035a980860ea97, type: 3}
-  - {fileID: 4900000, guid: f545d1e9f5cc2474f972de65deff844a, type: 3}
+  - {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
+  - {fileID: 4900000, guid: 699faa9ef124b3c47880cdbd3d7df004, type: 3}
+  - {fileID: 4900000, guid: e8f9d56c24df7bb4fba965e05a080721, type: 3}
   enemyPrefabs:
   - {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9, type: 3}
   - {fileID: 1943467288051095588, guid: b61820dc1ce60a648a54773cda5f080c, type: 3}
@@ -1434,6 +1434,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16aa8fb2147ba124bab98f3de4fe0821, type: 3}
+--- !u!1 &1067867538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7624292255090047748, guid: 16aa8fb2147ba124bab98f3de4fe0821,
+    type: 3}
+  m_PrefabInstance: {fileID: 1067867537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090074770
 GameObject:
   m_ObjectHideFlags: 0
