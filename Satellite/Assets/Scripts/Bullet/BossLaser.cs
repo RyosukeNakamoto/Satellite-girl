@@ -30,7 +30,7 @@ public class BossLaser : Bullet
         if (Time.timeScale == 1)
         {
             //レーザーの移動
-            this.transform.Translate(-0.7f, 0, 0);
+            this.transform.Translate(-0.3f, 0, 0);
         }
     }
 
