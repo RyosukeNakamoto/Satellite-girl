@@ -505,6 +505,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4660935517234374969, guid: 6050e9d41d3dd84449dda3f074b2611e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4660935517234374971, guid: 6050e9d41d3dd84449dda3f074b2611e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1307,8 +1312,8 @@ RectTransform:
   - {fileID: 201238570}
   - {fileID: 84683128}
   - {fileID: 1031732742}
-  - {fileID: 1319542330}
   - {fileID: 1939688544}
+  - {fileID: 1319542330}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1641,6 +1646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592906142}
   - component: {fileID: 592906141}
+  - component: {fileID: 592906143}
   m_Layer: 0
   m_Name: Bgm
   m_TagString: Untagged
@@ -1758,6 +1764,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &592906143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592906140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2880c8b3efb78974a9c57637debe5917, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &596549248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2600,7 +2618,7 @@ RectTransform:
   - {fileID: 1349877153}
   - {fileID: 1689133389}
   m_Father: {fileID: 481361723}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3156,7 +3174,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: rapidfireTable.Array.data[0]
-      value: 0.48
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
@@ -3181,7 +3199,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: rapidfireTable.Array.data[5]
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
@@ -3216,7 +3234,7 @@ PrefabInstance:
     - target: {fileID: 7314726446618528879, guid: 3c4df64328e9ed74886e78456fce40bb,
         type: 3}
       propertyPath: stage
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c4df64328e9ed74886e78456fce40bb, type: 3}
@@ -3614,8 +3632,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4323fc79ae295bd43832a7953190af2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3000
-  maxhp: 3000
+  hp: 1500
+  maxhp: 1500
   HpObject: {fileID: 534616267}
   HpGauge: {fileID: 534616269}
   HpValue: 1
@@ -3632,7 +3650,7 @@ MonoBehaviour:
     type: 3}
   meteoriteMedium: {fileID: 1879095314465036589, guid: ed7d6dcc64dd512428ef496277e0197b,
     type: 3}
-  meteoriteLarge: {fileID: 1879095314465036589, guid: 930b5f0486ee4684aae81b46c00bc1ee,
+  meteoriteLarge: {fileID: 1879095314465036589, guid: 49067ac764226414cbbb9796c8777767,
     type: 3}
   debriSmall: {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9,
     type: 3}
@@ -4082,7 +4100,7 @@ RectTransform:
   - {fileID: 140344890}
   - {fileID: 119839597}
   m_Father: {fileID: 481361723}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

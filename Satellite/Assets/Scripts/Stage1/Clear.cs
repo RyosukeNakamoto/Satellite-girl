@@ -36,7 +36,7 @@ public class Clear : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //ボイスの再生
-        audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+        //audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
         //シーン開始時に選択画像の色の変更
         for (int i = 0; i < 2; i++)
