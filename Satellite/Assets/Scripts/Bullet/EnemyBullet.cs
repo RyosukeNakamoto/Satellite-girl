@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
+    // 着弾エフェクト
+    [SerializeField]
+    private GameObject landing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,8 @@ public class EnemyBullet : Bullet
         // プレイヤーか判別します
         if (collision.gameObject.tag == "Player")
         {
+            // 着弾エフェクトを出す
+            Instantiate(landing, transform.position, landing.transform.rotation);
             // 弾を消します
             Destroy(gameObject);
         }

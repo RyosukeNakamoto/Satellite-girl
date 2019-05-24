@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class StraightBullet : EnemyBullet
 {
-    // 着弾エフェクト
-    [SerializeField]
-    private GameObject landing;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +16,5 @@ public class StraightBullet : EnemyBullet
         Vector3 pos = transform.position;
         pos += transform.right * speed * Time.deltaTime;
         transform.position = pos;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Instantiate(landing, transform.position, landing.transform.rotation);
-        Destroy(gameObject);
     }
 }
