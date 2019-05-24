@@ -35,7 +35,7 @@ public class GameOver : MonoBehaviour
         GameController.Instance.scoreText = 0;
         GameController.Instance.HpGet = 1;
 
-        inputControl = false;
+        count=0;
     }
 
     // Update is called once per frame
