@@ -47,8 +47,6 @@ public class Player : MonoBehaviour
 
     //ゲームオーバー表示
     public GameObject gameOver;
-    // ゲームクリア表示
-    public GameObject gameClear;
 
     //武器を数値で管理
     public static int bulletstatus = 0;
@@ -151,6 +149,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        scoreText.text = score.ToString();
+        resultScoreText.text = "" + score + "P";
+
         // ゲージがMAXになったらバフ発動フラグ
         if (buffGauge.fillAmount >= 1)
         {

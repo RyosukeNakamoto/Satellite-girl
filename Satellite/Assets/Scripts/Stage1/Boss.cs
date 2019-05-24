@@ -8,8 +8,8 @@ public class Boss : MonoBehaviour
 {
 
     //ボスのHP設定
-    public float hp=100f;
-    public float maxhp=100;
+    public float hp = 100f;
+    public float maxhp = 100;
 
     public GameObject HpObject;
     public Image HpGauge = null;
@@ -46,7 +46,7 @@ public class Boss : MonoBehaviour
     private float currentTime = 0;
 
     //ボス攻撃パターン
-    float bossAttack = 0;
+    public static float bossAttack = 0;
     //ボスポイント
     int bossPoint;
     float scoreCount;
@@ -63,15 +63,15 @@ public class Boss : MonoBehaviour
         switch (GameController.Instance.stage)
         {
             case 0:
-                maxhp = 450;
+                maxhp = 100;
                 bossPoint = 60;
                 break;
             case 1:
-                maxhp = 1500;
+                maxhp = 500;
                 bossPoint = 180;
                 break;
             case 2:
-                maxhp = 3000;
+                maxhp = 1000;
                 bossPoint = 300;
                 break;
         }
@@ -98,15 +98,8 @@ public class Boss : MonoBehaviour
             scoreCount += Time.deltaTime;
             //スコア加算
             Player.score += bossPoint;
-
-            if (scoreCount >= 0.3f)
-            {
-
-                Destroy(gameObject);
-
-                clearImage.SetActive(true);
-            }
-
+            Destroy(gameObject);
+            clearImage.SetActive(true);
             // sceneをまたいで保存
             GameController.Instance.score += Player.score;
         }
@@ -114,9 +107,9 @@ public class Boss : MonoBehaviour
         currentTime += Time.deltaTime;
 
         //3秒ごとに弾、発射
-        if (currentTime>3)
+        if (currentTime > 3)
         {
-            
+
             //ステージによって攻撃パターン変更
             switch (GameController.Instance.stage)
             {
@@ -130,7 +123,7 @@ public class Boss : MonoBehaviour
                     bossAttack = Random.Range(5, 13);
                     break;
             }
-            
+
             currentTime = 0;
 
             switch (bossAttack)
@@ -167,7 +160,7 @@ public class Boss : MonoBehaviour
                 case 7:
                     debriOccurrenceLarge();
                     break;
-                    //五方向に弾発射
+                //五方向に弾発射
                 case 8:
                     EnemyShotFiveDirections();
                     break;
@@ -189,10 +182,10 @@ public class Boss : MonoBehaviour
                     break;
             }
         }
-        
+
     }
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {
         if (collision.gameObject.tag == "Bullet")
         {
             HpGauge.fillAmount -= HpValue / maxhp * GameController.Instance.Attack;
@@ -299,7 +292,7 @@ public class Boss : MonoBehaviour
         audioSource.PlayOneShot(sound[0]);
     }
 
-    
+
     //5方向の弾の発射
     public void EnemyShotFiveDirections()
     {
@@ -321,7 +314,7 @@ public class Boss : MonoBehaviour
     }
 
     //プレイヤーに向かって弾3発発射
-   IEnumerator AimShotThreeConsecutive()
+    IEnumerator AimShotThreeConsecutive()
     {
         for (int i = 0; i < 3; i++)
         {
@@ -445,7 +438,7 @@ public class Boss : MonoBehaviour
         laser5.transform.Rotate(0, 0, 2.5f);
         laser5.GetComponent<Rigidbody2D>().velocity = new Vector2(-20, -0.7f);
         laser5.transform.parent = transform;
-        
+
     }
 
     //太いレーザー発射
@@ -461,7 +454,7 @@ public class Boss : MonoBehaviour
         largeLaser.transform.SetParent(transform, false);
         largeLaser.GetComponent<Rigidbody2D>().velocity = new Vector2(-30, 0);
         largeLaser.transform.parent = transform;
-        
+
     }
-    
+
 }

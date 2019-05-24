@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 10
+  landing: {fileID: 286038888519794324, guid: 90023444dca79f046adce30689e523af, type: 3}
 --- !u!61 &1777704064327639421
 BoxCollider2D:
   m_ObjectHideFlags: 0
