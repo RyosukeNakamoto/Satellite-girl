@@ -45,11 +45,17 @@ public class Boss : MonoBehaviour
     private float targetTime = 1.0f;
     private float currentTime = 0;
 
+    SpriteRenderer spriteRenderer;
+    float alpha = 1;
+
     //ボス攻撃パターン
     public static float bossAttack = 0;
     //ボスポイント
     int bossPoint;
-    float scoreCount;
+    bool point=false;
+    bool bossState=false;
+    //ボス爆発エフェクト
+    public GameObject explosionPrefab;
 
     //オーディオ
     AudioSource audioSource;
@@ -79,6 +85,8 @@ public class Boss : MonoBehaviour
 
         clearImage.SetActive(false);
 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
         //音のコンポーネントを取得
         audioSource = GetComponent<AudioSource>();
 
@@ -92,22 +100,30 @@ public class Boss : MonoBehaviour
         pos.x = target.position.x + offset;
         transform.position = pos;
 
-        //ボスの体力が0になったときに、自分を消去
+        //ボスの体力が0になったときの処理
         if (HpGauge.fillAmount <= 0)
         {
-            scoreCount += Time.deltaTime;
-            //スコア加算
-            Player.score += bossPoint;
-            Destroy(gameObject);
-            clearImage.SetActive(true);
-            // sceneをまたいで保存
-            GameController.Instance.score += Player.score;
+            //1.5秒後にボスを徐々に透明化
+            Invoke("BossTransparent", 1.5f);
+
+            if (bossState == false)
+            {
+                //スコア加算
+                Player.score += bossPoint;
+
+                // sceneをまたいで保存
+                GameController.Instance.score += Player.score;
+
+                StartCoroutine("ExplosionEffect");
+
+                bossState = true;
+            }
         }
 
         currentTime += Time.deltaTime;
 
         //3秒ごとに弾、発射
-        if (currentTime > 3)
+        if (currentTime > 3&& bossState==false)
         {
 
             //ステージによって攻撃パターン変更
@@ -457,4 +473,56 @@ public class Boss : MonoBehaviour
 
     }
 
+    //ボス爆発エフェクト
+    IEnumerator ExplosionEffect()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Vector2 position = new Vector2(0, 0);
+
+            GameObject explosion = Instantiate(explosionPrefab, position, explosionPrefab.transform.rotation);
+            explosion.transform.SetParent(transform, false);
+
+            yield return new WaitForSeconds(0.3f);
+
+            position.x = -1;
+            position.y = 2;
+            GameObject explosion1 = Instantiate(explosionPrefab, position, explosionPrefab.transform.rotation);
+            explosion1.transform.SetParent(transform, false);
+
+            yield return new WaitForSeconds(0.3f);
+
+            position.x = -1;
+            position.y = -3;
+            GameObject explosion2 = Instantiate(explosionPrefab, position, explosionPrefab.transform.rotation);
+            explosion2.transform.SetParent(transform, false);
+
+            yield return new WaitForSeconds(0.3f);
+
+            position.x = 1.7f;
+            position.y = 1.7f;
+            GameObject explosion3 = Instantiate(explosionPrefab, position, explosionPrefab.transform.rotation);
+            explosion3.transform.SetParent(transform, false);
+
+            yield return new WaitForSeconds(0.3f);
+
+            position.x = 1;
+            position.y = -2;
+            GameObject explosion4 = Instantiate(explosionPrefab, position, explosionPrefab.transform.rotation);
+            explosion3.transform.SetParent(transform, false);
+
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        //自分を消去
+        Destroy(gameObject);
+        //クリア画面表示
+        clearImage.SetActive(true);
+    }
+
+    public void BossTransparent()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, alpha);
+        alpha -= 0.013f;
+    }
 }

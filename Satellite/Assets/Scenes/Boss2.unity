@@ -2226,6 +2226,8 @@ MonoBehaviour:
     type: 3}
   largeLaserPrefab: {fileID: 1879095314465036589, guid: 930b5f0486ee4684aae81b46c00bc1ee,
     type: 3}
+  explosionPrefab: {fileID: 5908219524231412484, guid: 5fd755acf427bee4088758b026eac967,
+    type: 3}
   sound:
   - {fileID: 8300000, guid: 202409d9da7a1864aa3a9a59b6fe0b56, type: 3}
   - {fileID: 8300000, guid: e46b484712dcc5047a73392b79a4f86c, type: 3}
