@@ -27,5 +27,19 @@ namespace Satellite.Stage1
         //{
         //    StartCoroutine(FadeInIEnumerator());
         //}
+
+        public Player playerSc;
+        // Start is called before the first frame update
+        void Start()
+        {
+            playerSc = GetComponent<Player>();
+            GameController.Instance.buffGaugeValue = 0;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

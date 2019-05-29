@@ -51,8 +51,6 @@ public class Clear : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(inputControl);
-
         // ゲームを止める
         Time.timeScale = 0.0f;
         Scene loadscene = SceneManager.GetActiveScene();

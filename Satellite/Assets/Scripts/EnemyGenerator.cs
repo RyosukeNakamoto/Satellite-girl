@@ -19,15 +19,19 @@ public class EnemyGenerator : MonoBehaviour
     public float lossTime = 3.0f;
     // Alert後ボス遷移までのタイム
     public float changeTime = 2.0f;
+    // 敵がいない合図
+    public static bool notEenemy = false;
     // 
-    [SerializeField]
-    Player playerSc;
+    [SerializeField] GameObject fadeOut;
+    FadeOut fadeOutScriput;
 
     int enemyCount = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        fadeOutScriput = GetComponent<FadeOut>();
+
         // 行に分割
         var lines = csvData[GameController.Instance.stage].text.Split('\n');
         // 各行を順に繰返し処理
@@ -61,67 +65,35 @@ public class EnemyGenerator : MonoBehaviour
         int ObjectCount = transform.childCount;
         if (ObjectCount==0)
         {
-            timer += Time.deltaTime;
-            //敵が全滅してからAlertまでのカウント
-            if (lossTime <= timer)
-            {
-                //アラートを表示
-                bossAlert.gameObject.SetActive(true);
-                //ボスシーン遷移までのカウント
-                if (lossTime + changeTime <= timer)
-                {
-                    //SceneManager.LoadScene(string.Format("Boss{0}", GameController.Instance.stage));
+            StartCoroutine(TimerManagement());           
+        }
+    }
 
-                    switch (GameController.Instance.stage)
-                    {
-                        case 0:
-                            SceneManager.LoadScene("Boss1");
-                            break;
-                        case 1:
-                            SceneManager.LoadScene("Boss2");
-                            break;
-                        case 2:
-                            SceneManager.LoadScene("Boss3");
-                            break;
-                        case 3:
-                            SceneManager.LoadScene("Boss4");
-                            break;
-                        case 4:
-                            SceneManager.LoadScene("Boss5");
-                            break;
-                        case 5:
-                            SceneManager.LoadScene("Boss6");
-                            break;
-                        case 6:
-                            SceneManager.LoadScene("Boss7");
-                            break;
-                        case 7:
-                            SceneManager.LoadScene("Boss8");
-                            break;
-                        case 8:
-                            SceneManager.LoadScene("Boss9");
-                            break;
-                        case 9:
-                            SceneManager.LoadScene("Boss10");
-                            break;
-                        case 10:
-                            SceneManager.LoadScene("Boss11");
-                            break;
-                        case 11:
-                            SceneManager.LoadScene("Boss12");
-                            break;
-                    }
-                }
+    IEnumerator TimerManagement()
+    {
+        notEenemy = true;
+        //敵が全滅してからAlertまでのカウント
+        yield return new WaitForSeconds(3.0f);
+        //アラートを表示
+        bossAlert.gameObject.SetActive(true);
+        //ボスシーン遷移までのカウント
+        yield return new WaitForSeconds(2.5f);
+        fadeOut.SetActive(true);
+        if (FadeOut.fadeOutOk)
+        {
+            // ボスシーンへ遷移
+            switch (GameController.Instance.stage)
+            {
+                case 0:
+                    SceneManager.LoadScene("Boss1");
+                    break;
+                case 1:
+                    SceneManager.LoadScene("Boss2");
+                    break;
+                case 2:
+                    SceneManager.LoadScene("Boss3");
+                    break;
             }
         }
-        //if (ObjectCount == 99)
-        //{            
-            //foreach (Transform enemy in gameObject.transform)
-            //{
-               
-            //}
-        
-        //}
     }
- 
 }
