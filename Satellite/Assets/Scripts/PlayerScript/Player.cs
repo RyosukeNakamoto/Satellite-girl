@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
     Text scoreText;
     // リザルト画面のスコアスコアテキストコンポーネント
     Text resultScoreText;
+    // ポイントのアニメーション
+    [SerializeField] private Animator pointAnimator;
     // スコアテキストオブジェクトの参照
     public GameObject scoreObject;
     // リザルト画面のスコア表示
@@ -86,6 +88,7 @@ public class Player : MonoBehaviour
     int itemScore = 5;
     int itemScore1 = 10;
     int itemScore2 = 15;
+
     // スタミナ制御
     bool staminaControl = true;
     // バフを使うフラグ
@@ -97,6 +100,14 @@ public class Player : MonoBehaviour
     // スピードバフOFF
     private bool speedOffBuff = true;
 
+    IEnumerator PointCount()
+    {
+        pointAnimator.SetBool("Count", true);
+        yield return new WaitForSeconds(0.5f);
+        pointAnimator.SetBool("Count", false);
+        scoreText.text = score.ToString();
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -104,6 +115,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         bossSc = bossBullet.GetComponent<Bullet>();
+       // pointAnimator = GetComponent<Animator>();
         //
 
         Time.timeScale = 1.0f;
@@ -172,7 +184,7 @@ public class Player : MonoBehaviour
             PlayerBullet.buffTrigger = false;
             buffUse = false;    // バフフラグOFF
             buffSet = false;    // 
-            speedOffBuff = true;    // 通常モード
+            speedOffBuff = true;    // 通常モード           
         }
         // バフ発動
         if (buffSet)
@@ -180,7 +192,11 @@ public class Player : MonoBehaviour
             // ゲージを消費
             buffGauge.fillAmount -= 0.0025f;
         }
-        GameController.Instance.buffGaugeValue = buffGauge.fillAmount;
+        if (EnemyGenerator.notEenemy)
+        {
+            GameController.Instance.buffGaugeValue = buffGauge.fillAmount;
+        }
+        
         //ダメージを受けた時点滅
         if (ondamage)
         {
@@ -234,7 +250,6 @@ public class Player : MonoBehaviour
                 if (staminaGauge.fillAmount == 0)
                 {
                     staminaControl = false;
-                    Debug.Log("kita");
                 }
             }            
             // 移動していないとき
@@ -246,8 +261,8 @@ public class Player : MonoBehaviour
                     // ゲージが減っているとき
                     //if (staminaValue >= staminaGauge.fillAmount)
                     //{
-                        // 活動ゲージの加算
-                        staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
+                    // 活動ゲージの加算
+                    staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 7.0f * Time.deltaTime;
                     //}
                 }
             }
@@ -395,7 +410,7 @@ public class Player : MonoBehaviour
             score += itemScore;
             GameController.Instance.scoreText = score;
             // スコア内容の変更
-            scoreText.text = score.ToString();
+            StartCoroutine(PointCount());
             resultScoreText.text = "" + score + "P";
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
@@ -406,7 +421,7 @@ public class Player : MonoBehaviour
             score += itemScore1;
             GameController.Instance.scoreText = score;
             // スコア内容の変更
-            scoreText.text = score.ToString();
+            StartCoroutine(PointCount());
             resultScoreText.text = "" + score + "P";
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
@@ -417,7 +432,7 @@ public class Player : MonoBehaviour
             score += itemScore2;
             GameController.Instance.scoreText = score;
             // スコア内容の変更
-            scoreText.text = score.ToString();
+            StartCoroutine(PointCount());
             resultScoreText.text = "" + score + "P";
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
