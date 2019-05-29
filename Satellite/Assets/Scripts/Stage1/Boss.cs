@@ -523,6 +523,6 @@ public class Boss : MonoBehaviour
     public void BossTransparent()
     {
         spriteRenderer.color = new Color(1, 1, 1, alpha);
-        alpha -= 0.013f;
+        alpha -= 0.015f;
     }
 }
