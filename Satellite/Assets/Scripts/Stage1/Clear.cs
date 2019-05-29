@@ -58,7 +58,7 @@ public class Clear : MonoBehaviour
         Scene loadscene = SceneManager.GetActiveScene();
 
         count += Time.unscaledDeltaTime;
-        if (count > 3)
+        if (count > 1.5f)
         {
             inputControl = true;
         }

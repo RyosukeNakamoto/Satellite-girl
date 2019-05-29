@@ -47,7 +47,7 @@ public class GameOver : MonoBehaviour
 
         //連打でのシーン遷移制御を解除
         count += Time.unscaledDeltaTime;
-        if (count > 3)
+        if (count > 1.5f)
         {
             inputControl = true;
         }
