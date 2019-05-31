@@ -360,6 +360,17 @@ public class CustomController : MonoBehaviour
             }
         }
 
+        //ポイントが足りないとき、テキストを赤に
+        if (GameController.Instance.score < consumptionPoint)
+        {
+            consumptionPointText.color = Color.red;
+        }
+        else if (consumptionPoint == 0|| GameController.Instance.score > consumptionPoint)
+        {
+            consumptionPointText.color = Color.white;            
+        }
+        Debug.Log(consumptionPoint);
+
         //親愛度選択中
         if (selectNumber == 0)
         {
@@ -369,6 +380,9 @@ public class CustomController : MonoBehaviour
             //選択画像を点滅
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             selectedImage[0].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
+            //消費ポイントの変更
+            consumptionPoint = 0;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -420,7 +434,7 @@ public class CustomController : MonoBehaviour
 
                 if (GameController.Instance.intimacyLevel == 0)
                 {
-                    //消費ポイントの表示を500に変更
+                    //消費ポイントの表示を変更
                     consumptionPointText.text = (consumptionPoint).ToString();
                 }
                 else
@@ -429,8 +443,10 @@ public class CustomController : MonoBehaviour
                     consumptionPointText.text = "0";
                 }
 
-                //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
-                if (minimumUnunsettledIntimacy < 1 && !shortagePointImage.activeSelf)
+                    
+
+                    //現在のレベルが超えていたら強化するか選択するウインドウを表示しない
+                    if (minimumUnunsettledIntimacy < 1 && !shortagePointImage.activeSelf)
                 {
                     if (Input.GetKeyDown(KeyCode.Return)|| Input.GetKeyDown("joystick button 1"))
                     {
@@ -750,6 +766,9 @@ public class CustomController : MonoBehaviour
             //選択画像を点滅
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             selectedImage[1].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
+            //消費ポイントの変更
+            consumptionPoint = 0;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -1137,6 +1156,9 @@ public class CustomController : MonoBehaviour
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             selectedImage[2].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
+            //消費ポイントの変更
+            consumptionPoint = 0;
+
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
 
@@ -1522,6 +1544,9 @@ public class CustomController : MonoBehaviour
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             selectedImage[3].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
 
+            //消費ポイントの変更
+            consumptionPoint = 0;
+
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
 
@@ -1906,6 +1931,9 @@ public class CustomController : MonoBehaviour
             //選択画像を点滅
             float bling = Mathf.Abs(Mathf.Sin(Time.time * 3));
             selectedImage[4].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
+            //消費ポイントの変更
+            consumptionPoint = 0;
 
             //未確定の星を選択してない時は消費ポイントを0表示
             consumptionPointText.text = "0";
@@ -2298,6 +2326,9 @@ public class CustomController : MonoBehaviour
             sortieImage[2].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
             sortieImage[3].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
             sortieImage[4].GetComponent<Image>().color = new Color(1f, 1f, 1f, bling);
+
+            //消費ポイントの変更
+            consumptionPoint = 0;
 
             //消費ポイントの表示を変更
             consumptionPointText.text = (0).ToString();
