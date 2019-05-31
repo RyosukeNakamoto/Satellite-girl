@@ -34,6 +34,16 @@ namespace Satellite.StageSelect
         bool stageChangeOff = false;
         bool xInput = false;
 
+        [SerializeField] GameObject fadeOut;
+
+        IEnumerator FadeOut()
+        {
+            stageChangeOff = false;
+            fadeOut.SetActive(true);
+            yield return new WaitForSeconds(2.0f);
+            SceneManager.LoadScene("CharacterSelect");
+        }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -133,7 +143,8 @@ namespace Satellite.StageSelect
                     stageChangeOff = true;
 
                     //一秒後にシーン遷移
-                    Invoke("MoveScene", 0.5f);
+                    //Invoke("MoveScene", 2.f);
+                    StartCoroutine(FadeOut());
                 }
             }
             //Stage1を非選択状態
@@ -171,7 +182,8 @@ namespace Satellite.StageSelect
                     stageChangeOff = true;
 
                     //一秒後にシーン遷移
-                    Invoke("MoveScene", 0.5f);
+                    //Invoke("MoveScene", 2.0f);
+                    StartCoroutine(FadeOut());
                 }
             }
             //Stage2を選択状態
@@ -209,7 +221,8 @@ namespace Satellite.StageSelect
                     stageChangeOff = true;
 
                     //一秒後にシーン遷移
-                    Invoke("MoveScene", 0.5f);
+                    //Invoke("MoveScene", 2.0f);
+                    StartCoroutine(FadeOut());
                 }
             }
             //Stage3を非選択状態
@@ -535,14 +548,10 @@ namespace Satellite.StageSelect
         //シーンの遷移
         public void MoveScene()
         {
-
             stageChangeOff = false;
-
+            fadeOut.SetActive(true);
             SceneManager.LoadScene("CharacterSelect");
-
         }
 
     }
-
-
 }

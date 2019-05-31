@@ -52,7 +52,7 @@ public class Clear : MonoBehaviour
     void Update()
     {
         // ゲームを止める
-        Time.timeScale = 0.0f;
+        //Time.timeScale = 0.0f;
         Scene loadscene = SceneManager.GetActiveScene();
 
         count += Time.unscaledDeltaTime;

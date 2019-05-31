@@ -7,6 +7,8 @@ namespace Satellite.Title
 {
     public class ScecnContller : MonoBehaviour
     {
+        [SerializeField] GameObject fadeOut;
+
         // Update is called once per frame
         void Update()
         {
@@ -18,10 +20,19 @@ namespace Satellite.Title
             //タイトル画面でいずれかのキーを押したときのシーン遷移
             else if (Input.anyKeyDown)
             {
-                SceneManager.LoadScene("StageSelect");
+                StartCoroutine(Order());
             }
 
         }
+
+        IEnumerator Order()
+        {
+            fadeOut.SetActive(true);
+            yield return new WaitForSeconds(2.0f);
+            SceneManager.LoadScene("StageSelect");
+        }
+
+
         void Quit()
         {
 #if UNITY_EDITOR

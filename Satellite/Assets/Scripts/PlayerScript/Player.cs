@@ -94,11 +94,16 @@ public class Player : MonoBehaviour
     // バフを使うフラグ
     public bool buffUse = false;
     // バフをかける
-    public  static bool buffSet = false;
+    public static bool buffSet = false;
     // スピードバフON
     private bool speedOnBuff = false;
     // スピードバフOFF
     private bool speedOffBuff = true;
+
+    // アニメーション
+    Animator PlayerAnimator;
+    // 移動範囲制限の開始設定
+    bool limitStart = false;
 
     IEnumerator PointCount()
     {
@@ -108,6 +113,13 @@ public class Player : MonoBehaviour
         scoreText.text = score.ToString();
     }
 
+    //IEnumerator start()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
+    //    PlayerAnimator.SetInteger("Order",1);
+    //    limitStart = true;
+    //}
+
     // Use this for initialization
     void Start()
     {
@@ -115,8 +127,7 @@ public class Player : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         bulletSc = enemyBullet.GetComponent<StraightBullet>();
         bossSc = bossBullet.GetComponent<Bullet>();
-       // pointAnimator = GetComponent<Animator>();
-        //
+        //PlayerAnimator = GetComponent<Animator>();
 
         Time.timeScale = 1.0f;
 
@@ -156,6 +167,8 @@ public class Player : MonoBehaviour
         // 活動時間のゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = staminaValue;
+
+        //StartCoroutine(start());
     }
 
     // Update is called once per frame
@@ -171,11 +184,11 @@ public class Player : MonoBehaviour
             //playerVoiceSource.PlayOneShot(playerVoice[Random.Range(0, 3)]);
             buffUse = true; // バフを使うフラグON
 
-                buffSet = true; // バフをかける
-                PlayerBullet.buffTrigger = true;
-                speedOnBuff = true;
-                speedOffBuff = false;
-            
+            buffSet = true; // バフをかける
+            PlayerBullet.buffTrigger = true;
+            speedOnBuff = true;
+            speedOffBuff = false;
+
         }
         // ゲージを使い切ったらバフ終了
         else if (buffGauge.fillAmount <= 0)
@@ -196,7 +209,7 @@ public class Player : MonoBehaviour
         {
             GameController.Instance.buffGaugeValue = buffGauge.fillAmount;
         }
-        
+
         //ダメージを受けた時点滅
         if (ondamage)
         {
@@ -217,7 +230,8 @@ public class Player : MonoBehaviour
     // 移動関数
     void Move()
     {
-        if (staminaControl) {
+        if (staminaControl)
+        {
             //矢印キーの入力情報を取得
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
@@ -251,7 +265,7 @@ public class Player : MonoBehaviour
                 {
                     staminaControl = false;
                 }
-            }            
+            }
             // 移動していないとき
             else
             {
@@ -271,7 +285,7 @@ public class Player : MonoBehaviour
         {
             // 活動ゲージの加算
             staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
-            if (staminaGauge.fillAmount>0.2)
+            if (staminaGauge.fillAmount > 0.2)
             {
                 staminaControl = true;
             }

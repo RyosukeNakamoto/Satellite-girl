@@ -132,6 +132,8 @@ public class CustomController : MonoBehaviour
 
     bool shortagePoint = false;
 
+    [SerializeField] GameObject fadeOut;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -2314,7 +2316,8 @@ public class CustomController : MonoBehaviour
                     selectInput = true;
 
                     //シーン遷移
-                    Invoke("MoveScene", 0.5f);
+                    //Invoke("MoveScene", 0.5f);
+                    StartCoroutine(Sortie());
                 }
             }
         }
@@ -2435,6 +2438,12 @@ public class CustomController : MonoBehaviour
     //出撃を選択したときシーン遷移
     public void MoveScene()
     {
+        SceneManager.LoadScene("Stage");
+    }
+
+    IEnumerator Sortie(){
+        fadeOut.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene("Stage");
     }
 }
