@@ -235,7 +235,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeLayer: {fileID: 1736880389}
   audioClip: {fileID: 0}
-  playerSc: {fileID: 0}
 --- !u!4 &26391595
 Transform:
   m_ObjectHideFlags: 0
@@ -991,7 +990,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeLayer: {fileID: 0}
   audioClip: {fileID: 0}
-  playerSc: {fileID: 0}
 --- !u!1 &596549248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,9 +1034,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvData:
-  - {fileID: 4900000, guid: 3a80b5050b4d5d34c9a88732a434f0bf, type: 3}
-  - {fileID: 4900000, guid: 6202cfae644d85e48b035a980860ea97, type: 3}
-  - {fileID: 4900000, guid: f545d1e9f5cc2474f972de65deff844a, type: 3}
+  - {fileID: 4900000, guid: ad30e6ab5b24d7842b6e6c953b5fdb73, type: 3}
+  - {fileID: 4900000, guid: 699faa9ef124b3c47880cdbd3d7df004, type: 3}
+  - {fileID: 4900000, guid: e8f9d56c24df7bb4fba965e05a080721, type: 3}
   enemyPrefabs:
   - {fileID: 1943467288051095588, guid: a36d0886e0b1b7d4d82acbf3fec2d1d9, type: 3}
   - {fileID: 1943467288051095588, guid: b61820dc1ce60a648a54773cda5f080c, type: 3}
