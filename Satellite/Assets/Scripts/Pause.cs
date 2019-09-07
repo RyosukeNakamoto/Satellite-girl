@@ -104,7 +104,7 @@ public class Pause : MonoBehaviour
                 if (inputControl == true)
                 {
                     //再開
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                     {
                         //音の再生
                         audioSource.PlayOneShot(sound[2]);
@@ -142,7 +142,7 @@ public class Pause : MonoBehaviour
                 if (inputControl == true)
                 {
                     //エンターキーでステージセレクト画面に遷移
-                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                     {
                         //音の再生
                         audioSource.PlayOneShot(sound[2]);

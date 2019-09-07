@@ -105,6 +105,9 @@ public class Player : MonoBehaviour
     // 移動範囲制限の開始設定
     bool limitStart = false;
 
+    // xboxコントローラ「A」ボタン
+    string aButton = "joystick button 0";
+
     IEnumerator PointCount()
     {
         pointAnimator.SetBool("Count", true);
@@ -315,7 +318,7 @@ public class Player : MonoBehaviour
             bulletDelay = GameController.Instance.Rapidfire;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
+            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey(aButton) && timer > bulletDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;
@@ -335,7 +338,7 @@ public class Player : MonoBehaviour
             machineGunDelay = 0.5f;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey("joystick button 1") && timer > machineGunDelay)
+            if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey(aButton) && timer > machineGunDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;
@@ -354,7 +357,7 @@ public class Player : MonoBehaviour
             bulletDelay = 0.8f;
 
             //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey("joystick button 1") && timer > bulletDelay)
+            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey(aButton) && timer > bulletDelay)
             {
                 //弾を発射する間隔の時間計測の初期化
                 timer = 0.0f;

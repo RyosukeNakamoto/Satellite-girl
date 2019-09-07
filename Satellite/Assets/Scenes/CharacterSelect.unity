@@ -1180,7 +1180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "A \u623B\u308B"
+  m_Text: "B \u623B\u308B"
 --- !u!222 &120263346
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4238,7 +4238,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "B \u6C7A\u5B9A"
+  m_Text: "A \u6C7A\u5B9A"
 --- !u!222 &317247980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13101,6 +13101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadeOut
       objectReference: {fileID: 0}
+    - target: {fileID: 3237949406255115241, guid: dab3b20adefc80d49853c124a8131b46,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3237949406255115240, guid: dab3b20adefc80d49853c124a8131b46,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14193,7 +14198,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "A\u3067\u623B\u308B"
+  m_Text: "B\u3067\u623B\u308B"
 --- !u!222 &1543956856
 CanvasRenderer:
   m_ObjectHideFlags: 0

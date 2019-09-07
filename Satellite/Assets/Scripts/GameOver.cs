@@ -88,7 +88,7 @@ public class GameOver : MonoBehaviour
             if (inputControl == true)
             {
                 //エンターキーでキャラクター選択画面に遷移
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     //音の再生
                     audioSource.PlayOneShot(sound[1]);
@@ -123,7 +123,7 @@ public class GameOver : MonoBehaviour
             if (inputControl == true)
             {
                 //エンターキーでステージセレクト画面に遷移
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     //音の再生
                     audioSource.PlayOneShot(sound[1]);

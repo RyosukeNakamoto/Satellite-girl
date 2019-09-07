@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     private static GameController instance = null;
 
-    //* セレステルステータス
+    // 美少女ちゃん (セレステルステータス)
     // 親密度ステータスレベル
     public int intimacyLevel = 0;
     // レベルテーブル

@@ -34,6 +34,13 @@ namespace Satellite.StageSelect
         bool stageChangeOff = false;
         bool xInput = false;
 
+        // タイトルシーン変数
+        string titleScene = "Title";
+        // xboxコントローラ「A」ボタン
+        string aButton = "joystick button 0";
+        // xboxコントローラ「B」ボタン
+        string bButton = "joystick button 1";
+
         [SerializeField] GameObject fadeOut;
 
         IEnumerator FadeOut()
@@ -132,7 +139,7 @@ namespace Satellite.StageSelect
                 stageImageText[0].enabled = true;
 
                 //エンターキーを押したときキャラクター選択画面に遷移
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(aButton))
                 {
                     //決定時の音再生
                     audioSource.PlayOneShot(sound[1]);
@@ -171,7 +178,7 @@ namespace Satellite.StageSelect
                 stageImageText[1].enabled = true;
 
                 //エンターキーを押したときキャラクター選択画面に遷移(プロト)
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(aButton))
                 {
                     //決定時の音再生
                     audioSource.PlayOneShot(sound[1]);
@@ -210,7 +217,7 @@ namespace Satellite.StageSelect
                 stageImageText[2].enabled = true;
 
                 //エンターキーを押したときキャラクター選択画面に遷移(プロト)
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(aButton))
                 {
                     //決定時の音再生
                     audioSource.PlayOneShot(sound[1]);
@@ -234,6 +241,12 @@ namespace Satellite.StageSelect
 
                 //ステージ選択表示を非表示
                 stageImageText[2].enabled = false;
+            }
+
+            // タイトルへ戻る
+            if(Input.GetKey(bButton))
+            {
+                StartCoroutine(TitleSceneChange());              
             }
             /*
             //Stage4を選択状態
@@ -552,6 +565,13 @@ namespace Satellite.StageSelect
             fadeOut.SetActive(true);
             SceneManager.LoadScene("CharacterSelect");
         }
-
+        // タイトルへ戻る
+        IEnumerator TitleSceneChange()
+        {
+            fadeOut.SetActive(true);
+            yield return new WaitForSeconds(2.0f);
+            SceneManager.LoadScene(titleScene);
+        }
     }
+    
 }

@@ -38,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Boss3.unity
     guid: d81c242474337e349ac014d6c26aeb08
+  - enabled: 1
+    path: Assets/Scenes/Video.unity
+    guid: a0a60878e7f3db64c97247a5aade5f8d
   m_configObjects: {}

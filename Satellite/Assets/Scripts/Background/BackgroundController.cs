@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BackgroundController : MonoBehaviour
 {
+    // ポジションを左へ流す速さ
+    [SerializeField] float speed = 0;
+
     // 背景の枚数
     float spriteCount = 4f;
     // 背景が回り込み
@@ -24,6 +27,8 @@ public class BackgroundController : MonoBehaviour
 
     void Update()
     {
+        // ポジションを左へ流す
+        transform.position = new Vector3(transform.position.x - speed, transform.position.y);
         // 座標変換
         Vector3 myViewport = Camera.main.WorldToViewportPoint(bgTfm.position);
 

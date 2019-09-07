@@ -123,7 +123,7 @@ public class Clear : MonoBehaviour
 
             if (inputControl == true)
             {
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     SceneManager.LoadScene("CharacterSelect");
 
@@ -151,7 +151,7 @@ public class Clear : MonoBehaviour
             if (inputControl == true)
             {
                 //エンターキーを押したときの処理
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     //現在のステージによって、次で向かうステージを指定
                     switch (GameController.Instance.stage)
@@ -194,7 +194,7 @@ public class Clear : MonoBehaviour
             if (inputControl == true)
             {
                 //エンターキーでステージセレクト画面に遷移
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 1"))
+                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("joystick button 0"))
                 {
                     SceneManager.LoadScene("StageSelect");
 

@@ -61,6 +61,12 @@ public class Boss : MonoBehaviour
     AudioSource audioSource;
     public AudioClip[] sound;
 
+
+    // 緊急20190723
+    float time = 3.0f;
+    [SerializeField]
+    GameObject fadeOut;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,7 +111,7 @@ public class Boss : MonoBehaviour
         {
             //1.5秒後にボスを徐々に透明化
             Invoke("BossTransparent", 1.5f);
-
+            
             if (bossState == false)
             {
                 //スコア加算
@@ -516,6 +522,7 @@ public class Boss : MonoBehaviour
 
         //自分を消去
         Destroy(gameObject);
+        fadeOut.SetActive(true);
         //クリア画面表示
         clearImage.SetActive(true);
     }
@@ -523,6 +530,6 @@ public class Boss : MonoBehaviour
     public void BossTransparent()
     {
         spriteRenderer.color = new Color(1, 1, 1, alpha);
-        alpha -= 0.015f;
+        alpha -= 0.015f; 
     }
 }
