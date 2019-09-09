@@ -27,6 +27,7 @@ namespace Satellite.StageSelect
         public AudioClip[] sound;
 
         //どこを選択中か数値で管理
+        [SerializeField]
         int selectNumber = 0;
         int stageHalf = 0;
 
@@ -93,6 +94,8 @@ namespace Satellite.StageSelect
                 if (Input.GetKeyDown(KeyCode.RightArrow) || dpv > 0 || x > 0)
                 {
                     selectNumber++;
+
+                    Debug.Log("OK");
 
                     keyInput = true;
                     xInput = true;

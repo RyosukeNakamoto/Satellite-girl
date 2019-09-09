@@ -43,7 +43,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1999d4ebab09aba44a318681efb79dc6, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -369,7 +369,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1346116210599935547
 RectTransform:
   m_ObjectHideFlags: 0
@@ -451,13 +451,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a051323683d703b41b8542b330354c1c, type: 3}
   - {fileID: 8300000, guid: 191bea9ec801f2d468dba852a8e18f76, type: 3}
   voice:
-  - {fileID: 8300000, guid: 55858a300685da244bb98bb88feaf739, type: 3}
-  - {fileID: 8300000, guid: 92e5934d09c7b174eafce0c087f5e560, type: 3}
-  - {fileID: 8300000, guid: 9854cef7f9dd6d44587a9c3863ff5705, type: 3}
+  - {fileID: 8300000, guid: b740c4ca08eb5b04eacb6f1ee99e606c, type: 3}
+  - {fileID: 8300000, guid: 8eddffc46b4643442b054354775d88b5, type: 3}
+  - {fileID: 8300000, guid: af8f848e0fcda9843982e2bcfc5871fc, type: 3}
   selectedImage:
   - {fileID: 1346116210900140002}
   - {fileID: 1346116209964750615}
   - {fileID: 1346116210108390819}
+  bgmAudio: {fileID: 0}
 --- !u!82 &1346116210599935551
 AudioSource:
   m_ObjectHideFlags: 0

@@ -9513,9 +9513,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 431d9e09784483e479684f6347175d73, type: 3}
   - {fileID: 8300000, guid: 191bea9ec801f2d468dba852a8e18f76, type: 3}
   voice:
-  - {fileID: 8300000, guid: 862c1fcc8df3927438df264d2f5a1821, type: 3}
-  - {fileID: 8300000, guid: 2ed9413cf2ca5a243b8837bd5aee6be7, type: 3}
-  - {fileID: 8300000, guid: fe402db588c51e34aa4c274248d5dc70, type: 3}
+  - {fileID: 8300000, guid: 26f2f10604eb0bf4e9212431e1893306, type: 3}
+  - {fileID: 8300000, guid: 159f1bb44cfdac34bbab96479f7e8e0e, type: 3}
+  - {fileID: 8300000, guid: becae1e96ae751549b5252bde67468cf, type: 3}
   strengtheningVoice:
   - {fileID: 8300000, guid: 5f00aedd4d9306d40b635ac97775e863, type: 3}
   - {fileID: 8300000, guid: 3024aa0266a16504a9759e7b23ef33c4, type: 3}

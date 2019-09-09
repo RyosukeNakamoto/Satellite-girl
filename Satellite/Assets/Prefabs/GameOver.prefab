@@ -622,6 +622,10 @@ MonoBehaviour:
   sound:
   - {fileID: 8300000, guid: a051323683d703b41b8542b330354c1c, type: 3}
   - {fileID: 8300000, guid: 191bea9ec801f2d468dba852a8e18f76, type: 3}
+  voice:
+  - {fileID: 8300000, guid: 3b645b39d0bbc4c44bd3ac3adb84aabe, type: 3}
+  - {fileID: 8300000, guid: d208792c768f34c4694475ad14907dcf, type: 3}
+  - {fileID: 8300000, guid: bce9143bbb1e5a7448f2e35eaabcf52f, type: 3}
   selectImage:
   - {fileID: 1304905654918020604}
   - {fileID: 1304905655493756196}
