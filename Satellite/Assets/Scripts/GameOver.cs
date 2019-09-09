@@ -8,6 +8,7 @@ public class GameOver : MonoBehaviour
 {
     // サウンドを指定
     public AudioClip[] sound;
+    public AudioClip[] voice;
     // サウンドの変数
     AudioSource audioSource;
     //選択画像を指定
@@ -28,6 +29,9 @@ public class GameOver : MonoBehaviour
     {
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
+
+        //ボイスの再生
+        audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
         selectImage[0].color = Color.gray;
         selectImage[1].color = Color.gray;

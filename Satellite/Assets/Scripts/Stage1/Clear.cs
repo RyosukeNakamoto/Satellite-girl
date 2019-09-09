@@ -26,6 +26,9 @@ public class Clear : MonoBehaviour
     //連打でのシーン遷移制御
     bool inputControl=false;
 
+    //BGMオブジェクト
+    public AudioSource bgmAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +40,7 @@ public class Clear : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //ボイスの再生
-        //audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+        audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
         //シーン開始時に選択画像の色の変更
         for (int i = 0; i < 2; i++)
@@ -46,6 +49,8 @@ public class Clear : MonoBehaviour
         }
 
         count = 0.0f;
+
+        bgmAudio.Stop();
     }
 
     // Update is called once per frame

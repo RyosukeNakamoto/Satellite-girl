@@ -2352,7 +2352,7 @@ public class CustomController : MonoBehaviour
                     audioSource.PlayOneShot(sound[4]);
 
                     //ボイスの再生
-                    //audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
+                    audioSource.PlayOneShot(voice[Random.Range(0, 3)]);
 
                     selectInput = true;
 
@@ -2484,7 +2484,7 @@ public class CustomController : MonoBehaviour
 
     IEnumerator Sortie(){
         fadeOut.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene("Stage");
     }
 }

@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3274fc4b9d5fe84e94f7321c5a39eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!212 &20554999
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1110,6 +1111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367a261c0f7da2449be689002fafee34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
   csvData:
   - {fileID: 0}
   - {fileID: 0}
@@ -1198,6 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3274fc4b9d5fe84e94f7321c5a39eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!212 &758454116
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1709,6 +1712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3274fc4b9d5fe84e94f7321c5a39eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!212 &1253989708
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2671,6 +2675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3274fc4b9d5fe84e94f7321c5a39eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!212 &2064553818
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2850,6 +2855,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1304905656562467719, guid: 3b5149e8d20cc8b4dbf6da15f203246b,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b5149e8d20cc8b4dbf6da15f203246b, type: 3}
 --- !u!1001 &1346116211444981761
@@ -2863,11 +2873,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameClear
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346116210599935544, guid: 82d2030cd1f89b6428e19b62550f1789,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1346116210599935547, guid: 82d2030cd1f89b6428e19b62550f1789,
         type: 3}
@@ -2973,6 +2978,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346116210599935546, guid: 82d2030cd1f89b6428e19b62550f1789,
+        type: 3}
+      propertyPath: bgm
+      value: 
+      objectReference: {fileID: 592906140}
+    - target: {fileID: 1346116210599935546, guid: 82d2030cd1f89b6428e19b62550f1789,
+        type: 3}
+      propertyPath: bgmAudio
+      value: 
+      objectReference: {fileID: 592906141}
+    - target: {fileID: 1346116209895833935, guid: 82d2030cd1f89b6428e19b62550f1789,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82d2030cd1f89b6428e19b62550f1789, type: 3}
