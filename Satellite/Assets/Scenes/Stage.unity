@@ -2365,7 +2365,10 @@ MonoBehaviour:
   sound:
   - {fileID: 0}
   - {fileID: 0}
-  voice: []
+  voice:
+  - {fileID: 8300000, guid: 3b645b39d0bbc4c44bd3ac3adb84aabe, type: 3}
+  - {fileID: 8300000, guid: d208792c768f34c4694475ad14907dcf, type: 3}
+  - {fileID: 8300000, guid: bce9143bbb1e5a7448f2e35eaabcf52f, type: 3}
   selectImage:
   - {fileID: 129295981}
   - {fileID: 966805966}

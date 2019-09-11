@@ -8,6 +8,9 @@ public class Item : MonoBehaviour
     GameObject acquisitionEffect;
     [SerializeField]
     int point;
+    // ポジションを左へ流す速さ
+    [SerializeField]
+    float speed = 0;
     //// Start is called before the first frame update
     //void Start()
     //{
@@ -17,7 +20,8 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // ポジションを左へ流す
+        transform.position = new Vector3(transform.position.x - speed, transform.position.y);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {        

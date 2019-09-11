@@ -7,8 +7,12 @@ public class Enemy1 : Enemy
     // サウンドを指定
     public AudioClip[] sound;
     // サウンドの変数
-    AudioSource audioSource;   
-    
+    AudioSource audioSource;
+
+    // 0912.玉の向き確認
+    [SerializeField]
+    float bulletDirection = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,7 +100,7 @@ public class Enemy1 : Enemy
         position.x += -1;
 
         var bullet = Instantiate(enemyBullet, position, enemyBullet.transform.rotation);
-        bullet.transform.Rotate(0, 0, 180);
+        bullet.transform.Rotate(0, 0, bulletDirection);
 
         audioSource.PlayOneShot(sound[0]);
     }

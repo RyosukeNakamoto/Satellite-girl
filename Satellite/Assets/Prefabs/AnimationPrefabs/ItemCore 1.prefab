@@ -59,6 +59,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -123,6 +124,7 @@ MonoBehaviour:
   acquisitionEffect: {fileID: 3538082768402345504, guid: c48a095c47e74b848b3acc85e0dd2463,
     type: 3}
   point: 10
+  speed: 0.075
 --- !u!95 &9042025113157066627
 Animator:
   serializedVersion: 3
