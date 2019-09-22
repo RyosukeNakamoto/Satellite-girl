@@ -108,6 +108,10 @@ public class Player : MonoBehaviour
     // xboxコントローラ「A」ボタン
     string aButton = "joystick button 0";
 
+    // プレイヤーの座標
+    public float posX;    // X座標 
+    public float posY;    // Y座標
+
     IEnumerator PointCount()
     {
         pointAnimator.SetBool("Count", true);
@@ -164,19 +168,19 @@ public class Player : MonoBehaviour
         //// スライダーの値をセット
         // HPのゲージ
         HpGauge = HpObject.GetComponent<Image>();
-        //HpGauge.fillAmount = HpValue/ GameController.Instance.HitPoint ;
-        //Debug.Log(GameController.Instance.HitPoint);
         HpGauge.fillAmount = GameController.Instance.hpGet;
         // 活動時間のゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = staminaValue;
-
-        //StartCoroutine(start());
     }
 
     // Update is called once per frame
     void Update()
     {
+        // ポジションを代入します
+        posX = transform.position.x;
+        posY = transform.position.y;
+
         scoreText.text = score.ToString();
         resultScoreText.text = "" + score + "P";
 

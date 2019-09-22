@@ -7,55 +7,69 @@ public class StaminaBar : MonoBehaviour
 {
     // 画像を指定
     [SerializeField]
-    Sprite StaminaBar1;      // ステータス0
+    Sprite[] staminaBar;    // 配列
+
+    // Imageを参照します
     [SerializeField]
-    Sprite StaminaBar2;      // ステータス1
+    Image image = null;
+    // プレイヤースクリプトの取得
+    Player playerSc;
+    // α値
     [SerializeField]
-    Sprite StaminaBar3;      // ステータス2
-    [SerializeField]
-    Sprite StaminaBar4;      // ステータス3
-    [SerializeField]
-    Sprite StaminaBar5;      // ステータス4
-    [SerializeField]
-    Sprite StaminaBar6;      // ステータス5
+    float alpha = 0.25f;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Image>().sprite = StaminaBar1;
-        GetComponent<Image>().SetNativeSize();
+        //  SP画像を指定します
         switch (GameController.Instance.activityTimeLevel)
         {
             case 0:
-                GetComponent<Image>().sprite = StaminaBar6;
+                GetComponent<Image>().sprite = staminaBar[0];
                 GetComponent<Image>().SetNativeSize();
                 break;
             case 1:
-                GetComponent<Image>().sprite = StaminaBar5;
+                GetComponent<Image>().sprite = staminaBar[1];
                 GetComponent<Image>().SetNativeSize();
                 break;
             case 2:
-                GetComponent<Image>().sprite = StaminaBar4;
+                GetComponent<Image>().sprite = staminaBar[2];
                 GetComponent<Image>().SetNativeSize();
                 break;
             case 3:
-                GetComponent<Image>().sprite = StaminaBar3;
+                GetComponent<Image>().sprite = staminaBar[3];
                 GetComponent<Image>().SetNativeSize();
                 break;
             case 4:
-                GetComponent<Image>().sprite = StaminaBar2;
+                GetComponent<Image>().sprite = staminaBar[4];
                 GetComponent<Image>().SetNativeSize();
                 break;
             case 5:
-                GetComponent<Image>().sprite = StaminaBar1;
+                GetComponent<Image>().sprite = staminaBar[5];
                 GetComponent<Image>().SetNativeSize();
                 break;
         }
+        // Playerタグを取得します
+        var player = GameObject.FindGameObjectWithTag("Player");
+        // Playerタグのスクリプトを取得します
+        playerSc = player.GetComponent<Player>();
+        // Imageを取得します
+        image.GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // 半透明にします
+        if (playerSc.posX <= -2.0f && playerSc.posY >= 3.0f)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
+        }
+        // MAXカラーにします
+        else
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.maxColorComponent);
+        }
     }
 }
