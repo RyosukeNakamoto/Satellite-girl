@@ -15,6 +15,7 @@ TagManager:
   - SmallMeteorite
   - Item1
   - Item2
+  - HpGauge
   layers:
   - Default
   - TransparentFX

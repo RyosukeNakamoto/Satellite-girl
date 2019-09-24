@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour
     // HPステータスレベル
     public int hpLevel = 0;
     // レベルテーブル
-    public int[] hpTable = new int[6] { 9, 12, 15, 18, 21, 24 };
+    public int[] hpTable = new int[6] { 10, 14, 18, 22, 26, 30 };
     // ステータスとレベルを連結
     public int HitPoint
     {

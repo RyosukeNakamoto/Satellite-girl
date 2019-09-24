@@ -1836,7 +1836,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1795683429}
   - component: {fileID: 1795683428}
-  - component: {fileID: 1795683427}
+  - component: {fileID: 1795683433}
   - component: {fileID: 1795683426}
   - component: {fileID: 1795683430}
   - component: {fileID: 1795683431}
@@ -1896,32 +1896,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 202409d9da7a1864aa3a9a59b6fe0b56, type: 3}
   - {fileID: 8300000, guid: e46b484712dcc5047a73392b79a4f86c, type: 3}
   fadeOut: {fileID: 1298909628}
---- !u!61 &1795683427
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795683425}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.4448601, y: -0.030654907}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.8897202, y: 9.399752}
-  m_EdgeRadius: 0
 --- !u!212 &1795683428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2121,6 +2095,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &1795683433
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795683425}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 3.5, y: -0.18891844}
+  serializedVersion: 2
+  m_Radius: 4.4835935
 --- !u!1001 &1909962595
 PrefabInstance:
   m_ObjectHideFlags: 0

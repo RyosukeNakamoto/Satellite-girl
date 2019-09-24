@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291d6613d7ee09e43b92efc277a8ea6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 6
+  Hp: 5
   isRendered: 0
   enemytime: 1
   timer: 0

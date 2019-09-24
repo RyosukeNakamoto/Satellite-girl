@@ -57,12 +57,15 @@ public class Boss : MonoBehaviour
     //ボス爆発エフェクト
     public GameObject explosionPrefab;
 
+    // プレイヤースクリプトの取得
+    Player playerSc;
+
     //オーディオ
     AudioSource audioSource;
     public AudioClip[] sound;
 
 
-    // 緊急20190723
+    // 緊急2019,07.23
     float time = 3.0f;
     [SerializeField]
     GameObject fadeOut;

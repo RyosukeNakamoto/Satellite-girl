@@ -14,15 +14,13 @@ public class Player : MonoBehaviour
     private Vector2 player_pos;
 
     //プレイヤーのHP
-    [SerializeField]
-    public static int hp = 0;
+    //[SerializeField]
+    //public static int hp = 0;
     [SerializeField]
     float activ = 0;
 
-    // プレイヤーのHPゲージ
-    public GameObject HpObject;
-    public Image HpGauge = null;
-    public float HpValue = 1;
+    // プレイヤーのHP
+    public int hpValue;
 
     // プレイヤーのスタミナゲージ       
     public GameObject staminaObject;
@@ -47,6 +45,8 @@ public class Player : MonoBehaviour
 
     //ゲームオーバー表示
     public GameObject gameOver;
+    // HpBar.Scを参照(仮)
+    HpBar hpBar;
 
     //武器を数値で管理
     public static int bulletstatus = 0;
@@ -74,16 +74,15 @@ public class Player : MonoBehaviour
 
     // スコアの値
     public static int score;
-    // スコアテキストコンポーネント
-    Text scoreText;
-    // リザルト画面のスコアスコアテキストコンポーネント
-    Text resultScoreText;
+    //// スコアテキストコンポーネント
+    //Text scoreText;
+    
     // ポイントのアニメーション
     [SerializeField] private Animator pointAnimator;
-    // スコアテキストオブジェクトの参照
-    public GameObject scoreObject;
-    // リザルト画面のスコア表示
-    public GameObject resultScoreObject;
+    //// スコアテキストオブジェクトの参照
+    //public GameObject scoreObject;
+    //// リザルト画面のスコア表示
+    //public GameObject resultScoreObject;
     // アイテムの点数
     int itemScore = 5;
     int itemScore1 = 10;
@@ -117,7 +116,7 @@ public class Player : MonoBehaviour
         pointAnimator.SetBool("Count", true);
         yield return new WaitForSeconds(0.5f);
         pointAnimator.SetBool("Count", false);
-        scoreText.text = score.ToString();
+        //scoreText.text = score.ToString();
     }
 
     //IEnumerator start()
@@ -143,22 +142,19 @@ public class Player : MonoBehaviour
         // オーディオのコンポーネント
         audioSource = GetComponent<AudioSource>();
 
-        // スコアテキストのコンポーネント
-        scoreText = scoreObject.GetComponent<Text>();
-        // スコアを0で初期化
+        //// スコアテキストのコンポーネント
+        //scoreText = scoreObject.GetComponent<Text>();
+        //// スコアを0で初期化
         score = GameController.Instance.scoreText;
-        // スコアを表示
-        scoreText.text = score.ToString();
-        // リザルトスコアテキストのコンポーネント
-        resultScoreText = resultScoreObject.GetComponent<Text>();
-        resultScoreText.text = "" + score + "P";
+        //// スコアを表示
+        //scoreText.text = score.ToString();
 
         // バフゲージ
         buffGauge = buffObject.GetComponent<Image>();
-        buffGauge.fillAmount = GameController.Instance.buffGaugeValue;
+        buffGauge.fillAmount = 0;
 
         // 一号機セレステルのHPを取得
-        hp = GameController.Instance.HitPoint;
+        //hp = GameController.Instance.HitPoint;
         // 一号機セレステルの活動時間を取得
         activ = GameController.Instance.ActivityTime;
         // 一号機セレステルの攻撃力を取得
@@ -166,23 +162,32 @@ public class Player : MonoBehaviour
         // 一号機セレステルの連射間隔を取得
 
         //// スライダーの値をセット
-        // HPのゲージ
-        HpGauge = HpObject.GetComponent<Image>();
-        HpGauge.fillAmount = GameController.Instance.hpGet;
+        // HPのセット
+        hpValue = GameController.Instance.HitPoint;
         // 活動時間のゲージ
         staminaGauge = staminaObject.GetComponent<Image>();
         staminaGauge.fillAmount = staminaValue;
+
+        // Playerタグを取得します
+        var HpGauge = GameObject.FindGameObjectWithTag("HpGauge");
+        // Playerタグのスクリプトを取得します
+        hpBar = HpGauge.GetComponent<HpBar>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // ポジションを代入します
-        posX = transform.position.x;
-        posY = transform.position.y;
+        posX = transform.position.x;    // X座標
+        posY = transform.position.y;    // Y座標
 
-        scoreText.text = score.ToString();
-        resultScoreText.text = "" + score + "P";
+        //scoreText.text = score.ToString();
+
+        if (hpBar.image.fillAmount <= 0.01f)    // 無理やりゲームオーバーにプレイヤーがする(仮：音声が入ってるから)
+        {
+            playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
+            gameOver.SetActive(true);
+        }
 
         // ゲージがMAXになったらバフ発動フラグ
         if (buffGauge.fillAmount >= 1)
@@ -221,7 +226,7 @@ public class Player : MonoBehaviour
         if (ondamage)
         {
             float level = Mathf.Abs(Mathf.Sin(Time.time * 10));
-            //renderer.color = new Color(1f, 1f, 1f, level);
+            renderer.color = new Color(1f, 1f, 1f, level);
         }
 
         // 移動処理
@@ -258,7 +263,7 @@ public class Player : MonoBehaviour
 
             //移動する向きとスピードを代入
             rigidbody.velocity = direction * speed;
-
+           
             // 移動時の活動時間の変化
             if (x != 0 || y != 0)
             {
@@ -270,6 +275,8 @@ public class Player : MonoBehaviour
                 }
                 if (staminaGauge.fillAmount == 0)
                 {
+                    rigidbody.velocity = direction * 0;
+                    staminaGauge.color =  new Color(0.8314662f, 0.1067996f, 0.9056604f,1f);
                     staminaControl = false;
                 }
             }
@@ -280,11 +287,8 @@ public class Player : MonoBehaviour
                 if (!activsSwitch)
                 {
                     // ゲージが減っているとき
-                    //if (staminaValue >= staminaGauge.fillAmount)
-                    //{
                     // 活動ゲージの加算
                     staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 7.0f * Time.deltaTime;
-                    //}
                 }
             }
         }
@@ -294,6 +298,7 @@ public class Player : MonoBehaviour
             staminaGauge.fillAmount += staminaValue / GameController.Instance.ActivityTime * 0.07f;
             if (staminaGauge.fillAmount > 0.2)
             {
+                staminaGauge.color = new Color(1f,1f,1f,1f);
                 staminaControl = true;
             }
         }
@@ -335,44 +340,44 @@ public class Player : MonoBehaviour
             }
         }
 
-        //マシンガンを装備中の発射間隔
-        if (bulletstatus == 1)
-        {
-            // マシンガンの連射間隔の取得
-            machineGunDelay = 0.5f;
+        ////マシンガンを装備中の発射間隔
+        //if (bulletstatus == 1)
+        //{
+        //    // マシンガンの連射間隔の取得
+        //    machineGunDelay = 0.5f;
 
-            //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey(aButton) && timer > machineGunDelay)
-            {
-                //弾を発射する間隔の時間計測の初期化
-                timer = 0.0f;
+        //    //Spaceキーを押したとき弾を発射
+        //    if (Input.GetKey(KeyCode.Space) && timer > machineGunDelay || Input.GetKey(aButton) && timer > machineGunDelay)
+        //    {
+        //        //弾を発射する間隔の時間計測の初期化
+        //        timer = 0.0f;
 
-                //弾の実体化
-                Instantiate(machinegunBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+        //        //弾の実体化
+        //        Instantiate(machinegunBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
 
-                // サウンドの再生
-                audioSource.PlayOneShot(sound[1]);
-            }
-        }
+        //        // サウンドの再生
+        //        audioSource.PlayOneShot(sound[1]);
+        //    }
+        //}
 
-        //バズーカを装備中の発射間隔
-        if (bulletstatus == 2)
-        {
-            bulletDelay = 0.8f;
+        ////バズーカを装備中の発射間隔
+        //if (bulletstatus == 2)
+        //{
+        //    bulletDelay = 0.8f;
 
-            //Spaceキーを押したとき弾を発射
-            if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey(aButton) && timer > bulletDelay)
-            {
-                //弾を発射する間隔の時間計測の初期化
-                timer = 0.0f;
+        //    //Spaceキーを押したとき弾を発射
+        //    if (Input.GetKey(KeyCode.Space) && timer > bulletDelay || Input.GetKey(aButton) && timer > bulletDelay)
+        //    {
+        //        //弾を発射する間隔の時間計測の初期化
+        //        timer = 0.0f;
 
-                //弾の実体化
-                Instantiate(bazookaBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
+        //        //弾の実体化
+        //        Instantiate(bazookaBullet, new Vector2(transform.position.x + 1.5f, transform.position.y), transform.rotation);
 
-                // サウンドの再生
-                audioSource.PlayOneShot(sound[2]);
-            }
-        }
+        //        // サウンドの再生
+        //        audioSource.PlayOneShot(sound[2]);
+        //    }
+        //}
     }
 
     //ダメージ処理
@@ -389,39 +394,26 @@ public class Player : MonoBehaviour
     IEnumerator WaitForIt()
     {
         yield return new WaitForSeconds(1);
-
-
         ondamage = false;
-        //       renderer.color = new Color(1f, 1f, 1f, 1f);
+        renderer.color = new Color(1f, 1f, 1f, 1f);
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // 小デブリの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
             // ダメージ処理
-            HpGauge.fillAmount -= HpValue / GameController.Instance.HitPoint * bulletSc.damage;
-            GameController.Instance.hpGet = HpGauge.fillAmount;
-            if (HpGauge.fillAmount <= 0)
-            {
-                playerVoiceSource.PlayOneShot(playerVoice[Random.Range(3, 3)]);
-                gameOver.SetActive(true);
-            }
+            hpValue = hpValue - bulletSc.damage;
+      
             OndamageEffect();
         }
 
         //ボスの弾に当たったら
         if (!ondamage && collision.gameObject.tag == "Enemy_Bullet1")
         {
-            //hp -= (int)bulletSc.damage;
-            //HPバーを減らす（プロト版）
-            HpGauge.fillAmount -= bossSc.damage;
-            GameController.Instance.hpGet = HpGauge.fillAmount;
-            if (HpGauge.fillAmount <= 0)
-            {
-                gameOver.SetActive(true);
-            }
-            //hpSlider.value -= bulletSc.damage;
+            hpValue = hpValue - bossSc.damage;
+
             OndamageEffect();
         }
 
@@ -432,9 +424,10 @@ public class Player : MonoBehaviour
             GameController.Instance.scoreText = score;
             // スコア内容の変更
             StartCoroutine(PointCount());
-            resultScoreText.text = "" + score + "P";
+
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
+            Debug.Log(score);
         }
 
         if (collision.gameObject.tag == "Item1")
@@ -443,7 +436,7 @@ public class Player : MonoBehaviour
             GameController.Instance.scoreText = score;
             // スコア内容の変更
             StartCoroutine(PointCount());
-            resultScoreText.text = "" + score + "P";
+
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
         }
@@ -454,7 +447,7 @@ public class Player : MonoBehaviour
             GameController.Instance.scoreText = score;
             // スコア内容の変更
             StartCoroutine(PointCount());
-            resultScoreText.text = "" + score + "P";
+
             // サウンドの再生
             audioSource.PlayOneShot(sound[3]);
         }

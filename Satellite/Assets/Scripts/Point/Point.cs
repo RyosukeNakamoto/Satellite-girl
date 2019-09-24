@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Frame : MonoBehaviour
+public class Point : MonoBehaviour
 {
     // Imageを参照します
     [SerializeField]
     Image image = null;
-    // こどものImageを取得します
-    Image imageChild;
+    // こどものTextを取得します
+    Text textChild;
 
     // α値
     [SerializeField]
@@ -33,7 +33,7 @@ public class Frame : MonoBehaviour
     void Update()
     {
         // 半透明にします
-        if (playerSc.posX <= -2.0f && playerSc.posY >= 3.0f)
+        if (playerSc.posX >= 6.0f && playerSc.posY >= 4.0f)
         {
             // α値を下げます
             image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
@@ -41,9 +41,9 @@ public class Frame : MonoBehaviour
             foreach (Transform child in transform)
             {
                 // imageを取得します
-                imageChild = child.GetComponent<Image>();
+                textChild = child.GetComponent<Text>();
                 // α値を下げます
-                imageChild.color = new Color(imageChild.color.r, imageChild.color.g, imageChild.color.b, alpha);
+                textChild.color = new Color(textChild.color.r, textChild.color.g, textChild.color.b, alpha);
             }
         }
         // MAXカラーにします
@@ -53,8 +53,8 @@ public class Frame : MonoBehaviour
             // 子オブジェクトを取得します
             foreach (Transform child in transform)
             {
-                imageChild = child.GetComponent<Image>();
-                imageChild.color = new Color(imageChild.color.r, imageChild.color.g, imageChild.color.b, imageChild.color.maxColorComponent);
+                textChild = child.GetComponent<Text>();
+                textChild.color = new Color(textChild.color.r, textChild.color.g, textChild.color.b, textChild.color.maxColorComponent);
             }
         }
     }

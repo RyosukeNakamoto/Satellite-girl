@@ -247,7 +247,7 @@ namespace Satellite.StageSelect
             }
 
             // タイトルへ戻る
-            if(Input.GetKey(bButton))
+            if(Input.GetKey(bButton)||Input.GetKey(KeyCode.Space))
             {
                 StartCoroutine(TitleSceneChange());              
             }
